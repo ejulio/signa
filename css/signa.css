@@ -1,6 +1,7 @@
 .signa-body
 {
     background: #F2F2F2;
+    height: 100%;
 }
 
 .signa-titlebar
@@ -8,7 +9,7 @@
     background: #555;
 }
 
-.signa-titlebar > .signa-titlebar-title
+.signa-titlebar-title
 {
     color: white;
     font-weight: bold;
@@ -27,6 +28,14 @@
     margin: 0 auto;
     width: 95%;
     margin-top: 30px;
+    height: 100%;
+}
+
+.signa-main-section
+{
+    box-sizing: border-box;
+    padding: 5px;
+    height: 450px;
 }
 
 .signa-signal-container
@@ -48,6 +57,7 @@
     font-weight: bold;
     margin: 10px 0;
     padding: 10px;
+    text-align: center;
 }
 
 .signa-message-success
@@ -59,5 +69,47 @@
 {
     background: black;
     margin: 0 0 5px 0;
-    height: 200px;
+    height: 210px;
+    position: relative;
+}
+
+.signa-handmodel-example
+{
+    border: 2px solid green;
+}
+
+.signa-handmodel-user
+{
+    border: 2px solid red;
+}
+
+.signa-handmodel-container > .signa-titlebar-title
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.signa-button
+{
+    background: #555;
+    color: white;
+    margin: 5px;
+}
+
+.signa-button-xlarge {
+    font-size: 125%;
+}
+
+.signa-right
+{
+    float: right;
+}
+
+.signa-float-container::after
+{
+    display: block;
+    content: '.';
+    clear: both;
+    visibility: hidden;
 }
