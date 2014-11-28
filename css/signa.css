@@ -1,0 +1,63 @@
+.signa-body
+{
+    background: #F2F2F2;
+}
+
+.signa-titlebar
+{
+    background: #555;
+}
+
+.signa-titlebar > .signa-titlebar-title
+{
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    padding: 10px 5px;
+}
+
+.signa-titlebar > .signa-titlebar-title.signa-titlebar-main
+{
+    font-weight: bold;
+    padding: 10px 5px;
+}
+
+.signa-main
+{
+    margin: 0 auto;
+    width: 95%;
+    margin-top: 30px;
+}
+
+.signa-signal-container
+{
+    background: #AAA;
+}
+
+.signa-signal-word
+{
+    margin: 0;
+    text-align: center;
+    font-size: 300px;
+    color: red;
+}
+
+.signa-message
+{
+    color: white;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.signa-message-success
+{
+    background: green;
+}
+
+.signa-handmodel-container
+{
+    background: black;
+    margin: 0 0 5px 0;
+    height: 200px;
+}

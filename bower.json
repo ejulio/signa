@@ -1,0 +1,21 @@
+{
+  "name": "signa-tcc",
+  "version": "0.0.1",
+  "authors": [
+    "Júlio César Batista <jcb.1611@gmail.com>"
+  ],
+  "description": "TCC",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "pure": "~0.5.0"
+  }
+}
