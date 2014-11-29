@@ -16,6 +16,8 @@
   ],
   "devDependencies": {},
   "dependencies": {
-    "pure": "~0.5.0"
+    "pure": "~0.5.0",
+    "threejs": "*",
+    "jquery": "~2.1.1"
   }
 }
