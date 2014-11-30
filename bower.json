@@ -18,6 +18,9 @@
   "dependencies": {
     "pure": "~0.5.0",
     "threejs": "*",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "leapjs": "~0.6.2",
+    "leapjs-plugins": "~0.1.6",
+    "leapjs-rigged-hand": "~0.1.4"
   }
 }

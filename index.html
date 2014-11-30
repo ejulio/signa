@@ -42,6 +42,11 @@
         </section>
         <script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="bower_components/leapjs/leap-0.6.2.js"></script>
+        <script type="text/javascript" src="bower_components/leapjs-plugins/main/leap-plugins-0.1.6.js"></script>
+        <script type="text/javascript" src="bower_components/leapjs-plugins/main/hand-entry/leap.hand-entry.js"></script>
+        <script type="text/javascript" src="bower_components/leapjs-plugins/main/hand-hold/leap.hand-hold.js"></script>
+        <script type="text/javascript" src="bower_components/leapjs-rigged-hand/build/leap.rigged-hand-0.1.4.js"></script>
         <script type="text/javascript">
 
             function criarCena(container)
@@ -62,9 +67,19 @@
                 camera.position.z = 5;
 
                 renderer.render(scene, camera);
+
+                var controller = new Leap.Controller();
+                controller.use('riggedHand', {
+                    parent: scene,
+                    renderFn: function()
+                    {
+                        renderer.render(scene, camera);
+                    }
+                }).connect();
+
             }
 
-            criarCena($("#handmodel-animation"));
+            //criarCena($("#handmodel-animation"));
             criarCena($("#handmodel-user"));
 
         </script>
