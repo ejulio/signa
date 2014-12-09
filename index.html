@@ -27,7 +27,7 @@
                         <span>Parabéns! Sinal correto</span>
                     </div>
                 </section>
-                <section class="pure-u-1-2 signa-main-section">
+                <section class="pure-u-1-2 signa-main-section signa-hands-container">
                     <div id="handmodel-animation" class="signa-handmodel-container signa-handmodel-example">
                         <h3 class="signa-titlebar-title">Exemplo do sinal</h3>
                     </div>
@@ -44,43 +44,22 @@
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/leapjs/leap-0.6.2.js"></script>
         <script type="text/javascript" src="bower_components/leapjs-plugins/main/leap-plugins-0.1.6.js"></script>
-        <script type="text/javascript" src="bower_components/leapjs-plugins/main/hand-entry/leap.hand-entry.js"></script>
-        <script type="text/javascript" src="bower_components/leapjs-plugins/main/hand-hold/leap.hand-hold.js"></script>
         <script type="text/javascript" src="bower_components/leapjs-rigged-hand/build/leap.rigged-hand-0.1.4.js"></script>
+        <script type="text/javascript" src="js/signa/Signa.js"></script>
+        <script type="text/javascript" src="js/signa/Scene.js"></script>
+        <script type="text/javascript" src="js/signa/RiggedHandScene.js"></script>
         <script type="text/javascript">
 
-            function criarCena(container)
-            {
-                var scene = new THREE.Scene(),
-                    camera = new THREE.PerspectiveCamera(75, container.width() / container.height(), 0.1, 1000);
+            var width = $("#handmodel-user").width(),
+                height = $("#handmodel-user").height();
 
-                var renderer = new THREE.WebGLRenderer();
-                renderer.setSize(container.width(), container.height());
-                container.append(renderer.domElement);
+            var leapController = new Leap.Controller(),
+                animationHandmodelScene = new Signa.Scene($("#handmodel-animation"), width, height),
+                userHandmodelScene = new Signa.Scene($("#handmodel-user"), width, height);
 
-                var geometry = new THREE.BoxGeometry(1, 1, 1),
-                    material = new THREE.MeshBasicMaterial({color: 0x00ff00}),
-                    cube = new THREE.Mesh(geometry, material);
+            userHandmodelScene = new Signa.RiggedHandScene(leapController, userHandmodelScene);
 
-                scene.add(cube);
-
-                camera.position.z = 5;
-
-                renderer.render(scene, camera);
-
-                var controller = new Leap.Controller();
-                controller.use('riggedHand', {
-                    parent: scene,
-                    renderFn: function()
-                    {
-                        renderer.render(scene, camera);
-                    }
-                }).connect();
-
-            }
-
-            //criarCena($("#handmodel-animation"));
-            criarCena($("#handmodel-user"));
+            animationHandmodelScene.render();
 
         </script>
     </body>
