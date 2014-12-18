@@ -4,6 +4,9 @@
     {
         leapController.use('riggedHand', {
             parent: scene.getThreeScene(),
+            materialOptions: {
+                transparent: false
+            },
             renderFn: function()
             {
                 scene.render();

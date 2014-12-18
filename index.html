@@ -44,7 +44,12 @@
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/leapjs/leap-0.6.2.js"></script>
         <script type="text/javascript" src="bower_components/leapjs-plugins/main/leap-plugins-0.1.6.js"></script>
+        <!--
         <script type="text/javascript" src="bower_components/leapjs-rigged-hand/build/leap.rigged-hand-0.1.4.js"></script>
+        -->
+        <script type="text/javascript" src="js/RiggedHandUtil.js"></script>
+        <script type="text/javascript" src="js/RiggedHand.js"></script>
+        <script type="text/javascript" src="js/leap.rigged-hand-0.1.4-changed.js"></script>
         <script type="text/javascript" src="js/signa/Signa.js"></script>
         <script type="text/javascript" src="js/signa/Scene.js"></script>
         <script type="text/javascript" src="js/signa/RiggedHandScene.js"></script>
@@ -57,9 +62,39 @@
                 animationHandmodelScene = new Signa.Scene($("#handmodel-animation"), width, height),
                 userHandmodelScene = new Signa.Scene($("#handmodel-user"), width, height);
 
-            userHandmodelScene = new Signa.RiggedHandScene(leapController, userHandmodelScene);
+            //animationHandmodelScene = new Signa.RiggedHandScene(leapController, animationHandmodelScene);
+            //userHandmodelScene = new Signa.RiggedHandScene(leapController, userHandmodelScene);
 
-            animationHandmodelScene.render();
+            leapController.connect();
+
+            var riggedHand = new RiggedHand(leapController, {
+                sceneid: 1,
+                parent: animationHandmodelScene.getThreeScene(),
+                materialOptions: {
+                    transparent: false
+                },
+                renderFn: function()
+                {
+                    animationHandmodelScene.render();
+                }
+            });
+
+            leapController.on('frame', riggedHand.onFrame);
+
+            var riggedHand2 = new RiggedHand(leapController, {
+                sceneid: 2,
+                parent: userHandmodelScene.getThreeScene(),
+                materialOptions: {
+                    transparent: false
+                },
+                renderFn: function()
+                {
+                    userHandmodelScene.render();
+                }
+            });
+
+            leapController.on('frame', riggedHand2.onFrame);
+            //leapController.use('playback', {}).connect();
 
         </script>
     </body>
