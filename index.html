@@ -28,8 +28,8 @@
                     </div>
                 </section>
                 <section class="pure-u-1-2 signa-main-section signa-hands-container">
-                    <div id="handmodel-animation" class="signa-handmodel-container signa-handmodel-example">
-                        <h3 class="signa-titlebar-title">Exemplo do sinal</h3>
+                    <div id="handmodel-example" class="signa-handmodel-container signa-handmodel-example">
+                        <h3 class="signa-titlebar-title">Exemplo do sinal <a href="#" id="play-pause">Play/Pause</a></h3>
                     </div>
                     <div id="handmodel-user" class="signa-handmodel-container signa-handmodel-user">
                         <h3 class="signa-titlebar-title">Suas mãos</h3>
@@ -41,60 +41,57 @@
             </div>
         </section>
         <script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
+        <script type="text/javascript" src="bower_components/three.js-controls/src/OrbitControls.js"></script>
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/leapjs/leap-0.6.2.js"></script>
         <script type="text/javascript" src="bower_components/leapjs-plugins/main/leap-plugins-0.1.6.js"></script>
-        <!--
-        <script type="text/javascript" src="bower_components/leapjs-rigged-hand/build/leap.rigged-hand-0.1.4.js"></script>
-        -->
         <script type="text/javascript" src="js/RiggedHandUtil.js"></script>
         <script type="text/javascript" src="js/RiggedHand.js"></script>
-        <script type="text/javascript" src="js/leap.rigged-hand-0.1.4-changed.js"></script>
         <script type="text/javascript" src="js/signa/Signa.js"></script>
+        <script type="text/javascript" src="js/signa/DefaultCameraFactory.js"></script>
+        <script type="text/javascript" src="js/signa/OrbitControlsCameraFactory.js"></script>
         <script type="text/javascript" src="js/signa/Scene.js"></script>
         <script type="text/javascript" src="js/signa/RiggedHandScene.js"></script>
+        <script type="text/javascript" src="js/signa/PlaybackRiggedHandScene.js"></script>
         <script type="text/javascript">
 
             var width = $("#handmodel-user").width(),
-                height = $("#handmodel-user").height();
+                height = $("#handmodel-user").height(),
+                defaultCameraFactory = new Signa.DefaultCameraFactory(width / height);
 
-            var leapController = new Leap.Controller(),
-                animationHandmodelScene = new Signa.Scene($("#handmodel-animation"), width, height),
-                userHandmodelScene = new Signa.Scene($("#handmodel-user"), width, height);
-
-            //animationHandmodelScene = new Signa.RiggedHandScene(leapController, animationHandmodelScene);
-            //userHandmodelScene = new Signa.RiggedHandScene(leapController, userHandmodelScene);
-
-            leapController.connect();
-
-            var riggedHand = new RiggedHand(leapController, {
-                sceneid: 1,
-                parent: animationHandmodelScene.getThreeScene(),
-                materialOptions: {
-                    transparent: false
-                },
-                renderFn: function()
-                {
-                    animationHandmodelScene.render();
-                }
+            $('#play-pause').click(function()
+            {
+                window.riggedHandPlayer.toggle();
             });
 
-            leapController.on('frame', riggedHand.onFrame);
+            function initializeExampleHandScene()
+            {
+                var exampleHandleapController = new Leap.Controller(),
+                    container = $("#handmodel-example"),
+                    orbitConstrolsCameraFactory = new Signa.OrbitControlsCameraFactory(defaultCameraFactory),
+                    exampleHandmodelScene = new Signa.Scene(orbitConstrolsCameraFactory, container, width, height);
 
-            var riggedHand2 = new RiggedHand(leapController, {
-                sceneid: 2,
-                parent: userHandmodelScene.getThreeScene(),
-                materialOptions: {
-                    transparent: false
-                },
-                renderFn: function()
-                {
-                    userHandmodelScene.render();
-                }
-            });
+                orbitConstrolsCameraFactory.setSignaScene(exampleHandmodelScene);
 
-            leapController.on('frame', riggedHand2.onFrame);
-            //leapController.use('playback', {}).connect();
+                window.riggedHandPlayer = new Signa.PlaybackRiggedHandScene(exampleHandleapController, exampleHandmodelScene);
+            }
+
+            function initializeUserHandScene()
+            {
+                var userHandLeapController = new Leap.Controller(),
+                    container = $("#handmodel-user"),
+                    userHandmodelScene = new Signa.Scene(defaultCameraFactory, container, width, height);
+
+                window.userRiggedHand = new Signa.RiggedHandScene(userHandLeapController, userHandmodelScene);
+            }
+
+            initializeExampleHandScene();
+            initializeUserHandScene();
+
+            window.setTimeout(function()
+            {
+                riggedHandPlayer.loadRecording('recordings/test-a.json');
+            }, 2500);
 
         </script>
     </body>

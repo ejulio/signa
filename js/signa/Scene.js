@@ -1,19 +1,10 @@
 ;(function(window, Signa, undefined)
 {
-    var CAMERA_NEAR = 0.1;
-    var CAMERA_FAR = 1000;
-    var CAMERA_FIELD_OF_VIEW = 75;
-
-    function Scene(container, width, height)
+    function Scene(cameraFactory, container, width, height)
     {
-        var aspectRatio = width / height;
         this._scene = new THREE.Scene();
-        this._camera = new THREE.PerspectiveCamera(CAMERA_FIELD_OF_VIEW, aspectRatio, CAMERA_NEAR, CAMERA_FAR);
         this._renderer = new THREE.WebGLRenderer();
-
-        this._camera.position.z = 20;
-        this._camera.position.y = 10;
-        this._camera.rotation.x = -0.15;
+        this._camera = cameraFactory.create();
 
         this._drawUrs();
 

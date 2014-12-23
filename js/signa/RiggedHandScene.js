@@ -1,17 +1,20 @@
 ;(function(window, Signa, undefined)
 {
-    function RiggedHandScene(leapController, scene)
+    function RiggedHandScene(leapController, signaScene)
     {
-        leapController.use('riggedHand', {
-            parent: scene.getThreeScene(),
+        var riggedHand = new RiggedHand(leapController, {
+            sceneid: 1,
+            parent: signaScene.getThreeScene(),
             materialOptions: {
                 transparent: false
             },
             renderFn: function()
             {
-                scene.render();
+                signaScene.render();
             }
-        }).connect();
+        });
+
+        leapController.on('frame', riggedHand.onFrame).connect();
     }
 
     Signa.RiggedHandScene = RiggedHandScene;
