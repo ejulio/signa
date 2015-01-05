@@ -71,7 +71,6 @@ RiggedHand.prototype = {
     {
         var handMesh, palm, rigFinger, _i, _len, _ref;
         handMesh = this._getMesh(leapHand);
-        console.log(handMesh.uuid);
         this._parameters.parent.add(handMesh);
         leapHand.data('riggedHand.mesh' + this._parameters.sceneid, handMesh);
         palm = handMesh.children[0];

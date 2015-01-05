@@ -45,54 +45,20 @@
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/leapjs/leap-0.6.2.js"></script>
         <script type="text/javascript" src="bower_components/leapjs-plugins/main/leap-plugins-0.1.6.js"></script>
+        <script type="text/javascript" src="bower_components/signalr/jquery.signalr.js"></script>
+
+        <script type="text/javascript" src="http://localhost:9000/signalr/hubs"></script>
+
         <script type="text/javascript" src="js/RiggedHandUtil.js"></script>
         <script type="text/javascript" src="js/RiggedHand.js"></script>
+
         <script type="text/javascript" src="js/signa/Signa.js"></script>
         <script type="text/javascript" src="js/signa/DefaultCameraFactory.js"></script>
         <script type="text/javascript" src="js/signa/OrbitControlsCameraFactory.js"></script>
         <script type="text/javascript" src="js/signa/Scene.js"></script>
+        <script type="text/javascript" src="js/signa/SignalRecognizer.js"></script>
         <script type="text/javascript" src="js/signa/RiggedHandScene.js"></script>
         <script type="text/javascript" src="js/signa/PlaybackRiggedHandScene.js"></script>
-        <script type="text/javascript">
-
-            var width = $("#handmodel-user").width(),
-                height = $("#handmodel-user").height(),
-                defaultCameraFactory = new Signa.DefaultCameraFactory(width / height);
-
-            $('#play-pause').click(function()
-            {
-                window.riggedHandPlayer.toggle();
-            });
-
-            function initializeExampleHandScene()
-            {
-                var exampleHandleapController = new Leap.Controller(),
-                    container = $("#handmodel-example"),
-                    orbitConstrolsCameraFactory = new Signa.OrbitControlsCameraFactory(defaultCameraFactory),
-                    exampleHandmodelScene = new Signa.Scene(orbitConstrolsCameraFactory, container, width, height);
-
-                orbitConstrolsCameraFactory.setSignaScene(exampleHandmodelScene);
-
-                window.riggedHandPlayer = new Signa.PlaybackRiggedHandScene(exampleHandleapController, exampleHandmodelScene);
-            }
-
-            function initializeUserHandScene()
-            {
-                var userHandLeapController = new Leap.Controller(),
-                    container = $("#handmodel-user"),
-                    userHandmodelScene = new Signa.Scene(defaultCameraFactory, container, width, height);
-
-                window.userRiggedHand = new Signa.RiggedHandScene(userHandLeapController, userHandmodelScene);
-            }
-
-            initializeExampleHandScene();
-            initializeUserHandScene();
-
-            window.setTimeout(function()
-            {
-                riggedHandPlayer.loadRecording('recordings/test-a.json');
-            }, 2500);
-
-        </script>
+        <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>
