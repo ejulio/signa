@@ -34,3 +34,8 @@ initializeExampleHandScene();
 initializeUserHandScene(signaLeapController);
 
 riggedHandPlayer.loadRecording('recordings/test-a.json');
+
+signalRecognizer.addRecognizeEventListener(function()
+{
+    console.log('Sinal reconhecido');
+});
