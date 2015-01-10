@@ -11,6 +11,8 @@
         _eventEmitter: eventEmitter,
 
         recognize: function(){},
+        save: function(){},
+        train: function(){},
 
         addRecognizeEventListener: function(listener)
         {
@@ -37,6 +39,22 @@
                 });;
         },
 
+        save: function(signalParameters, signalId)
+        {
+            connection
+                .recognizer
+                .server
+                .saveSignalParameters(signalParameters, signalId)
+        },
+
+        train: function()
+        {
+            connection
+                .recognizer
+                .server
+                .trainRecognizer();
+        },
+
         addRecognizeEventListener: function(listener)
         {
             this._eventEmitter.addListener(RECOGNIZE_EVENT_ID, listener);
@@ -59,6 +77,7 @@
     SignalRecognizer.prototype = {
         _eventEmitter: undefined,
         _signalToRecognizeId: 0,
+        _save: false,
 
         setSignalToRecognizeId: function(signalToRecognizeId)
         {
@@ -67,9 +86,39 @@
 
         _recognize: function(frame)
         {
-            var signalParameters = { name: "Hand", id: 1 };
-            recognizerHub.recognize(signalParameters, this._signalToRecognizeId);
-            //debugger;
+            var hand = frame.hands[0];
+            if (hand)
+            {
+                var anglesBetweenFingers = [];
+                var length = hand.fingers.length - 1;
+                for (var i = 0; i < length; i++)
+                {
+                    var origin = new THREE.Vector3();
+                    var destiny = new THREE.Vector3();
+
+                    origin.fromArray(hand.fingers[i].tipPosition);
+                    destiny.fromArray(hand.fingers[i + 1].tipPosition);
+
+                    anglesBetweenFingers.push(origin.angleTo(destiny));
+                }
+
+                var signalParameters = {
+                    palmNormal: hand.palmNormal,
+                    handDirection: hand.direction,
+                    anglesBetweenFingers: anglesBetweenFingers
+                };
+
+                if (this._save)
+                {
+                    recognizerHub.save(signalParameters, this._signalToRecognizeId);
+                    this._save = false;
+                }
+                else
+                {
+                    recognizerHub.recognize(signalParameters, this._signalToRecognizeId);
+                }
+                //debugger;
+            }
         },
 
         _onLeapFrame: function(frame)
@@ -81,6 +130,17 @@
         addRecognizeEventListener: function(listener)
         {
             recognizerHub.addRecognizeEventListener(listener);
+        },
+
+        save: function(id)
+        {
+            this._signalToRecognizeId = id;
+            this._save = true;
+        },
+
+        train: function()
+        {
+            recognizerHub.train();
         }
     };
 
