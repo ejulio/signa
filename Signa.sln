@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signa", "Signa\Signa.csproj", "{B73A5508-76E4-4A0D-AD09-F436A851B558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{074B0BE4-2EA8-4249-B273-F764CC314FBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B73A5508-76E4-4A0D-AD09-F436A851B558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73A5508-76E4-4A0D-AD09-F436A851B558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73A5508-76E4-4A0D-AD09-F436A851B558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73A5508-76E4-4A0D-AD09-F436A851B558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074B0BE4-2EA8-4249-B273-F764CC314FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074B0BE4-2EA8-4249-B273-F764CC314FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074B0BE4-2EA8-4249-B273-F764CC314FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074B0BE4-2EA8-4249-B273-F764CC314FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
