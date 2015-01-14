@@ -28,11 +28,8 @@
 
         train: function()
         {
-            recognizerHub.train().done(function()
-            {
-                console.log('Mudando para o estado treinado');
-                this._signalRecognizer.setState(this._signalRecognizer.TRAINED);
-            }.bind(this));
+            console.log('Mudando para o estado treinado');
+            this._signalRecognizer.setState(this._signalRecognizer.TRAINED);
         }
     };
 
