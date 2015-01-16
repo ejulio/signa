@@ -1,7 +1,5 @@
 ;(function(window, Signa, undefined)
 {
-    var recognizerHub = $.connection.recognizer.server;
-
     function TrainedSignalRecognizer(eventEmitter)
     {
         this._eventEmitter = eventEmitter;
@@ -18,7 +16,7 @@
 
         recognize: function(signalData)
         {
-            recognizerHub
+            Signa.HUB
                 .recognize(signalData)
                 .then(function(signalRecognizedId)
                 {
@@ -36,12 +34,12 @@
 
         save: function(signalData)
         {
-            recognizerHub.save(signalData);
+            Signa.HUB.save(signalData);
         },
 
         train: function()
         {
-            recognizerHub.train().done();
+            Signa.HUB.train().done();
         }
     };
 

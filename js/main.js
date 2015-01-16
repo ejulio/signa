@@ -7,18 +7,18 @@ $('#play-pause').click(function()
     window.riggedHandPlayer.toggle();
 });
 
-var id = 0;
-
-$('#save').click(function()
+function loadNextSignal()
 {
-    signalRecognizer.save(id++);
-});
-
-$('#train').click(function()
-{
-    signalRecognizer.train();
-    signalRecognizer.setSignalToRecognizeId(signalId);
-});
+    Signa.initHubs().done(function()
+    {
+        Signa.HUB.getNextSign(1).done(function(signInfo)
+        {
+            window.riggedHandPlayer.loadRecording('recordings/' + signInfo.ExampleFilePath);
+            $('#sign-description').text(signInfo.Description);
+            signalRecognizer.setSignalToRecognizeId(signInfo.Id);
+        });
+    });
+}
 
 function initializeExampleHandScene()
 {
@@ -46,14 +46,9 @@ var signaLeapController = new Leap.Controller(),
 initializeExampleHandScene();
 initializeUserHandScene(signaLeapController);
 
-riggedHandPlayer.loadRecording('recordings/test-a.json');
-
-var signalId = 0;
-signalRecognizer.setSignalToRecognizeId(signalId);
 signalRecognizer.addRecognizeEventListener(function()
 {
-    signalId = (signalId + 1) % 3;
-    signalRecognizer.setSignalToRecognizeId(signalId);
-    console.log('Sinal reconhecido. Sigal atual: ' + signalId);
-    // sequencia de sinais: 0: mão aberta, 1: mão fechada, 2: paz e amor
+    console.log('Sinal reconhecido');
 });
+
+loadNextSignal();

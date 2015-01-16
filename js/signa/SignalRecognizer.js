@@ -2,9 +2,6 @@
 {
     var RECOGNIZE_EVENT_ID = 'recognize';
 
-    var connection = $.connection;
-    connection.hub.url = 'http://localhost:9000/signalr';
-
     function SignalRecognizer(leapController)
     {
         var me = this;
@@ -16,9 +13,9 @@
 
         me._state = me.OFFLINE;
 
-        connection.hub.start().done(function()
+        Signa.initHubs().done(function()
         {
-            me._state = me.ONLINE;
+            me._state = me.TRAINED;
         });
     }
 

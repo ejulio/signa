@@ -1,7 +1,5 @@
 ;(function(window, Signa, undefined)
 {
-    var recognizerHub = $.connection.recognizer.server;
-
     function OnlineSignalRecognizer(signalRecognizer, eventEmitter)
     {
         this._eventEmitter = eventEmitter;
@@ -23,7 +21,7 @@
 
         save: function(signalData)
         {
-            recognizerHub.save(signalData);
+            Signa.HUB.save(signalData);
         },
 
         train: function()
