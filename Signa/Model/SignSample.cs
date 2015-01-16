@@ -5,14 +5,13 @@ using System.Web;
 
 namespace Signa.Model
 {
-    public class SignalData
+    public class SignSample
     {
-        public int Id { get; set; }
         public double[] PalmNormal { get; set; }
         public double[] HandDirection { get; set; }
         public double[] AnglesBetweenFingers { get; set; }
 
-        public double[] ToInputArray()
+        public double[] ToArray()
         {
             var array = new double[10];
             

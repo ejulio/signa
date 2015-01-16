@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Hosting;
+using Signa;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,10 @@ namespace Host
             Console.WriteLine("Aplicação iniciada");
             
             Console.WriteLine("Treinando algoritmo");
-            Signa.SvmRecognizer.Instance.TrainFromFile();
+            var signSamplesController = new SignSamplesController("./data/sign-samples.json");
+            signSamplesController.Load();
+            var svmRecognizerTrainningData = new SvmRecognizerTrainningData(SignSamplesController.SignSamples);
+            Signa.SvmRecognizer.Instance.Train(svmRecognizerTrainningData);
             Console.WriteLine("Algoritmo treinado");
             Console.ReadLine();
         }

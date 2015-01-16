@@ -34,65 +34,24 @@ namespace Signa
 
         }
 
-        public int Recognize(SignalData data)
+        public int Recognize(SignSample data)
         {
             if (svm == null)
             {
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
-            return svm.Compute(data.ToInputArray());
+            return svm.Compute(data.ToArray());
         }
 
-        public void Train(IEnumerable<SignalData> data)
+        public void Train(SvmRecognizerTrainningData data)
         {
-            int dataCount = data.Count();
-            int classCount = 0;
-            int lastClass = -1;
-            int[] outputs = new int[dataCount];
-            double[][] inputs = new double[dataCount][];
+            svm = new MulticlassSupportVectorMachine(0, data.ClassCount);
 
-            int i = 0;
-            foreach (var signalData in data)
-            {
-                if (signalData.Id != lastClass)
-                {
-                    lastClass = signalData.Id;
-                    classCount++;
-                }
-                outputs[i] = signalData.Id;
-                inputs[i] = signalData.ToInputArray();
-                i++;
-            }
-
-            svm = new MulticlassSupportVectorMachine(0, classCount);
-
-            var teacher = new MulticlassSupportVectorLearning(svm, inputs, outputs);
+            var teacher = new MulticlassSupportVectorLearning(svm, data.Inputs, data.Outputs);
             teacher.Algorithm = (machine, classInputs, classOutputs, j, k) => 
                                     new SequentialMinimalOptimization(machine, classInputs, classOutputs);
 
             teacher.Run();
-        }
-
-        public void TrainFromFile()
-        {
-            using (var sr = new StreamReader("./data/signal-examples.json"))
-            {
-                var jsonData = sr.ReadToEnd();
-                var data = JsonConvert.DeserializeObject<List<SignalJsonData>>(jsonData);
-
-                var signalDataList = new LinkedList<SignalData>();
-
-                for (int i = 0; i < data.Count; i++)
-                {
-                    foreach (var signalData in data[i].Samples)
-                    {
-                        signalData.Id = i;
-                        signalDataList.AddFirst(signalData);
-                    }
-                }
-
-                Train(signalDataList);
-            }
         }
     }
 }
