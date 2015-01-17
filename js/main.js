@@ -14,7 +14,10 @@ function loadNextSignal()
         Signa.HUB.getNextSign(1).done(function(signInfo)
         {
             window.riggedHandPlayer.loadRecording('recordings/' + signInfo.ExampleFilePath);
-            $('#sign-description').text(signInfo.Description);
+            $('#sign-description')
+                .text(signInfo.Description)
+                .addClass('signa-sign-word-error')
+                .removeClass('signa-sign-word-success');
             signalRecognizer.setSignalToRecognizeId(signInfo.Id);
         });
     });
@@ -41,14 +44,23 @@ function initializeUserHandScene(userHandLeapController)
 }
 
 var signaLeapController = new Leap.Controller(),
-    signalRecognizer = new Signa.SignalRecognizer(signaLeapController);
+    signalRecognizer = new Signa.SignRecognizer(signaLeapController);
 
 initializeExampleHandScene();
 initializeUserHandScene(signaLeapController);
 
 signalRecognizer.addRecognizeEventListener(function()
 {
-    console.log('Sinal reconhecido');
+    $('#sign-description')
+        .removeClass('signa-sign-word-error')
+        .addClass('signa-sign-word-success');
+
+    console.log('carregando próximo sinal');
+
+    window.setTimeout(function()
+    {
+        loadNextSignal();
+    }, 500);
 });
 
 loadNextSignal();

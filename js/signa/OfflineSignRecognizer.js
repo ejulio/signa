@@ -1,16 +1,16 @@
 ;(function(window, Signa, undefined)
 {
-    function OfflineSignalRecognizer(eventEmitter)
+    function OfflineSignRecognizer(eventEmitter)
     {
         this._eventEmitter = eventEmitter;
     }
 
-    OfflineSignalRecognizer.prototype = {
+    OfflineSignRecognizer.prototype = {
         _eventEmitter: undefined,
 
         addRecognizeEventListener: function(listener)
         {
-            this._eventEmitter.addListener(Signa.SignalRecognizer.RECOGNIZE_EVENT_ID, listener);
+            this._eventEmitter.addListener(Signa.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
         },
 
         recognize: function(){},
@@ -22,5 +22,5 @@
         train: function(){}
     };
 
-    Signa.OfflineSignalRecognizer = OfflineSignalRecognizer;
+    Signa.OfflineSignRecognizer = OfflineSignRecognizer;
 })(window, window.Signa);

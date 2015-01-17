@@ -19,12 +19,9 @@
                         <div class="signa-titlebar">
                             <h3 class="signa-titlebar-title">Faça este sinal</h3>
                         </div>
-                        <div class="signa-signal-container">
-                            <h1 class="signa-signal-word" id="sign-description">A</h1>
+                        <div class="signa-sign-container">
+                            <h1 class="signa-sign-word signa-sign-word-error" id="sign-description"></h1>
                         </div>
-                    </div>
-                    <div class="signa-message signa-message-success">
-                        <span>Parabéns! Sinal correto</span>
                     </div>
                 </section>
                 <section class="pure-u-1-2 signa-main-section signa-hands-container">
@@ -36,9 +33,6 @@
                     </div>
                 </section>
             </section>
-            <div>
-                <button class="pure-button signa-button signa-button-xlarge signa-right">Próximo sinal</button>
-            </div>
         </section>
         <script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
         <script type="text/javascript" src="bower_components/three.js-controls/src/OrbitControls.js"></script>
@@ -57,10 +51,10 @@
         <script type="text/javascript" src="js/signa/DefaultCameraFactory.js"></script>
         <script type="text/javascript" src="js/signa/OrbitControlsCameraFactory.js"></script>
         <script type="text/javascript" src="js/signa/Scene.js"></script>
-        <script type="text/javascript" src="js/signa/SignalRecognizer.js"></script>
-        <script type="text/javascript" src="js/signa/OfflineSignalRecognizer.js"></script>
-        <script type="text/javascript" src="js/signa/OnlineSignalRecognizer.js"></script>
-        <script type="text/javascript" src="js/signa/TrainedSignalRecognizer.js"></script>
+        <script type="text/javascript" src="js/signa/SignRecognizer.js"></script>
+        <script type="text/javascript" src="js/signa/OfflineSignRecognizer.js"></script>
+        <script type="text/javascript" src="js/signa/OnlineSignRecognizer.js"></script>
+        <script type="text/javascript" src="js/signa/TrainedSignRecognizer.js"></script>
         <script type="text/javascript" src="js/signa/RiggedHandScene.js"></script>
         <script type="text/javascript" src="js/signa/PlaybackRiggedHandScene.js"></script>
         <script type="text/javascript" src="js/main.js"></script>

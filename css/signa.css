@@ -38,17 +38,28 @@
     height: 75vh;
 }
 
-.signa-signal-container
+.signa-sign-container
 {
     background: #AAA;
+    height: 100%;
 }
 
-.signa-signal-word
+.signa-sign-word
 {
     margin: 0;
     text-align: center;
-    font-size: 300px;
+    font-size: 60px;
+    color: white;
+}
+
+.signa-sign-word-error
+{
     color: red;
+}
+
+.signa-sign-word-success
+{
+    color: green;
 }
 
 .signa-message

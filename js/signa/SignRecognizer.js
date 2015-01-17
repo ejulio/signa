@@ -1,15 +1,13 @@
 ;(function(window, Signa, undefined)
 {
-    var RECOGNIZE_EVENT_ID = 'recognize';
-
-    function SignalRecognizer(leapController)
+    function SignRecognizer(leapController)
     {
         var me = this;
         leapController.on('frame', this._onLeapFrame.bind(this));
         me._eventEmitter = new EventEmitter();
-        me.OFFLINE = new Signa.OfflineSignalRecognizer(this._eventEmitter);
-        me.ONLINE = new Signa.OnlineSignalRecognizer(this, this._eventEmitter);
-        me.TRAINED = new Signa.TrainedSignalRecognizer(this._eventEmitter);
+        me.OFFLINE = new Signa.OfflineSignRecognizer(this._eventEmitter);
+        me.ONLINE = new Signa.OnlineSignRecognizer(this, this._eventEmitter);
+        me.TRAINED = new Signa.TrainedSignRecognizer(this._eventEmitter);
 
         me._state = me.OFFLINE;
 
@@ -19,7 +17,7 @@
         });
     }
 
-    SignalRecognizer.prototype = {
+    SignRecognizer.prototype = {
         RECOGNIZE_EVENT_ID: 'recognize',
         OFFLINE: undefined,
         ONLINE: undefined,
@@ -118,5 +116,5 @@
         }
     };
 
-    Signa.SignalRecognizer = SignalRecognizer;
+    Signa.SignRecognizer = SignRecognizer;
 })(window, window.Signa);

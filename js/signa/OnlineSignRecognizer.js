@@ -1,18 +1,18 @@
 ;(function(window, Signa, undefined)
 {
-    function OnlineSignalRecognizer(signalRecognizer, eventEmitter)
+    function OnlineSignRecognizer(signalRecognizer, eventEmitter)
     {
         this._eventEmitter = eventEmitter;
         this._signalRecognizer = signalRecognizer;
     }
 
-    OnlineSignalRecognizer.prototype = {
+    OnlineSignRecognizer.prototype = {
         _eventEmitter: undefined,
         _signalRecognizer: undefined,
 
         addRecognizeEventListener: function(listener)
         {
-            this._eventEmitter.addListener(Signa.SignalRecognizer.RECOGNIZE_EVENT_ID, listener);
+            this._eventEmitter.addListener(Signa.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
         },
 
         recognize: function(){},
@@ -31,5 +31,5 @@
         }
     };
 
-    Signa.OnlineSignalRecognizer = OnlineSignalRecognizer;
+    Signa.OnlineSignRecognizer = OnlineSignRecognizer;
 })(window, window.Signa);
