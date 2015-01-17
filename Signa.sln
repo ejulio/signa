@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signa", "Signa\Signa.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{074B0BE4-2EA8-4249-B273-F764CC314FBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signa.Tests", "Signa.Tests\Signa.Tests.csproj", "{6A52C36B-BFE5-440D-BCDB-13500F42E151}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{074B0BE4-2EA8-4249-B273-F764CC314FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{074B0BE4-2EA8-4249-B273-F764CC314FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{074B0BE4-2EA8-4249-B273-F764CC314FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A52C36B-BFE5-440D-BCDB-13500F42E151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A52C36B-BFE5-440D-BCDB-13500F42E151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A52C36B-BFE5-440D-BCDB-13500F42E151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A52C36B-BFE5-440D-BCDB-13500F42E151}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

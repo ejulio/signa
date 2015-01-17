@@ -8,19 +8,19 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace Signa
+namespace Signa.Recognizer
 {
-    public class SvmRecognizer
+    public class Svm
     {
-        private static SvmRecognizer instance;
+        private static Svm instance;
 
-        public static SvmRecognizer Instance 
+        public static Svm Instance 
         { 
             get
             {
                 if (instance == null)
                 {
-                    instance = new SvmRecognizer();
+                    instance = new Svm();
                 }
 
                 return instance;
@@ -29,7 +29,7 @@ namespace Signa
 
         private MulticlassSupportVectorMachine svm;
 
-        private SvmRecognizer()
+        private Svm()
         {
 
         }
@@ -43,7 +43,7 @@ namespace Signa
             return svm.Compute(data.ToArray());
         }
 
-        public void Train(SvmRecognizerTrainningData data)
+        public void Train(SvmTrainningData data)
         {
             svm = new MulticlassSupportVectorMachine(0, data.ClassCount);
 

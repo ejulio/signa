@@ -121,10 +121,10 @@
     <Compile Include="Model\SignInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SignSample.cs" />
-    <Compile Include="SignSamplesController.cs" />
+    <Compile Include="Data\SignSamplesController.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="SvmRecognizer.cs" />
-    <Compile Include="SvmRecognizerTrainningData.cs" />
+    <Compile Include="Recognizer\Svm.cs" />
+    <Compile Include="Recognizer\SvmTrainningData.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

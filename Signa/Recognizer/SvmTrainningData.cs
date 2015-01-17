@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Signa
+namespace Signa.Recognizer
 {
-    public class SvmRecognizerTrainningData
+    public class SvmTrainningData
     {
         public double[][] Inputs { get; set; }
         public int[] Outputs { get; set; }
@@ -16,7 +16,7 @@ namespace Signa
         private LinkedList<int> outputs;
         private LinkedList<double[]> inputs;
 
-        public SvmRecognizerTrainningData(IEnumerable<Sign> signs)
+        public SvmTrainningData(IEnumerable<Sign> signs)
         {
             this.signs = signs;
             Process();
