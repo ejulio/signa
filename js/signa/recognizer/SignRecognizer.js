@@ -26,18 +26,18 @@
         _eventEmitter: undefined,
         _state: undefined,
         _frame: undefined,
-        _signalToRecognizeId: -1,
+        _signToRecognizeId: -1,
 
         setState: function(state)
         {
             this._state = state;
-            state.setSignalToRecognizeId(this._signalToRecognizeId);
+            state.setSignalToRecognizeId(this._signToRecognizeId);
         },
 
-        setSignalToRecognizeId: function(signalToRecognizeId)
+        setSignToRecognizeId: function(signalToRecognizeId)
         {
-            this._state.setSignalToRecognizeId(signalToRecognizeId);
-            this._signalToRecognizeId = signalToRecognizeId;
+            this._state.setSignToRecognizeId(signalToRecognizeId);
+            this._signToRecognizeId = signalToRecognizeId;
         },
 
         _recognize: function(frame)

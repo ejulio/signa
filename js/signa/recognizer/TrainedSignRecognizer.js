@@ -7,7 +7,7 @@
 
     TrainedSignRecognizer.prototype = {
         _eventEmitter: undefined,
-        _signalToReconizeId: -1,
+        _signToReconizeId: -1,
 
         addRecognizeEventListener: function(listener)
         {
@@ -20,16 +20,16 @@
                 .recognize(signalData)
                 .then(function(signalRecognizedId)
                 {
-                    if (signalRecognizedId === this._signalToReconizeId)
+                    if (signalRecognizedId === this._signToReconizeId)
                     {
                         this._eventEmitter.trigger(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID);
                     }
                 }.bind(this));
         },
 
-        setSignalToRecognizeId: function(id)
+        setSignToRecognizeId: function(id)
         {
-            this._signalToReconizeId = id;
+            this._signToReconizeId = id;
         },
 
         save: function(signalData)

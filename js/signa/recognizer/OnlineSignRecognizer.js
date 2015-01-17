@@ -17,7 +17,7 @@
 
         recognize: function(){},
 
-        setSignalToRecognizeId: function(){},
+        setSignToRecognizeId: function(){},
 
         save: function(signalData)
         {
