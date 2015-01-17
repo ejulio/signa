@@ -56,17 +56,17 @@
         {
             this._signDescription.onRecognize();
             this._signExample.onRecognize();
-
+            this._signRecognizer.setSignToRecognizeId(-1);
             window.setTimeout(this._loadNextSign.bind(this), 500);
         },
 
         _loadNextSign: function()
         {
-            console.log('carregando próximo sinal');
             Signa.initHubs().done(function()
             {
+                var signId = this._signInfo ? this._signInfo.Id : -1;
                 Signa.HUB
-                    .getNextSign(this._signInfo ? this._signInfo.Id : -1)
+                    .getNextSign(signId)
                     .done(this._onNewSign.bind(this));
             }.bind(this));
         }
