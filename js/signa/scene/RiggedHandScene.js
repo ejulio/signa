@@ -17,5 +17,5 @@
         leapController.on('frame', riggedHand.onFrame).connect();
     }
 
-    Signa.RiggedHandScene = RiggedHandScene;
+    Signa.scene.RiggedHandScene = RiggedHandScene;
 })(window, window.Signa);

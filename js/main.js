@@ -1,6 +1,7 @@
 var width = $("#handmodel-user").width(),
     height = $("#handmodel-user").height(),
-    defaultCameraFactory = new Signa.DefaultCameraFactory(width / height);
+    defaultCameraFactory = new Signa.camera.DefaultCameraFactory(width / height),
+    appSignInfo;
 
 $('#play-pause').click(function()
 {
@@ -13,12 +14,8 @@ function loadNextSignal()
     {
         Signa.HUB.getNextSign(1).done(function(signInfo)
         {
+            appSignInfo = signInfo;
             window.riggedHandPlayer.loadRecording('recordings/' + signInfo.ExampleFilePath);
-            $('#sign-description')
-                .text(signInfo.Description)
-                .addClass('signa-sign-word-error')
-                .removeClass('signa-sign-word-success');
-            signalRecognizer.setSignalToRecognizeId(signInfo.Id);
         });
     });
 }
@@ -27,24 +24,35 @@ function initializeExampleHandScene()
 {
     var exampleHandleapController = new Leap.Controller(),
         container = $("#handmodel-example"),
-        orbitConstrolsCameraFactory = new Signa.OrbitControlsCameraFactory(defaultCameraFactory),
-        exampleHandmodelScene = new Signa.Scene(orbitConstrolsCameraFactory, container, width, height);
+        orbitConstrolsCameraFactory = new Signa.camera.OrbitControlsCameraFactory(defaultCameraFactory),
+        exampleHandmodelScene = new Signa.scene.Scene(orbitConstrolsCameraFactory, container, width, height);
 
     orbitConstrolsCameraFactory.setSignaScene(exampleHandmodelScene);
 
-    window.riggedHandPlayer = new Signa.PlaybackRiggedHandScene(exampleHandleapController, exampleHandmodelScene);
+    window.riggedHandPlayer = new Signa.scene.PlaybackRiggedHandScene(exampleHandleapController, exampleHandmodelScene);
+
+    exampleHandleapController.on('playback.recordingSet', function()
+    {
+        signalRecognizer.setSignalToRecognizeId(appSignInfo.Id);
+        $('#sign-description')
+            .text(appSignInfo.Description)
+            .addClass('signa-sign-word-error')
+            .removeClass('signa-sign-word-success');
+
+        console.log('carregou frames');
+    });
 }
 
 function initializeUserHandScene(userHandLeapController)
 {
     var container = $("#handmodel-user"),
-        userHandmodelScene = new Signa.Scene(defaultCameraFactory, container, width, height);
+        userHandmodelScene = new Signa.scene.Scene(defaultCameraFactory, container, width, height);
 
-    window.userRiggedHand = new Signa.RiggedHandScene(userHandLeapController, userHandmodelScene);
+    window.userRiggedHand = new Signa.scene.RiggedHandScene(userHandLeapController, userHandmodelScene);
 }
 
 var signaLeapController = new Leap.Controller(),
-    signalRecognizer = new Signa.SignRecognizer(signaLeapController);
+    signalRecognizer = new Signa.recognizer.SignRecognizer(signaLeapController);
 
 initializeExampleHandScene();
 initializeUserHandScene(signaLeapController);
@@ -56,6 +64,7 @@ signalRecognizer.addRecognizeEventListener(function()
         .addClass('signa-sign-word-success');
 
     console.log('carregando próximo sinal');
+    signalRecognizer.setSignalToRecognizeId(-1);
 
     window.setTimeout(function()
     {

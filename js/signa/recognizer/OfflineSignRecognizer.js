@@ -10,7 +10,7 @@
 
         addRecognizeEventListener: function(listener)
         {
-            this._eventEmitter.addListener(Signa.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
+            this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
         },
 
         recognize: function(){},
@@ -22,5 +22,5 @@
         train: function(){}
     };
 
-    Signa.OfflineSignRecognizer = OfflineSignRecognizer;
+    Signa.recognizer.OfflineSignRecognizer = OfflineSignRecognizer;
 })(window, window.Signa);

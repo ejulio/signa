@@ -22,5 +22,5 @@
         }
     };
 
-    Signa.DefaultCameraFactory = DefaultCameraFactory;
+    Signa.camera.DefaultCameraFactory = DefaultCameraFactory;
 })(window, window.Signa);

@@ -41,5 +41,5 @@
         }
     };
 
-    Signa.PlaybackRiggedHandScene = PlaybackRiggedHandScene;
+    Signa.scene.PlaybackRiggedHandScene = PlaybackRiggedHandScene;
 })(window, window.Signa);

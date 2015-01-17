@@ -56,5 +56,5 @@
         }
     };
 
-    Signa.Scene = Scene;
+    Signa.scene.Scene = Scene;
 })(window, window.Signa);

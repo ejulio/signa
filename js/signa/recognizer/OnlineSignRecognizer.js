@@ -12,7 +12,7 @@
 
         addRecognizeEventListener: function(listener)
         {
-            this._eventEmitter.addListener(Signa.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
+            this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
         },
 
         recognize: function(){},
@@ -31,5 +31,5 @@
         }
     };
 
-    Signa.OnlineSignRecognizer = OnlineSignRecognizer;
+    Signa.recognizer.OnlineSignRecognizer = OnlineSignRecognizer;
 })(window, window.Signa);

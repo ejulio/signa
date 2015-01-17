@@ -5,9 +5,9 @@
         var me = this;
         leapController.on('frame', this._onLeapFrame.bind(this));
         me._eventEmitter = new EventEmitter();
-        me.OFFLINE = new Signa.OfflineSignRecognizer(this._eventEmitter);
-        me.ONLINE = new Signa.OnlineSignRecognizer(this, this._eventEmitter);
-        me.TRAINED = new Signa.TrainedSignRecognizer(this._eventEmitter);
+        me.OFFLINE = new Signa.recognizer.OfflineSignRecognizer(this._eventEmitter);
+        me.ONLINE = new Signa.recognizer.OnlineSignRecognizer(this, this._eventEmitter);
+        me.TRAINED = new Signa.recognizer.TrainedSignRecognizer(this._eventEmitter);
 
         me._state = me.OFFLINE;
 
@@ -116,5 +116,5 @@
         }
     };
 
-    Signa.SignRecognizer = SignRecognizer;
+    Signa.recognizer.SignRecognizer = SignRecognizer;
 })(window, window.Signa);

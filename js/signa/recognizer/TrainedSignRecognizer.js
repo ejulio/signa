@@ -11,7 +11,7 @@
 
         addRecognizeEventListener: function(listener)
         {
-            this._eventEmitter.addListener(Signa.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
+            this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
         },
 
         recognize: function(signalData)
@@ -22,7 +22,7 @@
                 {
                     if (signalRecognizedId === this._signalToReconizeId)
                     {
-                        this._eventEmitter.trigger(Signa.SignRecognizer.RECOGNIZE_EVENT_ID);
+                        this._eventEmitter.trigger(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID);
                     }
                 }.bind(this));
         },
@@ -43,5 +43,5 @@
         }
     };
 
-    Signa.TrainedSignRecognizer = TrainedSignRecognizer;
+    Signa.recognizer.TrainedSignRecognizer = TrainedSignRecognizer;
 })(window, window.Signa);

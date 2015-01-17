@@ -5,6 +5,10 @@
 
     window.Signa = {
 
+        camera: {},
+        recognizer: {},
+        scene: {},
+
         HUB: connection.recognizer.server,
 
         initHubs: function()

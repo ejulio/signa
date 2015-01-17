@@ -30,5 +30,5 @@
         }
     };
 
-    Signa.OrbitControlsCameraFactory = OrbitControlsCameraFactory;
+    Signa.camera.OrbitControlsCameraFactory = OrbitControlsCameraFactory;
 })(window, window.Signa);
