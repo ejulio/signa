@@ -62,18 +62,32 @@
     color: green;
 }
 
-.signa-message
+#recognized-sign-message
 {
-    color: white;
-    font-weight: bold;
-    margin: 10px 0;
-    padding: 10px;
-    text-align: center;
+    display: none;
 }
 
-.signa-message-success
+.signa-message-box
 {
-    background: green;
+    position: absolute;
+    top: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.signa-message-box-horizontal-center
+{
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.signa-message-box-success
+{
+    background: #7ae16a;
+    border: 2px solid #309d1f;
+    color: #185010;
 }
 
 .signa-hands-container

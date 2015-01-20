@@ -14,6 +14,7 @@
         _signExample: undefined,
         _signRecognizer: undefined,
         _signInfo: undefined,
+        _messageBox: undefined,
 
         init: function()
         {
@@ -23,6 +24,8 @@
                 defaultCameraFactory = new Signa.camera.DefaultCameraFactory(width / height),
                 leapController = new Leap.Controller(),
                 leapController2 = new Leap.Controller();
+
+            this._messageBox = $('#recognized-sign-message');
 
             this._signDescription = new View.index.SignDescription($('#sign-description'));
             this._signExample = new View.index.SignExample(defaultCameraFactory, container, leapController, width, height);
@@ -50,14 +53,26 @@
         {
             this._signDescription.onNewSign(this._signInfo);
             this._signRecognizer.setSignToRecognizeId(this._signInfo.Id);
+            this._hideRecognizeMessage();
+        },
+
+        _hideRecognizeMessage: function()
+        {
+            this._messageBox.hide();
         },
 
         _onRecognize: function()
         {
+            this._showRecognizeMessage();
             this._signDescription.onRecognize();
             this._signExample.onRecognize();
             this._signRecognizer.setSignToRecognizeId(-1);
-            window.setTimeout(this._loadNextSign.bind(this), 500);
+            window.setTimeout(this._loadNextSign.bind(this), 1000);
+        },
+
+        _showRecognizeMessage: function()
+        {
+            this._messageBox.show();
         },
 
         _loadNextSign: function()

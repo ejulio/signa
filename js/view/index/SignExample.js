@@ -8,6 +8,8 @@
         orbitConstrolsCameraFactory.setSignaScene(exampleHandmodelScene);
 
         this._riggedHandPlayer = new Signa.scene.PlaybackRiggedHandScene(leapController, exampleHandmodelScene);
+
+        $('#play-pause').click(this._onPlayPause.bind(this));
     }
 
     SignExample.prototype = {
@@ -21,6 +23,11 @@
         onRecognize: function()
         {
 
+        },
+
+        _onPlayPause: function()
+        {
+            this._riggedHandPlayer.toggle();
         }
     };
 
