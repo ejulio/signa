@@ -10,7 +10,7 @@ using System.Web;
 
 namespace Signa.Recognizer
 {
-    public class Svm
+    public class Svm : ITrainableAlgorithm
     {
         private static Svm instance;
 
@@ -43,7 +43,7 @@ namespace Signa.Recognizer
             return svm.Compute(data.ToArray());
         }
 
-        public void Train(SvmTrainningData data)
+        public void Train(ITrainableAlgorithmData data)
         {
             svm = new MulticlassSupportVectorMachine(0, data.ClassCount);
 

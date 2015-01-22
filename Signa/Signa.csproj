@@ -116,12 +116,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLineInterface\ICommand.cs" />
+    <Compile Include="CommandLineInterface\TrainAlgorithmCommand.cs" />
     <Compile Include="Hubs\Recognizer.cs" />
     <Compile Include="Model\Sign.cs" />
     <Compile Include="Model\SignInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SignSample.cs" />
     <Compile Include="Data\SignSamplesController.cs" />
+    <Compile Include="Recognizer\ITrainableAlgorithm.cs" />
+    <Compile Include="Recognizer\ITrainableAlgorithmData.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Recognizer\Svm.cs" />
     <Compile Include="Recognizer\SvmTrainningData.cs" />

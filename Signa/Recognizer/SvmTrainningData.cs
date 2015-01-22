@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Signa.Recognizer
 {
-    public class SvmTrainningData
+    public class SvmTrainningData : ITrainableAlgorithmData
     {
         public double[][] Inputs { get; set; }
         public int[] Outputs { get; set; }
