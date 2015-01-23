@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Hosting;
 using Signa;
+using Signa.CommandLineInterface;
 using Signa.Data;
 using Signa.Recognizer;
 using System;
@@ -15,19 +16,17 @@ namespace Host
     {
         static void Main(string[] args)
         {
+            StartServer();
+
+            var commandReader = new CommandReader();
+            commandReader.Read();
+        }
+
+        private static void StartServer()
+        {
             var serverAddress = "http://localhost:9000";
             WebApp.Start<Signa.Startup>(serverAddress);
-
-            Console.WriteLine("Aplicação iniciada");
-            
-            Console.WriteLine("Treinando algoritmo");
-            var signSamplesController = SignSamplesController.Instance;
-            signSamplesController.SamplesFilePath = "./data/sign-samples.json";
-            signSamplesController.Load();
-            var svmRecognizerTrainningData = new SvmTrainningData(signSamplesController.SignSamples);
-            Svm.Instance.Train(svmRecognizerTrainningData);
-            Console.WriteLine("Algoritmo treinado");
-            Console.ReadLine();
+            Console.WriteLine("Aplicação iniciada em {0}", serverAddress);
         }
     }
 }

@@ -116,8 +116,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLineInterface\CommandReader.cs" />
+    <Compile Include="CommandLineInterface\HelpCommand.cs" />
     <Compile Include="CommandLineInterface\ICommand.cs" />
-    <Compile Include="CommandLineInterface\TrainAlgorithmCommand.cs" />
+    <Compile Include="CommandLineInterface\LoadCommand.cs" />
+    <Compile Include="CommandLineInterface\LogCommandDecorator.cs" />
+    <Compile Include="Data\IDataLoader.cs" />
     <Compile Include="Hubs\Recognizer.cs" />
     <Compile Include="Model\Sign.cs" />
     <Compile Include="Model\SignInfo.cs" />

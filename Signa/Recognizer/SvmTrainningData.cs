@@ -22,7 +22,7 @@ namespace Signa.Recognizer
             Process();
         }
 
-        private void Process()
+        public void Process()
         {
             int signId = 0;
             ClassCount = 0;

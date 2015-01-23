@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Signa.Data
 {
-    public class SignSamplesController
+    public class SignSamplesController : IDataLoader
     {
         private static SignSamplesController instance;
 
@@ -26,7 +26,7 @@ namespace Signa.Data
 
         public string SamplesFilePath { get; set; }
 
-        public IList<Sign> SignSamples 
+        public IList<Sign> Data 
         { 
             get
             {
