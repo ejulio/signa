@@ -10,34 +10,19 @@
     <body class="signa-body">
         <div class="signa-titlebar">
             <h1 class="signa-titlebar-title signa-titlebar-main">SIGNA</h1>
-            <a href="import.html">Importar sinal</a> | <a href="http://leapmotion.github.io/leapjs-playback/recorder/">Gravar sinal</a>
+            <a href="index.html">Principal</a> | <a href="http://leapmotion.github.io/leapjs-playback/recorder/">Gravar sinal</a>
         </div>
 
         <section class="signa-main signa-float-container">
-            <section class="pure-g">
-                <section class="pure-u-1-2 signa-main-section">
-                    <div>
-                        <div class="signa-titlebar">
-                            <h3 class="signa-titlebar-title">Faça este sinal</h3>
-                        </div>
-                        <div class="signa-sign-container">
-                            <h1 class="signa-sign-word signa-sign-word-error" id="sign-description"></h1>
-                        </div>
-                    </div>
-                </section>
-                <section class="pure-u-1-2 signa-main-section signa-hands-container">
-                    <div id="handmodel-example" class="signa-handmodel-container signa-handmodel-example">
-                        <h3 class="signa-titlebar-title">Exemplo do sinal <a href="#" id="play-pause">Play/Pause</a></h3>
-                    </div>
-                    <div id="handmodel-user" class="signa-handmodel-container signa-handmodel-user">
-                        <h3 class="signa-titlebar-title">Suas mãos</h3>
-                    </div>
-                </section>
-            </section>
+            <div>
+                <input type="file" id="sign-file">
+            </div>
+            <div class="signa-main-section" id="handmodel-user"></div>
+            <div>
+                <input type="text" placeholder="Descrição do sinal">
+                <button class="pure-button">Salvar</button>
+            </div>
         </section>
-        <div class="signa-message-box signa-message-box-horizontal-center signa-message-box-success" id="recognized-sign-message">
-            Parabéns, o sinal foi reconhecido! Carregando próximo sinal...
-        </div>
 
         <script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
         <script type="text/javascript" src="bower_components/three.js-controls/src/OrbitControls.js"></script>
@@ -72,6 +57,6 @@
         <script type="text/javascript" src="js/view/index/SignExample.js"></script>
         <script type="text/javascript" src="js/view/index/UserHands.js"></script>
 
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/import.js"></script>
     </body>
 </html>

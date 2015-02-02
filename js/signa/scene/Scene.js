@@ -1,7 +1,10 @@
 ;(function(window, Signa, undefined)
 {
+    var globalSceneId = 0;
     function Scene(cameraFactory, container, width, height)
     {
+        this._id = globalSceneId;
+        globalSceneId++;
         this._scene = new THREE.Scene();
         this._renderer = new THREE.WebGLRenderer();
         this._camera = cameraFactory.create();
@@ -16,6 +19,12 @@
         _scene: undefined,
         _camera: undefined,
         _renderer: undefined,
+        _id: 0,
+
+        getId: function()
+        {
+            return this._id;
+        },
 
         render: function()
         {

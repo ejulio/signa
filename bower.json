@@ -20,10 +20,10 @@
     "threejs": "*",
     "jquery": "~2.1.1",
     "leapjs": "~0.6.2",
-    "leapjs-plugins": "~0.1.6",
     "leapjs-rigged-hand": "~0.1.4",
     "three.js-controls": "~0.0.67",
     "signalr": "~2.1.2",
-    "eventEmitter": "~4.2.11"
+    "eventEmitter": "~4.2.11",
+    "leapjs-plugins": "~0.1.6"
   }
 }
