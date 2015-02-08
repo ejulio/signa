@@ -21,8 +21,7 @@
     "jquery": "~2.1.1",
     "three.js-controls": "~0.0.67",
     "signalr": "~2.1.2",
-    "eventEmitter": "~4.2.11",
-    "leapjs-playback": "https://github.com/leapmotion/leapjs-playback.git"
+    "eventEmitter": "~4.2.11"
   },
   "resolutions": {
     "threejs": "r69"

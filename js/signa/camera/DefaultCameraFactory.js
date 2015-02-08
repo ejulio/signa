@@ -1,7 +1,7 @@
 ;(function(window, Signa, undefined)
 {
     var CAMERA_NEAR = 0.1;
-    var CAMERA_FAR = 500;
+    var CAMERA_FAR = 1000;
     var CAMERA_FIELD_OF_VIEW = 75;
 
     function DefaultCameraFactory(aspectRatio)

@@ -614,6 +614,7 @@ function onReady(handler) {
     this.on('handLost', removeMesh);
     return {
       frame: function(frame) {
+		
         var boneColors, face, faceIndices, geometry, handMesh, hue, i, j, leapHand, lightness, mcp, palm, saturation, weights, xBoneHSL, yBoneHSL, _base, _i, _j, _k, _l, _len, _len1, _len2, _len3, _name, _name1, _ref, _ref1, _ref2, _ref3;
         if (scope.stats) {
           scope.stats.begin();
