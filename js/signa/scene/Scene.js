@@ -42,24 +42,24 @@
                 lineGeometry,
                 line;
 
-            lineMaterial = new THREE.LineBasicMaterial({color: 0xFF0000});
-            lineGeometry = new THREE.Geometry();
-            lineGeometry.vertices.push(new THREE.Vector3(0, 0, 0));
-            lineGeometry.vertices.push(new THREE.Vector3(0, 20, 0));
-            line = new THREE.Line(lineGeometry, lineMaterial);
-            this._scene.add(line);
-
             lineMaterial = new THREE.LineBasicMaterial({color: 0x00FF00});
             lineGeometry = new THREE.Geometry();
             lineGeometry.vertices.push(new THREE.Vector3(0, 0, 0));
-            lineGeometry.vertices.push(new THREE.Vector3(20, 0, 0));
+            lineGeometry.vertices.push(new THREE.Vector3(0, 100, 0));
+            line = new THREE.Line(lineGeometry, lineMaterial);
+            this._scene.add(line);
+
+            lineMaterial = new THREE.LineBasicMaterial({color: 0xFF0000});
+            lineGeometry = new THREE.Geometry();
+            lineGeometry.vertices.push(new THREE.Vector3(0, 0, 0));
+            lineGeometry.vertices.push(new THREE.Vector3(100, 0, 0));
             line = new THREE.Line(lineGeometry, lineMaterial);
             this._scene.add(line);
 
             lineMaterial = new THREE.LineBasicMaterial({color: 0x0000FF});
             lineGeometry = new THREE.Geometry();
             lineGeometry.vertices.push(new THREE.Vector3(0, 0, 0));
-            lineGeometry.vertices.push(new THREE.Vector3(0, 0, 20));
+            lineGeometry.vertices.push(new THREE.Vector3(0, 0, 100));
             line = new THREE.Line(lineGeometry, lineMaterial);
             this._scene.add(line);
         }

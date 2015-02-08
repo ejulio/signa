@@ -12,7 +12,7 @@
 
         onNewSign: function(signInfo)
         {
-            
+
         },
 
         onRecognize: function()

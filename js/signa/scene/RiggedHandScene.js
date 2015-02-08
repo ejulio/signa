@@ -4,21 +4,18 @@
     {
         this._signaScene = signaScene;
 
-        this._riggedHand = new RiggedHand(leapController, {
-            sceneid: signaScene.getId(),
+        leapController.use('riggedHand', {
+            sceneId: signaScene.getId(),
             parent: this.getThreeScene(),
             materialOptions: {
                 transparent: false
             },
             renderFn: this.render.bind(this)
         });
-
-        leapController.on('frame', this._riggedHand.onFrame);
     }
 
     RiggedHandScene.prototype = {
         _signaScene: undefined,
-        _riggedHand: undefined,
 
         getId: function()
         {

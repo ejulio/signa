@@ -8,6 +8,8 @@ var userHandmodelScene = new Signa.scene.Scene(defaultCameraFactory, container, 
 
 userHandmodelScene = new Signa.scene.RiggedHandScene(leapController, userHandmodelScene);
 
+userHandmodelScene.render();
+
 userHandmodelScene = new Signa.scene.PlaybackRiggedHandScene(leapController);
 
 $('#sign-file').change(function(event)
@@ -18,11 +20,11 @@ $('#sign-file').change(function(event)
     fileReader.onload = function(event)
     {
         var result = event.target.result,
-            json = JSON.parse(result);
+            json = JSON.parse(result),
+            player = userHandmodelScene._player,
+            recording = new player.Recording();
 
-        var recording = new window.Recording();
-        recording.url = '';
-        recording.finishLoad(result, function(frames)
+        recording.readFileData(json, function(frames)
         {
             recording.setFrames(frames);
         });
