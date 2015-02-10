@@ -18,6 +18,29 @@ namespace Signa.Hubs
             return Svm.Instance.Recognize(data);
         }
 
+        public void SaveSignSample(string name, string exampleFileContent, SignSample data)
+        {
+            if (!Directory.Exists("samples"))
+            {
+                Directory.CreateDirectory("samples");
+            }
+
+            var fileName = "samples/" + name + ".json";
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                writer.Write(exampleFileContent);
+            }
+
+            SignSamplesController.Instance.Add(new Sign
+            {
+                Description= name,
+                ExampleFilePath = fileName,
+                Samples = new SignSample[] { data }
+            });
+
+            SignSamplesController.Instance.Save();
+        }
+
         public SignInfo GetNextSign(int previousSignId)
         {
             var signId = GetRandomIndex(previousSignId);
