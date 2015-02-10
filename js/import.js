@@ -5,6 +5,8 @@ var width = $("#handmodel-user").width(),
     orbitControlsCameraFactory = new Signa.camera.OrbitControlsCameraFactory(defaultCameraFactory),
     leapController = new Leap.Controller();
 
+Signa.initHubs();
+
 var userHandmodelScene = new Signa.scene.Scene(orbitControlsCameraFactory, container, width, height);
 
 userHandmodelScene = new Signa.scene.RiggedHandScene(leapController, userHandmodelScene);
@@ -15,6 +17,8 @@ userHandmodelScene.render();
 
 userHandmodelScene = new Signa.scene.PlaybackRiggedHandScene(leapController);
 
+var serverFrames, json;
+
 $('#sign-file').change(function(event)
 {
     var file = event.target.files[0],
@@ -23,12 +27,14 @@ $('#sign-file').change(function(event)
     fileReader.onload = function(event)
     {
         var result = event.target.result,
-            json = JSON.parse(result),
             player = userHandmodelScene._player,
             recording = new player.Recording();
 
-        recording.readFileData(json, function(frames)
+        json = result;
+
+        recording.readFileData(JSON.parse(result), function(frames)
         {
+            serverFrames = frames;
             recording.setFrames(frames);
         });
 
@@ -36,4 +42,29 @@ $('#sign-file').change(function(event)
     };
 
     fileReader.readAsText(file);
+});
+
+$('#save').click(function()
+{
+    var frame = new Leap.Frame(serverFrames[0]);
+    var hand = frame.hands[0];
+    var anglesBetweenFingers = [];
+    var length = hand.fingers.length - 1;
+    for (var i = 0; i < length; i++)
+    {
+        var origin = new THREE.Vector3();
+        var destiny = new THREE.Vector3();
+
+        origin.fromArray(hand.fingers[i].tipPosition);
+        destiny.fromArray(hand.fingers[i + 1].tipPosition);
+
+        anglesBetweenFingers.push(origin.angleTo(destiny));
+    }
+
+    var signalParameters = {
+        palmNormal: hand.palmNormal,
+        handDirection: hand.direction,
+        anglesBetweenFingers: anglesBetweenFingers
+    };
+    Signa.HUB.saveSignSample($('#description').val(), json, signalParameters);
 });
