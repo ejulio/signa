@@ -21,7 +21,7 @@ namespace Signa.Data
         public SignRepository(string dataFilePath)
         {
             this.dataFilePath = dataFilePath;
-            signsByIndex = new Sign[0];
+            signsByIndex = new List<Sign>();
             signsById = new Dictionary<string, Sign>();
         }
 
@@ -33,12 +33,19 @@ namespace Signa.Data
 
         public Sign GetByIndex(int index)
         {
+            if (index == Count)
+                return null;
+
             return signsByIndex[index];
         }
 
         public Sign GetById(string id)
         {
-            return signsById[id];
+            Sign sign;
+            if (signsById.TryGetValue(id, out sign))
+                return sign;
+
+            return null;
         }
 
         public void Load()
@@ -46,7 +53,8 @@ namespace Signa.Data
             using (var reader = new StreamReader(dataFilePath))
             {
                 var jsonSignSamples = reader.ReadToEnd();
-                signsByIndex = JsonConvert.DeserializeObject<List<Sign>>(jsonSignSamples);
+                var fileSamples = JsonConvert.DeserializeObject<List<Sign>>(jsonSignSamples);
+                signsByIndex = fileSamples ?? signsByIndex;
                 LoadDictionary();
             }
         }

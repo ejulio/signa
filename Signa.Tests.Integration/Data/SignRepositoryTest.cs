@@ -98,6 +98,28 @@ namespace Signa.Tests.Integration.Data
             }
         }
 
+        [TestMethod]
+        public void loading_an_empty_file_should_not_throw_an_exception()
+        {
+            GivenAnEmptySamplesFile();
+
+            Action loadCall = () => signRepository.Load();
+            Action getByIndexCall = () => signRepository.GetByIndex(0);
+            Action getByIdCall = () => signRepository.GetById("");
+
+            loadCall.ShouldNotThrow();
+            getByIndexCall.ShouldNotThrow();
+            getByIdCall.ShouldNotThrow();
+        }
+
+        private void GivenAnEmptySamplesFile()
+        {
+            using (StreamWriter writer = new StreamWriter(samplesFilePath))
+            {
+                writer.Write("");
+            }
+        }
+
         private ICollection<Sign> GivenSomeSignsInTheSamplesFile()
         {
             var signs = new SignCollectionBuilder()
