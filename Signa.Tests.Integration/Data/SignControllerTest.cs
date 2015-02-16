@@ -1,9 +1,8 @@
-﻿using System;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Data;
-using System.IO;
-using FluentAssertions;
 using Signa.Util;
+using System.IO;
 
 namespace Signa.Tests.Integration.Data
 {

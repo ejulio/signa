@@ -1,16 +1,17 @@
 ﻿using Signa.Model;
+using Signa.Util;
 using System;
 using System.IO;
 using System.Linq;
-using Signa.Util;
 
 namespace Signa.Data
 {
     public class SignController
     {
-        private IRepository<Sign> repository;
-
+        public const string SignSamplesFilePath = "./data/sign-samples.json";
         public const string SamplesDirectory = "samples/";
+
+        private IRepository<Sign> repository;
 
         public SignController(IRepository<Sign> repository)
         {

@@ -58,7 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="data\sign-samples.json" />
     <None Include="packages.config" />
+    <None Include="samples\mao-aberta.json" />
+    <None Include="samples\paz-e-amor.json" />
+    <None Include="samples\positivo.json" />
+    <None Include="samples\tres.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Signa\Signa.csproj">

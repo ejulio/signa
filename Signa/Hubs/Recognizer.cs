@@ -11,7 +11,7 @@ namespace Signa.Hubs
 
         public Recognizer()
         {
-            var repository = new SignRepository("./data/sign-samples.json");
+            var repository = new SignRepository(SignController.SignSamplesFilePath);
             signController = new SignController(repository);
         }
 
