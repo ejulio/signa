@@ -55,9 +55,11 @@ namespace Signa.Tests.Data
             var sign0 = GivenThatTheRepositoryReturnsASignForTheIndex(signIdex0);
             var sign1 = GivenThatTheRepositoryReturnsASignForTheIndex(signIdex1);
 
-            var randomSign = signController.GetRandomSign(signIdex1);
+            int signIndex;
+            var randomSign = signController.GetRandomSign(signIdex1, out signIndex);
 
             randomSign.Should().Be(sign0);
+            signIndex.Should().Be(0);
         }
 
         private Sign GivenThatTheRepositoryReturnsASignForTheDescription(string signDescription)

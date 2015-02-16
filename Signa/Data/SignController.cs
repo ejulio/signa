@@ -37,7 +37,7 @@ namespace Signa.Data
             repository.SaveChanges();
         }
 
-        public Sign GetRandomSign(int lastSignIndex)
+        public Sign GetRandomSign(int lastSignIndex, out int signIndex)
         {
             var random = new Random();
             int index;
@@ -47,6 +47,7 @@ namespace Signa.Data
             }
             while (index == lastSignIndex);
 
+            signIndex = index;
             return repository.GetByIndex(index);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
+using Signa.Data;
 using Signa.Model;
 using Signa.Recognizer;
 
@@ -6,47 +7,44 @@ namespace Signa.Hubs
 {
     public class Recognizer : Hub
     {
+        private SignController signController;
+
+        public Recognizer()
+        {
+            var repository = new SignRepository("./data/sign-samples.json");
+            signController = new SignController(repository);
+        }
+
         public int Recognize(SignSample data)
         {
             return Svm.Instance.Recognize(data);
         }
 
-        //public void SaveSignSample(string name, string exampleFileContent, SignSample data)
-        //{
-        //    if (!Directory.Exists("samples"))
-        //    {
-        //        Directory.CreateDirectory("samples");
-        //    }
+        public void SaveSignSample(string name, string exampleFileContent, SignSample data)
+        {
+            var fileName = signController.CreateSampleFileIfNotExists(name, exampleFileContent);
 
-        //    var fileName = "samples/" + name + ".json";
-        //    using (StreamWriter writer = new StreamWriter(fileName))
-        //    {
-        //        writer.Write(exampleFileContent);
-        //    }
+            signController.Add(new Sign
+            {
+                Description = name,
+                ExampleFilePath = fileName,
+                Samples = new SignSample[] { data }
+            });
+        }
 
-        //    SignController.Instance.Add(new Sign
-        //    {
-        //        Description= name,
-        //        ExampleFilePath = fileName,
-        //        Samples = new SignSample[] { data }
-        //    });
+        public SignInfo GetNextSign(int previousSignIndex)
+        {
+            int signIndex;
+            var sign = signController.GetRandomSign(previousSignIndex, out signIndex);
 
-        //    SignController.Instance.Save();
-        //}
+            var signInfo = new SignInfo
+            {
+                Id = signIndex,
+                Description = sign.Description,
+                ExampleFilePath = sign.ExampleFilePath
+            };
 
-        //public SignInfo GetNextSign(int previousSignId)
-        //{
-        //    var signId = GetRandomIndex(previousSignId);
-        //    var sign = SignController.Instance.GetByIndex(signId);
-
-        //    var signInfo = new SignInfo
-        //    {
-        //        Id = signId,
-        //        Description = sign.Description,
-        //        ExampleFilePath = sign.ExampleFilePath
-        //    };
-
-        //    return signInfo;
-        //}
+            return signInfo;
+        }
     }
 }
