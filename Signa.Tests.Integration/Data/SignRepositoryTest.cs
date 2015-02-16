@@ -82,12 +82,38 @@ namespace Signa.Tests.Integration.Data
             signRepository.GetByIndex(signIndex).Description.Should().Be(signDescription);
         }
 
-        private string GetSamplesFileContent()
+        [TestMethod]
+        public void enumerating_return_items_like_GetByIndex()
         {
-            using (StreamReader reader = new StreamReader(samplesFilePath))
+            GivenSomeSignsInTheSamplesFile();
+            
+            signRepository.Load();
+
+            int index = 0;
+
+            foreach (var sign in signRepository)
             {
-                return reader.ReadToEnd();
+                sign.Should().Be(signRepository.GetByIndex(index));
+                index++;
             }
+        }
+
+        private ICollection<Sign> GivenSomeSignsInTheSamplesFile()
+        {
+            var signs = new SignCollectionBuilder()
+                            .WithSize(4)
+                            .WithDescriptionTemplate(descriptionTemplate)
+                            .WithPathTemplate(pathTemplate)
+                            .Build();
+
+            var json = JsonConvert.SerializeObject(signs);
+
+            using (StreamWriter writer = new StreamWriter(samplesFilePath))
+            {
+                writer.Write(json);
+            }
+
+            return signs;
         }
 
         private static Sign GivenANewSign(string description)
@@ -129,23 +155,12 @@ namespace Signa.Tests.Integration.Data
                         sign.Samples.Count == 4);
             }
         }
-
-        private ICollection<Sign> GivenSomeSignsInTheSamplesFile()
+        private string GetSamplesFileContent()
         {
-            var signs = new SignCollectionBuilder()
-                            .WithSize(4)
-                            .WithDescriptionTemplate(descriptionTemplate)
-                            .WithPathTemplate(pathTemplate)
-                            .Build();
-
-            var json = JsonConvert.SerializeObject(signs);
-
-            using (StreamWriter writer = new StreamWriter(samplesFilePath))
+            using (StreamReader reader = new StreamReader(samplesFilePath))
             {
-                writer.Write(json);
+                return reader.ReadToEnd();
             }
-
-            return signs;
         }
     }
 }

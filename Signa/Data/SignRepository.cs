@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Signa.Model;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Signa.Data
 {
-    public class SignRepository : IRepository<Sign>
+    public class SignRepository : IRepository<Sign>, IEnumerable<Sign>
     {
         private IList<Sign> signsByIndex;
         private IDictionary<string, Sign> signsById;
@@ -65,6 +66,16 @@ namespace Signa.Data
                 var json = JsonConvert.SerializeObject(signsById.Values);
                 writer.Write(json);
             }
+        }
+
+        public IEnumerator<Sign> GetEnumerator()
+        {
+            return signsByIndex.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return signsByIndex.GetEnumerator();
         }
     }
 }
