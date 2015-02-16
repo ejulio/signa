@@ -44,7 +44,7 @@ namespace Signa.Hubs
         public SignInfo GetNextSign(int previousSignId)
         {
             var signId = GetRandomIndex(previousSignId);
-            var sign = SignSamplesController.Instance.Data[signId];
+            var sign = SignSamplesController.Instance.GetByIndex(signId);
 
             var signInfo = new SignInfo
             {
@@ -58,7 +58,7 @@ namespace Signa.Hubs
 
         private int GetRandomIndex(int previousSignId)
         {
-            var signSamplesCount = SignSamplesController.Instance.Data.Count;
+            var signSamplesCount = SignSamplesController.Instance.Count;
             Random random = new Random();
             int signId = 0;
             do

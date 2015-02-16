@@ -8,8 +8,8 @@ namespace Signa.Recognizer
 {
     public interface ITrainableAlgorithmData
     {
-        double[][] Inputs { get; set; }
-        int[] Outputs { get; set; }
-        int ClassCount { get; set; }
+        double[][] Inputs { get; }
+        int[] Outputs { get; }
+        int ClassCount { get; }
     }
 }

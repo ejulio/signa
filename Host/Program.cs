@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin.Hosting;
 using Signa;
-using Signa.CommandLineInterface;
 using Signa.Data;
 using Signa.Recognizer;
 using System;
@@ -17,9 +16,7 @@ namespace Host
         static void Main(string[] args)
         {
             StartServer();
-
-            var commandReader = new CommandReader();
-            commandReader.Read();
+            Console.ReadKey();
         }
 
         private static void StartServer()

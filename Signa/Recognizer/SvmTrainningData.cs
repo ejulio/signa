@@ -8,9 +8,9 @@ namespace Signa.Recognizer
 {
     public class SvmTrainningData : ITrainableAlgorithmData
     {
-        public double[][] Inputs { get; set; }
-        public int[] Outputs { get; set; }
-        public int ClassCount { get; set; }
+        public double[][] Inputs { get; private set; }
+        public int[] Outputs { get; private set; }
+        public int ClassCount { get; private set; }
 
         private IEnumerable<Sign> signs;
         private LinkedList<int> outputs;
@@ -24,27 +24,27 @@ namespace Signa.Recognizer
 
         public void Process()
         {
-            int signId = 0;
+            int signIndex = 0;
             ClassCount = 0;
             inputs = new LinkedList<double[]>();
             outputs = new LinkedList<int>();
 
             foreach (var sign in signs)
             {
-                ExtracSignSampleData(sign, signId);
+                ExtracSignSampleData(sign, signIndex);
                 ClassCount++;
-                signId++;
+                signIndex++;
             }
 
             Outputs = outputs.ToArray();
             Inputs = inputs.ToArray();
         }
 
-        private void ExtracSignSampleData(Sign sign, int signId)
+        private void ExtracSignSampleData(Sign sign, int signIndex)
         {
             foreach (var sample in sign.Samples)
             {
-                outputs.AddFirst(signId);
+                outputs.AddFirst(signIndex);
                 inputs.AddFirst(sample.ToArray());
             }
         }

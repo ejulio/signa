@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Signa.Data
 {
-    public class SignSamplesController : IDataLoader
+    public class SignSamplesController
     {
         private static SignSamplesController instance;
 
@@ -26,68 +26,54 @@ namespace Signa.Data
 
         public string SamplesFilePath { get; set; }
 
-        public IList<Sign> Data 
-        { 
-            get
+        public int Count { 
+            get 
             {
-                return signSamples;
-            }
+                return repository.Count;
+            } 
         }
 
-        private IList<Sign> signSamples;
-
-        private IDictionary<string, Sign> signIndexes;
+        private IRepository<Sign> repository;
 
         private SignSamplesController()
         {
-            signIndexes = new Dictionary<string, Sign>();
+            repository = new SignRepository(SamplesFilePath);
         }
 
         public void Load()
         {
-            using (var reader = new StreamReader(SamplesFilePath))
-            {
-                var jsonSignSamples = reader.ReadToEnd();
-                signSamples = JsonConvert.DeserializeObject<List<Sign>>(jsonSignSamples);
-                LoadDictionary();
-            }
-        }
-
-        private void LoadDictionary()
-        {
-            foreach (var sign in signSamples)
-            {
-                signIndexes.Add(sign.Description, sign);
-            }
+            repository.Load();
         }
 
         public void Add(Sign sign)
         {
-            Sign signInIndex;
-            if (signIndexes.TryGetValue(sign.Description, out signInIndex))
+            Sign signInRepository = repository.GetById(sign.Description);
+            if (signInRepository == null)
             {
-                foreach (var sample in sign.Samples)
-                {
-                    var samples = new SignSample[signInIndex.Samples.Count + sign.Samples.Count];
-                    Array.Copy(signInIndex.Samples.ToArray(), samples, signInIndex.Samples.Count);
-                    Array.Copy(sign.Samples.ToArray(), 0, samples, signInIndex.Samples.Count, sign.Samples.Count);
-                    
-                    signInIndex.Samples = samples;
-                }
+                repository.Add(sign);
             }
             else
             {
-                signIndexes.Add(sign.Description, sign);
+                foreach (var sample in sign.Samples)
+                {
+                    var samples = new SignSample[signInRepository.Samples.Count + sign.Samples.Count];
+                    Array.Copy(signInRepository.Samples.ToArray(), samples, signInRepository.Samples.Count);
+                    Array.Copy(sign.Samples.ToArray(), 0, samples, signInRepository.Samples.Count, sign.Samples.Count);
+
+                    signInRepository.Samples = samples;
+                }
             }
+
         }
 
         public void Save()
         {
-            using (StreamWriter writer = new StreamWriter(SamplesFilePath))
-            {
-                var json = JsonConvert.SerializeObject(signIndexes.Values);
-                writer.Write(json);
-            }
+            repository.SaveChanges();
+        }
+
+        public Sign GetByIndex(int index)
+        {
+            return repository.GetByIndex(index);
         }
     }
 }

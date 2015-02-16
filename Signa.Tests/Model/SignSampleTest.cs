@@ -9,7 +9,7 @@ namespace Signa.Tests.Model
     public class SignSampleTest
     {
         [TestMethod]
-        public void ToArray_Should_Return_Properties_In_The_Array()
+        public void returning_an_array_with_samples_properties()
         {
             double[] palmNormal = { 0.123, 0.556, 0.897 };
             double[] handDirection = { 0.896, 0.132, 0.745 };
