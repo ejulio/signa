@@ -37,9 +37,9 @@ namespace Signa.Tests.Integration.Data
             const string signDescription = "new sign";
             const string fileData = "file data";
 
-            signController.CreateSampleFileIfNotExists(signDescription, fileData);
+            var createdFilePath = signController.CreateSampleFileIfNotExists(signDescription, fileData);
 
-            MustCreateFileWithContent(signDescription, fileData);
+            MustCreateFileWithContent(createdFilePath, signDescription, fileData);
         }
 
         [TestMethod]
@@ -61,9 +61,10 @@ namespace Signa.Tests.Integration.Data
             signController.CreateSampleFileIfNotExists(oldSignDescription, oldFileData);
         }
 
-        private static void MustCreateFileWithContent(string signDescription, string fileData)
+        private static void MustCreateFileWithContent(string createdFilePath, string signDescription, string fileData)
         {
             var file = SignController.SamplesDirectory + signDescription.Hyphenate() + ".json";
+            createdFilePath.Should().Be(file);
             File.Exists(file).Should().BeTrue();
             using (StreamReader reader = new StreamReader(file))
             {

@@ -50,17 +50,19 @@ namespace Signa.Data
             return repository.GetByIndex(index);
         }
 
-        public void CreateSampleFileIfNotExists(string signDescription, string signSample)
+        public string CreateSampleFileIfNotExists(string signDescription, string signSample)
         {
-            var file = SamplesDirectory + signDescription.Hyphenate() + ".json";
+            var filePath = SamplesDirectory + signDescription.Hyphenate() + ".json";
 
-            if (File.Exists(file))
-                return;
+            if (File.Exists(filePath))
+                return filePath;
 
-            using (StreamWriter writer = new StreamWriter(file))
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.Write(signSample);
             }
+
+            return filePath;
         }
     }
 }
