@@ -62,7 +62,7 @@ namespace Signa.Tests.Integration.Data
 
         private static void MustCreateFileWithContent(string createdFilePath, string signDescription, string fileData)
         {
-            var file = SignController.SamplesDirectory + signDescription.Hyphenate() + ".json";
+            var file = SignController.SamplesDirectory + signDescription.Underscore() + ".json";
             createdFilePath.Should().Be(file);
             File.Exists(file).Should().BeTrue();
             using (StreamReader reader = new StreamReader(file))
@@ -73,7 +73,7 @@ namespace Signa.Tests.Integration.Data
 
         private static void MustNotChangeFileContent(string signDescription, string oldFileData)
         {
-            var file = SignController.SamplesDirectory + signDescription.Hyphenate() + ".json";
+            var file = SignController.SamplesDirectory + signDescription.Underscore() + ".json";
             using (StreamReader reader = new StreamReader(file))
             {
                 reader.ReadToEnd().Should().Be(oldFileData);

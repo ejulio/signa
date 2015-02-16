@@ -54,7 +54,7 @@ namespace Signa.Data
 
         public string CreateSampleFileIfNotExists(string signDescription, string signSample)
         {
-            var filePath = SamplesDirectory + signDescription.Hyphenate() + ".json";
+            var filePath = SamplesDirectory + signDescription.Underscore() + ".json";
 
             if (File.Exists(filePath))
                 return filePath;

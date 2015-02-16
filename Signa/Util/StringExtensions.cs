@@ -3,9 +3,9 @@ namespace Signa.Util
 {
     public static class StringExtensions
     {
-        public static string Hyphenate(this string value)
+        public static string Underscore(this string value)
         {
-            return value.Replace(' ', '-');
+            return value.Replace(' ', '_');
         }
     }
 }

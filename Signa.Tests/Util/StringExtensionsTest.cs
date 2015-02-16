@@ -8,13 +8,13 @@ namespace Signa.Tests.Util
     public class StringExtensionsTest
     {
         [TestMethod]
-        public void hyphenate_a_string()
+        public void underscore_a_string()
         {
             var text = "Hello World with  some  SPACES";
 
-            var result = text.Hyphenate();
+            var result = text.Underscore();
 
-            result.Should().Be("Hello-World-with--some--SPACES");
+            result.Should().Be("Hello_World_with__some__SPACES");
         }
     }
 }
