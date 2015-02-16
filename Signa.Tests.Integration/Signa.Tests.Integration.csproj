@@ -63,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Data\SignRepositoryTest.cs" />
+    <Compile Include="Data\SignControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +72,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="samples\samples.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Signa.Tests.Common\Signa.Tests.Common.csproj">
@@ -82,6 +86,7 @@
       <Name>Signa</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

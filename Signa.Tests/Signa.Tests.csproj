@@ -68,6 +68,7 @@
     <Compile Include="Recognizer\SvmTrainningDataTest.cs" />
     <Compile Include="Recognizer\SvmTest.cs" />
     <Compile Include="SignSamples.cs" />
+    <Compile Include="Util\StringExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Signa.Tests.Common\Signa.Tests.Common.csproj">

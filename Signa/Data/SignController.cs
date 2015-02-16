@@ -1,12 +1,16 @@
 ﻿using Signa.Model;
 using System;
+using System.IO;
 using System.Linq;
+using Signa.Util;
 
 namespace Signa.Data
 {
     public class SignController
     {
         private IRepository<Sign> repository;
+
+        public const string SamplesDirectory = "samples/";
 
         public SignController(IRepository<Sign> repository)
         {
@@ -44,6 +48,19 @@ namespace Signa.Data
             while (index == lastSignIndex);
 
             return repository.GetByIndex(index);
+        }
+
+        public void CreateSampleFileIfNotExists(string signDescription, string signSample)
+        {
+            var file = SamplesDirectory + signDescription.Hyphenate() + ".json";
+
+            if (File.Exists(file))
+                return;
+
+            using (StreamWriter writer = new StreamWriter(file))
+            {
+                writer.Write(signSample);
+            }
         }
     }
 }

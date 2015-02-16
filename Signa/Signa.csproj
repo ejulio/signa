@@ -129,6 +129,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Recognizer\Svm.cs" />
     <Compile Include="Recognizer\SvmTrainningData.cs" />
+    <Compile Include="Util\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
