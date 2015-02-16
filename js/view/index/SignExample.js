@@ -18,7 +18,7 @@
 
         onNewSign: function(signInfo)
         {
-            this._riggedHandPlayer.loadRecording('recordings/' + signInfo.ExampleFilePath);
+            this._riggedHandPlayer.loadRecording('http://localhost:9000/' + signInfo.ExampleFilePath);
         },
 
         onRecognize: function()
