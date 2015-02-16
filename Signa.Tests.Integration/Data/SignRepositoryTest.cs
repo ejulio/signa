@@ -1,11 +1,11 @@
-﻿using System;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using Signa.Data;
-using FluentAssertions;
-using System.Collections.Generic;
 using Signa.Model;
 using Signa.Tests.Common.Builders;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Signa.Tests.Integration.Data

@@ -1,12 +1,8 @@
-﻿using Accord.MachineLearning.VectorMachines;
-using Accord.MachineLearning.VectorMachines.Learning;
-using Microsoft.AspNet.SignalR;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNet.SignalR;
 using Signa.Data;
 using Signa.Model;
 using Signa.Recognizer;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Signa.Hubs
