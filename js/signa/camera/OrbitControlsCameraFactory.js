@@ -10,10 +10,13 @@
         _orbitControls: undefined,
         _signaScene: undefined,
 
-        create: function()
+        create: function(signaScene)
         {
+            this._signaScene = signaScene;
+
             var camera = this._cameraFactory.create();
-            this._orbitControls = new THREE.OrbitControls(camera);
+            this._orbitControls = new THREE.OrbitControls(camera, signaScene.getContainer());
+            this._orbitControls.addEventListener('change', this._onControlsChange.bind(this));
 
             return camera;
         },
@@ -25,8 +28,7 @@
 
         setSignaScene: function(signaScene)
         {
-            this._signaScene = signaScene;
-            this._orbitControls.addEventListener('change', this._onControlsChange.bind(this));
+
         }
     };
 

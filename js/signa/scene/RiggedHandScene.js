@@ -8,7 +8,7 @@
             sceneId: signaScene.getId(),
             parent: this.getThreeScene(),
             materialOptions: {
-                transparent: false
+                transparent: true
             },
             renderFn: this.render.bind(this)
         });
@@ -30,6 +30,11 @@
         getThreeScene: function()
         {
             return this._signaScene.getThreeScene();
+        },
+
+        getContainer: function()
+        {
+            return this._signaScene.getContainer();
         }
     };
 

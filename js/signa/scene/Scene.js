@@ -7,7 +7,8 @@
         globalSceneId++;
         this._scene = new THREE.Scene();
         this._renderer = new THREE.WebGLRenderer();
-        this._camera = cameraFactory.create();
+        this._container = container[0];
+        this._camera = cameraFactory.create(this);
 
         this._drawUrs();
 
@@ -34,6 +35,11 @@
         getThreeScene: function()
         {
             return this._scene;
+        },
+
+        getContainer: function()
+        {
+            return this._container;
         },
 
         _drawUrs: function()
