@@ -1,5 +1,7 @@
 ;(function(window, Signa, undefined)
 {
+    'use strict';
+    
     function TrainedSignRecognizer(eventEmitter)
     {
         this._eventEmitter = eventEmitter;

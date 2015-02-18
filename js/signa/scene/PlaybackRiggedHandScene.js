@@ -1,5 +1,7 @@
 ;(function(window, Signa, undefined)
 {
+    'use strict';
+    
     function PlaybackRiggedHandScene(leapController)
     {
         leapController

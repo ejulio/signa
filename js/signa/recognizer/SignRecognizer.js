@@ -1,5 +1,7 @@
 ;(function(window, Signa, undefined)
 {
+    'use strict';
+    
     function SignRecognizer(leapController)
     {
         var me = this;

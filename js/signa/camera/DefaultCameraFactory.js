@@ -1,5 +1,7 @@
 ;(function(window, Signa, undefined)
 {
+    'use strict';
+    
     var CAMERA_NEAR = 0.1;
     var CAMERA_FAR = 1000;
     var CAMERA_FIELD_OF_VIEW = 75;

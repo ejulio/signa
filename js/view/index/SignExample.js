@@ -1,12 +1,14 @@
 ;(function(window, View, Signa, undefined)
 {
+    'use strict';
+    
     function SignExample(cameraFactory, container, leapController, width, height)
     {
         var orbitConstrolsCameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory),
             exampleHandmodelScene = new Signa.scene.Scene(orbitConstrolsCameraFactory, container, width, height);
 
         exampleHandmodelScene = new Signa.scene.RiggedHandScene(leapController, exampleHandmodelScene);
-        
+
         this._riggedHandPlayer = new Signa.scene.PlaybackRiggedHandScene(leapController);
 
         $('#play-pause').click(this._onPlayPause.bind(this));

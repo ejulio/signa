@@ -1,5 +1,7 @@
 ;(function(window, Signa, undefined)
 {
+    'use strict';
+    
     var globalSceneId = 0;
     function Scene(cameraFactory, container, width, height)
     {

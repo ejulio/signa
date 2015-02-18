@@ -1,5 +1,7 @@
 ;(function(window, View, Signa, undefined)
 {
+    'use strict';
+    
     function UserHands(cameraFactory, container, leapController, width, height)
     {
         var userHandmodelScene = new Signa.scene.Scene(cameraFactory, container, width, height);

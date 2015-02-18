@@ -1,5 +1,7 @@
 ;(function(window, undefined)
 {
+    'use strict';
+    
     var connection = $.connection;
     connection.hub.url = 'http://localhost:9000/signalr';
 

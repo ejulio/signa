@@ -1,5 +1,7 @@
 ;(function(window, Signa, undefined)
 {
+    'use strict';
+    
     function OnlineSignRecognizer(signalRecognizer, eventEmitter)
     {
         this._eventEmitter = eventEmitter;

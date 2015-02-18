@@ -1,5 +1,7 @@
 ;(function(window, Signa, undefined)
 {
+    'use strict';
+    
     function OrbitControlsCameraFactory(cameraFactory)
     {
         this._cameraFactory = cameraFactory;

@@ -1,5 +1,7 @@
 ;(function(window, View, Signa, undefined)
 {
+    'use strict';
+    
     function Index()
     {
 

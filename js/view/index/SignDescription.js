@@ -1,5 +1,7 @@
 ;(function(window, View, Signa, undefined)
 {
+    'use strict';
+    
     function SignDescription(textContainer)
     {
         this._textContainer = textContainer;
