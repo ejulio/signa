@@ -1,7 +1,7 @@
 ;(function(window, View, Signa, undefined)
 {
     'use strict';
-    
+
     function Index()
     {
 
@@ -86,7 +86,7 @@
             Signa.initHubs().done(function()
             {
                 var signId = this._signInfo ? this._signInfo.Id : -1;
-                Signa.HUB
+                Signa.signalrHub()
                     .getNextSign(signId)
                     .done(this._onNewSign.bind(this));
             }.bind(this));

@@ -1,7 +1,7 @@
 ;(function(window, Signa, undefined)
 {
     'use strict';
-    
+
     function OnlineSignRecognizer(signalRecognizer, eventEmitter)
     {
         this._eventEmitter = eventEmitter;
@@ -19,18 +19,7 @@
 
         recognize: function(){},
 
-        setSignToRecognizeId: function(){},
-
-        save: function(signalData)
-        {
-            Signa.HUB.save(signalData);
-        },
-
-        train: function()
-        {
-            console.log('Mudando para o estado treinado');
-            this._signalRecognizer.setState(this._signalRecognizer.TRAINED);
-        }
+        setSignToRecognizeId: function(){}
     };
 
     Signa.recognizer.OnlineSignRecognizer = OnlineSignRecognizer;

@@ -4,7 +4,7 @@ var width = $("#handmodel-user").width(),
     cameraFactory = new Signa.camera.DefaultCameraFactory(width / height),
     leapController = new Leap.Controller();
 
-cameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory),
+cameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory);
 
 Signa.initHubs();
 
@@ -65,5 +65,5 @@ $('#save').click(function()
         handDirection: hand.direction,
         anglesBetweenFingers: anglesBetweenFingers
     };
-    Signa.HUB.saveSignSample($('#description').val(), json, signalParameters);
+    Signa.signalrHub().saveSignSample($('#description').val(), json, signalParameters);
 });

@@ -1,7 +1,7 @@
 ;(function(window, Signa, undefined)
 {
     'use strict';
-    
+
     function OfflineSignRecognizer(eventEmitter)
     {
         this._eventEmitter = eventEmitter;
@@ -17,11 +17,7 @@
 
         recognize: function(){},
 
-        setSignToRecognizeId: function(){},
-
-        save: function(){},
-
-        train: function(){}
+        setSignToRecognizeId: function(){}
     };
 
     Signa.recognizer.OfflineSignRecognizer = OfflineSignRecognizer;

@@ -1,7 +1,7 @@
 ;(function(window, Signa, undefined)
 {
     'use strict';
-    
+
     function TrainedSignRecognizer(eventEmitter)
     {
         this._eventEmitter = eventEmitter;
@@ -18,7 +18,7 @@
 
         recognize: function(signalData)
         {
-            Signa.HUB
+            Signa.signalrHub()
                 .recognize(signalData)
                 .then(function(signalRecognizedId)
                 {
@@ -32,16 +32,6 @@
         setSignToRecognizeId: function(id)
         {
             this._signToReconizeId = id;
-        },
-
-        save: function(signalData)
-        {
-            Signa.HUB.save(signalData);
-        },
-
-        train: function()
-        {
-            Signa.HUB.train().done();
         }
     };
 
