@@ -6,8 +6,7 @@
             exampleHandmodelScene = new Signa.scene.Scene(orbitConstrolsCameraFactory, container, width, height);
 
         exampleHandmodelScene = new Signa.scene.RiggedHandScene(leapController, exampleHandmodelScene);
-        orbitConstrolsCameraFactory.setSignaScene(exampleHandmodelScene);
-
+        
         this._riggedHandPlayer = new Signa.scene.PlaybackRiggedHandScene(leapController);
 
         $('#play-pause').click(this._onPlayPause.bind(this));

@@ -54,6 +54,7 @@
         _onNewSignLoad: function()
         {
             this._signDescription.onNewSign(this._signInfo);
+            this._userHands.onNewSign();
             this._signRecognizer.setSignToRecognizeId(this._signInfo.Id);
             this._hideRecognizeMessage();
         },
@@ -68,6 +69,7 @@
             this._showRecognizeMessage();
             this._signDescription.onRecognize();
             this._signExample.onRecognize();
+            this._userHands.onRecognize();
             this._signRecognizer.setSignToRecognizeId(-1);
             window.setTimeout(this._loadNextSign.bind(this), 1000);
         },

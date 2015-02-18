@@ -10,6 +10,8 @@
         this._container = container[0];
         this._camera = cameraFactory.create(this);
 
+        this._renderer.setClearColor(0xF7F7F7);
+
         this._drawUrs();
 
         this._renderer.setSize(width, height);

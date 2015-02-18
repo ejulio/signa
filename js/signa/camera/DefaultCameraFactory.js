@@ -12,7 +12,7 @@
     DefaultCameraFactory.prototype = {
         _aspectRatio: 0,
 
-        create: function()
+        create: function(signaScene)
         {
             var camera = new THREE.PerspectiveCamera(CAMERA_FIELD_OF_VIEW, this._aspectRatio, CAMERA_NEAR, CAMERA_FAR);
             camera.position.set(0, 200, 400);

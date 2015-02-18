@@ -8,18 +8,24 @@
         <link rel="stylesheet" type="text/css" href="css/signa.css">
     </head>
     <body class="signa-body">
-        <div class="signa-titlebar">
-            <h1 class="signa-titlebar-title signa-titlebar-main">SIGNA</h1>
-            <a href="index.html">Principal</a> | <a href="http://leapmotion.github.io/leapjs-playback/recorder/">Gravar sinal</a>
+        <div class="pure-menu pure-menu-open pure-menu-horizontal signa-menu">
+            <span class="pure-menu-heading signa-menu-title">SIGNA</span>
+            <ul>
+                <li><a href="index.html">Principal</a></li>
+                <li><a href="http://leapmotion.github.io/leapjs-playback/recorder/">Gravar sinal</a></li>
+            </ul>
         </div>
 
         <section class="signa-main signa-float-container">
-            <div>
-                <input type="file" id="sign-file" />
-                <input type="text" id="description" value="teste" />
-                <button class="pure-button" id="save">Salvar</button>
+            <div class="signa-titlebar">
+                <h3 class="signa-titlebar-title">Informe um sinal para importar</h3>
             </div>
-            <div class="signa-main-section" id="handmodel-user"></div>
+            <div class="signa-input-container">
+                <input type="text" class="signa-input" id="description" placeholder="Descrição/Nome do sinal" size="50" autofocus />
+                <input type="file" class="signa-input" id="sign-file" />
+                <button class="pure-button" id="save">Importar</button>
+            </div>
+            <div class="signa-handmodel-full-container" id="handmodel-user"></div>
         </section>
 
         <script type="text/javascript" src="bower_components/threejs/build/three.js"></script>

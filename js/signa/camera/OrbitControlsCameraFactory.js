@@ -24,11 +24,6 @@
         _onControlsChange: function()
         {
             this._signaScene.render();
-        },
-
-        setSignaScene: function(signaScene)
-        {
-
         }
     };
 

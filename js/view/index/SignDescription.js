@@ -11,16 +11,11 @@
         onNewSign: function(signInfo)
         {
             this._textContainer
-                .text(signInfo.Description)
-                .addClass('signa-sign-word-error')
-                .removeClass('signa-sign-word-success');
+                .text(signInfo.Description);
         },
 
         onRecognize: function()
         {
-            this._textContainer
-                .removeClass('signa-sign-word-error')
-                .addClass('signa-sign-word-success');
         }
     };
 

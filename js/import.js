@@ -1,17 +1,16 @@
 var width = $("#handmodel-user").width(),
     height = $("#handmodel-user").height(),
     container = $("#handmodel-user"),
-    defaultCameraFactory = new Signa.camera.DefaultCameraFactory(width / height),
-    orbitControlsCameraFactory = new Signa.camera.OrbitControlsCameraFactory(defaultCameraFactory),
+    cameraFactory = new Signa.camera.DefaultCameraFactory(width / height),
     leapController = new Leap.Controller();
+
+cameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory),
 
 Signa.initHubs();
 
-var userHandmodelScene = new Signa.scene.Scene(orbitControlsCameraFactory, container, width, height);
+var userHandmodelScene = new Signa.scene.Scene(cameraFactory, container, width, height);
 
 userHandmodelScene = new Signa.scene.RiggedHandScene(leapController, userHandmodelScene);
-
-orbitControlsCameraFactory.setSignaScene(userHandmodelScene);
 
 userHandmodelScene.render();
 
