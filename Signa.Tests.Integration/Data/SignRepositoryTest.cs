@@ -143,12 +143,7 @@ namespace Signa.Tests.Integration.Data
             var sign = new SignBuilder()
                             .WithDescription(description)
                             .WithPath("new-sign.json")
-                            .WithSample(new SignSample
-                            {
-                                AnglesBetweenFingers = new DoubleArrayBuilder().WithSize(4).Build(),
-                                PalmNormal = new DoubleArrayBuilder().WithSize(3).Build(),
-                                HandDirection = new DoubleArrayBuilder().WithSize(3).Build()
-                            })
+                            .WithSample(new SignSampleBuilder().Build())
                             .Build();
             return sign;
         }

@@ -17,9 +17,11 @@ namespace Signa.Tests.Common.Builders
         {
             sampleGenerator = index => new SignSample
             {
-                AnglesBetweenFingers = new DoubleArrayBuilder().WithSize(4).Build(),
-                HandDirection = new DoubleArrayBuilder().WithSize(3).Build(),
-                PalmNormal = new DoubleArrayBuilder().WithSize(3).Build()
+                Hands = new[] 
+                { 
+                    new HandSampleBuilder().Build(), 
+                    new HandSampleBuilder().Build() 
+                }
             };
         }
 

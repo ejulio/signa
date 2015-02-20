@@ -1,1 +1,136 @@
-[{"Description":"mao aberta","ExampleFilePath":"samples/mao_aberta.json","Samples":[{"PalmNormal":[-0.141882,-0.984659,-0.101565],"HandDirection":[0.0695366,0.092435,-0.993288],"AnglesBetweenFingers":[0.55708765500913415,0.27761219365445761,0.22365789502415129,0.25300639009102266]},{"PalmNormal":[-0.0487812,-0.941368,-0.333835],"HandDirection":[0.0517045,0.331405,-0.942071],"AnglesBetweenFingers":[0.59289287158411341,0.26961947607097608,0.22335064529676085,0.26368952043366456]}]},{"Description":"positivo","ExampleFilePath":"samples/positivo.json","Samples":[{"PalmNormal":[0.900861,-0.335052,-0.276026],"HandDirection":[-0.366925,-0.247906,-0.896609],"AnglesBetweenFingers":[0.36700331872715258,0.062888296685137624,0.065140901443807284,0.098676575108963133]}]},{"Description":"paz e amor","ExampleFilePath":"samples/paz_e_amor.json","Samples":[{"PalmNormal":[-0.0878787,-0.959341,-0.268222],"HandDirection":[-0.067052,0.27435,-0.959289],"AnglesBetweenFingers":[0.89247989324894694,0.48464370420540465,0.95515263881759116,0.1058970340988271]}]},{"Description":"tres","ExampleFilePath":"samples/tres.json","Samples":[{"PalmNormal":[0.170669,0.647568,0.742649],"HandDirection":[0.239382,0.703875,-0.668772],"AnglesBetweenFingers":[0.0592163251441775,0.34041413639362911,0.14496744602971567,0.13343045599792661]}]}]
+[
+    {
+        "Description": "mao aberta",
+        "ExampleFilePath": "samples/mao_aberta.json",
+        "Samples": [
+            {
+                "hands": [
+                    {
+                        "PalmNormal": [
+                            -0.141882,
+                            -0.984659,
+                            -0.101565
+                        ],
+                        "HandDirection": [
+                            0.0695366,
+                            0.092435,
+                            -0.993288
+                        ],
+                        "AnglesBetweenFingers": [
+                            0.55708765500913415,
+                            0.27761219365445761,
+                            0.22365789502415129,
+                            0.25300639009102266
+                        ]
+                    }
+                ]
+            },
+            {
+                "hands": [
+                    {
+                        "PalmNormal": [
+                            -0.0487812,
+                            -0.941368,
+                            -0.333835
+                        ],
+                        "HandDirection": [
+                            0.0517045,
+                            0.331405,
+                            -0.942071
+                        ],
+                        "AnglesBetweenFingers": [
+                            0.59289287158411341,
+                            0.26961947607097608,
+                            0.22335064529676085,
+                            0.26368952043366456
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Description": "positivo",
+        "ExampleFilePath": "samples/positivo.json",
+        "Samples": [
+            {
+                "hands": [
+                    {
+                        "PalmNormal": [
+                            0.900861,
+                            -0.335052,
+                            -0.276026
+                        ],
+                        "HandDirection": [
+                            -0.366925,
+                            -0.247906,
+                            -0.896609
+                        ],
+                        "AnglesBetweenFingers": [
+                            0.36700331872715258,
+                            0.062888296685137624,
+                            0.065140901443807284,
+                            0.098676575108963133
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Description": "paz e amor",
+        "ExampleFilePath": "samples/paz_e_amor.json",
+        "Samples": [
+            {
+                "hands": [
+                    {
+                        "PalmNormal": [
+                            -0.0878787,
+                            -0.959341,
+                            -0.268222
+                        ],
+                        "HandDirection": [
+                            -0.067052,
+                            0.27435,
+                            -0.959289
+                        ],
+                        "AnglesBetweenFingers": [
+                            0.89247989324894694,
+                            0.48464370420540465,
+                            0.95515263881759116,
+                            0.1058970340988271
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Description": "tres",
+        "ExampleFilePath": "samples/tres.json",
+        "Samples": [
+            {
+                "hands": [
+                    {
+                        "PalmNormal": [
+                            0.170669,
+                            0.647568,
+                            0.742649
+                        ],
+                        "HandDirection": [
+                            0.239382,
+                            0.703875,
+                            -0.668772
+                        ],
+                        "AnglesBetweenFingers": [
+                            0.0592163251441775,
+                            0.34041413639362911,
+                            0.14496744602971567,
+                            0.13343045599792661
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

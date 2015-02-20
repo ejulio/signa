@@ -1,35 +1,19 @@
 ﻿using Signa.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Signa.Tests.Common.Builders
 {
     public class SignSampleBuilder
     {
-        private double[] anglesBetweenFingers;
-        private double[] palmNormal;
-        private double[] handDirection;
+        private HandSample[] hands;
 
-        public SignSampleBuilder()
+        public SignSampleBuilder WithHands(HandSample[] hands)
         {
-            anglesBetweenFingers = new DoubleArrayBuilder().WithSize(4).Build();
-            palmNormal = new DoubleArrayBuilder().WithSize(3).Build();
-            handDirection = new DoubleArrayBuilder().WithSize(3).Build();
-        }
-
-        public SignSampleBuilder WithAnglesBetweenFingers(double[] anglesBetweenFingers)
-        {
-            this.anglesBetweenFingers = anglesBetweenFingers;
-            return this;
-        }
-
-        public SignSampleBuilder WithPalmNormal(double[] palmNormal)
-        {
-            this.palmNormal = palmNormal;
-            return this;
-        }
-
-        public SignSampleBuilder WithHandDirection(double[] handDirection)
-        {
-            this.handDirection = handDirection;
+            this.hands = hands;
             return this;
         }
 
@@ -37,9 +21,7 @@ namespace Signa.Tests.Common.Builders
         {
             return new SignSample
             {
-                AnglesBetweenFingers = anglesBetweenFingers,
-                PalmNormal = palmNormal,
-                HandDirection = handDirection
+                Hands = hands
             };
         }
     }

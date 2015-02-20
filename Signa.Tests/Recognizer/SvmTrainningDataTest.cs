@@ -19,9 +19,11 @@ namespace Signa.Tests.Recognizer
         {
             defaultSignSample = new SignSample
             {
-                AnglesBetweenFingers = new double[] { 0.63, 0.45, 0.89, 0.12 },
-                HandDirection = new double[] { 0.12, 0.3, 0.8 },
-                PalmNormal = new double[] { 0.87, 0.45, 0.25 }
+                Hands = new[] 
+                {
+                    new HandSampleBuilder().Build(),
+                    new HandSampleBuilder().Build()
+                }
             };
         }
 

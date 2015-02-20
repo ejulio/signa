@@ -126,6 +126,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\SignRepository.cs" />
     <Compile Include="Hubs\Recognizer.cs" />
+    <Compile Include="Model\HandSample.cs" />
     <Compile Include="Model\Sign.cs" />
     <Compile Include="Model\SignInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

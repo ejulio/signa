@@ -1,6 +1,7 @@
-﻿using FluentAssertions;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Model;
+using Signa.Tests.Common.Builders;
+using FluentAssertions;
 
 namespace Signa.Tests.Model
 {
@@ -8,25 +9,37 @@ namespace Signa.Tests.Model
     public class SignSampleTest
     {
         [TestMethod]
-        public void returning_an_array_with_samples_properties()
+        public void building_a_sample_with_one_hand()
         {
-            double[] palmNormal = { 0.123, 0.556, 0.897 };
-            double[] handDirection = { 0.896, 0.132, 0.745 };
-            double[] anglesBetweenFingers = { 25, 10, 40, 50 };
+            var hands = new[] { new HandSampleBuilder().Build() };
+            var signSample = new SignSampleBuilder()
+                .WithHands(hands)
+                .Build();
 
-            var signSample = new SignSample
-            {
-                PalmNormal = palmNormal,
-                HandDirection = handDirection,
-                AnglesBetweenFingers = anglesBetweenFingers
-            };
+            var handSampleData = hands[0].ToArray();
 
-            var signSampleArray = signSample.ToArray();
+            var sampleArray = signSample.ToArray();
 
-            signSampleArray.Should().Contain(palmNormal);
-            signSampleArray.Should().Contain(handDirection);
-            signSampleArray.Should().Contain(anglesBetweenFingers);
-            signSampleArray.Length.Should().Be(10);
+            sampleArray.Should().HaveCount(handSampleData.Length);
+            sampleArray.Should().ContainInOrder(handSampleData);
+        }
+
+        [TestMethod]
+        public void building_a_sample_with_two_hands()
+        {
+            var hands = new[] { new HandSampleBuilder().Build(), new HandSampleBuilder().Build() };
+            var signSample = new SignSampleBuilder()
+                .WithHands(hands)
+                .Build();
+
+            var handSampleData1 = hands[0].ToArray();
+            var handSampleData2 = hands[0].ToArray();
+
+            var sampleArray = signSample.ToArray();
+
+            sampleArray.Should().HaveCount(handSampleData1.Length + handSampleData2.Length);
+            sampleArray.Should().ContainInOrder(handSampleData1);
+            sampleArray.Should().ContainInOrder(handSampleData2);
         }
     }
 }

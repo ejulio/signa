@@ -40,9 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\DoubleArrayBuilder.cs" />
+    <Compile Include="Builders\SignSampleBuilder.cs" />
     <Compile Include="Builders\SignBuilder.cs" />
     <Compile Include="Builders\SignCollectionBuilder.cs" />
-    <Compile Include="Builders\SignSampleBuilder.cs" />
+    <Compile Include="Builders\HandSampleBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

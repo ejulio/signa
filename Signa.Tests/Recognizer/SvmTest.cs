@@ -53,10 +53,22 @@ namespace Signa.Tests.Recognizer
 
         private static SignSample BuildSignSampleByIndex(int index)
         {
+            var hands = new[] 
+            {
+                new HandSampleBuilder()
+                    .WithAnglesBetweenFingers(new double[] { index, index, index, index })
+                    .WithPalmNormal(new double[] { index, index, index })
+                    .WithHandDirection(new double[] { index, index, index })
+                    .Build(),
+
+                new HandSampleBuilder()
+                    .WithAnglesBetweenFingers(new double[] { index, index, index, index })
+                    .WithPalmNormal(new double[] { index, index, index })
+                    .WithHandDirection(new double[] { index, index, index })
+                    .Build()
+            };
             return new SignSampleBuilder()
-                .WithAnglesBetweenFingers(new double[] { index, index, index, index })
-                .WithPalmNormal(new double[] { index, index, index })
-                .WithHandDirection(new double[] { index, index, index })
+                .WithHands(hands)
                 .Build();
         }
     }
