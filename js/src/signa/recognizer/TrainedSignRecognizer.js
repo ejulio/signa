@@ -16,10 +16,15 @@
             this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
         },
 
-        recognize: function(signalData)
+        recognize: function(frame)
         {
+            if (!frame.hands.length)
+                return;
+                
+            var data = new Signa.recognizer.FrameSignDataProcessor().process(frame);
+
             Signa.signalrHub()
-                .recognize(signalData)
+                .recognize(data)
                 .then(function(signalRecognizedId)
                 {
                     if (signalRecognizedId === this._signToReconizeId)

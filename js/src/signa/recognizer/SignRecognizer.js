@@ -44,31 +44,7 @@
 
         _recognize: function(frame)
         {
-            var hand = frame.hands[0];
-            if (hand)
-            {
-                var anglesBetweenFingers = [];
-                var length = hand.fingers.length - 1;
-                for (var i = 0; i < length; i++)
-                {
-                    var origin = new THREE.Vector3();
-                    var destiny = new THREE.Vector3();
-
-                    origin.fromArray(hand.fingers[i].tipPosition);
-                    destiny.fromArray(hand.fingers[i + 1].tipPosition);
-
-                    anglesBetweenFingers.push(origin.angleTo(destiny));
-                }
-
-                var signalParameters = {
-                    palmNormal: hand.palmNormal,
-                    handDirection: hand.direction,
-                    anglesBetweenFingers: anglesBetweenFingers
-                };
-
-                this._state.recognize(signalParameters);
-                //debugger;
-            }
+            this._state.recognize(frame);
         },
 
         _onLeapFrame: function(frame)
