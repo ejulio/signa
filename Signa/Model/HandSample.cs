@@ -21,5 +21,15 @@ namespace Signa.Model
 
             return array;
         }
+        public static HandSample DefaultSample()
+        {
+            return new HandSample
+            {
+                AnglesBetweenFingers = new[] { 0.0, 0.0, 0.0, 0.0 },
+                HandDirection = new[] { 0.0, 0.0, 0.0 },
+                PalmNormal = new[] { 0.0, 0.0, 0.0 }
+            };
+        }
+
     }
 }

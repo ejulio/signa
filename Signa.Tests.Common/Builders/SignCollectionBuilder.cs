@@ -17,11 +17,8 @@ namespace Signa.Tests.Common.Builders
         {
             sampleGenerator = index => new SignSample
             {
-                Hands = new[] 
-                { 
-                    new HandSampleBuilder().Build(), 
-                    new HandSampleBuilder().Build() 
-                }
+                LeftHand = new HandSampleBuilder().Build(),
+                RightHand = new HandSampleBuilder().Build()
             };
         }
 

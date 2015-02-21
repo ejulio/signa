@@ -9,11 +9,18 @@ namespace Signa.Tests.Common.Builders
 {
     public class SignSampleBuilder
     {
-        private HandSample[] hands;
+        private HandSample leftHand;
+        private HandSample rightHand;
 
-        public SignSampleBuilder WithHands(HandSample[] hands)
+        public SignSampleBuilder WithLeftHand(HandSample leftHand)
         {
-            this.hands = hands;
+            this.leftHand = leftHand;
+            return this;
+        }
+
+        public SignSampleBuilder WithRightHand(HandSample rightHand)
+        {
+            this.rightHand = rightHand;
             return this;
         }
 
@@ -21,7 +28,8 @@ namespace Signa.Tests.Common.Builders
         {
             return new SignSample
             {
-                Hands = hands
+                LeftHand = leftHand,
+                RightHand = rightHand
             };
         }
     }

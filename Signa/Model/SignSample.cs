@@ -5,17 +5,37 @@ namespace Signa.Model
 {
     public class SignSample
     {
-        public HandSample[] Hands { get; set; }
+        private HandSample leftHand;
+        public HandSample LeftHand 
+        {
+            get { return leftHand; }
+            set
+            {
+                if (value == null)
+                    value = HandSample.DefaultSample();
+
+                leftHand = value;
+            } 
+        }
+
+        private HandSample rightHand;
+        public HandSample RightHand 
+        {
+            get { return rightHand; } 
+            set
+            {
+                if (value == null)
+                    value = HandSample.DefaultSample();
+
+                rightHand = value;
+            }
+        }
 
         public double[] ToArray()
         {
-            IEnumerable<double> handSamples = new double[0];
-            foreach (var hand in Hands)
-            {
-                handSamples = handSamples.Concat(hand.ToArray());
-            }
-
-            return handSamples.ToArray();
+            return LeftHand.ToArray()
+                .Concat(RightHand.ToArray())
+                .ToArray();
         }
     }
 }

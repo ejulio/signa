@@ -19,11 +19,8 @@ namespace Signa.Tests.Recognizer
         {
             defaultSignSample = new SignSample
             {
-                Hands = new[] 
-                {
-                    new HandSampleBuilder().Build(),
-                    new HandSampleBuilder().Build()
-                }
+                LeftHand = new HandSampleBuilder().Build(),
+                RightHand = new HandSampleBuilder().Build()
             };
         }
 
