@@ -7,8 +7,8 @@
         process: function(frame)
         {
             return {
-                leftHand: this._getLeftHandFromFrame(frame.hands),
-                rightHand: this._getRightHandFromFrame(frame.hands)
+                LeftHand: this._getLeftHandFromFrame(frame.hands),
+                RightHand: this._getRightHandFromFrame(frame.hands)
             };
         },
 
@@ -61,9 +61,9 @@
             }
 
             return {
-                palmNormal: leapHand.palmNormal,
-                handDirection: leapHand.direction,
-                anglesBetweenFingers: anglesBetweenFingers
+                PalmNormal: leapHand.palmNormal,
+                HandDirection: leapHand.direction,
+                AnglesBetweenFingers: anglesBetweenFingers
             };
         }
     };

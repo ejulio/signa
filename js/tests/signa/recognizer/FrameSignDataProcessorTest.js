@@ -28,8 +28,8 @@ describe('FrameSignDataProcessor', function()
 
         var signData = frameSignDataProcessor.process(frame);
 
-        expect(signData.rightHand).toBeNull();
-        mustReturnSignDataWithHandData(signData.leftHand, leftHand);
+        expect(signData.RightHand).toBeNull();
+        mustReturnSignDataWithHandData(signData.LeftHand, leftHand);
     });
 
     it('is getting sign data from a frame with right hand', function()
@@ -39,8 +39,8 @@ describe('FrameSignDataProcessor', function()
 
         var signData = frameSignDataProcessor.process(frame);
 
-        expect(signData.leftHand).toBeNull();
-        mustReturnSignDataWithHandData(signData.rightHand, rightHand);
+        expect(signData.LeftHand).toBeNull();
+        mustReturnSignDataWithHandData(signData.RightHand, rightHand);
     });
 
     it('is getting sign data from a frame with two hands', function()
@@ -51,8 +51,8 @@ describe('FrameSignDataProcessor', function()
 
         var signData = frameSignDataProcessor.process(frame);
 
-        mustReturnSignDataWithHandData(signData.leftHand, leftHand);
-        mustReturnSignDataWithHandData(signData.rightHand, rightHand);
+        mustReturnSignDataWithHandData(signData.LeftHand, leftHand);
+        mustReturnSignDataWithHandData(signData.RightHand, rightHand);
     });
 
     function givenLeftHand()
@@ -100,8 +100,8 @@ describe('FrameSignDataProcessor', function()
     function mustReturnSignDataWithHandData(signDataHand, hand)
     {
         expect(signDataHand).not.toBeNull();
-        expect(signDataHand.palmNormal).toBe(hand.palmNormal);
-        expect(signDataHand.handDirection).toBe(hand.direction);
-        expect(signDataHand.anglesBetweenFingers.length).toBe(4);
+        expect(signDataHand.PalmNormal).toBe(hand.palmNormal);
+        expect(signDataHand.HandDirection).toBe(hand.direction);
+        expect(signDataHand.AnglesBetweenFingers.length).toBe(4);
     }
 });
