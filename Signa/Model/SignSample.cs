@@ -11,10 +11,7 @@ namespace Signa.Model
             get { return leftHand; }
             set
             {
-                if (value == null)
-                    value = HandSample.DefaultSample();
-
-                leftHand = value;
+                leftHand = value ?? HandSample.DefaultSample();
             } 
         }
 
@@ -24,10 +21,7 @@ namespace Signa.Model
             get { return rightHand; } 
             set
             {
-                if (value == null)
-                    value = HandSample.DefaultSample();
-
-                rightHand = value;
+                rightHand = value ?? HandSample.DefaultSample();
             }
         }
 
