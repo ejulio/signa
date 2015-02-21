@@ -10,8 +10,10 @@ var FrameSignDataProcessor = global.Signa.recognizer.FrameSignDataProcessor;
 
 describe('FrameSignDataProcessor', function()
 {
-    var HAND_DIRECTION = [1, 2, 3],
-        HAND_PALM_NORMAL = [0, 0, 1];
+    var LEFT_HAND_DIRECTION = [1, 2, 3],
+        LEFT_HAND_PALM_NORMAL = [0, 0, 1],
+        RIGHT_HAND_DIRECTION = [4, 5, 6],
+        RIGHT_HAND_PALM_NORMAL = [1, 1, 0];
 
     var frameSignDataProcessor;
     beforeEach(function()
@@ -19,35 +21,41 @@ describe('FrameSignDataProcessor', function()
         frameSignDataProcessor = new FrameSignDataProcessor();
     });
 
-    it('is getting sign data from a frame with one hand', function()
+    it('is getting sign data from a frame with left hand', function()
     {
-        var frame = givenFrameWithOneHand();
+        var leftHand = givenLeftHand();
+        var frame = givenFrameWithHands(leftHand, null);
 
         var signData = frameSignDataProcessor.process(frame);
 
-        expect(signData.hands.length).toBe(1);
-        expect(signData.hands[0].palmNormal).toBe(HAND_PALM_NORMAL);
-        expect(signData.hands[0].handDirection).toBe(HAND_DIRECTION);
-        expect(signData.hands[0].anglesBetweenFingers.length).toBe(4);
+        expect(signData.rightHand).toBeNull();
+        mustReturnSignDataWithHandData(signData.leftHand, leftHand);
+    });
+
+    it('is getting sign data from a frame with right hand', function()
+    {
+        var rightHand = givenRightHand();
+        var frame = givenFrameWithHands(null, rightHand);
+
+        var signData = frameSignDataProcessor.process(frame);
+
+        expect(signData.leftHand).toBeNull();
+        mustReturnSignDataWithHandData(signData.rightHand, rightHand);
     });
 
     it('is getting sign data from a frame with two hands', function()
     {
-        var frame = givenFrameWithTwoHands();
+        var leftHand = givenLeftHand();
+        var rightHand = givenRightHand();
+        var frame = givenFrameWithHands(leftHand, rightHand);
 
         var signData = frameSignDataProcessor.process(frame);
 
-        expect(signData.hands.length).toBe(2);
-        expect(signData.hands[0].palmNormal).toBe(HAND_PALM_NORMAL);
-        expect(signData.hands[0].handDirection).toBe(HAND_DIRECTION);
-        expect(signData.hands[0].anglesBetweenFingers.length).toBe(4);
-
-        expect(signData.hands[1].palmNormal).toBe(HAND_PALM_NORMAL);
-        expect(signData.hands[1].handDirection).toBe(HAND_DIRECTION);
-        expect(signData.hands[1].anglesBetweenFingers.length).toBe(4);
+        mustReturnSignDataWithHandData(signData.leftHand, leftHand);
+        mustReturnSignDataWithHandData(signData.rightHand, rightHand);
     });
 
-    function givenFrameWithOneHand()
+    function givenLeftHand()
     {
         var fingers = [
             new FingerBuilder().withTipPosition([1, 1, 1]).build(),
@@ -57,18 +65,14 @@ describe('FrameSignDataProcessor', function()
             new FingerBuilder().withTipPosition([5, 5, 5]).build()
         ];
 
-        var hand = new HandBuilder()
-            .withDirection(HAND_DIRECTION)
-            .withPalmNormal(HAND_PALM_NORMAL)
+        return new HandBuilder()
+            .withDirection(LEFT_HAND_DIRECTION)
+            .withPalmNormal(LEFT_HAND_PALM_NORMAL)
             .withFingers(fingers)
-            .build();
-
-        return new FrameBuilder()
-            .withHands([hand])
             .build();
     }
 
-    function givenFrameWithTwoHands()
+    function givenRightHand()
     {
         var fingers = [
             new FingerBuilder().withTipPosition([1, 1, 1]).build(),
@@ -78,21 +82,26 @@ describe('FrameSignDataProcessor', function()
             new FingerBuilder().withTipPosition([5, 5, 5]).build()
         ];
 
-        var hands = [
-            new HandBuilder()
-                .withDirection(HAND_DIRECTION)
-                .withPalmNormal(HAND_PALM_NORMAL)
-                .withFingers(fingers)
-                .build(),
-            new HandBuilder()
-                .withDirection(HAND_DIRECTION)
-                .withPalmNormal(HAND_PALM_NORMAL)
-                .withFingers(fingers)
-                .build()
-        ];
-
-        return new FrameBuilder()
-            .withHands(hands)
+        return new HandBuilder()
+            .withDirection(RIGHT_HAND_DIRECTION)
+            .withPalmNormal(RIGHT_HAND_PALM_NORMAL)
+            .withFingers(fingers)
             .build();
+    }
+
+    function givenFrameWithHands(leftHand, rightHand)
+    {
+        return new FrameBuilder()
+            .withLeftHand(leftHand)
+            .withRightHand(rightHand)
+            .build();
+    }
+
+    function mustReturnSignDataWithHandData(signDataHand, hand)
+    {
+        expect(signDataHand).not.toBeNull();
+        expect(signDataHand.palmNormal).toBe(hand.palmNormal);
+        expect(signDataHand.handDirection).toBe(hand.direction);
+        expect(signDataHand.anglesBetweenFingers.length).toBe(4);
     }
 });

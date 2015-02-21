@@ -6,16 +6,42 @@
     FrameSignDataProcessor.prototype = {
         process: function(frame)
         {
-            var hands = new Array(frame.hands.length);
-
-            for (var i = 0; i < hands.length; i++)
-            {
-                hands[i] = this._getHandData(frame.hands[i]);
-            }
-
             return {
-                hands: hands
+                leftHand: this._getLeftHandFromFrame(frame.hands),
+                rightHand: this._getRightHandFromFrame(frame.hands)
             };
+        },
+
+        _getLeftHandFromFrame: function(hands)
+        {
+            if (this._isLeftHand(hands[0]))
+                return this._getHandData(hands[0]);
+
+            if (this._isLeftHand(hands[1]))
+                return this._getHandData(hands[1]);
+
+            return null
+        },
+
+        _isLeftHand: function(hand)
+        {
+            return hand && hand.type.toUpperCase() === 'LEFT';
+        },
+
+        _getRightHandFromFrame: function(hands)
+        {
+            if (this._isRightHand(hands[0]))
+                return this._getHandData(hands[0]);
+
+            if (this._isRightHand(hands[1]))
+                return this._getHandData(hands[1]);
+
+            return null
+        },
+
+        _isRightHand: function(hand)
+        {
+            return hand && hand.type.toUpperCase() === 'RIGHT';
         },
 
         _getHandData: function(leapHand)

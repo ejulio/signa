@@ -34,7 +34,7 @@
             this._userHands = new View.index.UserHands(defaultCameraFactory, $("#handmodel-user"), leapController2, width, height);
 
             leapController2.connect();
-
+            
             this._signRecognizer = new Signa.recognizer.SignRecognizer(leapController2);
 
             this._signRecognizer.addRecognizeEventListener(this._onRecognize.bind(this));

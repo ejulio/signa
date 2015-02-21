@@ -46,24 +46,6 @@ $('#sign-file').change(function(event)
 $('#save').click(function()
 {
     var frame = new Leap.Frame(serverFrames[0]);
-    var hand = frame.hands[0];
-    var anglesBetweenFingers = [];
-    var length = hand.fingers.length - 1;
-    for (var i = 0; i < length; i++)
-    {
-        var origin = new THREE.Vector3();
-        var destiny = new THREE.Vector3();
-
-        origin.fromArray(hand.fingers[i].tipPosition);
-        destiny.fromArray(hand.fingers[i + 1].tipPosition);
-
-        anglesBetweenFingers.push(origin.angleTo(destiny));
-    }
-
-    var signalParameters = {
-        palmNormal: hand.palmNormal,
-        handDirection: hand.direction,
-        anglesBetweenFingers: anglesBetweenFingers
-    };
-    Signa.signalrHub().saveSignSample($('#description').val(), json, signalParameters);
+    var data = new Signa.recognizer.FrameSignDataProcessor().process(frame);
+    Signa.signalrHub().saveSignSample($('#description').val(), json, data);
 });
