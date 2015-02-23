@@ -3,6 +3,7 @@
     'use strict';
 
     window.View = {
-        index: {}
+        index: {},
+        load: {}
     };
 })(window);

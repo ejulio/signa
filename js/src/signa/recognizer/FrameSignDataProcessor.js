@@ -20,7 +20,7 @@
             if (this._isLeftHand(hands[1]))
                 return this._getHandData(hands[1]);
 
-            return null
+            return null;
         },
 
         _isLeftHand: function(hand)
@@ -36,7 +36,7 @@
             if (this._isRightHand(hands[1]))
                 return this._getHandData(hands[1]);
 
-            return null
+            return null;
         },
 
         _isRightHand: function(hand)

@@ -9,17 +9,17 @@
 
         exampleHandmodelScene = new Signa.scene.RiggedHandScene(leapController, exampleHandmodelScene);
 
-        this._riggedHandPlayer = new Signa.scene.PlaybackRiggedHandScene(leapController);
+        this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
 
         $('#play-pause').click(this._onPlayPause.bind(this));
     }
 
     SignExample.prototype = {
-        _riggedHandPlayer: undefined,
+        _leapRecordingPlayer: undefined,
 
         onNewSign: function(signInfo)
         {
-            this._riggedHandPlayer.loadRecording('http://localhost:9000/' + signInfo.ExampleFilePath);
+            this._leapRecordingPlayer.loadRecording('http://localhost:9000/' + signInfo.ExampleFilePath);
         },
 
         onRecognize: function()
@@ -29,7 +29,7 @@
 
         _onPlayPause: function()
         {
-            this._riggedHandPlayer.toggle();
+            this._leapRecordingPlayer.toggle();
         }
     };
 

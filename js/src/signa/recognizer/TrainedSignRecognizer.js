@@ -5,10 +5,12 @@
     function TrainedSignRecognizer(eventEmitter)
     {
         this._eventEmitter = eventEmitter;
+        this._frameSignDataProcessor = new Signa.recognizer.FrameSignDataProcessor();
     }
 
     TrainedSignRecognizer.prototype = {
         _eventEmitter: undefined,
+        _frameSignDataProcessor: undefined,
         _signToReconizeId: -1,
 
         addRecognizeEventListener: function(listener)
@@ -21,7 +23,7 @@
             if (!frame.hands.length)
                 return;
                 
-            var data = new Signa.recognizer.FrameSignDataProcessor().process(frame);
+            var data = this._frameSignDataProcessor.process(frame);
 
             Signa.signalrHub()
                 .recognize(data)

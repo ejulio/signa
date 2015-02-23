@@ -2,10 +2,7 @@
 {
     'use strict';
 
-    function Index()
-    {
-
-    }
+    function Index(){}
 
     Index.RECOGNIZE_EVENT_ID = 'recognize';
     Index.NEW_SIGN_EVENT_ID = 'new-sign';
@@ -22,29 +19,38 @@
         {
             var width = $("#handmodel-user").width(),
                 height = $("#handmodel-user").height(),
-                container = $("#handmodel-example"),
-                defaultCameraFactory = new Signa.camera.DefaultCameraFactory(width / height),
-                leapController = new Leap.Controller(),
-                leapController2 = new Leap.Controller();
+                cameraFactory = new Signa.camera.DefaultCameraFactory(width / height);
 
             this._messageBox = $('#recognized-sign-message');
 
             this._signDescription = new View.index.SignDescription($('#sign-description'));
-            this._signExample = new View.index.SignExample(defaultCameraFactory, container, leapController, width, height);
-            this._userHands = new View.index.UserHands(defaultCameraFactory, $("#handmodel-user"), leapController2, width, height);
-
-            leapController2.connect();
-            
-            this._signRecognizer = new Signa.recognizer.SignRecognizer(leapController2);
-
-            this._signRecognizer.addRecognizeEventListener(this._onRecognize.bind(this));
-
-            leapController.on('playback.recordingSet', function()
-            {
-                this._onNewSignLoad();
-            }.bind(this));
+            this._initSignExample(cameraFactory, width, height);
+            this._initUserHands(cameraFactory, width, height);
 
             this._loadNextSign();
+        },
+
+        _initSignExample: function(cameraFactory, width, height)
+        {
+            var signExampleLeapController = new Leap.Controller(),
+                container = $("#handmodel-example");
+
+            this._signExample = new View.index.SignExample(cameraFactory, container, signExampleLeapController, width, height);
+
+            signExampleLeapController.on('playback.recordingSet', this._onNewSignLoad.bind(this));
+        },
+
+        _initUserHands: function(cameraFactory, width, height)
+        {
+            var userHandsLeapController = new Leap.Controller(),
+                container = $("#handmodel-user");
+
+            this._userHands = new View.index.UserHands(cameraFactory, container, userHandsLeapController, width, height);
+            
+            userHandsLeapController.connect();
+            
+            this._signRecognizer = new Signa.recognizer.SignRecognizer(userHandsLeapController);
+            this._signRecognizer.addRecognizeEventListener(this._onRecognize.bind(this));
         },
 
         _onNewSign: function(signInfo)
