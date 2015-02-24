@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>SIGNA</title>
+        <link rel="stylesheet" type="text/css" href="bower_components/pure/pure.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/pure/grids-responsive.css">
+        <link rel="stylesheet" type="text/css" href="css/signa.css">
+    </head>
+    <body class="signa-body">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal signa-menu">
+            <span class="pure-menu-heading signa-menu-title">SIGNA</span>
+            <ul>
+                <li><a href="index.html">Principal</a></li>
+                <li><a href="http://leapmotion.github.io/leapjs-playback/recorder/">Gravar sinal</a></li>
+            </ul>
+        </div>
+
+        <section class="signa-main signa-float-container">
+            <div class="signa-titlebar">
+                <h3 class="signa-titlebar-title">Informe um sinal para importar</h3>
+            </div>
+            <div class="signa-input-container">
+                <input type="text" class="signa-input" id="description" placeholder="Descrição/Nome do sinal" size="50" autofocus />
+                <input type="file" class="signa-input" id="sign-file" />
+                <button class="pure-button" id="save">Importar</button>
+            </div>
+            <div class="signa-handmodel-full-container" id="handmodel-user"></div>
+        </section>
+
+        <script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
+        <script type="text/javascript" src="bower_components/three.js-controls/src/OrbitControls.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+
+        <script type="text/javascript" src="js/leap-motion/leap.js"></script>
+        <script type="text/javascript" src="js/leap-motion/leap-plugins.js"></script>
+        <script type="text/javascript" src="js/leap-motion/leap-rigged-hand.js"></script>
+        <script type="text/javascript" src="js/leap-motion/leap-playback.js"></script>
+
+        <script type="text/javascript" src="bower_components/signalr/jquery.signalr.js"></script>
+        <script type="text/javascript" src="bower_components/eventEmitter/EventEmitter.js"></script>
+
+        <script type="text/javascript" src="http://localhost:9000/signalr/hubs"></script>
+
+        <script type="text/javascript" src="js/src/signa/Signa.js"></script>
+        <script type="text/javascript" src="js/src/signa/LeapRecordingPlayer.js"></script>
+
+        <script type="text/javascript" src="js/src/signa/camera/DefaultCameraFactory.js"></script>
+        <script type="text/javascript" src="js/src/signa/camera/OrbitControlsCameraFactory.js"></script>
+
+        <script type="text/javascript" src="js/src/signa/scene/Scene.js"></script>
+        <script type="text/javascript" src="js/src/signa/scene/RiggedHandScene.js"></script>
+        
+        <script type="text/javascript" src="js/src/signa/recognizer/SignRecognizer.js"></script>
+        <script type="text/javascript" src="js/src/signa/recognizer/OfflineSignRecognizer.js"></script>
+        <script type="text/javascript" src="js/src/signa/recognizer/OnlineSignRecognizer.js"></script>
+        <script type="text/javascript" src="js/src/signa/recognizer/TrainedSignRecognizer.js"></script>
+        <script type="text/javascript" src="js/src/signa/recognizer/FrameSignDataProcessor.js"></script>
+
+        <script type="text/javascript" src="js/src/view/View.js"></script>
+        <script type="text/javascript" src="js/src/view/load/Load.js"></script>
+
+        <script type="text/javascript" src="js/src/load.js"></script>
+    </body>
+</html>

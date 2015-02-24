@@ -1,0 +1,29 @@
+{
+  "name": "signa-tcc",
+  "version": "0.0.1",
+  "authors": [
+    "Júlio César Batista <jcb.1611@gmail.com>"
+  ],
+  "description": "TCC",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "pure": "~0.5.0",
+    "threejs": "r69",
+    "jquery": "~2.1.1",
+    "three.js-controls": "~0.0.67",
+    "signalr": "~2.1.2",
+    "eventEmitter": "~4.2.11"
+  },
+  "resolutions": {
+    "threejs": "r69"
+  }
+}

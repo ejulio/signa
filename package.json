@@ -1,0 +1,27 @@
+{
+  "name": "signa-tcc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-load-plugins": "^0.8.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jasmine": "^2.0.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-load-plugins": "^0.8.0",
+    "jshint-stylish": "^1.0.0",
+    "three": "^0.69.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ejulio/signa-tcc.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

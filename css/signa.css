@@ -1,0 +1,189 @@
+.signa-body
+{
+    background: #F7F7F7;
+    height: 100%;
+}
+
+.signa-link
+{
+    text-decoration: none;
+    color: #2a72d2;
+}
+
+.signa-link:hover
+{
+    color: #a6c4ec;
+}
+
+.signa-menu
+{
+    border-bottom: 2px solid #555 !important;
+}
+
+.signa-menu-title
+{
+    font-size: 20px !important;
+    font-weight: bold;
+}
+
+.signa-titlebar
+{
+    background: #2a72d2;
+}
+
+.signa-titlebar-title
+{
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    padding: 10px 5px;
+}
+
+.signa-titlebar > .signa-titlebar-title.signa-titlebar-main
+{
+    font-weight: bold;
+    padding: 10px 5px;
+}
+
+.signa-main
+{
+    margin: 0 auto;
+    width: 95%;
+    margin-top: 30px;
+}
+
+.signa-main-section
+{
+    box-sizing: border-box;
+    margin: 5px 0;
+}
+
+.signa-input-container
+{
+    background: #a6c4ec;
+    padding: 5px;
+}
+
+.signa-input
+{
+    padding: 5px;
+}
+
+.signa-sign-container
+{
+    background: #a6c4ec;
+    height: 100%;
+}
+
+.signa-sign-word
+{
+    margin: 0;
+    text-align: center;
+    font-size: 60px;
+    color: white;
+}
+
+#recognized-sign-message
+{
+    display: none;
+}
+
+.signa-message-box
+{
+    position: absolute;
+    top: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.signa-message-box-horizontal-center
+{
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.signa-message-box-success
+{
+    background: #6cdd59;
+    border: 2px solid #309d1f;
+    color: #185010;
+}
+
+.signa-hands-container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.signa-handmodel-container
+{
+    margin: 0 0 5px 0;
+    position: relative;
+    flex: 1 1 auto;
+    height: 50vh;
+    border: 5px solid #a6c4ec;
+}
+
+.signa-handmodel-example
+{
+    order: 1;
+    flex: 1 1 auto;
+    margin-right: 5px;
+}
+
+.signa-handmodel-user
+{
+    order: 2;
+    flex: 1 1 auto;
+    margin-left: 5px;
+}
+
+.signa-handmodel-user-error
+{
+    border: 5px solid #d25d2a;
+}
+
+.signa-handmodel-user-success
+{
+    border: 5px solid #6cdd59;
+}
+
+.signa-handmodel-container > .signa-titlebar-title
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #565d64;
+}
+
+.signa-handmodel-full-container
+{
+    height: 70vh;
+    border: 5px solid #a6c4ec;
+}
+
+.signa-button
+{
+    background: #555;
+    color: white;
+    margin: 5px;
+}
+
+.signa-button-xlarge {
+    font-size: 125%;
+}
+
+.signa-right
+{
+    float: right;
+}
+
+.signa-float-container::after
+{
+    display: block;
+    content: '.';
+    clear: both;
+    visibility: hidden;
+}
