@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
-    plugins = require('gulp-load-plugins')();
+    plugins = require('gulp-load-plugins')(),
+    connect = require('gulp-connect');
 
 var JAVASCRIPT_SRC = ['js/src/*.js', 'js/src/signa/**/*.js', 'js/src/view/**/*.js'];
 
@@ -14,4 +15,9 @@ gulp.task('tests', function()
 {
     gulp.src('js/tests/**/*.js')
         .pipe(plugins.jasmine());
+});
+
+gulp.task('webserver', function()
+{
+    connect.server();
 });
