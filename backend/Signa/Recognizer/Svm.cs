@@ -7,27 +7,7 @@ namespace Signa.Recognizer
 {
     public class Svm : ITrainableAlgorithm
     {
-        private static Svm instance;
-
-        public static Svm Instance 
-        { 
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new Svm();
-                }
-
-                return instance;
-            }
-        }
-
         private MulticlassSupportVectorMachine svm;
-
-        private Svm()
-        {
-
-        }
 
         public int Recognize(SignFrame data)
         {

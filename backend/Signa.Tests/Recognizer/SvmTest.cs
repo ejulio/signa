@@ -15,7 +15,7 @@ namespace Signa.Tests.Recognizer
         public void recognizing_without_trainning_throw_an_error()
         {
             var sample = new SignFrameBuilder().Build();
-            Action recognizeCall = () => Svm.Instance.Recognize(sample);
+            Action recognizeCall = () => new Svm().Recognize(sample);
 
             recognizeCall.ShouldThrow<InvalidOperationException>();
         }
@@ -27,20 +27,24 @@ namespace Signa.Tests.Recognizer
             const int samplesPerSign = 2;
             const int signResultIndex = 2;
 
-            GivenATrainedAlgorithm(signCount, samplesPerSign);
+            var svm = GivenATrainedAlgorithm(signCount, samplesPerSign);
 
             var frame = BuildSignSampleByIndex(signResultIndex).Frames[0];
 
-            var result = Svm.Instance.Recognize(frame);
+            var result = svm.Recognize(frame);
 
             result.Should().Be(signResultIndex);
         }
 
-        private void GivenATrainedAlgorithm(int signCount, int samplesPerSign)
+        private Svm GivenATrainedAlgorithm(int signCount, int samplesPerSign)
         {
             var signs = GivenACollectionOfSigns(signCount, samplesPerSign);
             var trainningData = new SvmTrainningData(signs);
-            Svm.Instance.Train(trainningData);
+
+            var svm = new Svm();
+            svm.Train(trainningData);
+
+            return svm;
         }
 
         private ICollection<Sign> GivenACollectionOfSigns(int signCount, int samplesPerSign)
@@ -48,7 +52,7 @@ namespace Signa.Tests.Recognizer
             var signs = new SignCollectionBuilder()
                             .WithSize(signCount)            
                             .WithSampleCount(samplesPerSign)
-                            .WithSampleGenerator(i => BuildSignSampleByIndex(i))
+                            .WithSampleGenerator(BuildSignSampleByIndex)
                             .Build();
             return signs;
         }

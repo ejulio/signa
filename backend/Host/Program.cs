@@ -21,7 +21,7 @@ namespace Host
             {
                 Console.WriteLine("Treinando o algoritmo com os exemplos");
                 var trainningData = new SvmTrainningData(repository);
-                Svm.Instance.Train(trainningData);
+                //Svm.Instance.Train(trainningData);
                 Console.WriteLine("Algoritmo treinado");
             }
 

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
 using Signa.Model;
 
 namespace Signa.Tests.Model

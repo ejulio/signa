@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Tests.Common.Builders;
-using FluentAssertions;
 using Signa.Model;
+using Signa.Tests.Common.Builders;
+using System;
 using System.Linq;
 
 namespace Signa.Tests.Model

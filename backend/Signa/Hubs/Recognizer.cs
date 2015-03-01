@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Data;
 using Signa.Model;
-using Signa.Recognizer;
+using System;
 
 namespace Signa.Hubs
 {
@@ -17,7 +17,9 @@ namespace Signa.Hubs
 
         public int Recognize(SignFrame data)
         {
-            return Svm.Instance.Recognize(data);
+            throw new NotImplementedException("Utilizar um container DI para resolver a instância de SVM como um singleton");
+            return 0;
+            //return Svm.Instance.Recognize(data);
         }
 
         public void SaveSignSample(string name, string exampleFileContent, SignSample data)
