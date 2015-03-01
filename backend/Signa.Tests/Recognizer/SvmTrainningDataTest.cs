@@ -19,8 +19,7 @@ namespace Signa.Tests.Recognizer
         {
             defaultSignSample = new SignSample
             {
-                LeftHand = new HandSampleBuilder().Build(),
-                RightHand = new HandSampleBuilder().Build()
+                Frames = new[] { new SignFrameBuilder().WithDefaultLeftAndRightHand().Build() }
             };
         }
 
@@ -88,7 +87,7 @@ namespace Signa.Tests.Recognizer
         {
             algorithmData.ClassCount.Should().Be(1);
             algorithmData.Inputs.Should().HaveCount(1);
-            algorithmData.Inputs[0].Should().ContainInOrder(defaultSignSample.ToArray());
+            algorithmData.Inputs[0].Should().ContainInOrder(defaultSignSample.Frames[0].ToArray());
             algorithmData.Outputs.Should().HaveCount(1);
             algorithmData.Outputs[0].Should().Be(0);
         }
@@ -101,7 +100,7 @@ namespace Signa.Tests.Recognizer
             {
                 foreach (var sample in sign.Samples)
                 {
-                    inputs.AddFirst(sample.ToArray());
+                    inputs.AddFirst(sample.Frames[0].ToArray());
                 }
             }
 

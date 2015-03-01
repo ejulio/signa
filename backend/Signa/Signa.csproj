@@ -126,8 +126,11 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\SignRepository.cs" />
     <Compile Include="Hubs\Recognizer.cs" />
-    <Compile Include="Model\HandSample.cs" />
+    <Compile Include="Model\Finger.cs" />
+    <Compile Include="Model\FingerType.cs" />
+    <Compile Include="Model\Hand.cs" />
     <Compile Include="Model\Sign.cs" />
+    <Compile Include="Model\SignFrame.cs" />
     <Compile Include="Model\SignInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SignSample.cs" />

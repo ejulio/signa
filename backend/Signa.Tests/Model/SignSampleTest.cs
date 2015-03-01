@@ -11,92 +11,68 @@ namespace Signa.Tests.Model
     public class SignSampleTest
     {
         [TestMethod]
-        public void building_a_sample_with_left_hand()
+        public void building_a_sample_with_one_frame()
         {
-            var leftHand = GivenLeftHand();
-            var rightHand = HandSample.DefaultSample();
-            var signSample = GivenSignSampleWithHands(leftHand, null);
-
-            var sampleArray = signSample.ToArray();
-
-            MustReturnAnArrayWithLeftAndRightData(leftHand, rightHand, sampleArray);
-        }
-
-        [TestMethod]
-        public void building_a_sample_with_right_hand()
-        {
-            var leftHand = HandSample.DefaultSample();
-            var rightHand = GivenRightHand();
-            var signSample = GivenSignSampleWithHands(null, rightHand);
-
-            var sampleArray = signSample.ToArray();
-
-            MustReturnAnArrayWithLeftAndRightData(leftHand, rightHand, sampleArray);
-        }
-
-        [TestMethod]
-        public void building_a_sample_with_two_hands()
-        {
-            var leftHand = GivenLeftHand();
-            var rightHand = GivenRightHand();
-            var signSample = GivenSignSampleWithHands(leftHand, rightHand);
-
-            var sampleArray = signSample.ToArray();
-
-            MustReturnAnArrayWithLeftAndRightData(leftHand, rightHand, sampleArray);
-        }
-
-        [TestMethod]
-        public void when_null_right_and_left_hand_should_have_default_values()
-        {
-            var signSample = new SignSample
-            {
-                LeftHand = null,
-                RightHand = null
-            };
-
-            var defaultValues = HandSample.DefaultSample();
-
-            signSample.LeftHand.ToArray().Should().ContainInOrder(defaultValues.ToArray());
-            signSample.RightHand.ToArray().Should().ContainInOrder(defaultValues.ToArray());
-        }
-
-        private SignSample GivenSignSampleWithHands(HandSample leftHand, HandSample rightHand)
-        {
+            var frames = GivenAnArrayOfSignFramesWithCount(1);
             var signSample = new SignSampleBuilder()
-                .WithLeftHand(leftHand)
-                .WithRightHand(rightHand)
+                .WithFrames(frames)
                 .Build();
 
-            return signSample;
+            var sampleArray = signSample.ToArray();
+
+            MustReturnAnArrayWithFrameData(frames, sampleArray);
         }
 
-        private HandSample GivenRightHand()
+        [TestMethod]
+        public void building_a_sample_two_frames()
         {
-            var rightHand = new HandSampleBuilder()
-                .WithAnglesBetweenFingers(new[] { 0.5, 0.5, 0.7, 0.7 })
-                .WithHandDirection(new[] { 0.4, 0.5, 0.6 })
-                .WithPalmNormal(new[] { 0.0, 1.0, 1.0 })
+            var frames = GivenAnArrayOfSignFramesWithCount(2);
+            var signSample = new SignSampleBuilder()
+                .WithFrames(frames)
                 .Build();
-            return rightHand;
+
+            var sampleArray = signSample.ToArray();
+
+            MustReturnAnArrayWithFrameData(frames, sampleArray);
         }
 
-        private HandSample GivenLeftHand()
+        [TestMethod]
+        public void building_a_sample_with_random_number_of_frames()
         {
-            var leftHand = new HandSampleBuilder()
-                .WithAnglesBetweenFingers(new[] { 0.1, 0.1, 0.2, 0.2 })
-                .WithHandDirection(new[] { 0.1, 0.2, 0.3 })
-                .WithPalmNormal(new[] { 1.0, 0.0, 1.0 })
+            var numberOfFrames = new Random().Next(3, 15);
+            var frames = GivenAnArrayOfSignFramesWithCount(numberOfFrames);
+            var signSample = new SignSampleBuilder()
+                .WithFrames(frames)
                 .Build();
-            return leftHand;
+
+            var sampleArray = signSample.ToArray();
+
+            MustReturnAnArrayWithFrameData(frames, sampleArray);
         }
 
-        private void MustReturnAnArrayWithLeftAndRightData(HandSample leftHand, HandSample rightHand, double[] sampleArray)
+        private SignFrame[] GivenAnArrayOfSignFramesWithCount(int count)
         {
-            var expectedSampleData = leftHand.ToArray().Concat(rightHand.ToArray());
+            var frames = new SignFrame[count];
 
-            sampleArray.Should().HaveCount(expectedSampleData.Count());
-            sampleArray.Should().ContainInOrder(expectedSampleData);
+            for (var i = 0; i < count; i++)
+            {
+                frames[i] = new SignFrameBuilder().Build();
+            }
+
+            return frames;
+        }
+
+        private void MustReturnAnArrayWithFrameData(SignFrame[] frames, double[][] sampleArray)
+        {
+            var expectedFrameData = frames.Select(f => f.ToArray());
+
+            sampleArray.Should().HaveCount(expectedFrameData.Count());
+
+            for (var i = 0; i < expectedFrameData.Count(); i++)
+            {
+                sampleArray[i].Should().HaveSameCount(expectedFrameData.ElementAt(i));
+                sampleArray[i].Should().ContainInOrder(expectedFrameData.ElementAt(i));
+            }
         }
     }
 }

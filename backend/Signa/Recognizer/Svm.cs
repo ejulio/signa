@@ -29,7 +29,7 @@ namespace Signa.Recognizer
 
         }
 
-        public int Recognize(SignSample data)
+        public int Recognize(SignFrame data)
         {
             if (svm == null)
             {

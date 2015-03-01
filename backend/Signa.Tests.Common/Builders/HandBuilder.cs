@@ -2,42 +2,42 @@
 
 namespace Signa.Tests.Common.Builders
 {
-    public class HandSampleBuilder
+    public class HandBuilder
     {
-        private double[] anglesBetweenFingers;
+        private Finger[] fingers;
         private double[] palmNormal;
         private double[] handDirection;
 
-        public HandSampleBuilder()
+        public HandBuilder()
         {
-            anglesBetweenFingers = new DoubleArrayBuilder().WithSize(4).Build();
+            fingers = FingerBuilder.DefaultFingers();
             palmNormal = new DoubleArrayBuilder().WithSize(3).Build();
             handDirection = new DoubleArrayBuilder().WithSize(3).Build();
         }
 
-        public HandSampleBuilder WithAnglesBetweenFingers(double[] anglesBetweenFingers)
+        public HandBuilder WithFingers(Finger[] fingers)
         {
-            this.anglesBetweenFingers = anglesBetweenFingers;
+            this.fingers = fingers;
             return this;
         }
 
-        public HandSampleBuilder WithPalmNormal(double[] palmNormal)
+        public HandBuilder WithPalmNormal(double[] palmNormal)
         {
             this.palmNormal = palmNormal;
             return this;
         }
 
-        public HandSampleBuilder WithHandDirection(double[] handDirection)
+        public HandBuilder WithHandDirection(double[] handDirection)
         {
             this.handDirection = handDirection;
             return this;
         }
 
-        public HandSample Build()
+        public Hand Build()
         {
-            return new HandSample
+            return new Hand
             {
-                AnglesBetweenFingers = anglesBetweenFingers,
+                Fingers = fingers,
                 PalmNormal = palmNormal,
                 HandDirection = handDirection
             };

@@ -15,7 +15,7 @@ namespace Signa.Hubs
             signController = new SignController(repository);
         }
 
-        public int Recognize(SignSample data)
+        public int Recognize(SignFrame data)
         {
             return Svm.Instance.Recognize(data);
         }

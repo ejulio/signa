@@ -63,8 +63,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Data\SignControllerTest.cs" />
-    <Compile Include="Model\HandSampleTest.cs" />
+    <Compile Include="Model\HandTest.cs" />
     <Compile Include="Model\SignSampleTest.cs" />
+    <Compile Include="Model\SignFrameTest.cs" />
+    <Compile Include="Model\FingerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recognizer\SvmTrainningDataTest.cs" />
     <Compile Include="Recognizer\SvmTest.cs" />

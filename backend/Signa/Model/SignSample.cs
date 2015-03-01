@@ -5,31 +5,23 @@ namespace Signa.Model
 {
     public class SignSample
     {
-        private HandSample leftHand;
-        public HandSample LeftHand 
+        public IList<SignFrame> Frames { get; set; }
+
+        public SignSample()
         {
-            get { return leftHand; }
-            set
-            {
-                leftHand = value ?? HandSample.DefaultSample();
-            } 
+            Frames = new SignFrame[0];
         }
 
-        private HandSample rightHand;
-        public HandSample RightHand 
+        public double[][] ToArray()
         {
-            get { return rightHand; } 
-            set
+            var framesData = new double[Frames.Count][];
+
+            for (var i = 0; i < framesData.Length; i++)
             {
-                rightHand = value ?? HandSample.DefaultSample();
+                framesData[i] = Frames[i].ToArray();
             }
-        }
 
-        public double[] ToArray()
-        {
-            return LeftHand.ToArray()
-                .Concat(RightHand.ToArray())
-                .ToArray();
+            return framesData;
         }
     }
 }

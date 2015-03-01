@@ -1,4 +1,5 @@
 ﻿using Signa.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,7 +44,7 @@ namespace Signa.Recognizer
             foreach (var sample in sign.Samples)
             {
                 outputs.AddFirst(signIndex);
-                inputs.AddFirst(sample.ToArray());
+                inputs.AddFirst(sample.Frames[0].ToArray());
             }
         }
     }

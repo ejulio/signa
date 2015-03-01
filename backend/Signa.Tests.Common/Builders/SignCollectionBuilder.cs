@@ -15,10 +15,20 @@ namespace Signa.Tests.Common.Builders
 
         public SignCollectionBuilder()
         {
-            sampleGenerator = index => new SignSample
+            sampleGenerator = index =>
             {
-                LeftHand = new HandSampleBuilder().Build(),
-                RightHand = new HandSampleBuilder().Build()
+                var length = index + 1;
+                var frames = new SignFrame[length];
+
+                for (var i = 0; i < length; i++)
+                {
+                    frames[i] = new SignFrameBuilder().Build();
+                }
+
+                return new SignSample
+                {
+                    Frames = frames
+                };
             };
         }
 

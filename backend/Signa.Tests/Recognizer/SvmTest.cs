@@ -14,7 +14,7 @@ namespace Signa.Tests.Recognizer
         [TestMethod]
         public void recognizing_without_trainning_throw_an_error()
         {
-            var sample = new SignSampleBuilder().Build();
+            var sample = new SignFrameBuilder().Build();
             Action recognizeCall = () => Svm.Instance.Recognize(sample);
 
             recognizeCall.ShouldThrow<InvalidOperationException>();
@@ -28,20 +28,22 @@ namespace Signa.Tests.Recognizer
             const int signResultIndex = 2;
 
             GivenATrainedAlgorithm(signCount, samplesPerSign);
-            
-            var result = Svm.Instance.Recognize(BuildSignSampleByIndex(signResultIndex));
+
+            var frame = BuildSignSampleByIndex(signResultIndex).Frames[0];
+
+            var result = Svm.Instance.Recognize(frame);
 
             result.Should().Be(signResultIndex);
         }
 
-        private static void GivenATrainedAlgorithm(int signCount, int samplesPerSign)
+        private void GivenATrainedAlgorithm(int signCount, int samplesPerSign)
         {
             var signs = GivenACollectionOfSigns(signCount, samplesPerSign);
             var trainningData = new SvmTrainningData(signs);
             Svm.Instance.Train(trainningData);
         }
 
-        private static ICollection<Sign> GivenACollectionOfSigns(int signCount, int samplesPerSign)
+        private ICollection<Sign> GivenACollectionOfSigns(int signCount, int samplesPerSign)
         {
             var signs = new SignCollectionBuilder()
                             .WithSize(signCount)            
@@ -51,24 +53,40 @@ namespace Signa.Tests.Recognizer
             return signs;
         }
 
-        private static SignSample BuildSignSampleByIndex(int index)
+        private SignSample BuildSignSampleByIndex(int index)
         {
-            var leftHand = new HandSampleBuilder()
-                    .WithAnglesBetweenFingers(new double[] { index, index, index, index })
-                    .WithPalmNormal(new double[] { index, index, index })
-                    .WithHandDirection(new double[] { index, index, index })
-                    .Build();
+            var leftHand = GivenHandWithFingers(index);
+            var rightHand = GivenHandWithFingers(index);
 
-            var rightHand = new HandSampleBuilder()
-                    .WithAnglesBetweenFingers(new double[] { index, index, index, index })
-                    .WithPalmNormal(new double[] { index, index, index })
-                    .WithHandDirection(new double[] { index, index, index })
-                    .Build();
+            var frames = new[] 
+            { 
+                new SignFrameBuilder()
+                    .WithLeftHand(leftHand)
+                    .WithRightHand(rightHand)
+                    .Build() 
+            };
 
             return new SignSampleBuilder()
-                .WithLeftHand(leftHand)
-                .WithRightHand(rightHand)
+                .WithFrames(frames)
                 .Build();
+        }
+
+        private Hand GivenHandWithFingers(int index)
+        {
+            var fingers = new[] 
+            {
+                new FingerBuilder().OfType(FingerType.Thumb).WithDirection(new double[] { index, index, index }).Build(),
+                new FingerBuilder().OfType(FingerType.Index).WithDirection(new double[] { index, index, index }).Build(),
+                new FingerBuilder().OfType(FingerType.Middle).WithDirection(new double[] { index, index, index }).Build(),
+                new FingerBuilder().OfType(FingerType.Ring).WithDirection(new double[] { index, index, index }).Build(),
+                new FingerBuilder().OfType(FingerType.Pinky).WithDirection(new double[] { index, index, index }).Build()
+            };
+
+            return new HandBuilder()
+                    .WithFingers(fingers)
+                    .WithPalmNormal(new double[] { index, index, index })
+                    .WithHandDirection(new double[] { index, index, index })
+                    .Build();
         }
     }
 }
