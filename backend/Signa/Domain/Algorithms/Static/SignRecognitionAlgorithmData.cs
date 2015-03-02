@@ -1,10 +1,10 @@
-﻿using Signa.Domain.Signs.Dynamic;
+﻿using Signa.Domain.Signs.Static;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Recognizer
+namespace Signa.Domain.Algorithms.Static
 {
-    public class SvmTrainningData : ITrainableAlgorithmData
+    public class SignRecognitionAlgorithmData : ISignRecognitionAlgorithmData
     {
         public double[][] Inputs { get; private set; }
         public int[] Outputs { get; private set; }
@@ -14,7 +14,7 @@ namespace Signa.Recognizer
         private LinkedList<int> outputs;
         private LinkedList<double[]> inputs;
 
-        public SvmTrainningData(IEnumerable<Sign> signs)
+        public SignRecognitionAlgorithmData(IEnumerable<Sign> signs)
         {
             this.signs = signs;
             Process();
@@ -43,7 +43,7 @@ namespace Signa.Recognizer
             foreach (var sample in sign.Samples)
             {
                 outputs.AddFirst(signIndex);
-                inputs.AddFirst(sample.Frames[0].ToArray());
+                inputs.AddFirst(sample.ToArray());
             }
         }
     }

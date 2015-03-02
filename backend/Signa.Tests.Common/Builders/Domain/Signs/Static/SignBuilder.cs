@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Signa.Domain.Signs.Dynamic;
-using Signa.Domain.Signs.Static;
+﻿using Signa.Domain.Signs.Static;
+using System.Collections.Generic;
 using Sign = Signa.Domain.Signs.Static.Sign;
 
 namespace Signa.Tests.Common.Builders.Domain.Signs.Static

@@ -1,27 +1,24 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Domain.Signs.Dynamic;
-using Signa.Recognizer;
+using Signa.Domain.Algorithms.Static;
+using Signa.Domain.Signs.Static;
 using Signa.Tests.Common.Builders.Domain.Signs;
-using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
+using Signa.Tests.Common.Builders.Domain.Signs.Static;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Tests.Recognizer
+namespace Signa.Tests.Domain.Algorithms.Static
 {
     [TestClass]
-    public class SvmTrainningDataTest
+    public class SignRecognitionAlgorithmDataTest
     {
-        private readonly SignSample defaultSignSample;
+        private readonly Sample defaultSignSample;
 
-        public SvmTrainningDataTest()
+        public SignRecognitionAlgorithmDataTest()
         {
-            defaultSignSample = new SignSample
-            {
-                Frames = new[] { new SignFrameBuilder().WithDefaultLeftAndRightHand().Build() }
-            };
+            defaultSignSample = new SampleBuilder().Build();
         }
 
         [TestMethod]
@@ -29,7 +26,7 @@ namespace Signa.Tests.Recognizer
         {
             var signs = GivenACollectionOfOneSign();
 
-            var algorithmData = new SvmTrainningData(signs);
+            var algorithmData = new SignRecognitionAlgorithmData(signs);
 
             MustHaveOneTrainningData(algorithmData);
         }
@@ -42,33 +39,35 @@ namespace Signa.Tests.Recognizer
 
             var signs = GivenACollectionOfSigns(samplesPerSign, signCount);
 
-            var algorithmData = new SvmTrainningData(signs);
+            var algorithmData = new SignRecognitionAlgorithmData(signs);
 
             MustHaveTheDataOfTheCollectionOfSigns(algorithmData, signs, samplesPerSign);
         }
 
         private ICollection<Sign> GivenACollectionOfOneSign()
         {
-            Func<int, SignSample> sampleGenerator = index => defaultSignSample;
+            Func<int, Sample> sampleGenerator = index => defaultSignSample;
 
-            var signs = new DynamicSignCollectionBuilder()
+            var signs = new StaticSignCollectionBuilder()
                         .WithSampleCount(1)
                         .WithSampleGenerator(sampleGenerator)
                         .WithSize(1)
                         .Build();
+
             return signs;
         }
 
         private static ICollection<Sign> GivenACollectionOfSigns(int samplesPerSign, int signCount)
         {
-            var signs = new DynamicSignCollectionBuilder()
+            var signs = new StaticSignCollectionBuilder()
                         .WithSampleCount(samplesPerSign)
                         .WithSize(signCount)
                         .Build();
+
             return signs;
         }
 
-        private void MustHaveTheDataOfTheCollectionOfSigns(SvmTrainningData algorithmData, ICollection<Sign> signs, int samplesPerSign)
+        private void MustHaveTheDataOfTheCollectionOfSigns(SignRecognitionAlgorithmData algorithmData, ICollection<Sign> signs, int samplesPerSign)
         {
             algorithmData.ClassCount.Should().Be(signs.Count);
             algorithmData.Inputs.Should().HaveCount(samplesPerSign * signs.Count);
@@ -84,11 +83,11 @@ namespace Signa.Tests.Recognizer
             }
         }
 
-        private void MustHaveOneTrainningData(SvmTrainningData algorithmData)
+        private void MustHaveOneTrainningData(SignRecognitionAlgorithmData algorithmData)
         {
             algorithmData.ClassCount.Should().Be(1);
             algorithmData.Inputs.Should().HaveCount(1);
-            algorithmData.Inputs[0].Should().ContainInOrder(defaultSignSample.Frames[0].ToArray());
+            algorithmData.Inputs[0].Should().ContainInOrder(defaultSignSample.ToArray());
             algorithmData.Outputs.Should().HaveCount(1);
             algorithmData.Outputs[0].Should().Be(0);
         }
@@ -101,7 +100,7 @@ namespace Signa.Tests.Recognizer
             {
                 foreach (var sample in sign.Samples)
                 {
-                    inputs.AddFirst(sample.Frames[0].ToArray());
+                    inputs.AddFirst(sample.ToArray());
                 }
             }
 

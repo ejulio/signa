@@ -1,15 +1,15 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Signa.Domain.Algorithms.Static;
 using Signa.Domain.Features;
-using Signa.Domain.Signs.Dynamic;
-using Signa.Recognizer;
+using Signa.Domain.Signs.Static;
 using Signa.Tests.Common.Builders.Domain.Features;
 using Signa.Tests.Common.Builders.Domain.Signs;
-using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
+using Signa.Tests.Common.Builders.Domain.Signs.Static;
 using System;
 using System.Collections.Generic;
 
-namespace Signa.Tests.Recognizer
+namespace Signa.Tests.Domain.Algorithms.Static
 {
     [TestClass]
     public class SvmTest
@@ -17,7 +17,7 @@ namespace Signa.Tests.Recognizer
         [TestMethod]
         public void recognizing_without_trainning_throw_an_error()
         {
-            var sample = new SignFrameBuilder().Build();
+            var sample = new SampleBuilder().Build();
             Action recognizeCall = () => new Svm().Recognize(sample);
 
             recognizeCall.ShouldThrow<InvalidOperationException>();
@@ -32,9 +32,9 @@ namespace Signa.Tests.Recognizer
 
             var svm = GivenATrainedAlgorithm(signCount, samplesPerSign);
 
-            var frame = BuildSignSampleByIndex(signResultIndex).Frames[0];
+            var sample = BuildSignSampleByIndex(signResultIndex);
 
-            var result = svm.Recognize(frame);
+            var result = svm.Recognize(sample);
 
             result.Should().Be(signResultIndex);
         }
@@ -42,7 +42,7 @@ namespace Signa.Tests.Recognizer
         private Svm GivenATrainedAlgorithm(int signCount, int samplesPerSign)
         {
             var signs = GivenACollectionOfSigns(signCount, samplesPerSign);
-            var trainningData = new SvmTrainningData(signs);
+            var trainningData = new SignRecognitionAlgorithmData(signs);
 
             var svm = new Svm();
             svm.Train(trainningData);
@@ -52,7 +52,7 @@ namespace Signa.Tests.Recognizer
 
         private ICollection<Sign> GivenACollectionOfSigns(int signCount, int samplesPerSign)
         {
-            var signs = new DynamicSignCollectionBuilder()
+            var signs = new StaticSignCollectionBuilder()
                             .WithSize(signCount)            
                             .WithSampleCount(samplesPerSign)
                             .WithSampleGenerator(BuildSignSampleByIndex)
@@ -60,21 +60,14 @@ namespace Signa.Tests.Recognizer
             return signs;
         }
 
-        private SignSample BuildSignSampleByIndex(int index)
+        private Sample BuildSignSampleByIndex(int index)
         {
             var leftHand = GivenHandWithFingers(index);
             var rightHand = GivenHandWithFingers(index);
 
-            var frames = new[] 
-            { 
-                new SignFrameBuilder()
-                    .WithLeftHand(leftHand)
-                    .WithRightHand(rightHand)
-                    .Build() 
-            };
-
-            return new SignSampleBuilder()
-                .WithFrames(frames)
+            return new SampleBuilder()
+                .WithLeftHand(leftHand)
+                .WithRightHand(rightHand)
                 .Build();
         }
 

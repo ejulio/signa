@@ -128,7 +128,6 @@
     <Compile Include="Data\Repository\SignRepository.cs" />
     <Compile Include="Domain\Algorithms\IStaticSignRecognitionAlgorithm.cs" />
     <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactory.cs" />
-    <Compile Include="Domain\Algorithms\Svm.cs" />
     <Compile Include="Domain\Features\IFeature.cs" />
     <Compile Include="Domain\Signs\Static\Sample.cs" />
     <Compile Include="Domain\Signs\Static\Sign.cs" />
@@ -144,11 +143,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Signs\Dynamic\SignSample.cs" />
     <Compile Include="Data\StaticSignController.cs" />
-    <Compile Include="Recognizer\ITrainableAlgorithm.cs" />
-    <Compile Include="Recognizer\ITrainableAlgorithmData.cs" />
+    <Compile Include="Domain\Algorithms\Static\ISignRecognitionAlgorithmData.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Recognizer\Svm.cs" />
-    <Compile Include="Recognizer\SvmTrainningData.cs" />
+    <Compile Include="Domain\Algorithms\Static\Svm.cs" />
+    <Compile Include="Domain\Algorithms\Static\SignRecognitionAlgorithmData.cs" />
     <Compile Include="Util\IEnumerableExtensions.cs" />
     <Compile Include="Util\StringExtensions.cs" />
   </ItemGroup>

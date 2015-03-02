@@ -1,4 +1,6 @@
-﻿namespace Signa.Domain.Algorithms
+﻿using Signa.Domain.Algorithms.Static;
+
+namespace Signa.Domain.Algorithms
 {
     public class SignRecognitionAlgorithmFactory
     {

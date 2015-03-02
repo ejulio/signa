@@ -2,12 +2,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Data.Repository;
+using Signa.Domain.Signs.Static;
 using Signa.Tests.Common.Builders.Domain.Signs;
+using Signa.Tests.Common.Builders.Domain.Signs.Static;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Signa.Domain.Signs.Static;
-using Signa.Tests.Common.Builders.Domain.Signs.Static;
 
 namespace Signa.Tests.Integration.Data.Repository
 {

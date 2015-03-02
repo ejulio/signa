@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Signa.Domain.Signs.Static;
 using Signa.Tests.Common.Builders.Domain.Signs.Static;
-using Signa.Domain.Signs.Static;
+using System;
+using System.Collections.Generic;
 
 namespace Signa.Tests.Common.Builders.Domain.Signs
 {

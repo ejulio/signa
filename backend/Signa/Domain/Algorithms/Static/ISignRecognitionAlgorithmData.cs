@@ -1,7 +1,7 @@
 ﻿
-namespace Signa.Recognizer
+namespace Signa.Domain.Algorithms.Static
 {
-    public interface ITrainableAlgorithmData
+    public interface ISignRecognitionAlgorithmData
     {
         double[][] Inputs { get; }
         int[] Outputs { get; }

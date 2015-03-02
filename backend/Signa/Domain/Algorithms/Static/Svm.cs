@@ -1,15 +1,15 @@
 ﻿using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
-using Signa.Domain.Signs.Dynamic;
+using Signa.Domain.Signs.Static;
 using System;
 
-namespace Signa.Recognizer
+namespace Signa.Domain.Algorithms.Static
 {
-    public class Svm : ITrainableAlgorithm
+    public class Svm : IStaticSignRecognitionAlgorithm
     {
         private MulticlassSupportVectorMachine svm;
 
-        public int Recognize(SignFrame data)
+        public int Recognize(Sample data)
         {
             if (svm == null)
             {
@@ -18,7 +18,7 @@ namespace Signa.Recognizer
             return svm.Compute(data.ToArray());
         }
 
-        public void Train(ITrainableAlgorithmData data)
+        public void Train(ISignRecognitionAlgorithmData data)
         {
             svm = new MulticlassSupportVectorMachine(0, data.ClassCount);
 
