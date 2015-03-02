@@ -51,7 +51,7 @@ namespace Signa.Tests.Recognizer
         {
             Func<int, SignSample> sampleGenerator = index => defaultSignSample;
 
-            var signs = new SignCollectionBuilder()
+            var signs = new DynamicSignCollectionBuilder()
                         .WithSampleCount(1)
                         .WithSampleGenerator(sampleGenerator)
                         .WithSize(1)
@@ -61,7 +61,7 @@ namespace Signa.Tests.Recognizer
 
         private static ICollection<Sign> GivenACollectionOfSigns(int samplesPerSign, int signCount)
         {
-            var signs = new SignCollectionBuilder()
+            var signs = new DynamicSignCollectionBuilder()
                         .WithSampleCount(samplesPerSign)
                         .WithSize(signCount)
                         .Build();

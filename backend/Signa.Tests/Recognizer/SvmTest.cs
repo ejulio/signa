@@ -52,7 +52,7 @@ namespace Signa.Tests.Recognizer
 
         private ICollection<Sign> GivenACollectionOfSigns(int signCount, int samplesPerSign)
         {
-            var signs = new SignCollectionBuilder()
+            var signs = new DynamicSignCollectionBuilder()
                             .WithSize(signCount)            
                             .WithSampleCount(samplesPerSign)
                             .WithSampleGenerator(BuildSignSampleByIndex)

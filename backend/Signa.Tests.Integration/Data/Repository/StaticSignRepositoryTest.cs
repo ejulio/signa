@@ -2,27 +2,27 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Data.Repository;
-using Signa.Domain.Signs.Dynamic;
 using Signa.Tests.Common.Builders.Domain.Signs;
-using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Signa.Domain.Signs.Static;
+using Signa.Tests.Common.Builders.Domain.Signs.Static;
 
 namespace Signa.Tests.Integration.Data.Repository
 {
     [TestClass]
-    public class SignRepositoryTest
+    public class StaticSignRepositoryTest
     {
-        private SignRepository signRepository;
-        private const string samplesFilePath = "JsonTestData/test-samples.json";
-        private const string descriptionTemplate = "Sign sample {0}";
-        private const string pathTemplate = "sample-{0}.json";
+        private StaticSignRepository signRepository;
+        private const string samplesFilePath = "JsonTestData/static-test-samples.json";
+        private const string descriptionTemplate = "Static sign sample {0}";
+        private const string pathTemplate = "static-sample-{0}.json";
 
         [TestInitialize]
         public void TestInitialize()
         {
-            signRepository = new SignRepository(samplesFilePath);
+            signRepository = new StaticSignRepository(samplesFilePath);
         }
 
         [TestMethod]
@@ -123,7 +123,7 @@ namespace Signa.Tests.Integration.Data.Repository
 
         private ICollection<Sign> GivenSomeSignsInTheSamplesFile()
         {
-            var signs = new DynamicSignCollectionBuilder()
+            var signs = new StaticSignCollectionBuilder()
                             .WithSize(4)
                             .WithDescriptionTemplate(descriptionTemplate)
                             .WithPathTemplate(pathTemplate)
@@ -144,7 +144,7 @@ namespace Signa.Tests.Integration.Data.Repository
             var sign = new SignBuilder()
                             .WithDescription(description)
                             .WithPath("new-sign.json")
-                            .WithSample(new SignSampleBuilder().Build())
+                            .WithSample(new SampleBuilder().Build())
                             .Build();
             return sign;
         }

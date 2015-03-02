@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Signa.Tests.Common.Builders.Domain.Signs
 {
-    public class SignCollectionBuilder
+    public class DynamicSignCollectionBuilder
     {
         private int size = 2;
         private int sampleCount = 4;
@@ -14,7 +14,7 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
         private Func<int, SignSample> sampleGenerator;
 
 
-        public SignCollectionBuilder()
+        public DynamicSignCollectionBuilder()
         {
             sampleGenerator = index =>
             {
@@ -33,31 +33,31 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
             };
         }
 
-        public SignCollectionBuilder WithSize(int size)
+        public DynamicSignCollectionBuilder WithSize(int size)
         {
             this.size = size;
             return this;
         }
 
-        public SignCollectionBuilder WithDescriptionTemplate(string descriptionTemplate)
+        public DynamicSignCollectionBuilder WithDescriptionTemplate(string descriptionTemplate)
         {
             this.descriptionTemplate = descriptionTemplate;
             return this;
         }
 
-        public SignCollectionBuilder WithPathTemplate(string pathTemplate)
+        public DynamicSignCollectionBuilder WithPathTemplate(string pathTemplate)
         {
             this.pathTemplate = pathTemplate;
             return this;
         }
 
-        public SignCollectionBuilder WithSampleGenerator(Func<int, SignSample> sampleGenerator)
+        public DynamicSignCollectionBuilder WithSampleGenerator(Func<int, SignSample> sampleGenerator)
         {
             this.sampleGenerator = sampleGenerator;
             return this;
         }
 
-        public SignCollectionBuilder WithSampleCount(int sampleCount)
+        public DynamicSignCollectionBuilder WithSampleCount(int sampleCount)
         {
             this.sampleCount = sampleCount;
             return this;
