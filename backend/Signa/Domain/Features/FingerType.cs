@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Model
+namespace Signa.Domain.Features
 {
     public enum FingerType
     {

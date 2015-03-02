@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Model;
-using Signa.Tests.Common.Builders;
+using Signa.Domain.Features;
+using Signa.Tests.Common.Builders.Domain.Features;
 using System.Linq;
 
-namespace Signa.Tests.Model
+namespace Signa.Tests.Domain.Features
 {
     [TestClass]
     public class HandTest

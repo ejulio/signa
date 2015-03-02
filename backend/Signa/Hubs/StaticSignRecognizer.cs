@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Data;
-using Signa.Model;
+using Signa.Domain.Signs.Dynamic;
 using System;
 
 namespace Signa.Hubs

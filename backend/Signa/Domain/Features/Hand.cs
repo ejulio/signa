@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Signa.Model
+namespace Signa.Domain.Features
 {
     public class Hand
     {

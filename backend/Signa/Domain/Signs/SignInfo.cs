@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Model
+namespace Signa.Domain.Signs
 {
     public class SignInfo
     {

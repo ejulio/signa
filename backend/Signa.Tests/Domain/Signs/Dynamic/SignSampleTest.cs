@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Model;
-using Signa.Tests.Common.Builders;
+using Signa.Domain.Signs.Dynamic;
+using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
 using System;
 using System.Linq;
 
-namespace Signa.Tests.Model
+namespace Signa.Tests.Domain.Signs.Dynamic
 {
     [TestClass]
     public class SignSampleTest

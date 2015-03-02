@@ -1,6 +1,8 @@
-﻿using Signa.Model;
+﻿using Signa.Domain.Features;
+using Signa.Domain.Signs.Dynamic;
+using Signa.Tests.Common.Builders.Domain.Features;
 
-namespace Signa.Tests.Common.Builders
+namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
 {
     public class SignFrameBuilder
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Data;
-using Signa.Model;
+using Signa.Domain.Signs;
+using Signa.Domain.Signs.Dynamic;
 using System;
 
 namespace Signa.Hubs
@@ -9,7 +10,7 @@ namespace Signa.Hubs
     {
         private StaticSignController staticSignController;
 
-        public Sign(IRepository<Model.Sign> repository)
+        public Sign(IRepository<Domain.Signs.Dynamic.Sign> repository)
         {
             staticSignController = new StaticSignController(repository);
         }
@@ -25,7 +26,7 @@ namespace Signa.Hubs
             throw new NotImplementedException("implementar nos devidos hubs");
             var fileName = staticSignController.CreateSampleFileIfNotExists(name, exampleFileContent);
 
-            staticSignController.Add(new Model.Sign
+            staticSignController.Add(new Domain.Signs.Dynamic.Sign
             {
                 Description = name,
                 ExampleFilePath = fileName,

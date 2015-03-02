@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using Signa.Domain.Features;
+using System.Linq;
 
-namespace Signa.Model
+namespace Signa.Domain.Signs.Dynamic
 {
     public class SignFrame
     {

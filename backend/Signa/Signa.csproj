@@ -128,14 +128,14 @@
     <Compile Include="Hubs\DynamicSignRecognizer.cs" />
     <Compile Include="Hubs\Sign.cs" />
     <Compile Include="Hubs\StaticSignRecognizer.cs" />
-    <Compile Include="Model\Finger.cs" />
-    <Compile Include="Model\FingerType.cs" />
-    <Compile Include="Model\Hand.cs" />
-    <Compile Include="Model\Sign.cs" />
-    <Compile Include="Model\SignFrame.cs" />
-    <Compile Include="Model\SignInfo.cs" />
+    <Compile Include="Domain\Features\Finger.cs" />
+    <Compile Include="Domain\Features\FingerType.cs" />
+    <Compile Include="Domain\Features\Hand.cs" />
+    <Compile Include="Domain\Signs\Dynamic\Sign.cs" />
+    <Compile Include="Domain\Signs\Dynamic\SignFrame.cs" />
+    <Compile Include="Domain\Signs\SignInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\SignSample.cs" />
+    <Compile Include="Domain\Signs\Dynamic\SignSample.cs" />
     <Compile Include="Data\StaticSignController.cs" />
     <Compile Include="Recognizer\ITrainableAlgorithm.cs" />
     <Compile Include="Recognizer\ITrainableAlgorithmData.cs" />
@@ -144,7 +144,9 @@
     <Compile Include="Recognizer\SvmTrainningData.cs" />
     <Compile Include="Util\StringExtensions.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Domain\Signs\Static\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Model;
+using Signa.Domain.Features;
 
-namespace Signa.Tests.Model
+namespace Signa.Tests.Domain.Features
 {
     [TestClass]
     public class FingerTest

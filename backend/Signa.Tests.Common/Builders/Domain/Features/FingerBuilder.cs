@@ -1,6 +1,6 @@
-﻿using Signa.Model;
+﻿using Signa.Domain.Features;
 
-namespace Signa.Tests.Common.Builders
+namespace Signa.Tests.Common.Builders.Domain.Features
 {
     public class FingerBuilder
     {

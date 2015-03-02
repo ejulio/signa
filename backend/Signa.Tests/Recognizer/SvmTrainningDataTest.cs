@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Model;
+using Signa.Domain.Signs.Dynamic;
 using Signa.Recognizer;
-using Signa.Tests.Common.Builders;
+using Signa.Tests.Common.Builders.Domain.Signs;
+using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
 using System;
 using System.Collections;
 using System.Collections.Generic;

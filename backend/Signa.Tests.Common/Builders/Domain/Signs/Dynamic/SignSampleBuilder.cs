@@ -1,7 +1,7 @@
-﻿using Signa.Model;
+﻿using Signa.Domain.Signs.Dynamic;
 using System.Collections.Generic;
 
-namespace Signa.Tests.Common.Builders
+namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
 {
     public class SignSampleBuilder
     {

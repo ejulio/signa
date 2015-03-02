@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Signa.Model
+namespace Signa.Domain.Signs.Dynamic
 {
     public class Sign
     {

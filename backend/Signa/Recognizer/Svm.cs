@@ -1,6 +1,6 @@
 ﻿using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
-using Signa.Model;
+using Signa.Domain.Signs.Dynamic;
 using System;
 
 namespace Signa.Recognizer

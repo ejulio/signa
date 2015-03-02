@@ -2,8 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Data;
-using Signa.Model;
-using Signa.Tests.Common.Builders;
+using Signa.Domain.Signs.Dynamic;
+using Signa.Tests.Common.Builders.Domain.Signs;
+using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
 using System;
 using System.Collections.Generic;
 using System.IO;

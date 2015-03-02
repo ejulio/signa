@@ -1,4 +1,4 @@
-﻿using Signa.Model;
+﻿using Signa.Domain.Signs.Dynamic;
 using Signa.Util;
 using System;
 using System.IO;
