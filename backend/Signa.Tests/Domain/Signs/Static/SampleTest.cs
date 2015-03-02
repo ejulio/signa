@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Features;
 using Signa.Domain.Signs.Static;
 using Signa.Tests.Common.Builders.Domain.Features;
 using Signa.Tests.Common.Builders.Domain.Signs.Static;
+using System.Linq;
 
 namespace Signa.Tests.Domain.Signs.Static
 {

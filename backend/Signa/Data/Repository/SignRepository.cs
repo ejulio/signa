@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Signa.Data
+namespace Signa.Data.Repository
 {
     public class SignRepository : IRepository<Sign>, IEnumerable<Sign>
     {

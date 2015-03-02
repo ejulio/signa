@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Data;
+using Signa.Data.Repository;
 using Signa.Domain.Signs;
 using Signa.Domain.Signs.Dynamic;
 using System;

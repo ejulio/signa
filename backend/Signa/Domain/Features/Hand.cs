@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Signa.Util;
+﻿using Signa.Util;
+using System.Linq;
 
 namespace Signa.Domain.Features
 {

@@ -123,10 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentTypeProviders\JsonContentTypeProvider.cs" />
-    <Compile Include="Data\IRepository.cs" />
-    <Compile Include="Data\SignRepository.cs" />
+    <Compile Include="Data\Repository\IRepository.cs" />
+    <Compile Include="Data\Repository\SignRepository.cs" />
     <Compile Include="Domain\Features\IFeature.cs" />
     <Compile Include="Domain\Signs\Static\Sample.cs" />
+    <Compile Include="Domain\Signs\Static\Sign.cs" />
     <Compile Include="Hubs\DynamicSignRecognizer.cs" />
     <Compile Include="Hubs\Sign.cs" />
     <Compile Include="Hubs\StaticSignRecognizer.cs" />

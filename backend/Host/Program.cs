@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Hosting;
 using Signa.Data;
+using Signa.Data.Repository;
 using System;
 
 namespace Host

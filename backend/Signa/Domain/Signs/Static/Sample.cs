@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Signa.Domain.Features;
+﻿using Signa.Domain.Features;
+using System.Linq;
 
 namespace Signa.Domain.Signs.Static
 {

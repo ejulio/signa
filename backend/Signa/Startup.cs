@@ -6,6 +6,7 @@ using Newtonsoft.Json.Serialization;
 using Owin;
 using Signa.ContentTypeProviders;
 using Signa.Data;
+using Signa.Data.Repository;
 
 namespace Signa
 {

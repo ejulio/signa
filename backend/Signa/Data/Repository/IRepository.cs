@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Data
+namespace Signa.Data.Repository
 {
     public interface IRepository<TEntity>
     {

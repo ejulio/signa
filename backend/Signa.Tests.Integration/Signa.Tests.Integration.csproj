@@ -62,7 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Data\SignRepositoryTest.cs" />
+    <Compile Include="Data\Repository\SignRepositoryTest.cs" />
     <Compile Include="Data\SignControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

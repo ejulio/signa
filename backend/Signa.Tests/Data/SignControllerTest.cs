@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Data;
+using Signa.Data.Repository;
 using Signa.Domain.Signs.Dynamic;
 using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
 
