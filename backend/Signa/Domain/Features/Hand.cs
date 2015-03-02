@@ -1,8 +1,9 @@
 ﻿using System.Linq;
+using Signa.Util;
 
 namespace Signa.Domain.Features
 {
-    public class Hand
+    public class Hand : IFeature
     {
         public double[] PalmNormal { get; set; }
         public double[] HandDirection { get; set; }
@@ -11,7 +12,7 @@ namespace Signa.Domain.Features
 
         public double[] ToArray()
         {
-            var fingersData = Fingers[0].ToArray().Concat(Fingers[1].ToArray()).Concat(Fingers[2].ToArray()).Concat(Fingers[3].ToArray()).Concat(Fingers[4].ToArray());
+            var fingersData = Fingers.Select(f => f.ToArray()).Concatenate();
             
             return PalmNormal
                 .Concat(HandDirection)

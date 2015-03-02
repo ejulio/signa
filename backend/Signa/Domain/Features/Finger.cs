@@ -2,7 +2,7 @@
 
 namespace Signa.Domain.Features
 {
-    public class Finger
+    public class Finger : IFeature
     {
         public double[] TipDirection { get; set; }
         public FingerType Type { get; set; }
