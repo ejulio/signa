@@ -11,22 +11,22 @@ namespace Signa.Tests.Integration.Data
     {
         private const string samplesFilePath = "JsonTestData/test-samples.json";
         private SignRepository repository;
-        private SignController signController;
+        private StaticSignController _staticSignController;
 
         [TestInitialize]
         public void Setup()
         {
             repository = new SignRepository(samplesFilePath);
-            signController = new SignController(repository);
+            _staticSignController = new StaticSignController(repository);
         }
 
         [TestCleanup]
         public void DeleteFiles()
         {
-            if (Directory.Exists(SignController.SamplesDirectory))
+            if (Directory.Exists(StaticSignController.SamplesDirectory))
             {
-                Directory.Delete(SignController.SamplesDirectory, true);
-                Directory.CreateDirectory(SignController.SamplesDirectory);
+                Directory.Delete(StaticSignController.SamplesDirectory, true);
+                Directory.CreateDirectory(StaticSignController.SamplesDirectory);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Signa.Tests.Integration.Data
             const string signDescription = "new sign";
             const string fileData = "file data";
 
-            var createdFilePath = signController.CreateSampleFileIfNotExists(signDescription, fileData);
+            var createdFilePath = _staticSignController.CreateSampleFileIfNotExists(signDescription, fileData);
 
             MustCreateFileWithContent(createdFilePath, signDescription, fileData);
         }
@@ -50,19 +50,19 @@ namespace Signa.Tests.Integration.Data
 
             GivenAnExistingSampleFile(oldSignDescription, oldFileData);
 
-            signController.CreateSampleFileIfNotExists(oldSignDescription, newFileData);
+            _staticSignController.CreateSampleFileIfNotExists(oldSignDescription, newFileData);
 
             MustNotChangeFileContent(oldSignDescription, oldFileData);
         }
 
         private void GivenAnExistingSampleFile(string oldSignDescription, string oldFileData)
         {
-            signController.CreateSampleFileIfNotExists(oldSignDescription, oldFileData);
+            _staticSignController.CreateSampleFileIfNotExists(oldSignDescription, oldFileData);
         }
 
         private static void MustCreateFileWithContent(string createdFilePath, string signDescription, string fileData)
         {
-            var file = SignController.SamplesDirectory + signDescription.Underscore() + ".json";
+            var file = StaticSignController.SamplesDirectory + signDescription.Underscore() + ".json";
             createdFilePath.Should().Be(file);
             File.Exists(file).Should().BeTrue();
             using (StreamReader reader = new StreamReader(file))
@@ -73,7 +73,7 @@ namespace Signa.Tests.Integration.Data
 
         private static void MustNotChangeFileContent(string signDescription, string oldFileData)
         {
-            var file = SignController.SamplesDirectory + signDescription.Underscore() + ".json";
+            var file = StaticSignController.SamplesDirectory + signDescription.Underscore() + ".json";
             using (StreamReader reader = new StreamReader(file))
             {
                 reader.ReadToEnd().Should().Be(oldFileData);

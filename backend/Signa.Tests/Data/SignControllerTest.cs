@@ -11,13 +11,13 @@ namespace Signa.Tests.Data
     public class SignControllerTest
     {
         private Mock<IRepository<Sign>> repositoryMock;
-        private SignController signController;
+        private StaticSignController _staticSignController;
 
         [TestInitialize]
         public void MyTestMethod()
         {
             repositoryMock = new Mock<IRepository<Sign>>();
-            signController = new SignController(repositoryMock.Object);
+            _staticSignController = new StaticSignController(repositoryMock.Object);
         }
 
         [TestMethod]
@@ -28,7 +28,7 @@ namespace Signa.Tests.Data
 
             var sign = GivenASignWithTwoSamples(signDescription);
 
-            signController.Add(sign);
+            _staticSignController.Add(sign);
 
             MustAddSignToRepositoryAndSaveChanges(sign);
         }
@@ -41,7 +41,7 @@ namespace Signa.Tests.Data
 
             var newSign = GivenASignWithTwoSamples(signDescription);
 
-            signController.Add(newSign);
+            _staticSignController.Add(newSign);
 
             MustMergeSamplesAndSaveChanges(oldSign, newSign);
         }
@@ -56,7 +56,7 @@ namespace Signa.Tests.Data
             var sign1 = GivenThatTheRepositoryReturnsASignForTheIndex(signIdex1);
 
             int signIndex;
-            var randomSign = signController.GetRandomSign(signIdex1, out signIndex);
+            var randomSign = _staticSignController.GetRandomSign(signIdex1, out signIndex);
 
             randomSign.Should().Be(sign0);
             signIndex.Should().Be(0);

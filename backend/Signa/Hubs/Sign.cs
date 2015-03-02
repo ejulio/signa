@@ -5,39 +5,39 @@ using System;
 
 namespace Signa.Hubs
 {
-    public class Recognizer : Hub
+    public class Sign : Hub
     {
-        private SignController signController;
+        private StaticSignController staticSignController;
 
-        public Recognizer()
+        public Sign(IRepository<Model.Sign> repository)
         {
-            var repository = new SignRepository(SignController.SignSamplesFilePath);
-            signController = new SignController(repository);
+            staticSignController = new StaticSignController(repository);
         }
 
         public int Recognize(SignFrame data)
         {
-            throw new NotImplementedException("Utilizar um container DI para resolver a instância de SVM como um singleton");
-            return 0;
+            throw new NotImplementedException("Implementar nos devidos hubs");
             //return Svm.Instance.Recognize(data);
         }
 
         public void SaveSignSample(string name, string exampleFileContent, SignSample data)
         {
-            var fileName = signController.CreateSampleFileIfNotExists(name, exampleFileContent);
+            throw new NotImplementedException("implementar nos devidos hubs");
+            var fileName = staticSignController.CreateSampleFileIfNotExists(name, exampleFileContent);
 
-            signController.Add(new Sign
+            staticSignController.Add(new Model.Sign
             {
                 Description = name,
                 ExampleFilePath = fileName,
-                Samples = new SignSample[] { data }
+                Samples = new[] { data }
             });
         }
 
         public SignInfo GetNextSign(int previousSignIndex)
         {
+            // alterar para receber os dados dos 2 repositórios
             int signIndex;
-            var sign = signController.GetRandomSign(previousSignIndex, out signIndex);
+            var sign = staticSignController.GetRandomSign(previousSignIndex, out signIndex);
 
             var signInfo = new SignInfo
             {

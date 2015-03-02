@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace Signa.Data
 {
-    public class SignController
+    public class StaticSignController
     {
         public const string SignSamplesFilePath = "./data/sign-samples.json";
         public const string SamplesDirectory = "samples/";
 
         private IRepository<Sign> repository;
 
-        public SignController(IRepository<Sign> repository)
+        public StaticSignController(IRepository<Sign> repository)
         {
             this.repository = repository;
             repository.Load();
