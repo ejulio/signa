@@ -63,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Data\SignControllerTest.cs" />
+    <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactoryTest.cs" />
     <Compile Include="Domain\Features\HandTest.cs" />
     <Compile Include="Domain\Signs\Dynamic\SignSampleTest.cs" />
     <Compile Include="Domain\Signs\Dynamic\SignFrameTest.cs" />
