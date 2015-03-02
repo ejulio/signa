@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\Domain\Signs\Static\SampleBuilder.cs" />
     <Compile Include="Builders\DoubleArrayBuilder.cs" />
     <Compile Include="Builders\Domain\Features\FingerBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\Dynamic\SignFrameBuilder.cs" />
@@ -57,9 +58,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Builders\Domain\Signs\Static\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

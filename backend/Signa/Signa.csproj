@@ -125,6 +125,8 @@
     <Compile Include="ContentTypeProviders\JsonContentTypeProvider.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\SignRepository.cs" />
+    <Compile Include="Domain\Features\IFeature.cs" />
+    <Compile Include="Domain\Signs\Static\Sample.cs" />
     <Compile Include="Hubs\DynamicSignRecognizer.cs" />
     <Compile Include="Hubs\Sign.cs" />
     <Compile Include="Hubs\StaticSignRecognizer.cs" />
@@ -142,11 +144,10 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Recognizer\Svm.cs" />
     <Compile Include="Recognizer\SvmTrainningData.cs" />
+    <Compile Include="Util\IEnumerableExtensions.cs" />
     <Compile Include="Util\StringExtensions.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\Signs\Static\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
