@@ -58,11 +58,11 @@ describe('FrameSignDataProcessor', function()
     function givenLeftHand()
     {
         var fingers = [
-            new FingerBuilder().withTipPosition([1, 1, 1]).build(),
-            new FingerBuilder().withTipPosition([2, 2, 2]).build(),
-            new FingerBuilder().withTipPosition([3, 3, 3]).build(),
-            new FingerBuilder().withTipPosition([4, 4, 4]).build(),
-            new FingerBuilder().withTipPosition([5, 5, 5]).build()
+            FingerBuilder.thumb(),
+            FingerBuilder.index(),
+            FingerBuilder.middle(),
+            FingerBuilder.ring(),
+            FingerBuilder.pinky()
         ];
 
         return new HandBuilder()
@@ -75,11 +75,11 @@ describe('FrameSignDataProcessor', function()
     function givenRightHand()
     {
         var fingers = [
-            new FingerBuilder().withTipPosition([1, 1, 1]).build(),
-            new FingerBuilder().withTipPosition([2, 2, 2]).build(),
-            new FingerBuilder().withTipPosition([3, 3, 3]).build(),
-            new FingerBuilder().withTipPosition([4, 4, 4]).build(),
-            new FingerBuilder().withTipPosition([5, 5, 5]).build()
+            FingerBuilder.thumb(),
+            FingerBuilder.index(),
+            FingerBuilder.middle(),
+            FingerBuilder.ring(),
+            FingerBuilder.pinky()
         ];
 
         return new HandBuilder()
@@ -100,8 +100,14 @@ describe('FrameSignDataProcessor', function()
     function mustReturnSignDataWithHandData(signDataHand, hand)
     {
         expect(signDataHand).not.toBeNull();
-        expect(signDataHand.PalmNormal).toBe(hand.palmNormal);
-        expect(signDataHand.HandDirection).toBe(hand.direction);
-        expect(signDataHand.AnglesBetweenFingers.length).toBe(4);
+        expect(signDataHand.palmNormal).toBe(hand.palmNormal);
+        expect(signDataHand.handDirection).toBe(hand.direction);
+        
+        var fingers = signDataHand.fingers;        
+        for (var i = 0; i < fingers.length; i++)
+        {
+            expect(fingers[i].type).toBe(hand.fingers[i].type);
+            expect(fingers[i].direction).toBe(hand.fingers[i].direction);
+        }
     }
 });

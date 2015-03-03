@@ -12,7 +12,7 @@ namespace Signa.Data
     {
         public const string SignSamplesFilePath = "./data/static-sign-samples.json";
 
-        public const string SamplesDirectory = "samples/static"; 
+        public const string SamplesDirectory = "samples/"; 
 
         private IRepository<Sign> repository;
         private readonly IStaticSignRecognitionAlgorithm staticSignRecognitionAlgorithm;

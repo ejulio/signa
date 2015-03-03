@@ -13,7 +13,7 @@ namespace Signa.Tests.Domain.Features
             var finger = new Finger
             {
                 Type = FingerType.Thumb,
-                TipDirection = new[] { 0.12, 0.478, 0.6985 }
+                Direction = new[] { 0.12, 0.478, 0.6985 }
             };
 
             var fingerArray = finger.ToArray();

@@ -25,7 +25,8 @@
                 
             var data = this._frameSignDataProcessor.process(frame);
 
-            Signa.signalrHub()
+            Signa.Hubs
+                .staticSignRecognizer()
                 .recognize(data)
                 .then(function(signalRecognizedId)
                 {

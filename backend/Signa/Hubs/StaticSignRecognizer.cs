@@ -21,7 +21,7 @@ namespace Signa.Hubs
 
         public void Save(string name, string exampleFileContent, Sample sample)
         {
-            throw new NotImplementedException("Mover implementação para StaticSignController");
+            //throw new NotImplementedException("Mover implementação para StaticSignController");
             var fileName = signController.CreateSampleFileIfNotExists(name, exampleFileContent);
             signController.Add(new Sign
             {

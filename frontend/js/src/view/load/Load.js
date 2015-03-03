@@ -14,7 +14,7 @@
         {
             var leapController = new Leap.Controller();
 
-            Signa.initHubs();
+            Signa.Hubs.init();
             this._initScene(leapController);
 
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
@@ -74,7 +74,9 @@
             var signDescription = $('#description').val(),
                 signData = this._getSignDataFromFrame();
 
-            Signa.signalrHub().saveSignSample(signDescription, this._loadedFramesJson, signData);
+            Signa.Hubs
+                .staticSignRecognizer()
+                .save(signDescription, this._loadedFramesJson, signData);
         },
 
         _getSignDataFromFrame: function()

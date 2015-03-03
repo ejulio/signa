@@ -4,13 +4,13 @@ namespace Signa.Domain.Features
 {
     public class Finger : IFeature
     {
-        public double[] TipDirection { get; set; }
+        public double[] Direction { get; set; }
         public FingerType Type { get; set; }
 
         public double[] ToArray()
         {
             var type = new double[] { (int)Type };
-            return type.Concat(TipDirection).ToArray();
+            return type.Concat(Direction).ToArray();
         }
 
         public static Finger Empty()
@@ -18,7 +18,7 @@ namespace Signa.Domain.Features
             return new Finger
             {
                 Type = FingerType.Thumb,
-                TipDirection = new[] { 0.0, 0.0, 0.0 }
+                Direction = new[] { 0.0, 0.0, 0.0 }
             };
         }
     }

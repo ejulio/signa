@@ -2,18 +2,6 @@
 {
     'use strict';
 
-    var connection;
-    function getConnection()
-    {
-        if (!connection)
-        {
-            connection = $.connection;
-            connection.hub.url = 'http://localhost:9000/signalr';
-        }
-
-        return connection;
-    }
-
     global.Signa = {
 
         camera: {},
@@ -22,7 +10,7 @@
 
         signalrHub: function()
         {
-            return getConnection().recognizer.server;
+            return getConnection().signSequence.server;
         },
 
         initHubs: function()

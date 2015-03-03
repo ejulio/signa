@@ -13,7 +13,7 @@
 
         me._state = me.OFFLINE;
 
-        Signa.initHubs().done(function()
+        Signa.Hubs.init().done(function()
         {
             me._state = me.TRAINED;
         });

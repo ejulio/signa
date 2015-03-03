@@ -23,7 +23,7 @@ namespace Signa.Tests.Common.Builders.Domain.Features
         {
             return new Finger
             {
-                TipDirection = tipDirection,
+                Direction = tipDirection,
                 Type = type
             };
         }

@@ -89,10 +89,11 @@
 
         _loadNextSign: function()
         {
-            Signa.initHubs().done(function()
+            Signa.Hubs.init().done(function()
             {
                 var signId = this._signInfo ? this._signInfo.Id : -1;
-                Signa.signalrHub()
+                Signa.Hubs
+                    .signSequence()
                     .getNextSign(signId)
                     .done(this._onNewSign.bind(this));
             }.bind(this));

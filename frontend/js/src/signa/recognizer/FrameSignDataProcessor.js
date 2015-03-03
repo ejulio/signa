@@ -46,25 +46,26 @@
 
         _getHandData: function(leapHand)
         {
-            var anglesBetweenFingers = [],
-                length = leapHand.fingers.length - 1;
+            return {
+                palmNormal: leapHand.palmNormal,
+                handDirection: leapHand.direction,
+                fingers: this._getHandFingersData(leapHand.fingers)
+            };
+        },
 
-            for (var i = 0; i < length; i++)
+        _getHandFingersData: function(leapFingers)
+        {
+            var fingers = new Array(leapFingers.length);
+
+            for (var i = 0; i < fingers.length; i++)
             {
-                var origin = new THREE.Vector3();
-                var destiny = new THREE.Vector3();
-
-                origin.fromArray(leapHand.fingers[i].tipPosition);
-                destiny.fromArray(leapHand.fingers[i + 1].tipPosition);
-
-                anglesBetweenFingers.push(origin.angleTo(destiny));
+                fingers[i] = {
+                    type: leapFingers[i].type,
+                    direction: leapFingers[i].direction
+                };
             }
 
-            return {
-                PalmNormal: leapHand.palmNormal,
-                HandDirection: leapHand.direction,
-                AnglesBetweenFingers: anglesBetweenFingers
-            };
+            return fingers;
         }
     };
 
