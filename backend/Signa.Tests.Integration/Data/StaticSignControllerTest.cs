@@ -8,17 +8,17 @@ using System.IO;
 namespace Signa.Tests.Integration.Data
 {
     [TestClass]
-    public class SignControllerTest
+    public class StaticSignControllerTest
     {
         private const string samplesFilePath = "JsonTestData/test-samples.json";
-        private SignRepository repository;
+        private IRepository<Domain.Signs.Static.Sign> repository;
         private StaticSignController _staticSignController;
 
         [TestInitialize]
         public void Setup()
         {
-            repository = new SignRepository(samplesFilePath);
-            _staticSignController = new StaticSignController(repository);
+            repository = new StaticSignRepository(samplesFilePath);
+            _staticSignController = new StaticSignController(repository, null);
         }
 
         [TestCleanup]

@@ -3,22 +3,25 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Data;
 using Signa.Data.Repository;
-using Signa.Domain.Signs.Dynamic;
-using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
+using Signa.Domain.Algorithms;
+using Signa.Domain.Signs.Static;
+using Signa.Tests.Common.Builders.Domain.Signs.Static;
 
 namespace Signa.Tests.Data
 {
     [TestClass]
-    public class SignControllerTest
+    public class StaticSignControllerTest
     {
         private Mock<IRepository<Sign>> repositoryMock;
-        private StaticSignController _staticSignController;
+        private Mock<IStaticSignRecognitionAlgorithm> algorithmMock;
+        private StaticSignController staticSignController;
 
         [TestInitialize]
-        public void MyTestMethod()
+        public void Setup()
         {
             repositoryMock = new Mock<IRepository<Sign>>();
-            _staticSignController = new StaticSignController(repositoryMock.Object);
+            algorithmMock = new Mock<IStaticSignRecognitionAlgorithm>();
+            staticSignController = new StaticSignController(repositoryMock.Object, algorithmMock.Object);
         }
 
         [TestMethod]
@@ -29,7 +32,7 @@ namespace Signa.Tests.Data
 
             var sign = GivenASignWithTwoSamples(signDescription);
 
-            _staticSignController.Add(sign);
+            staticSignController.Add(sign);
 
             MustAddSignToRepositoryAndSaveChanges(sign);
         }
@@ -42,7 +45,7 @@ namespace Signa.Tests.Data
 
             var newSign = GivenASignWithTwoSamples(signDescription);
 
-            _staticSignController.Add(newSign);
+            staticSignController.Add(newSign);
 
             MustMergeSamplesAndSaveChanges(oldSign, newSign);
         }
@@ -57,10 +60,22 @@ namespace Signa.Tests.Data
             var sign1 = GivenThatTheRepositoryReturnsASignForTheIndex(signIdex1);
 
             int signIndex;
-            var randomSign = _staticSignController.GetRandomSign(signIdex1, out signIndex);
+            var randomSign = staticSignController.GetRandomSign(signIdex1, out signIndex);
 
             randomSign.Should().Be(sign0);
             signIndex.Should().Be(0);
+        }
+
+        [TestMethod]
+        public void recognizing_a_sign()
+        {
+            const int signId = 23;
+            var sample = new SampleBuilder().Build();
+            algorithmMock.Setup(a => a.Recognize(sample)).Returns(signId);
+
+            var reconizedSign = staticSignController.Recognize(sample);
+
+            reconizedSign.Should().Be(signId);
         }
 
         private Sign GivenThatTheRepositoryReturnsASignForTheDescription(string signDescription)
@@ -94,8 +109,8 @@ namespace Signa.Tests.Data
         {
             var sign = new SignBuilder()
                             .WithDescription(signDescription)
-                            .WithSample(new SignSampleBuilder().Build())
-                            .WithSample(new SignSampleBuilder().Build())
+                            .WithSample(new SampleBuilder().Build())
+                            .WithSample(new SampleBuilder().Build())
                             .Build();
             return sign;
         }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Data;
-using Signa.Domain.Signs.Dynamic;
+using Signa.Domain.Signs.Static;
 using System;
 
 namespace Signa.Hubs
@@ -14,14 +14,21 @@ namespace Signa.Hubs
             this.signController = signController;
         }
 
-        public int Recognize(SignFrame frame)
+        public int Recognize(Sample sample)
         {
-            throw new NotImplementedException("Implementar para retornar o resultado do reconhecimento via SVM");
+            return signController.Recognize(sample);
         }
 
-        public void Save(string name, string exampleFileContent, SignFrame frame)
+        public void Save(string name, string exampleFileContent, Sample sample)
         {
-            throw new NotImplementedException("Implementar para salvar no repositório e treinar o algoritmo SVM");
+            throw new NotImplementedException("Mover implementação para StaticSignController");
+            var fileName = signController.CreateSampleFileIfNotExists(name, exampleFileContent);
+            signController.Add(new Sign
+            {
+                Description = name,
+                ExampleFilePath = fileName,
+                Samples = new[] { sample }
+            });
         }
     }
 }

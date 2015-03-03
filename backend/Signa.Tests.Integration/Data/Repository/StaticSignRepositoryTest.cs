@@ -15,14 +15,14 @@ namespace Signa.Tests.Integration.Data.Repository
     public class StaticSignRepositoryTest
     {
         private StaticSignRepository signRepository;
-        private const string samplesFilePath = "JsonTestData/static-test-samples.json";
-        private const string descriptionTemplate = "Static sign sample {0}";
-        private const string pathTemplate = "static-sample-{0}.json";
+        private const string SamplesFilePath = "JsonTestData/static-test-samples.json";
+        private const string DescriptionTemplate = "Static sign sample {0}";
+        private const string PathTemplate = "static-sample-{0}.json";
 
         [TestInitialize]
         public void TestInitialize()
         {
-            signRepository = new StaticSignRepository(samplesFilePath);
+            signRepository = new StaticSignRepository(SamplesFilePath);
         }
 
         [TestMethod]
@@ -113,9 +113,40 @@ namespace Signa.Tests.Integration.Data.Repository
             getByIdCall.ShouldNotThrow();
         }
 
+        [TestMethod]
+        public void loading_when_file_does_not_exist()
+        {
+            GivenThatTheSamplesFileDoesNotExist();
+
+            Action loadCall = () => signRepository.Load();
+
+            loadCall.ShouldNotThrow();
+        }
+
+        [TestMethod]
+        public void saving_changes_when_file_does_not_exist()
+        {
+            GivenThatTheSamplesFileDoesNotExist();
+
+            var sign = GivenANewSign("saving sign");
+            signRepository.Add(sign);
+
+            Action loadCall = () => signRepository.SaveChanges();
+
+            loadCall.ShouldNotThrow();
+            File.Exists(SamplesFilePath).Should().BeTrue();
+            GetSamplesFileContent().Should().NotBe("");
+        }
+
+        private static void GivenThatTheSamplesFileDoesNotExist()
+        {
+            if (File.Exists(SamplesFilePath))
+                File.Delete(SamplesFilePath);
+        }
+
         private void GivenAnEmptySamplesFile()
         {
-            using (StreamWriter writer = new StreamWriter(samplesFilePath))
+            using (StreamWriter writer = new StreamWriter(SamplesFilePath))
             {
                 writer.Write("");
             }
@@ -125,13 +156,13 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             var signs = new StaticSignCollectionBuilder()
                             .WithSize(4)
-                            .WithDescriptionTemplate(descriptionTemplate)
-                            .WithPathTemplate(pathTemplate)
+                            .WithDescriptionTemplate(DescriptionTemplate)
+                            .WithPathTemplate(PathTemplate)
                             .Build();
 
             var json = JsonConvert.SerializeObject(signs);
 
-            using (StreamWriter writer = new StreamWriter(samplesFilePath))
+            using (StreamWriter writer = new StreamWriter(SamplesFilePath))
             {
                 writer.Write(json);
             }
@@ -154,7 +185,7 @@ namespace Signa.Tests.Integration.Data.Repository
             string signId;
             for (int i = 0; i < signs.Count; i++)
             {
-                signId = String.Format(descriptionTemplate, i);
+                signId = String.Format(DescriptionTemplate, i);
                 signRepository.GetById(signId).Description.Should().Be(signId);
             }
         }
@@ -168,14 +199,14 @@ namespace Signa.Tests.Integration.Data.Repository
                     .GetByIndex(i)
                     .Should()
                     .Match<Sign>(sign =>
-                        sign.Description == String.Format(descriptionTemplate, i) &&
-                        sign.ExampleFilePath == String.Format(pathTemplate, i) &&
+                        sign.Description == String.Format(DescriptionTemplate, i) &&
+                        sign.ExampleFilePath == String.Format(PathTemplate, i) &&
                         sign.Samples.Count == 4);
             }
         }
         private string GetSamplesFileContent()
         {
-            using (StreamReader reader = new StreamReader(samplesFilePath))
+            using (StreamReader reader = new StreamReader(SamplesFilePath))
             {
                 return reader.ReadToEnd();
             }

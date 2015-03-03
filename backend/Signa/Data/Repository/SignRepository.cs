@@ -50,6 +50,9 @@ namespace Signa.Data.Repository
 
         public void Load()
         {
+            if (!File.Exists(dataFilePath))
+                return;
+
             using (var reader = new StreamReader(dataFilePath))
             {
                 var jsonSignSamples = reader.ReadToEnd();

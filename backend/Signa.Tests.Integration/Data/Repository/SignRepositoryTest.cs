@@ -113,6 +113,37 @@ namespace Signa.Tests.Integration.Data.Repository
             getByIdCall.ShouldNotThrow();
         }
 
+        [TestMethod]
+        public void loading_when_file_does_not_exist()
+        {
+            GivenThatTheSamplesFileDoesNotExist();
+
+            Action loadCall = () => signRepository.Load();
+
+            loadCall.ShouldNotThrow();
+        }
+
+        [TestMethod]
+        public void saving_changes_when_file_does_not_exist()
+        {
+            GivenThatTheSamplesFileDoesNotExist();
+
+            var sign = GivenANewSign("saving sign");
+            signRepository.Add(sign);
+
+            Action loadCall = () => signRepository.SaveChanges();
+
+            loadCall.ShouldNotThrow();
+            File.Exists(samplesFilePath).Should().BeTrue();
+            GetSamplesFileContent().Should().NotBe("");
+        }
+
+        private static void GivenThatTheSamplesFileDoesNotExist()
+        {
+            if (File.Exists(samplesFilePath))
+                File.Delete(samplesFilePath);
+        }
+
         private void GivenAnEmptySamplesFile()
         {
             using (StreamWriter writer = new StreamWriter(samplesFilePath))

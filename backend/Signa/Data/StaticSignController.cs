@@ -1,5 +1,6 @@
 ﻿using Signa.Data.Repository;
-using Signa.Domain.Signs.Dynamic;
+using Signa.Domain.Algorithms;
+using Signa.Domain.Signs.Static;
 using Signa.Util;
 using System;
 using System.IO;
@@ -9,15 +10,17 @@ namespace Signa.Data
 {
     public class StaticSignController
     {
-        public const string SignSamplesFilePath = "./data/sign-samples.json";
-        public const string SamplesDirectory = "samples/";
+        public const string SignSamplesFilePath = "./data/static-sign-samples.json";
+
+        public const string SamplesDirectory = "samples/static"; 
 
         private IRepository<Sign> repository;
+        private readonly IStaticSignRecognitionAlgorithm staticSignRecognitionAlgorithm;
 
-        public StaticSignController(IRepository<Sign> repository)
+        public StaticSignController(IRepository<Sign> repository, IStaticSignRecognitionAlgorithm staticSignRecognitionAlgorithm)
         {
             this.repository = repository;
-            repository.Load();
+            this.staticSignRecognitionAlgorithm = staticSignRecognitionAlgorithm;
         }
 
         public void Add(Sign sign)
@@ -29,7 +32,7 @@ namespace Signa.Data
             }
             else
             {
-                var samples = new SignSample[signInRepository.Samples.Count + sign.Samples.Count];
+                var samples = new Sample[signInRepository.Samples.Count + sign.Samples.Count];
                 
                 Array.Copy(signInRepository.Samples.ToArray(), samples, signInRepository.Samples.Count);
                 Array.Copy(sign.Samples.ToArray(), 0, samples, signInRepository.Samples.Count, sign.Samples.Count);
@@ -37,20 +40,6 @@ namespace Signa.Data
                 signInRepository.Samples = samples;
             }
             repository.SaveChanges();
-        }
-
-        public Sign GetRandomSign(int lastSignIndex, out int signIndex)
-        {
-            var random = new Random();
-            int index;
-            do
-            {
-                index = random.Next(repository.Count);
-            }
-            while (index == lastSignIndex);
-
-            signIndex = index;
-            return repository.GetByIndex(index);
         }
 
         public string CreateSampleFileIfNotExists(string signDescription, string signSample)
@@ -66,6 +55,26 @@ namespace Signa.Data
             }
 
             return filePath;
+        }
+
+        public int Recognize(Sample sample)
+        {
+            return staticSignRecognitionAlgorithm.Recognize(sample);
+        }
+
+        [Obsolete("Remover")]
+        public Sign GetRandomSign(int lastSignIndex, out int signIndex)
+        {
+            var random = new Random();
+            int index;
+            do
+            {
+                index = random.Next(repository.Count);
+            }
+            while (index == lastSignIndex);
+
+            signIndex = index;
+            return repository.GetByIndex(index);
         }
     }
 }

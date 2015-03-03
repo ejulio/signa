@@ -7,6 +7,7 @@ using Owin;
 using Signa.ContentTypeProviders;
 using Signa.Data;
 using Signa.Data.Repository;
+using Signa.Domain.Algorithms;
 
 namespace Signa
 {
@@ -15,10 +16,7 @@ namespace Signa
         public void Configuration(IAppBuilder app)
         {
             ConfigureJsonSerializerSettings();
-
-
-            var repository = new SignRepository(StaticSignController.SignSamplesFilePath);
-            GlobalHost.DependencyResolver.Register(typeof(Hubs.Sign), () => new Hubs.Sign(repository));
+            ConfigureHubs();
 
             app.UseCors(CorsOptions.AllowAll);
 
@@ -30,6 +28,27 @@ namespace Signa
             app.UseStaticFiles(options);
             
             app.MapSignalR();
+        }
+
+        private static SignRecognitionAlgorithmFactory algorithmFactory;
+        private static IRepository<Domain.Signs.Static.Sign> repository;
+        private static void ConfigureHubs()
+        {
+            repository = new StaticSignRepository(StaticSignController.SignSamplesFilePath);
+            repository.Load();
+
+            algorithmFactory = new SignRecognitionAlgorithmFactory();
+
+            var container = GlobalHost.DependencyResolver;
+
+            container.Register(typeof(Hubs.SignSequence), 
+                () => new Hubs.SignSequence(repository));
+
+            container.Register(typeof(StaticSignController), 
+                () => new StaticSignController(repository, algorithmFactory.CreateStaticSignRecognizer()));
+
+            container.Register(typeof(Hubs.StaticSignRecognizer), 
+                () => new Hubs.StaticSignRecognizer(container.Resolve<StaticSignController>()));
         }
 
         private static void ConfigureJsonSerializerSettings()

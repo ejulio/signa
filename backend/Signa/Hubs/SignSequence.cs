@@ -2,37 +2,37 @@
 using Signa.Data;
 using Signa.Data.Repository;
 using Signa.Domain.Signs;
-using Signa.Domain.Signs.Dynamic;
+using Signa.Domain.Signs.Static;
 using System;
 
 namespace Signa.Hubs
 {
-    public class Sign : Hub
+    public class SignSequence : Hub
     {
         private StaticSignController staticSignController;
 
-        public Sign(IRepository<Domain.Signs.Dynamic.Sign> repository)
+        public SignSequence(IRepository<Sign> repository)
         {
-            staticSignController = new StaticSignController(repository);
+            staticSignController = new StaticSignController(repository, null);
         }
 
-        public int Recognize(SignFrame data)
+        public int Recognize(Sample data)
         {
             throw new NotImplementedException("Implementar nos devidos hubs");
             //return Svm.Instance.Recognize(data);
         }
 
-        public void SaveSignSample(string name, string exampleFileContent, SignSample data)
+        public void SaveSignSample(string name, string exampleFileContent, Sample data)
         {
             throw new NotImplementedException("implementar nos devidos hubs");
-            var fileName = staticSignController.CreateSampleFileIfNotExists(name, exampleFileContent);
+            //var fileName = staticSignController.CreateSampleFileIfNotExists(name, exampleFileContent);
 
-            staticSignController.Add(new Domain.Signs.Dynamic.Sign
-            {
-                Description = name,
-                ExampleFilePath = fileName,
-                Samples = new[] { data }
-            });
+            //staticSignController.Add(new Domain.Signs.Dynamic.Sign
+            //{
+            //    Description = name,
+            //    ExampleFilePath = fileName,
+            //    Samples = new[] { data }
+            //});
         }
 
         public SignInfo GetNextSign(int previousSignIndex)

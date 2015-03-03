@@ -132,7 +132,7 @@
     <Compile Include="Domain\Signs\Static\Sample.cs" />
     <Compile Include="Domain\Signs\Static\Sign.cs" />
     <Compile Include="Hubs\DynamicSignRecognizer.cs" />
-    <Compile Include="Hubs\Sign.cs" />
+    <Compile Include="Hubs\SignSequence.cs" />
     <Compile Include="Hubs\StaticSignRecognizer.cs" />
     <Compile Include="Domain\Features\Finger.cs" />
     <Compile Include="Domain\Features\FingerType.cs" />
