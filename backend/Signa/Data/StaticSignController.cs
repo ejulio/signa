@@ -32,12 +32,7 @@ namespace Signa.Data
             }
             else
             {
-                var samples = new Sample[signInRepository.Samples.Count + sign.Samples.Count];
-                
-                Array.Copy(signInRepository.Samples.ToArray(), samples, signInRepository.Samples.Count);
-                Array.Copy(sign.Samples.ToArray(), 0, samples, signInRepository.Samples.Count, sign.Samples.Count);
-                
-                signInRepository.Samples = samples;
+                signInRepository.Samples = signInRepository.Samples.Concat(sign.Samples).ToArray();
             }
             repository.SaveChanges();
         }
@@ -62,19 +57,15 @@ namespace Signa.Data
             return staticSignRecognitionAlgorithm.Recognize(sample);
         }
 
-        [Obsolete("Remover")]
-        public Sign GetRandomSign(int lastSignIndex, out int signIndex)
+        public void Save(string signDescription, string exampleFileContent, Sample sample)
         {
-            var random = new Random();
-            int index;
-            do
+            var fileName = CreateSampleFileIfNotExists(signDescription, exampleFileContent);
+            Add(new Sign
             {
-                index = random.Next(repository.Count);
-            }
-            while (index == lastSignIndex);
-
-            signIndex = index;
-            return repository.GetByIndex(index);
+                Description = signDescription,
+                ExampleFilePath = fileName,
+                Samples = new[] { sample }
+            });
         }
     }
 }

@@ -51,22 +51,6 @@ namespace Signa.Tests.Data
         }
 
         [TestMethod]
-        public void getting_random_sign_should_not_return_the_last_one()
-        {
-            const int signIdex0 = 0;
-            const int signIdex1 = 1;
-
-            var sign0 = GivenThatTheRepositoryReturnsASignForTheIndex(signIdex0);
-            var sign1 = GivenThatTheRepositoryReturnsASignForTheIndex(signIdex1);
-
-            int signIndex;
-            var randomSign = staticSignController.GetRandomSign(signIdex1, out signIndex);
-
-            randomSign.Should().Be(sign0);
-            signIndex.Should().Be(0);
-        }
-
-        [TestMethod]
         public void recognizing_a_sign()
         {
             const int signId = 23;

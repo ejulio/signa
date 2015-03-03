@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Data;
 using Signa.Domain.Signs.Static;
-using System;
 
 namespace Signa.Hubs
 {
@@ -21,14 +20,7 @@ namespace Signa.Hubs
 
         public void Save(string name, string exampleFileContent, Sample sample)
         {
-            //throw new NotImplementedException("Mover implementação para StaticSignController");
-            var fileName = signController.CreateSampleFileIfNotExists(name, exampleFileContent);
-            signController.Add(new Sign
-            {
-                Description = name,
-                ExampleFilePath = fileName,
-                Samples = new[] { sample }
-            });
+            signController.Save(name, exampleFileContent, sample);
         }
     }
 }
