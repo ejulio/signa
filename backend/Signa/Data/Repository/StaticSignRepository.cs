@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Signa.Data.Repository
 {
-    public class StaticSignRepository : IRepository<Sign>, IEnumerable<Sign>
+    public class StaticSignRepository : IRepository<Sign>
     {
         private IList<Sign> signsByIndex;
         private IDictionary<string, Sign> signsById;

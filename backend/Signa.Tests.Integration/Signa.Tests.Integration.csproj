@@ -62,6 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Data\Repository\RepositoryFactoryTest.cs" />
     <Compile Include="Data\Repository\StaticSignRepositoryTest.cs" />
     <Compile Include="Data\Repository\SignRepositoryTest.cs" />
     <Compile Include="Data\StaticSignControllerTest.cs" />

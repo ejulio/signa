@@ -2,7 +2,7 @@
 
 namespace Signa.Domain.Algorithms
 {
-    public class SignRecognitionAlgorithmFactory
+    public class SignRecognitionAlgorithmFactory : ISignRecognitionAlgorithmFactory
     {
         private static readonly IStaticSignRecognitionAlgorithm StaticSignRecognitionAlgorithm;
 

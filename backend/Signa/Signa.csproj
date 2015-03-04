@@ -124,8 +124,12 @@
   <ItemGroup>
     <Compile Include="ContentTypeProviders\JsonContentTypeProvider.cs" />
     <Compile Include="Data\Repository\IRepository.cs" />
+    <Compile Include="Data\Repository\IRepositoryFactory.cs" />
+    <Compile Include="Data\Repository\RepositoryFactory.cs" />
     <Compile Include="Data\Repository\StaticSignRepository.cs" />
     <Compile Include="Data\Repository\SignRepository.cs" />
+    <Compile Include="Domain\AlgorithmInitializerFacade.cs" />
+    <Compile Include="Domain\Algorithms\ISignRecognitionAlgorithmFactory.cs" />
     <Compile Include="Domain\Algorithms\IStaticSignRecognitionAlgorithm.cs" />
     <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactory.cs" />
     <Compile Include="Domain\Features\IFeature.cs" />

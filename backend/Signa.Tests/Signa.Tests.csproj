@@ -63,14 +63,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Data\StaticSignControllerTest.cs" />
+    <Compile Include="Domain\AlgorithmInitializerFacadeTest.cs" />
     <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactoryTest.cs" />
+    <Compile Include="Domain\Algorithms\Static\SignRecognitionAlgorithmDataTest.cs" />
     <Compile Include="Domain\Features\HandTest.cs" />
     <Compile Include="Domain\Signs\Dynamic\SignSampleTest.cs" />
     <Compile Include="Domain\Signs\Dynamic\SignFrameTest.cs" />
     <Compile Include="Domain\Features\FingerTest.cs" />
     <Compile Include="Domain\Signs\Static\SampleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\Algorithms\Static\SignRecognitionAlgorithmDataTest.cs" />
     <Compile Include="Domain\Algorithms\Static\SvmTest.cs" />
     <Compile Include="Util\IEnumerableExtensionsTest.cs" />
     <Compile Include="Util\StringExtensionsTest.cs" />

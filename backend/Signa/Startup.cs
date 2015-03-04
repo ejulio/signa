@@ -31,21 +31,20 @@ namespace Signa
         }
 
         private static SignRecognitionAlgorithmFactory algorithmFactory;
-        private static IRepository<Domain.Signs.Static.Sign> repository;
+        private static IRepositoryFactory repositoryFactory;
         private static void ConfigureHubs()
         {
-            repository = new StaticSignRepository(StaticSignController.SignSamplesFilePath);
-            repository.Load();
+            repositoryFactory = new RepositoryFactory(StaticSignController.SignSamplesFilePath);
 
             algorithmFactory = new SignRecognitionAlgorithmFactory();
 
             var container = GlobalHost.DependencyResolver;
 
-            container.Register(typeof(Hubs.SignSequence), 
-                () => new Hubs.SignSequence(repository));
+            container.Register(typeof(Hubs.SignSequence),
+                () => new Hubs.SignSequence(repositoryFactory.CreateAndLoadStaticSignRepository()));
 
-            container.Register(typeof(StaticSignController), 
-                () => new StaticSignController(repository, algorithmFactory.CreateStaticSignRecognizer()));
+            container.Register(typeof(StaticSignController),
+                () => new StaticSignController(repositoryFactory.CreateAndLoadStaticSignRepository(), algorithmFactory.CreateStaticSignRecognizer()));
 
             container.Register(typeof(Hubs.StaticSignRecognizer), 
                 () => new Hubs.StaticSignRecognizer(container.Resolve<StaticSignController>()));

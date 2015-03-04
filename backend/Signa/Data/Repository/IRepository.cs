@@ -1,7 +1,9 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Signa.Data.Repository
 {
-    public interface IRepository<TEntity>
+    public interface IRepository<TEntity> : IEnumerable<TEntity>
     {
         int Count { get; }
         void Add(TEntity entity);

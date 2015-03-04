@@ -2,41 +2,39 @@
 using Signa.Data;
 using Signa.Data.Repository;
 using Signa.Domain.Algorithms;
-using Signa.Domain.Algorithms.Static;
 using System;
+using Signa.Domain;
 
 namespace Host
 {
     class Program
     {
-        [Obsolete("MELHORAR O CÓDIGO DE INICIALIZAÇÃO")]
         static void Main(string[] args)
         {
-            Console.WriteLine("MELHORAR O CÓDIGO DE INICIALIZAÇÃO");
             StartServer();
 
-            var repository = new StaticSignRepository(StaticSignController.SignSamplesFilePath);
-            repository.Load();
-            if (repository.Count == 0)
-            {
-                Console.WriteLine("Sem dados para treinar o algoritmo");
-            }
-            else
-            {
-                Console.WriteLine("Treinando o algoritmo com os exemplos");
-                var trainningData = new SignRecognitionAlgorithmData(repository);
-                new SignRecognitionAlgorithmFactory().CreateStaticSignRecognizer().Train(trainningData);
-                Console.WriteLine("Algoritmo treinado");
-            }
+            InitializeAlgorithms();
 
             Console.ReadKey();
         }
 
         private static void StartServer()
         {
-            var serverAddress = "http://localhost:9000";
+            const string serverAddress = "http://localhost:9000";
             WebApp.Start<Signa.Startup>(serverAddress);
             Console.WriteLine("Aplicação iniciada em {0}", serverAddress);
+        }
+
+        private static void InitializeAlgorithms()
+        {
+            Console.WriteLine("Treinando algoritmos");
+            var repositoryFactory = new RepositoryFactory(StaticSignController.SignSamplesFilePath);
+            var signRecognitionAlgorithmFactory = new SignRecognitionAlgorithmFactory();
+            var algorithmInitializerFacade = new AlgorithmInitializerFacade(signRecognitionAlgorithmFactory, repositoryFactory);
+
+            algorithmInitializerFacade.TrainStaticSignRecognitionAlgorithm();
+
+            Console.WriteLine("Algoritmos treinados");
         }
     }
 }
