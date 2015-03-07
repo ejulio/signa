@@ -3,9 +3,9 @@ using Signa.Domain.Signs.Static;
 
 namespace Signa.Domain.Algorithms
 {
-    public interface IStaticSignRecognitionAlgorithm
+    public interface IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
-        int Recognize(Sample sample);
+        int Reconhecer(Sample sample);
         void Train(IDadosParaAlgoritmoDeReconhecimentoDeSinal data);
     }
 }

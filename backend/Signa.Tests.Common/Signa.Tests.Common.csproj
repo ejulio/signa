@@ -40,8 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\Domain\Signs\StaticSignCollectionBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Static\SampleBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Static\SignBuilder.cs" />
+    <Compile Include="Builders\Domain\Signs\Static\AmostraBuilder.cs" />
+    <Compile Include="Builders\Domain\Signs\Static\SinalBuilder.cs" />
     <Compile Include="Builders\DoubleArrayBuilder.cs" />
     <Compile Include="Builders\Domain\Features\FingerBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\Dinamico\FrameDeSinalBuilder.cs" />

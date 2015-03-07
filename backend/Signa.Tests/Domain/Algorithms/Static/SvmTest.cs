@@ -17,8 +17,8 @@ namespace Signa.Tests.Domain.Algorithms.Static
         [TestMethod]
         public void recognizing_without_trainning_throw_an_error()
         {
-            var sample = new SampleBuilder().Build();
-            Action recognizeCall = () => new Svm().Recognize(sample);
+            var sample = new AmostraBuilder().Construir();
+            Action recognizeCall = () => new Svm().Reconhecer(sample);
 
             recognizeCall.ShouldThrow<InvalidOperationException>();
         }
@@ -34,7 +34,7 @@ namespace Signa.Tests.Domain.Algorithms.Static
 
             var sample = BuildSignSampleByIndex(signResultIndex);
 
-            var result = svm.Recognize(sample);
+            var result = svm.Reconhecer(sample);
 
             result.Should().Be(signResultIndex);
         }
@@ -50,7 +50,7 @@ namespace Signa.Tests.Domain.Algorithms.Static
             return svm;
         }
 
-        private ICollection<Sign> GivenACollectionOfSigns(int signCount, int samplesPerSign)
+        private ICollection<SinalEstatico> GivenACollectionOfSigns(int signCount, int samplesPerSign)
         {
             var signs = new StaticSignCollectionBuilder()
                             .WithSize(signCount)            
@@ -65,10 +65,10 @@ namespace Signa.Tests.Domain.Algorithms.Static
             var leftHand = GivenHandWithFingers(index);
             var rightHand = GivenHandWithFingers(index);
 
-            return new SampleBuilder()
+            return new AmostraBuilder()
                 .WithLeftHand(leftHand)
                 .WithRightHand(rightHand)
-                .Build();
+                .Construir();
         }
 
         private Hand GivenHandWithFingers(int index)

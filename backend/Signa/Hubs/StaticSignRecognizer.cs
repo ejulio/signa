@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNet.SignalR;
-using Signa.Data;
+using Signa.Dados;
 using Signa.Domain.Signs.Static;
 
 namespace Signa.Hubs
 {
     public class StaticSignRecognizer : Hub
     {
-        private readonly StaticSignController signController;
+        private readonly SinaisEstaticosController signController;
 
-        public StaticSignRecognizer(StaticSignController signController)
+        public StaticSignRecognizer(SinaisEstaticosController signController)
         {
             this.signController = signController;
         }
 
         public int Recognize(Sample sample)
         {
-            return signController.Recognize(sample);
+            return signController.Reconhecer(sample);
         }
 
         public void Save(string name, string exampleFileContent, Sample sample)

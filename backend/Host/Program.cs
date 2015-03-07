@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin.Hosting;
-using Signa.Data;
-using Signa.Data.Repository;
+using Signa.Domain;
 using Signa.Domain.Algorithms;
 using System;
-using Signa.Domain;
+using Signa.Dados;
+using Signa.Dados.Repositorio;
 
 namespace Host
 {
@@ -28,7 +28,7 @@ namespace Host
         private static void InitializeAlgorithms()
         {
             Console.WriteLine("Treinando algoritmos");
-            var repositoryFactory = new RepositoryFactory(StaticSignController.SignSamplesFilePath);
+            var repositoryFactory = new RepositorioFactory(SinaisEstaticosController.SignSamplesFilePath);
             var signRecognitionAlgorithmFactory = new SignRecognitionAlgorithmFactory();
             var algorithmInitializerFacade = new AlgorithmInitializerFacade(signRecognitionAlgorithmFactory, repositoryFactory);
 

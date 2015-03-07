@@ -1,20 +1,20 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Signa.Data.Repository;
 using Signa.Domain.Signs.Dynamic;
 using Signa.Tests.Common.Builders.Domain.Signs;
-using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Signa.Dados.Repositorio;
+using Signa.Tests.Common.Builders.Domain.Signs.Dinamico;
 
 namespace Signa.Tests.Integration.Data.Repository
 {
     [TestClass]
     public class SignRepositoryTest
     {
-        private SignRepository signRepository;
+        private RepositorioDeSinaisDinamicos repositorioDeSinaisDinamicos;
         private const string SamplesFilePath = "JsonTestData/test-samples.json";
         private const string DescriptionTemplate = "Sign sample {0}";
         private const string PathTemplate = "sample-{0}.json";
@@ -22,7 +22,7 @@ namespace Signa.Tests.Integration.Data.Repository
         [TestInitialize]
         public void TestInitialize()
         {
-            signRepository = new SignRepository(SamplesFilePath);
+            repositorioDeSinaisDinamicos = new RepositorioDeSinaisDinamicos(SamplesFilePath);
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             var signs = GivenSomeSignsInTheSamplesFile();
 
-            signRepository.Load();
+            repositorioDeSinaisDinamicos.Carregar();
 
             MustHaveTheSignsOfTheFile(signs);
         }
@@ -40,7 +40,7 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             var signs = GivenSomeSignsInTheSamplesFile();
             
-            signRepository.Load();
+            repositorioDeSinaisDinamicos.Carregar();
 
             MustBeAbleToGetSignsByDescriptionAsId(signs);
         }
@@ -50,16 +50,16 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             GivenSomeSignsInTheSamplesFile();
             
-            signRepository.Load();
+            repositorioDeSinaisDinamicos.Carregar();
 
             var samplesFileContent = GetSamplesFileContent();
             
             var sign = GivenANewSign("New sign");
-            signRepository.Add(sign);
+            repositorioDeSinaisDinamicos.Adicionar(sign);
 
             GetSamplesFileContent().Should().Be(samplesFileContent);
 
-            signRepository.SaveChanges();
+            repositorioDeSinaisDinamicos.SalvarAlteracoes();
 
             GetSamplesFileContent().Should().NotBe(samplesFileContent);
             GetSamplesFileContent().Length.Should().BeGreaterThan(samplesFileContent.Length);
@@ -70,17 +70,17 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             var signs = GivenSomeSignsInTheSamplesFile();
             
-            signRepository.Load();
+            repositorioDeSinaisDinamicos.Carregar();
 
             var signDescription = "New sign";
             var signIndex = signs.Count;
 
             var sign = GivenANewSign(signDescription);
-            signRepository.Add(sign);
+            repositorioDeSinaisDinamicos.Adicionar(sign);
 
-            signRepository.Count.Should().Be(signs.Count + 1);
-            signRepository.GetById(signDescription).Descricao.Should().Be(signDescription);
-            signRepository.GetByIndex(signIndex).Descricao.Should().Be(signDescription);
+            repositorioDeSinaisDinamicos.Quantidade.Should().Be(signs.Count + 1);
+            repositorioDeSinaisDinamicos.BuscarPorId(signDescription).Descricao.Should().Be(signDescription);
+            repositorioDeSinaisDinamicos.BuscarPorIndice(signIndex).Descricao.Should().Be(signDescription);
         }
 
         [TestMethod]
@@ -88,13 +88,13 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             GivenSomeSignsInTheSamplesFile();
             
-            signRepository.Load();
+            repositorioDeSinaisDinamicos.Carregar();
 
             int index = 0;
 
-            foreach (var sign in signRepository)
+            foreach (var sign in repositorioDeSinaisDinamicos)
             {
-                sign.Should().Be(signRepository.GetByIndex(index));
+                sign.Should().Be(repositorioDeSinaisDinamicos.BuscarPorIndice(index));
                 index++;
             }
         }
@@ -104,9 +104,9 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             GivenAnEmptySamplesFile();
 
-            Action loadCall = () => signRepository.Load();
-            Action getByIndexCall = () => signRepository.GetByIndex(0);
-            Action getByIdCall = () => signRepository.GetById("");
+            Action loadCall = () => repositorioDeSinaisDinamicos.Carregar();
+            Action getByIndexCall = () => repositorioDeSinaisDinamicos.BuscarPorIndice(0);
+            Action getByIdCall = () => repositorioDeSinaisDinamicos.BuscarPorId("");
 
             loadCall.ShouldNotThrow();
             getByIndexCall.ShouldNotThrow();
@@ -118,7 +118,7 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             GivenThatTheSamplesFileDoesNotExist();
 
-            Action loadCall = () => signRepository.Load();
+            Action loadCall = () => repositorioDeSinaisDinamicos.Carregar();
 
             loadCall.ShouldNotThrow();
         }
@@ -129,9 +129,9 @@ namespace Signa.Tests.Integration.Data.Repository
             GivenThatTheSamplesFileDoesNotExist();
 
             var sign = GivenANewSign("saving sign");
-            signRepository.Add(sign);
+            repositorioDeSinaisDinamicos.Adicionar(sign);
 
-            Action loadCall = () => signRepository.SaveChanges();
+            Action loadCall = () => repositorioDeSinaisDinamicos.SalvarAlteracoes();
 
             loadCall.ShouldNotThrow();
             File.Exists(SamplesFilePath).Should().BeTrue();
@@ -186,17 +186,17 @@ namespace Signa.Tests.Integration.Data.Repository
             for (int i = 0; i < signs.Count; i++)
             {
                 signId = String.Format(DescriptionTemplate, i);
-                signRepository.GetById(signId).Descricao.Should().Be(signId);
+                repositorioDeSinaisDinamicos.BuscarPorId(signId).Descricao.Should().Be(signId);
             }
         }
 
         private void MustHaveTheSignsOfTheFile(ICollection<SinalDinamico> signs)
         {
-            signRepository.Count.Should().Be(signs.Count);
+            repositorioDeSinaisDinamicos.Quantidade.Should().Be(signs.Count);
             for (int i = 0; i < signs.Count; i++)
             {
-                signRepository
-                    .GetByIndex(i)
+                repositorioDeSinaisDinamicos
+                    .BuscarPorIndice(i)
                     .Should()
                     .Match<SinalDinamico>(sign =>
                         sign.Descricao == String.Format(DescriptionTemplate, i) &&

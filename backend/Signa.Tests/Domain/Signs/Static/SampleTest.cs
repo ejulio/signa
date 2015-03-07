@@ -64,10 +64,10 @@ namespace Signa.Tests.Domain.Signs.Static
 
         private Sample GivenSampleWithHands(Hand leftHand, Hand rightHand)
         {
-            var sample = new SampleBuilder()
+            var sample = new AmostraBuilder()
                 .WithLeftHand(leftHand)
                 .WithRightHand(rightHand)
-                .Build();
+                .Construir();
 
             return sample;
         }

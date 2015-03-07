@@ -4,16 +4,16 @@ namespace Signa.Domain.Algorithms
 {
     public class SignRecognitionAlgorithmFactory : ISignRecognitionAlgorithmFactory
     {
-        private static readonly IStaticSignRecognitionAlgorithm StaticSignRecognitionAlgorithm;
+        private static readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos AlgoritmoDeReconhecimentoDeSinaisEstaticos;
 
         static SignRecognitionAlgorithmFactory()
         {
-            StaticSignRecognitionAlgorithm = new Svm();
+            AlgoritmoDeReconhecimentoDeSinaisEstaticos = new Svm();
         }
 
-        public IStaticSignRecognitionAlgorithm CreateStaticSignRecognizer()
+        public IAlgoritmoDeReconhecimentoDeSinaisEstaticos CreateStaticSignRecognizer()
         {
-            return StaticSignRecognitionAlgorithm;
+            return AlgoritmoDeReconhecimentoDeSinaisEstaticos;
         }
     }
 }

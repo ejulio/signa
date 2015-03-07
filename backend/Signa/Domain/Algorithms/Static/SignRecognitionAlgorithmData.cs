@@ -10,11 +10,11 @@ namespace Signa.Domain.Algorithms.Static
         public int[] Saidas { get; private set; }
         public int QuantidadeDeClasses { get; private set; }
 
-        private IEnumerable<Sign> signs;
+        private IEnumerable<SinalEstatico> signs;
         private LinkedList<int> outputs;
         private LinkedList<double[]> inputs;
 
-        public SignRecognitionAlgorithmData(IEnumerable<Sign> signs)
+        public SignRecognitionAlgorithmData(IEnumerable<SinalEstatico> signs)
         {
             this.signs = signs;
             Process();
@@ -38,9 +38,9 @@ namespace Signa.Domain.Algorithms.Static
             Entradas = inputs.ToArray();
         }
 
-        private void ExtracSignSampleData(Sign sign, int signIndex)
+        private void ExtracSignSampleData(SinalEstatico sinalEstatico, int signIndex)
         {
-            foreach (var sample in sign.Samples)
+            foreach (var sample in sinalEstatico.Amostras)
             {
                 outputs.AddFirst(signIndex);
                 inputs.AddFirst(sample.ToArray());

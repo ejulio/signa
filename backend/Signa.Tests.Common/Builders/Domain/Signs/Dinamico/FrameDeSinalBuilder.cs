@@ -2,7 +2,7 @@
 using Signa.Domain.Signs.Dynamic;
 using Signa.Tests.Common.Builders.Domain.Features;
 
-namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
+namespace Signa.Tests.Common.Builders.Domain.Signs.Dinamico
 {
     public class FrameDeSinalBuilder
     {

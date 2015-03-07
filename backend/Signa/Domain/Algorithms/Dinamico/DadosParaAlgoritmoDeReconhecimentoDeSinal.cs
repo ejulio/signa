@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Signa.Domain.Signs.Dynamic;
 using System.Collections.Generic;
 using System.Linq;
-using Signa.Domain.Algorithms.Static;
-using Signa.Domain.Signs.Dynamic;
 
 namespace Signa.Domain.Algorithms.Dinamico
 {

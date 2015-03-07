@@ -18,7 +18,7 @@ namespace Signa.Tests.Domain.Algorithms.Static
 
         public SignRecognitionAlgorithmDataTest()
         {
-            defaultSignSample = new SampleBuilder().Build();
+            defaultSignSample = new AmostraBuilder().Construir();
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace Signa.Tests.Domain.Algorithms.Static
             MustHaveTheDataOfTheCollectionOfSigns(algorithmData, signs, samplesPerSign);
         }
 
-        private ICollection<Sign> GivenACollectionOfOneSign()
+        private ICollection<SinalEstatico> GivenACollectionOfOneSign()
         {
             Func<int, Sample> sampleGenerator = index => defaultSignSample;
 
@@ -57,7 +57,7 @@ namespace Signa.Tests.Domain.Algorithms.Static
             return signs;
         }
 
-        private static ICollection<Sign> GivenACollectionOfSigns(int samplesPerSign, int signCount)
+        private static ICollection<SinalEstatico> GivenACollectionOfSigns(int samplesPerSign, int signCount)
         {
             var signs = new StaticSignCollectionBuilder()
                         .WithSampleCount(samplesPerSign)
@@ -67,7 +67,7 @@ namespace Signa.Tests.Domain.Algorithms.Static
             return signs;
         }
 
-        private void MustHaveTheDataOfTheCollectionOfSigns(SignRecognitionAlgorithmData algorithmData, ICollection<Sign> signs, int samplesPerSign)
+        private void MustHaveTheDataOfTheCollectionOfSigns(SignRecognitionAlgorithmData algorithmData, ICollection<SinalEstatico> signs, int samplesPerSign)
         {
             algorithmData.QuantidadeDeClasses.Should().Be(signs.Count);
             algorithmData.Entradas.Should().HaveCount(samplesPerSign * signs.Count);
@@ -92,13 +92,13 @@ namespace Signa.Tests.Domain.Algorithms.Static
             algorithmData.Saidas[0].Should().Be(0);
         }
 
-        private double[][] ExpectedInputArrayFor(ICollection<Sign> signs)
+        private double[][] ExpectedInputArrayFor(ICollection<SinalEstatico> signs)
         {
             var inputs = new LinkedList<double[]>();
 
             foreach (var sign in signs)
             {
-                foreach (var sample in sign.Samples)
+                foreach (var sample in sign.Amostras)
                 {
                     inputs.AddFirst(sample.ToArray());
                 }

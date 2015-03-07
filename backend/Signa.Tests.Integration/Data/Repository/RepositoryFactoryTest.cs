@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Signa.Data.Repository;
 using Signa.Domain.Signs.Static;
 using Signa.Tests.Common.Builders.Domain.Signs;
+using System.Collections.Generic;
+using System.IO;
+using FluentAssertions;
+using Signa.Dados.Repositorio;
 
 namespace Signa.Tests.Integration.Data.Repository
 {
@@ -21,25 +21,25 @@ namespace Signa.Tests.Integration.Data.Repository
         {
             var signs = GivenSomeSignsInTheSamplesFile();
 
-            var factory = new RepositoryFactory(SamplesFilePath);
+            var factory = new RepositorioFactory(SamplesFilePath);
 
-            var staticSignRepository = factory.CreateAndLoadStaticSignRepository();
+            var staticSignRepository = factory.CriarECarregarRepositorioDeSinaisEstaticos();
 
-            staticSignRepository.Count.Should().Be(signs.Count);
+            staticSignRepository.Quantidade.Should().Be(signs.Count);
         }
 
         [TestMethod]
         public void receiving_the_same_repository()
         {
-            var factory = new RepositoryFactory(SamplesFilePath);
+            var factory = new RepositorioFactory(SamplesFilePath);
 
-            var staticSignRepository1 = factory.CreateAndLoadStaticSignRepository();
-            var staticSignRepository2 = factory.CreateAndLoadStaticSignRepository();
+            var staticSignRepository1 = factory.CriarECarregarRepositorioDeSinaisEstaticos();
+            var staticSignRepository2 = factory.CriarECarregarRepositorioDeSinaisEstaticos();
 
             staticSignRepository1.Should().BeSameAs(staticSignRepository2);
         }
 
-        private ICollection<Sign> GivenSomeSignsInTheSamplesFile()
+        private ICollection<SinalEstatico> GivenSomeSignsInTheSamplesFile()
         {
             var signs = new StaticSignCollectionBuilder()
                             .WithSize(4)

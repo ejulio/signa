@@ -2,15 +2,15 @@
 
 namespace Signa.Domain.Signs.Static
 {
-    public class Sign
+    public class SinalEstatico
     {
         public string Description { get; set; }
         public string ExampleFilePath { get; set; }
-        public IList<Sample> Samples { get; set; }
+        public IList<Sample> Amostras { get; set; }
 
-        public Sign()
+        public SinalEstatico()
         {
-            Samples = new List<Sample>();
+            Amostras = new List<Sample>();
         }
     }
 }

@@ -5,11 +5,11 @@ using System;
 
 namespace Signa.Domain.Algorithms.Static
 {
-    public class Svm : IStaticSignRecognitionAlgorithm
+    public class Svm : IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
         private MulticlassSupportVectorMachine svm;
 
-        public int Recognize(Sample data)
+        public int Reconhecer(Sample data)
         {
             if (svm == null)
             {

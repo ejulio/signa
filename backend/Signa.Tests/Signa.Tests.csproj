@@ -62,7 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Data\StaticSignControllerTest.cs" />
+    <Compile Include="Dados\SinaisEstaticosControllerTest.cs" />
     <Compile Include="Domain\AlgorithmInitializerFacadeTest.cs" />
     <Compile Include="Domain\Algorithms\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinalTest.cs" />
     <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactoryTest.cs" />

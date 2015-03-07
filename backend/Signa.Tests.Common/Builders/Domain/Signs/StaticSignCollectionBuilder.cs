@@ -1,7 +1,7 @@
 ﻿using Signa.Domain.Signs.Dynamic;
-using Signa.Tests.Common.Builders.Domain.Signs.Dynamic;
 using System;
 using System.Collections.Generic;
+using Signa.Tests.Common.Builders.Domain.Signs.Dinamico;
 
 namespace Signa.Tests.Common.Builders.Domain.Signs
 {

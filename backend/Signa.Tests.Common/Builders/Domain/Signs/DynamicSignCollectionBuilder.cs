@@ -16,7 +16,7 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
 
         public StaticSignCollectionBuilder()
         {
-            sampleGenerator = index => new SampleBuilder().Build();
+            sampleGenerator = index => new AmostraBuilder().Construir();
         }
 
         public StaticSignCollectionBuilder WithSize(int size)
@@ -49,22 +49,22 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
             return this;
         }
 
-        public ICollection<Sign> Build()
+        public ICollection<SinalEstatico> Build()
         {
-            var signs = new List<Sign>();
+            var signs = new List<SinalEstatico>();
 
             for (int i = 0; i < size; i++)
             {
-                var signBuilder = new SignBuilder()
-                    .WithDescription(String.Format(descriptionTemplate, i))
+                var signBuilder = new SinalBuilder()
+                    .ComDescricao(String.Format(descriptionTemplate, i))
                     .WithPath(String.Format(pathTemplate, i));
 
                 for (int j = 0; j < sampleCount; j++)
                 {
-                    signBuilder.WithSample(sampleGenerator(i));
+                    signBuilder.ComAmostra(sampleGenerator(i));
                 }
 
-                signs.Add(signBuilder.Build());
+                signs.Add(signBuilder.Construir());
             }
 
             return signs;

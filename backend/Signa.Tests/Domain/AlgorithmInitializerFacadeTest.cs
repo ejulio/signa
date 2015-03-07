@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Signa.Data.Repository;
+using Signa.Dados.Repositorio;
 using Signa.Domain;
 using Signa.Domain.Algorithms;
 using Signa.Domain.Algorithms.Static;
@@ -16,24 +16,24 @@ namespace Signa.Tests.Domain
     public class AlgorithmInitializerFacadeTest
     {
         private Mock<ISignRecognitionAlgorithmFactory> signRecognitionAlgorithmFactory;
-        private Mock<IRepository<Sign>> repository;
-        private Mock<IStaticSignRecognitionAlgorithm> staticSignRecognitionAlgorithm;
-        private Mock<IRepositoryFactory> repositoryFactory;
+        private Mock<IRepositorio<SinalEstatico>> repository;
+        private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> staticSignRecognitionAlgorithm;
+        private Mock<IRepositorioFactory> repositoryFactory;
         private AlgorithmInitializerFacade algorithmInitializerFacade;
 
         [TestInitialize]
         public void Setup()
         {
-            repository = new Mock<IRepository<Sign>>();
-            repositoryFactory = new Mock<IRepositoryFactory>();
-            staticSignRecognitionAlgorithm = new Mock<IStaticSignRecognitionAlgorithm>();
+            repository = new Mock<IRepositorio<SinalEstatico>>();
+            repositoryFactory = new Mock<IRepositorioFactory>();
+            staticSignRecognitionAlgorithm = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
             signRecognitionAlgorithmFactory = new Mock<ISignRecognitionAlgorithmFactory>();
 
             algorithmInitializerFacade =
                 new AlgorithmInitializerFacade(signRecognitionAlgorithmFactory.Object, repositoryFactory.Object);
 
             repositoryFactory
-                .Setup(r => r.CreateAndLoadStaticSignRepository())
+                .Setup(r => r.CriarECarregarRepositorioDeSinaisEstaticos())
                 .Returns(repository.Object);
 
             signRecognitionAlgorithmFactory
@@ -58,7 +58,7 @@ namespace Signa.Tests.Domain
         [TestMethod]
         public void training_static_sign_recognition_algorithm_without_data()
         {
-            var emptySignList = new List<Sign>();
+            var emptySignList = new List<SinalEstatico>();
             repository
                 .Setup(r => r.GetEnumerator())
                 .Returns(emptySignList.GetEnumerator());
@@ -68,7 +68,7 @@ namespace Signa.Tests.Domain
             action.ShouldNotThrow();
         }
 
-        private ICollection<Sign> GivenACollectionOfSigns()
+        private ICollection<SinalEstatico> GivenACollectionOfSigns()
         {
             var signs = new StaticSignCollectionBuilder()
                         .WithSampleCount(2)

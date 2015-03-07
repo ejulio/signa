@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Signa.ContentTypeProviders;
-using Signa.Data;
-using Signa.Data.Repository;
+using Signa.Dados;
+using Signa.Dados.Repositorio;
 using Signa.Domain.Algorithms;
 
 namespace Signa
@@ -31,23 +31,23 @@ namespace Signa
         }
 
         private static SignRecognitionAlgorithmFactory algorithmFactory;
-        private static IRepositoryFactory repositoryFactory;
+        private static IRepositorioFactory repositorioFactory;
         private static void ConfigureHubs()
         {
-            repositoryFactory = new RepositoryFactory(StaticSignController.SignSamplesFilePath);
+            repositorioFactory = new RepositorioFactory(SinaisEstaticosController.SignSamplesFilePath);
 
             algorithmFactory = new SignRecognitionAlgorithmFactory();
 
             var container = GlobalHost.DependencyResolver;
 
             container.Register(typeof(Hubs.SignSequence),
-                () => new Hubs.SignSequence(repositoryFactory.CreateAndLoadStaticSignRepository()));
+                () => new Hubs.SignSequence(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos()));
 
-            container.Register(typeof(StaticSignController),
-                () => new StaticSignController(repositoryFactory.CreateAndLoadStaticSignRepository(), algorithmFactory.CreateStaticSignRecognizer()));
+            container.Register(typeof(SinaisEstaticosController),
+                () => new SinaisEstaticosController(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(), algorithmFactory.CreateStaticSignRecognizer()));
 
             container.Register(typeof(Hubs.StaticSignRecognizer), 
-                () => new Hubs.StaticSignRecognizer(container.Resolve<StaticSignController>()));
+                () => new Hubs.StaticSignRecognizer(container.Resolve<SinaisEstaticosController>()));
         }
 
         private static void ConfigureJsonSerializerSettings()
