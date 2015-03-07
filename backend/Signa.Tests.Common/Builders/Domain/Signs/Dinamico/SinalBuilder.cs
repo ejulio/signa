@@ -26,13 +26,13 @@ namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
             return this;
         }
 
-        public SinalBuilder WithSample(AmostraDeSinal sample)
+        public SinalBuilder ComAmostra(AmostraDeSinal sample)
         {
             this.samples.Add(sample);
             return this;
         }
 
-        public SinalDinamico Build()
+        public SinalDinamico Construir()
         {
             return new SinalDinamico
             {

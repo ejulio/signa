@@ -67,7 +67,7 @@ namespace Signa.Tests.Domain.Signs.Dynamic
             var signFrame = new FrameDeSinalBuilder()
                 .WithLeftHand(leftHand)
                 .WithRightHand(rightHand)
-                .Build();
+                .Construir();
 
             return signFrame;
         }

@@ -21,14 +21,14 @@ namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
             return this;
         }
 
-        public FrameDeSinalBuilder WithDefaultLeftAndRightHand()
+        public FrameDeSinalBuilder ComMaosEsquerdaEDireitaPadroes()
         {
             rightHand = new HandBuilder().Build();
             leftHand = new HandBuilder().Build();
             return this;
         }
 
-        public SignFrame Build()
+        public SignFrame Construir()
         {
             return new SignFrame
             {

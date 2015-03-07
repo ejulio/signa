@@ -7,13 +7,13 @@ namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
     {
         private IList<SignFrame> frames;
 
-        public AmostraDeSinalBuilder WithFrames(IList<SignFrame> frames)
+        public AmostraDeSinalBuilder ComFrames(IList<SignFrame> frames)
         {
             this.frames = frames;
             return this;
         }
 
-        public AmostraDeSinal Build()
+        public AmostraDeSinal Construir()
         {
             return new AmostraDeSinal
             {

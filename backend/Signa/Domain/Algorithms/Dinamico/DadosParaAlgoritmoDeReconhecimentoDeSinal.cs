@@ -14,13 +14,13 @@ namespace Signa.Domain.Algorithms.Dinamico
 
         public int QuantidadeDeClasses { get; private set; }
 
-        private IEnumerable<AmostraDeSinal> amostras;
+        private IEnumerable<SinalDinamico> sinais;
         private LinkedList<double[][]> entradas;
         private LinkedList<int> saidas; 
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<AmostraDeSinal> amostras)
+        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<SinalDinamico> sinais)
         {
-            this.amostras = amostras;
+            this.sinais = sinais;
             entradas = new LinkedList<double[][]>();
             saidas = new LinkedList<int>();
             ExtrairDadosDos();
@@ -29,16 +29,19 @@ namespace Signa.Domain.Algorithms.Dinamico
         private void ExtrairDadosDos()
         {
             QuantidadeDeClasses = 0;
-            int indiceDaAmostra = 0;
+            int identificadorDoSinal = 0;
 
-            foreach (var amostra in amostras)
+            foreach (var sinal in sinais)
             {
-                entradas.AddFirst(amostra.ToArray());
-                saidas.AddFirst(indiceDaAmostra);
-                indiceDaAmostra++;
+                foreach (var amostra in sinal.Amostras)
+                {
+                    entradas.AddLast(amostra.ToArray());
+                    saidas.AddLast(identificadorDoSinal);
+                }
+                identificadorDoSinal++;
                 QuantidadeDeClasses++;
             }
-
+            
             Entradas = entradas.ToArray();
             Saidas = saidas.ToArray();
         }

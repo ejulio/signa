@@ -154,11 +154,11 @@ namespace Signa.Tests.Integration.Data.Repository
 
         private ICollection<SinalDinamico> GivenSomeSignsInTheSamplesFile()
         {
-            var signs = new DynamicSignCollectionBuilder()
-                            .WithSize(4)
-                            .WithDescriptionTemplate(DescriptionTemplate)
-                            .WithPathTemplate(PathTemplate)
-                            .Build();
+            var signs = new ColecaoDeSinaisDinamicosBuilder()
+                            .ComTamanho(4)
+                            .ComTemplateDeDescricao(DescriptionTemplate)
+                            .ComTemplateDeCaminho(PathTemplate)
+                            .Construir();
 
             var json = JsonConvert.SerializeObject(signs);
 
@@ -175,8 +175,8 @@ namespace Signa.Tests.Integration.Data.Repository
             var sign = new SinalBuilder()
                             .WithDescription(description)
                             .WithPath("new-sign.json")
-                            .WithSample(new AmostraDeSinalBuilder().Build())
-                            .Build();
+                            .ComAmostra(new AmostraDeSinalBuilder().Construir())
+                            .Construir();
             return sign;
         }
 

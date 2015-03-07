@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Signa.Tests.Common.Builders.Domain.Signs
 {
-    public class DynamicSignCollectionBuilder
+    public class ColecaoDeSinaisDinamicosBuilder
     {
         private int size = 2;
         private int sampleCount = 4;
@@ -14,16 +14,16 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
         private Func<int, AmostraDeSinal> sampleGenerator;
 
 
-        public DynamicSignCollectionBuilder()
+        public ColecaoDeSinaisDinamicosBuilder()
         {
             sampleGenerator = index =>
             {
-                var length = index + 1;
+                var length = index + 2;
                 var frames = new SignFrame[length];
 
                 for (var i = 0; i < length; i++)
                 {
-                    frames[i] = new FrameDeSinalBuilder().Build();
+                    frames[i] = new FrameDeSinalBuilder().Construir();
                 }
 
                 return new AmostraDeSinal
@@ -33,37 +33,37 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
             };
         }
 
-        public DynamicSignCollectionBuilder WithSize(int size)
+        public ColecaoDeSinaisDinamicosBuilder ComTamanho(int size)
         {
             this.size = size;
             return this;
         }
 
-        public DynamicSignCollectionBuilder WithDescriptionTemplate(string descriptionTemplate)
+        public ColecaoDeSinaisDinamicosBuilder ComTemplateDeDescricao(string descriptionTemplate)
         {
             this.descriptionTemplate = descriptionTemplate;
             return this;
         }
 
-        public DynamicSignCollectionBuilder WithPathTemplate(string pathTemplate)
+        public ColecaoDeSinaisDinamicosBuilder ComTemplateDeCaminho(string pathTemplate)
         {
             this.pathTemplate = pathTemplate;
             return this;
         }
 
-        public DynamicSignCollectionBuilder WithSampleGenerator(Func<int, AmostraDeSinal> sampleGenerator)
+        public ColecaoDeSinaisDinamicosBuilder ComGeradorDeAmostras(Func<int, AmostraDeSinal> sampleGenerator)
         {
             this.sampleGenerator = sampleGenerator;
             return this;
         }
 
-        public DynamicSignCollectionBuilder WithSampleCount(int sampleCount)
+        public ColecaoDeSinaisDinamicosBuilder ComQuantidadeDeAmostras(int sampleCount)
         {
             this.sampleCount = sampleCount;
             return this;
         }
 
-        public ICollection<SinalDinamico> Build()
+        public ICollection<SinalDinamico> Construir()
         {
             var signs = new List<SinalDinamico>();
             SinalBuilder sinalBuilder;
@@ -76,10 +76,10 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
 
                 for (int j = 0; j < sampleCount; j++)
                 {
-                    sinalBuilder.WithSample(sampleGenerator(i));
+                    sinalBuilder.ComAmostra(sampleGenerator(i));
                 }
 
-                signs.Add(sinalBuilder.Build());
+                signs.Add(sinalBuilder.Construir());
             }
 
             return signs;
