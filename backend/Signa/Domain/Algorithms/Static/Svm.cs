@@ -18,11 +18,11 @@ namespace Signa.Domain.Algorithms.Static
             return svm.Compute(data.ToArray());
         }
 
-        public void Train(ISignRecognitionAlgorithmData data)
+        public void Train(IDadosParaAlgoritmoDeReconhecimentoDeSinal data)
         {
-            svm = new MulticlassSupportVectorMachine(0, data.ClassCount);
+            svm = new MulticlassSupportVectorMachine(0, data.QuantidadeDeClasses);
 
-            var teacher = new MulticlassSupportVectorLearning(svm, data.Inputs, data.Outputs);
+            var teacher = new MulticlassSupportVectorLearning(svm, data.Entradas, data.Saidas);
             teacher.Algorithm = (machine, classInputs, classOutputs, j, k) => 
                                     new SequentialMinimalOptimization(machine, classInputs, classOutputs);
 

@@ -129,6 +129,7 @@
     <Compile Include="Data\Repository\StaticSignRepository.cs" />
     <Compile Include="Data\Repository\SignRepository.cs" />
     <Compile Include="Domain\AlgorithmInitializerFacade.cs" />
+    <Compile Include="Domain\Algorithms\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
     <Compile Include="Domain\Algorithms\ISignRecognitionAlgorithmFactory.cs" />
     <Compile Include="Domain\Algorithms\IStaticSignRecognitionAlgorithm.cs" />
     <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactory.cs" />
@@ -141,13 +142,13 @@
     <Compile Include="Domain\Features\Finger.cs" />
     <Compile Include="Domain\Features\FingerType.cs" />
     <Compile Include="Domain\Features\Hand.cs" />
-    <Compile Include="Domain\Signs\Dynamic\Sign.cs" />
+    <Compile Include="Domain\Signs\Dynamic\SinalDinamico.cs" />
     <Compile Include="Domain\Signs\Dynamic\SignFrame.cs" />
     <Compile Include="Domain\Signs\SignInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\Signs\Dynamic\SignSample.cs" />
+    <Compile Include="Domain\Signs\Dynamic\AmostraDeSinal.cs" />
     <Compile Include="Data\StaticSignController.cs" />
-    <Compile Include="Domain\Algorithms\Static\ISignRecognitionAlgorithmData.cs" />
+    <Compile Include="Domain\Algorithms\Static\IDadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Domain\Algorithms\Static\Svm.cs" />
     <Compile Include="Domain\Algorithms\Static\SignRecognitionAlgorithmData.cs" />

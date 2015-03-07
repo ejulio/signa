@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Data\StaticSignControllerTest.cs" />
     <Compile Include="Domain\AlgorithmInitializerFacadeTest.cs" />
+    <Compile Include="Domain\Algorithms\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinalTest.cs" />
     <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactoryTest.cs" />
     <Compile Include="Domain\Algorithms\Static\SignRecognitionAlgorithmDataTest.cs" />
     <Compile Include="Domain\Features\HandTest.cs" />

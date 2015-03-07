@@ -52,7 +52,7 @@ namespace Signa.Tests.Domain
 
             staticSignRecognitionAlgorithm
                 .Verify(a => 
-                    a.Train(It.Is<ISignRecognitionAlgorithmData>(d => VerifyAlgorithmData(d))));
+                    a.Train(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinal>(d => VerifyAlgorithmData(d))));
         }
 
         [TestMethod]
@@ -78,11 +78,11 @@ namespace Signa.Tests.Domain
             return signs;
         }
 
-        private bool VerifyAlgorithmData(ISignRecognitionAlgorithmData data)
+        private bool VerifyAlgorithmData(IDadosParaAlgoritmoDeReconhecimentoDeSinal data)
         {
-            data.ClassCount.Should().Be(2);
-            data.Outputs.Should().HaveCount(4);
-            data.Inputs.Should().HaveCount(4);
+            data.QuantidadeDeClasses.Should().Be(2);
+            data.Saidas.Should().HaveCount(4);
+            data.Entradas.Should().HaveCount(4);
             return true;
         }
     }

@@ -14,7 +14,7 @@ namespace Signa.Tests.Domain.Signs.Dynamic
         public void building_a_sample_with_one_frame()
         {
             var frames = GivenAnArrayOfSignFramesWithCount(1);
-            var signSample = new SignSampleBuilder()
+            var signSample = new AmostraDeSinalBuilder()
                 .WithFrames(frames)
                 .Build();
 
@@ -27,7 +27,7 @@ namespace Signa.Tests.Domain.Signs.Dynamic
         public void building_a_sample_two_frames()
         {
             var frames = GivenAnArrayOfSignFramesWithCount(2);
-            var signSample = new SignSampleBuilder()
+            var signSample = new AmostraDeSinalBuilder()
                 .WithFrames(frames)
                 .Build();
 
@@ -41,7 +41,7 @@ namespace Signa.Tests.Domain.Signs.Dynamic
         {
             var numberOfFrames = new Random().Next(3, 15);
             var frames = GivenAnArrayOfSignFramesWithCount(numberOfFrames);
-            var signSample = new SignSampleBuilder()
+            var signSample = new AmostraDeSinalBuilder()
                 .WithFrames(frames)
                 .Build();
 
@@ -56,7 +56,7 @@ namespace Signa.Tests.Domain.Signs.Dynamic
 
             for (var i = 0; i < count; i++)
             {
-                frames[i] = new SignFrameBuilder().Build();
+                frames[i] = new FrameDeSinalBuilder().Build();
             }
 
             return frames;

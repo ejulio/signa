@@ -69,14 +69,14 @@ namespace Signa.Tests.Domain.Algorithms.Static
 
         private void MustHaveTheDataOfTheCollectionOfSigns(SignRecognitionAlgorithmData algorithmData, ICollection<Sign> signs, int samplesPerSign)
         {
-            algorithmData.ClassCount.Should().Be(signs.Count);
-            algorithmData.Inputs.Should().HaveCount(samplesPerSign * signs.Count);
-            algorithmData.Inputs.Should().HaveSameCount(algorithmData.Outputs);
-            algorithmData.Outputs.Should().ContainInOrder(ExpectedOutputArrayFor(signs.Count, samplesPerSign));
+            algorithmData.QuantidadeDeClasses.Should().Be(signs.Count);
+            algorithmData.Entradas.Should().HaveCount(samplesPerSign * signs.Count);
+            algorithmData.Entradas.Should().HaveSameCount(algorithmData.Saidas);
+            algorithmData.Saidas.Should().ContainInOrder(ExpectedOutputArrayFor(signs.Count, samplesPerSign));
 
             int inputIndex = 0;
             var expectedInputs = ExpectedInputArrayFor(signs);
-            foreach (var input in algorithmData.Inputs)
+            foreach (var input in algorithmData.Entradas)
             {
                 input.Should().ContainInOrder(expectedInputs[inputIndex]);
                 inputIndex++;
@@ -85,11 +85,11 @@ namespace Signa.Tests.Domain.Algorithms.Static
 
         private void MustHaveOneTrainningData(SignRecognitionAlgorithmData algorithmData)
         {
-            algorithmData.ClassCount.Should().Be(1);
-            algorithmData.Inputs.Should().HaveCount(1);
-            algorithmData.Inputs[0].Should().ContainInOrder(defaultSignSample.ToArray());
-            algorithmData.Outputs.Should().HaveCount(1);
-            algorithmData.Outputs[0].Should().Be(0);
+            algorithmData.QuantidadeDeClasses.Should().Be(1);
+            algorithmData.Entradas.Should().HaveCount(1);
+            algorithmData.Entradas[0].Should().ContainInOrder(defaultSignSample.ToArray());
+            algorithmData.Saidas.Should().HaveCount(1);
+            algorithmData.Saidas[0].Should().Be(0);
         }
 
         private double[][] ExpectedInputArrayFor(ICollection<Sign> signs)

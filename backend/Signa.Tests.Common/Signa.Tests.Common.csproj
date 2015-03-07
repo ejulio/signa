@@ -44,9 +44,9 @@
     <Compile Include="Builders\Domain\Signs\Static\SignBuilder.cs" />
     <Compile Include="Builders\DoubleArrayBuilder.cs" />
     <Compile Include="Builders\Domain\Features\FingerBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Dynamic\SignFrameBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Dynamic\SignSampleBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Dynamic\SignBuilder.cs" />
+    <Compile Include="Builders\Domain\Signs\Dinamico\FrameDeSinalBuilder.cs" />
+    <Compile Include="Builders\Domain\Signs\Dinamico\AmostraDeSinalBuilder.cs" />
+    <Compile Include="Builders\Domain\Signs\Dinamico\SinalBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\DynamicSignCollectionBuilder.cs" />
     <Compile Include="Builders\Domain\Features\HandBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,11 +2,11 @@
 
 namespace Signa.Domain.Signs.Dynamic
 {
-    public class SignSample
+    public class AmostraDeSinal
     {
         public IList<SignFrame> Frames { get; set; }
 
-        public SignSample()
+        public AmostraDeSinal()
         {
             Frames = new SignFrame[0];
         }

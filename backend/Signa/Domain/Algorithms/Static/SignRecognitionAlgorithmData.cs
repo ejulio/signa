@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Signa.Domain.Algorithms.Static
 {
-    public class SignRecognitionAlgorithmData : ISignRecognitionAlgorithmData
+    public class SignRecognitionAlgorithmData : IDadosParaAlgoritmoDeReconhecimentoDeSinal
     {
-        public double[][] Inputs { get; private set; }
-        public int[] Outputs { get; private set; }
-        public int ClassCount { get; private set; }
+        public double[][] Entradas { get; private set; }
+        public int[] Saidas { get; private set; }
+        public int QuantidadeDeClasses { get; private set; }
 
         private IEnumerable<Sign> signs;
         private LinkedList<int> outputs;
@@ -23,19 +23,19 @@ namespace Signa.Domain.Algorithms.Static
         public void Process()
         {
             int signIndex = 0;
-            ClassCount = 0;
+            QuantidadeDeClasses = 0;
             inputs = new LinkedList<double[]>();
             outputs = new LinkedList<int>();
 
             foreach (var sign in signs)
             {
                 ExtracSignSampleData(sign, signIndex);
-                ClassCount++;
+                QuantidadeDeClasses++;
                 signIndex++;
             }
 
-            Outputs = outputs.ToArray();
-            Inputs = inputs.ToArray();
+            Saidas = outputs.ToArray();
+            Entradas = inputs.ToArray();
         }
 
         private void ExtracSignSampleData(Sign sign, int signIndex)

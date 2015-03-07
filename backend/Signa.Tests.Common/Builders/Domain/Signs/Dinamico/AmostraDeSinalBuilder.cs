@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
 {
-    public class SignSampleBuilder
+    public class AmostraDeSinalBuilder
     {
         private IList<SignFrame> frames;
 
-        public SignSampleBuilder WithFrames(IList<SignFrame> frames)
+        public AmostraDeSinalBuilder WithFrames(IList<SignFrame> frames)
         {
             this.frames = frames;
             return this;
         }
 
-        public SignSample Build()
+        public AmostraDeSinal Build()
         {
-            return new SignSample
+            return new AmostraDeSinal
             {
                 Frames = frames
             };

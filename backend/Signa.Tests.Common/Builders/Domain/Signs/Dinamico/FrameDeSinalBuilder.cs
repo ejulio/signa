@@ -4,24 +4,24 @@ using Signa.Tests.Common.Builders.Domain.Features;
 
 namespace Signa.Tests.Common.Builders.Domain.Signs.Dynamic
 {
-    public class SignFrameBuilder
+    public class FrameDeSinalBuilder
     {
         private Hand leftHand;
         private Hand rightHand;
 
-        public SignFrameBuilder WithLeftHand(Hand leftHand)
+        public FrameDeSinalBuilder WithLeftHand(Hand leftHand)
         {
             this.leftHand = leftHand;
             return this;
         }
 
-        public SignFrameBuilder WithRightHand(Hand rightHand)
+        public FrameDeSinalBuilder WithRightHand(Hand rightHand)
         {
             this.rightHand = rightHand;
             return this;
         }
 
-        public SignFrameBuilder WithDefaultLeftAndRightHand()
+        public FrameDeSinalBuilder WithDefaultLeftAndRightHand()
         {
             rightHand = new HandBuilder().Build();
             leftHand = new HandBuilder().Build();

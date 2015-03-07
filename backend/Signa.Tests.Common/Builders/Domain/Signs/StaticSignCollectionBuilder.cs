@@ -11,7 +11,7 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
         private int sampleCount = 4;
         private string descriptionTemplate = "{0}";
         private string pathTemplate = "{0}";
-        private Func<int, SignSample> sampleGenerator;
+        private Func<int, AmostraDeSinal> sampleGenerator;
 
 
         public DynamicSignCollectionBuilder()
@@ -23,10 +23,10 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
 
                 for (var i = 0; i < length; i++)
                 {
-                    frames[i] = new SignFrameBuilder().Build();
+                    frames[i] = new FrameDeSinalBuilder().Build();
                 }
 
-                return new SignSample
+                return new AmostraDeSinal
                 {
                     Frames = frames
                 };
@@ -51,7 +51,7 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
             return this;
         }
 
-        public DynamicSignCollectionBuilder WithSampleGenerator(Func<int, SignSample> sampleGenerator)
+        public DynamicSignCollectionBuilder WithSampleGenerator(Func<int, AmostraDeSinal> sampleGenerator)
         {
             this.sampleGenerator = sampleGenerator;
             return this;
@@ -63,23 +63,23 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
             return this;
         }
 
-        public ICollection<Sign> Build()
+        public ICollection<SinalDinamico> Build()
         {
-            var signs = new List<Sign>();
-            SignBuilder signBuilder;
+            var signs = new List<SinalDinamico>();
+            SinalBuilder sinalBuilder;
 
             for (int i = 0; i < size; i++)
             {
-                signBuilder = new SignBuilder()
+                sinalBuilder = new SinalBuilder()
                     .WithDescription(String.Format(descriptionTemplate, i))
                     .WithPath(String.Format(pathTemplate, i));
 
                 for (int j = 0; j < sampleCount; j++)
                 {
-                    signBuilder.WithSample(sampleGenerator(i));
+                    sinalBuilder.WithSample(sampleGenerator(i));
                 }
 
-                signs.Add(signBuilder.Build());
+                signs.Add(sinalBuilder.Build());
             }
 
             return signs;

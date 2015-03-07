@@ -64,7 +64,7 @@ namespace Signa.Tests.Domain.Signs.Dynamic
 
         private SignFrame GivenSignFrameWithHands(Hand leftHand, Hand rightHand)
         {
-            var signFrame = new SignFrameBuilder()
+            var signFrame = new FrameDeSinalBuilder()
                 .WithLeftHand(leftHand)
                 .WithRightHand(rightHand)
                 .Build();

@@ -6,6 +6,6 @@ namespace Signa.Domain.Algorithms
     public interface IStaticSignRecognitionAlgorithm
     {
         int Recognize(Sample sample);
-        void Train(ISignRecognitionAlgorithmData data);
+        void Train(IDadosParaAlgoritmoDeReconhecimentoDeSinal data);
     }
 }

@@ -6,10 +6,10 @@ using System.IO;
 
 namespace Signa.Data.Repository
 {
-    public class SignRepository : IRepository<Sign>
+    public class SignRepository : IRepository<SinalDinamico>
     {
-        private IList<Sign> signsByIndex;
-        private IDictionary<string, Sign> signsById;
+        private IList<SinalDinamico> signsByIndex;
+        private IDictionary<string, SinalDinamico> signsById;
 
         private string dataFilePath;
 
@@ -21,17 +21,17 @@ namespace Signa.Data.Repository
         public SignRepository(string dataFilePath)
         {
             this.dataFilePath = dataFilePath;
-            signsByIndex = new List<Sign>();
-            signsById = new Dictionary<string, Sign>();
+            signsByIndex = new List<SinalDinamico>();
+            signsById = new Dictionary<string, SinalDinamico>();
         }
 
-        public void Add(Sign entity)
+        public void Add(SinalDinamico entity)
         {
-            signsById.Add(entity.Description, entity);
+            signsById.Add(entity.Descricao, entity);
             signsByIndex.Add(entity);
         }
 
-        public Sign GetByIndex(int index)
+        public SinalDinamico GetByIndex(int index)
         {
             if (index == Count)
                 return null;
@@ -39,11 +39,11 @@ namespace Signa.Data.Repository
             return signsByIndex[index];
         }
 
-        public Sign GetById(string id)
+        public SinalDinamico GetById(string id)
         {
-            Sign sign;
-            if (signsById.TryGetValue(id, out sign))
-                return sign;
+            SinalDinamico sinalDinamico;
+            if (signsById.TryGetValue(id, out sinalDinamico))
+                return sinalDinamico;
 
             return null;
         }
@@ -56,7 +56,7 @@ namespace Signa.Data.Repository
             using (var reader = new StreamReader(dataFilePath))
             {
                 var jsonSignSamples = reader.ReadToEnd();
-                var fileSamples = JsonConvert.DeserializeObject<List<Sign>>(jsonSignSamples);
+                var fileSamples = JsonConvert.DeserializeObject<List<SinalDinamico>>(jsonSignSamples);
                 signsByIndex = fileSamples ?? signsByIndex;
                 LoadDictionary();
             }
@@ -66,7 +66,7 @@ namespace Signa.Data.Repository
         {
             foreach (var sign in signsByIndex)
             {
-                signsById.Add(sign.Description, sign);
+                signsById.Add(sign.Descricao, sign);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Signa.Data.Repository
             }
         }
 
-        public IEnumerator<Sign> GetEnumerator()
+        public IEnumerator<SinalDinamico> GetEnumerator()
         {
             return signsByIndex.GetEnumerator();
         }
