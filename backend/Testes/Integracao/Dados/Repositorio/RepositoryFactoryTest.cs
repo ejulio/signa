@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Dados.Repositorio;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados.Repositorio
@@ -12,44 +12,44 @@ namespace Testes.Integracao.Dados.Repositorio
     [TestClass]
     public class RepositoryFactoryTest
     {
-        private const string SamplesFilePath = Caminhos.CaminhoDoArquivoDeDeAmostras;
-        private const string DescriptionTemplate = "Static sign sample {0}";
-        private const string PathTemplate = "static-sample-{0}.json";
+        private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeDeAmostras;
+        private const string TemplateDaDescricao = "Static sign sample {0}";
+        private const string TemplateDoCaminhoDoArquivoDeExemplo = "static-sample-{0}.json";
 
         [TestMethod]
-        public void creating_and_loading_a_repository()
+        public void criando_e_carregando_um_repositorio()
         {
-            var signs = GivenSomeSignsInTheSamplesFile();
+            var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplos();
 
-            var factory = new RepositorioFactory(SamplesFilePath);
+            var fabrica = new RepositorioFactory(CaminhoDoArquivoDeDeAmostras);
 
-            var staticSignRepository = factory.CriarECarregarRepositorioDeSinaisEstaticos();
+            var repositorioDeSinaisEstaticos = fabrica.CriarECarregarRepositorioDeSinaisEstaticos();
 
-            staticSignRepository.Quantidade.Should().Be(signs.Count);
+            repositorioDeSinaisEstaticos.Quantidade.Should().Be(sinais.Count);
         }
 
         [TestMethod]
-        public void receiving_the_same_repository()
+        public void criando_o_repositorio_duas_vezes()
         {
-            var factory = new RepositorioFactory(SamplesFilePath);
+            var fabrica = new RepositorioFactory(CaminhoDoArquivoDeDeAmostras);
 
-            var staticSignRepository1 = factory.CriarECarregarRepositorioDeSinaisEstaticos();
-            var staticSignRepository2 = factory.CriarECarregarRepositorioDeSinaisEstaticos();
+            var repositorioDeSinaisEstaticos1 = fabrica.CriarECarregarRepositorioDeSinaisEstaticos();
+            var repositorioDeSinaisEstaticos2 = fabrica.CriarECarregarRepositorioDeSinaisEstaticos();
 
-            staticSignRepository1.Should().BeSameAs(staticSignRepository2);
+            repositorioDeSinaisEstaticos1.Should().BeSameAs(repositorioDeSinaisEstaticos2);
         }
 
-        private ICollection<SinalEstatico> GivenSomeSignsInTheSamplesFile()
+        private ICollection<Sinal> DadoQueExistamAlgunsSinaisNoArquivoDeExemplos()
         {
-            var signs = new StaticSignCollectionBuilder()
+            var signs = new ColecaoDeSinaisEstaticosBuilder()
                             .WithSize(4)
-                            .WithDescriptionTemplate(DescriptionTemplate)
-                            .WithPathTemplate(PathTemplate)
+                            .WithDescriptionTemplate(TemplateDaDescricao)
+                            .WithPathTemplate(TemplateDoCaminhoDoArquivoDeExemplo)
                             .Build();
 
             var json = JsonConvert.SerializeObject(signs);
 
-            using (StreamWriter writer = new StreamWriter(SamplesFilePath))
+            using (StreamWriter writer = new StreamWriter(CaminhoDoArquivoDeDeAmostras))
             {
                 writer.Write(json);
             }

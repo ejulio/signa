@@ -5,7 +5,7 @@ using Accord.Statistics.Distributions.Univariate;
 using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
-using Signa.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
@@ -13,7 +13,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
     {
         private HiddenMarkovClassifier<Independent<NormalDistribution>> classificador;
 
-        public int Reconhecer(AmostraDeSinal amostra)
+        public int Reconhecer(Amostra amostra)
         {
             if (classificador == null)
                 throw new InvalidOperationException();

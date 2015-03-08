@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dados.Repositorio
 {
-    public class RepositorioSinaisEstaticos : IRepositorio<SinalEstatico>
+    public class RepositorioSinaisEstaticos : IRepositorio<Sinal>
     {
-        private IList<SinalEstatico> sinaisPorIndice;
-        private readonly IDictionary<string, SinalEstatico> sinaisPorId;
+        private IList<Sinal> sinaisPorIndice;
+        private readonly IDictionary<string, Sinal> sinaisPorId;
 
         private readonly string caminhoDoArquivoDeDados;
 
@@ -21,17 +21,17 @@ namespace Signa.Dados.Repositorio
         public RepositorioSinaisEstaticos(string caminhoDoArquivoDeDados)
         {
             this.caminhoDoArquivoDeDados = caminhoDoArquivoDeDados;
-            sinaisPorIndice = new List<SinalEstatico>();
-            sinaisPorId = new Dictionary<string, SinalEstatico>();
+            sinaisPorIndice = new List<Sinal>();
+            sinaisPorId = new Dictionary<string, Sinal>();
         }
 
-        public void Adicionar(SinalEstatico sinal)
+        public void Adicionar(Sinal sinal)
         {
-            sinaisPorId.Add(sinal.Description, sinal);
+            sinaisPorId.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
         }
 
-        public SinalEstatico BuscarPorIndice(int indice)
+        public Sinal BuscarPorIndice(int indice)
         {
             if (indice == Quantidade)
                 return null;
@@ -39,11 +39,11 @@ namespace Signa.Dados.Repositorio
             return sinaisPorIndice[indice];
         }
 
-        public SinalEstatico BuscarPorId(string id)
+        public Sinal BuscarPorDescricao(string id)
         {
-            SinalEstatico sinalEstatico;
-            if (sinaisPorId.TryGetValue(id, out sinalEstatico))
-                return sinalEstatico;
+            Sinal Sinal;
+            if (sinaisPorId.TryGetValue(id, out Sinal))
+                return Sinal;
 
             return null;
         }
@@ -56,7 +56,7 @@ namespace Signa.Dados.Repositorio
             using (var reader = new StreamReader(caminhoDoArquivoDeDados))
             {
                 var sinaisEmFormatoJson = reader.ReadToEnd();
-                var sinais = JsonConvert.DeserializeObject<List<SinalEstatico>>(sinaisEmFormatoJson);
+                var sinais = JsonConvert.DeserializeObject<List<Sinal>>(sinaisEmFormatoJson);
                 sinaisPorIndice = sinais ?? sinaisPorIndice;
                 CarregarSinaisPorId();
             }
@@ -66,7 +66,7 @@ namespace Signa.Dados.Repositorio
         {
             foreach (var sinal in sinaisPorIndice)
             {
-                sinaisPorId.Add(sinal.Description, sinal);
+                sinaisPorId.Add(sinal.Descricao, sinal);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Signa.Dados.Repositorio
             }
         }
 
-        public IEnumerator<SinalEstatico> GetEnumerator()
+        public IEnumerator<Sinal> GetEnumerator()
         {
             return sinaisPorIndice.GetEnumerator();
         }

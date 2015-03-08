@@ -3,7 +3,7 @@ using Signa.Util;
 using System.IO;
 using System.Linq;
 using Signa.Dominio.Algoritmos;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dados
 {
@@ -11,20 +11,20 @@ namespace Signa.Dados
     {
         public const string SignSamplesFilePath = "./data/static-sign-samples.json";
 
-        public const string SamplesDirectory = "samples/"; 
+        public const string DiretorioDeAmostras = "samples/"; 
 
-        private IRepositorio<SinalEstatico> repositorio;
+        private readonly IRepositorio<Sinal> repositorio;
         private readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos;
 
-        public SinaisEstaticosController(IRepositorio<SinalEstatico> repositorio, IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos)
+        public SinaisEstaticosController(IRepositorio<Sinal> repositorio, IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos)
         {
             this.repositorio = repositorio;
             this.algoritmoDeReconhecimentoDeSinaisEstaticos = algoritmoDeReconhecimentoDeSinaisEstaticos;
         }
 
-        public void Adicionar(SinalEstatico sinalEstatico)
+        public void Adicionar(Sinal sinalEstatico)
         {
-            SinalEstatico sinalEstaticoInRepository = repositorio.BuscarPorId(sinalEstatico.Description);
+            Sinal sinalEstaticoInRepository = repositorio.BuscarPorDescricao(sinalEstatico.Descricao);
             if (sinalEstaticoInRepository == null)
             {
                 repositorio.Adicionar(sinalEstatico);
@@ -36,9 +36,9 @@ namespace Signa.Dados
             repositorio.SalvarAlteracoes();
         }
 
-        public string CreateSampleFileIfNotExists(string signDescription, string signSample)
+        public string CriarArquivoDeExemploSeNaoExistir(string signDescription, string signSample)
         {
-            var filePath = SamplesDirectory + signDescription.RemoveAccents().Underscore() + ".json";
+            var filePath = DiretorioDeAmostras + signDescription.RemoveAccents().Underscore() + ".json";
 
             if (File.Exists(filePath))
                 return filePath;
@@ -51,18 +51,18 @@ namespace Signa.Dados
             return filePath;
         }
 
-        public int Reconhecer(Sample sample)
+        public int Reconhecer(Amostra sample)
         {
             return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(sample);
         }
 
-        public void Save(string signDescription, string exampleFileContent, Sample sample)
+        public void SalvarAmostraDoSinal(string signDescription, string exampleFileContent, Amostra sample)
         {
-            var fileName = CreateSampleFileIfNotExists(signDescription, exampleFileContent);
-            Adicionar(new SinalEstatico
+            var fileName = CriarArquivoDeExemploSeNaoExistir(signDescription, exampleFileContent);
+            Adicionar(new Sinal
             {
-                Description = signDescription,
-                ExampleFilePath = fileName,
+                Descricao = signDescription,
+                CaminhoParaArquivoDeExemplo = fileName,
                 Amostras = new[] { sample }
             });
         }

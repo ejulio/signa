@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Signa.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dados.Repositorio
 {
-    public class RepositorioDeSinaisDinamicos : IRepositorio<SinalDinamico>
+    public class RepositorioDeSinaisDinamicos : IRepositorio<Sinal>
     {
-        private IList<SinalDinamico> sinaisPorIndice;
-        private readonly IDictionary<string, SinalDinamico> sinaisPorId;
+        private IList<Sinal> sinaisPorIndice;
+        private readonly IDictionary<string, Sinal> sinaisPorId;
 
         private readonly string caminhoDoArquivoDeDados;
 
@@ -21,17 +21,17 @@ namespace Signa.Dados.Repositorio
         public RepositorioDeSinaisDinamicos(string caminhoDoArquivoDeDados)
         {
             this.caminhoDoArquivoDeDados = caminhoDoArquivoDeDados;
-            sinaisPorIndice = new List<SinalDinamico>();
-            sinaisPorId = new Dictionary<string, SinalDinamico>();
+            sinaisPorIndice = new List<Sinal>();
+            sinaisPorId = new Dictionary<string, Sinal>();
         }
 
-        public void Adicionar(SinalDinamico sinal)
+        public void Adicionar(Sinal sinal)
         {
             sinaisPorId.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
         }
 
-        public SinalDinamico BuscarPorIndice(int indice)
+        public Sinal BuscarPorIndice(int indice)
         {
             if (indice == Quantidade)
                 return null;
@@ -39,9 +39,9 @@ namespace Signa.Dados.Repositorio
             return sinaisPorIndice[indice];
         }
 
-        public SinalDinamico BuscarPorId(string id)
+        public Sinal BuscarPorDescricao(string id)
         {
-            SinalDinamico sinalDinamico;
+            Sinal sinalDinamico;
             if (sinaisPorId.TryGetValue(id, out sinalDinamico))
                 return sinalDinamico;
 
@@ -56,7 +56,7 @@ namespace Signa.Dados.Repositorio
             using (var reader = new StreamReader(caminhoDoArquivoDeDados))
             {
                 var sinaisEmFormatoJson = reader.ReadToEnd();
-                var sinais = JsonConvert.DeserializeObject<List<SinalDinamico>>(sinaisEmFormatoJson);
+                var sinais = JsonConvert.DeserializeObject<List<Sinal>>(sinaisEmFormatoJson);
                 sinaisPorIndice = sinais ?? sinaisPorIndice;
                 CarregarSinaisPorIndice();
             }
@@ -79,7 +79,7 @@ namespace Signa.Dados.Repositorio
             }
         }
 
-        public IEnumerator<SinalDinamico> GetEnumerator()
+        public IEnumerator<Sinal> GetEnumerator()
         {
             return sinaisPorIndice.GetEnumerator();
         }

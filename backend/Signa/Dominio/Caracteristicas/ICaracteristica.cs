@@ -1,6 +1,6 @@
 ﻿namespace Signa.Dominio.Caracteristicas
 {
-    public interface IFeature
+    public interface ICaracteristica
     {
         double[] ToArray(); 
     }

@@ -2,8 +2,8 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Sinais.Dinamico;
-using Testes.Comum.Builders.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
+using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Sinais.Dinamico
 {
@@ -14,7 +14,7 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
         public void building_a_sample_with_one_frame()
         {
             var frames = GivenAnArrayOfSignFramesWithCount(1);
-            var signSample = new AmostraDeSinalBuilder()
+            var signSample = new AmostraBuilder()
                 .ComFrames(frames)
                 .Construir();
 
@@ -27,7 +27,7 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
         public void building_a_sample_two_frames()
         {
             var frames = GivenAnArrayOfSignFramesWithCount(2);
-            var signSample = new AmostraDeSinalBuilder()
+            var signSample = new AmostraBuilder()
                 .ComFrames(frames)
                 .Construir();
 
@@ -41,7 +41,7 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
         {
             var numberOfFrames = new Random().Next(3, 15);
             var frames = GivenAnArrayOfSignFramesWithCount(numberOfFrames);
-            var signSample = new AmostraDeSinalBuilder()
+            var signSample = new AmostraBuilder()
                 .ComFrames(frames)
                 .Construir();
 
@@ -50,19 +50,37 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
             MustReturnAnArrayWithFrameData(frames, sampleArray);
         }
 
-        private FrameDeSinal[] GivenAnArrayOfSignFramesWithCount(int count)
+        [TestMethod]
+        public void criando_uma_amostra_de_sinal_estatico()
         {
-            var frames = new FrameDeSinal[count];
+            throw new NotImplementedException("Implementar uma amostra com apenas um frame");
+        }
+
+        [TestMethod]
+        public void criando_uma_amostra_apenas_com_a_mao_esquerda()
+        {
+            throw new NotImplementedException("Implementar uma amostra com vários frames apenas com a mão esquerda");
+        }
+
+        [TestMethod]
+        public void criando_uma_amostra_apenas_com_a_mao_direita()
+        {
+            throw new NotImplementedException("Implementar uma amostra com vários frames apenas com a mão direita");
+        }
+
+        private Frame[] GivenAnArrayOfSignFramesWithCount(int count)
+        {
+            var frames = new Frame[count];
 
             for (var i = 0; i < count; i++)
             {
-                frames[i] = new FrameDeSinalBuilder().Construir();
+                frames[i] = new FrameBuilder().Construir();
             }
 
             return frames;
         }
 
-        private void MustReturnAnArrayWithFrameData(FrameDeSinal[] framesDeSinal, double[][] sampleArray)
+        private void MustReturnAnArrayWithFrameData(Frame[] framesDeSinal, double[][] sampleArray)
         {
             var expectedFrameData = framesDeSinal.Select(f => f.ToArray());
 

@@ -40,14 +40,14 @@ namespace Signa
 
             var container = GlobalHost.DependencyResolver;
 
-            container.Register(typeof(Hubs.SignSequence),
-                () => new Hubs.SignSequence(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos()));
+            container.Register(typeof(Hubs.SequenciaDeSinais),
+                () => new Hubs.SequenciaDeSinais(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos()));
 
             container.Register(typeof(SinaisEstaticosController),
                 () => new SinaisEstaticosController(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(), algorithmFactory.CreateStaticSignRecognizer()));
 
-            container.Register(typeof(Hubs.StaticSignRecognizer), 
-                () => new Hubs.StaticSignRecognizer(container.Resolve<SinaisEstaticosController>()));
+            container.Register(typeof(Hubs.ReconhecedorDeSinaisEstaticos), 
+                () => new Hubs.ReconhecedorDeSinaisEstaticos(container.Resolve<SinaisEstaticosController>()));
         }
 
         private static void ConfigureJsonSerializerSettings()

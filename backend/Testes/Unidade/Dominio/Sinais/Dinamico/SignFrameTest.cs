@@ -2,9 +2,9 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Caracteristicas;
-using Signa.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
-using Testes.Comum.Builders.Dominio.Sinais.Dinamico;
+using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Sinais.Dinamico
 {
@@ -50,7 +50,7 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
         [TestMethod]
         public void when_null_right_and_left_hand_should_have_default_values()
         {
-            var signFrame = new FrameDeSinal
+            var signFrame = new Frame
             {
                 LeftMao = null,
                 RightMao = null
@@ -62,9 +62,9 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
             signFrame.RightMao.ToArray().Should().ContainInOrder(defaultValues.ToArray());
         }
 
-        private FrameDeSinal GivenSignFrameWithHands(Mao leftMao, Mao rightMao)
+        private Frame GivenSignFrameWithHands(Mao leftMao, Mao rightMao)
         {
-            var signFrame = new FrameDeSinalBuilder()
+            var signFrame = new FrameBuilder()
                 .ComMaoEsquerda(leftMao)
                 .WithRightHand(rightMao)
                 .Construir();

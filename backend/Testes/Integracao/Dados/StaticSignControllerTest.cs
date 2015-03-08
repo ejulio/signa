@@ -3,101 +3,101 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 using Signa.Util;
-using Testes.Comum.Builders.Dominio.Sinais.Estatico;
+using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados
 {
     [TestClass]
     public class StaticSignControllerTest
     {
-        private const string SamplesFilePath = Caminhos.CaminhoDoArquivoDeDeAmostras;
-        private IRepositorio<SinalEstatico> repositorio;
+        private const string CaminhoParaOArquivoDeAmostras = Caminhos.CaminhoDoArquivoDeDeAmostras;
+        private IRepositorio<Sinal> repositorio;
         private SinaisEstaticosController sinaisEstaticosController;
 
         [TestInitialize]
         public void Setup()
         {
-            repositorio = new RepositorioSinaisEstaticos(SamplesFilePath);
+            repositorio = new RepositorioSinaisEstaticos(CaminhoParaOArquivoDeAmostras);
             sinaisEstaticosController = new SinaisEstaticosController(repositorio, null);
 
-            Directory.CreateDirectory(SinaisEstaticosController.SamplesDirectory);
+            Directory.CreateDirectory(SinaisEstaticosController.DiretorioDeAmostras);
         }
 
         [TestCleanup]
-        public void DeleteFiles()
+        public void DeletarArquivos()
         {
-            if (Directory.Exists(SinaisEstaticosController.SamplesDirectory))
+            if (Directory.Exists(SinaisEstaticosController.DiretorioDeAmostras))
             {
-                Directory.Delete(SinaisEstaticosController.SamplesDirectory, true);
+                Directory.Delete(SinaisEstaticosController.DiretorioDeAmostras, true);
             }
         }
 
         [TestMethod]
-        public void creating_the_sign_sample_file()
+        public void criando_arquivo_de_exemplo_quando_nao_existe()
         {
-            const string signDescription = "new sign";
-            const string fileData = "file data";
+            const string descricaoDoSinal = "new sign";
+            const string dadosDoArquivo = "file data";
 
-            var createdFilePath = sinaisEstaticosController.CreateSampleFileIfNotExists(signDescription, fileData);
+            var caminhoDoArquivoCriado = sinaisEstaticosController.CriarArquivoDeExemploSeNaoExistir(descricaoDoSinal, dadosDoArquivo);
 
-            MustCreateFileWithContent(createdFilePath, signDescription, fileData);
+            DeveTerCriadoOArquivoComConteudo(caminhoDoArquivoCriado, descricaoDoSinal, dadosDoArquivo);
         }
 
         [TestMethod]
-        public void not_replacing_and_existing_file()
+        public void criando_um_arquivo_de_exemplo_quando_ja_existe()
         {
-            const string oldSignDescription = "old sign";
-            const string oldFileData = "Old file data";
-            const string newFileData = "New file data";
+            const string descricaoDoSinal = "old sign";
+            const string conteudoAntigoDoArquivo = "Old file data";
+            const string conteudoNovoDoArquivo = "New file data";
 
-            GivenAnExistingSampleFile(oldSignDescription, oldFileData);
+            DadoQueExistaUmArquivoDeExemplo(descricaoDoSinal, conteudoAntigoDoArquivo);
 
-            sinaisEstaticosController.CreateSampleFileIfNotExists(oldSignDescription, newFileData);
+            sinaisEstaticosController.CriarArquivoDeExemploSeNaoExistir(descricaoDoSinal, conteudoNovoDoArquivo);
 
-            MustNotChangeFileContent(oldSignDescription, oldFileData);
+            NaoDeveTerTrocadoOConteudoDoArquivo(descricaoDoSinal, conteudoAntigoDoArquivo);
         }
 
         [TestMethod]
-        public void saving_sign()
+        public void salvando_uma_amostra_de_um_sinal()
         {
-            var sample = new AmostraBuilder().Construir();
-            const string signDescription = "New Sign";
-            const string fileContent = "New sign file content";
+            var amostra = new AmostraBuilder().Construir();
+            const string descricaoDoSinal = "New Sign";
+            const string conteudoDoArquivo = "New sign file content";
 
-            sinaisEstaticosController.Save(signDescription, fileContent, sample);
+            sinaisEstaticosController.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
 
-            var filePath = SinaisEstaticosController.SamplesDirectory + signDescription.Underscore() + ".json";
-            MustCreateFileWithContent(filePath, signDescription, fileContent);
+            var caminhoDoArquivoCriado = SinaisEstaticosController.DiretorioDeAmostras + descricaoDoSinal.Underscore() + ".json";
+            DeveTerCriadoOArquivoComConteudo(caminhoDoArquivoCriado, descricaoDoSinal, conteudoDoArquivo);
 
-            var sign = repositorio.BuscarPorId(signDescription);
-            sign.Should().NotBeNull();
-            sign.Amostras.Should().Contain(sample);
+            var sinalAdicionadoNoRepositorio = repositorio.BuscarPorDescricao(descricaoDoSinal);
+            sinalAdicionadoNoRepositorio.Should().NotBeNull();
+            sinalAdicionadoNoRepositorio.Amostras.Should().Contain(amostra);
         }
 
-        private void GivenAnExistingSampleFile(string oldSignDescription, string oldFileData)
+        private void DadoQueExistaUmArquivoDeExemplo(string descricaoDoSinal, string conteudoDoArquivoDoSinal)
         {
-            sinaisEstaticosController.CreateSampleFileIfNotExists(oldSignDescription, oldFileData);
+            sinaisEstaticosController.CriarArquivoDeExemploSeNaoExistir(descricaoDoSinal, conteudoDoArquivoDoSinal);
         }
 
-        private static void MustCreateFileWithContent(string createdFilePath, string signDescription, string fileData)
+        private static void DeveTerCriadoOArquivoComConteudo(string caminhoDoArquivoCriado, string descricaoDoSinal, string conteudoDoArquivo)
         {
-            var file = SinaisEstaticosController.SamplesDirectory + signDescription.Underscore() + ".json";
-            createdFilePath.Should().Be(file);
-            File.Exists(file).Should().BeTrue();
-            using (StreamReader reader = new StreamReader(file))
+            var caminhoDoArquivoCriadoEsperado = SinaisEstaticosController.DiretorioDeAmostras + descricaoDoSinal.Underscore() + ".json";
+            caminhoDoArquivoCriado.Should().Be(caminhoDoArquivoCriadoEsperado);
+            File.Exists(caminhoDoArquivoCriadoEsperado).Should().BeTrue();
+            using (StreamReader reader = new StreamReader(caminhoDoArquivoCriadoEsperado))
             {
-                reader.ReadToEnd().Should().Be(fileData);
+                reader.ReadToEnd().Should().Be(conteudoDoArquivo);
             }
         }
 
-        private static void MustNotChangeFileContent(string signDescription, string oldFileData)
+        private static void NaoDeveTerTrocadoOConteudoDoArquivo(string descricaoDoSinal, string conteudoAntigoDoArquivo)
         {
-            var file = SinaisEstaticosController.SamplesDirectory + signDescription.Underscore() + ".json";
+            var file = SinaisEstaticosController.DiretorioDeAmostras + descricaoDoSinal.Underscore() + ".json";
             using (StreamReader reader = new StreamReader(file))
             {
-                reader.ReadToEnd().Should().Be(oldFileData);
+                reader.ReadToEnd().Should().Be(conteudoAntigoDoArquivo);
             }
         }
     }

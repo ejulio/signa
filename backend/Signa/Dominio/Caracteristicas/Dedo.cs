@@ -2,7 +2,7 @@
 
 namespace Signa.Dominio.Caracteristicas
 {
-    public class Dedo : IFeature
+    public class Dedo : ICaracteristica
     {
         public double[] Direcao { get; set; }
         public TipoDeDedo Tipo { get; set; }

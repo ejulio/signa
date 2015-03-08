@@ -32,7 +32,7 @@ namespace Infraestrutura
             var signRecognitionAlgorithmFactory = new SignRecognitionAlgorithmFactory();
             var algorithmInitializerFacade = new AlgorithmInitializerFacade(signRecognitionAlgorithmFactory, repositoryFactory);
 
-            algorithmInitializerFacade.TrainStaticSignRecognitionAlgorithm();
+            algorithmInitializerFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
             Console.WriteLine("Algoritmos treinados");
         }

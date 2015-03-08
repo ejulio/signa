@@ -15,13 +15,13 @@ namespace Signa.Dominio
             this.repositorioFactory = repositorioFactory;
         }
 
-        public void TrainStaticSignRecognitionAlgorithm()
+        public void TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos()
         {
             var algorithm = signRecognitionAlgorithmFactory.CreateStaticSignRecognizer();
             var repository = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
             var algorithmData = new SignRecognitionAlgorithmData(repository);
 
-            algorithm.Train(algorithmData);
+            algorithm.Treinar(algorithmData);
         }
     }
 }

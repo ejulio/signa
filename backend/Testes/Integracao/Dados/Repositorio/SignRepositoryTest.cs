@@ -5,9 +5,8 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Dados.Repositorio;
-using Signa.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
-using Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
 namespace Testes.Integracao.Dados.Repositorio
 {
@@ -79,7 +78,7 @@ namespace Testes.Integracao.Dados.Repositorio
             repositorioDeSinaisDinamicos.Adicionar(sign);
 
             repositorioDeSinaisDinamicos.Quantidade.Should().Be(signs.Count + 1);
-            repositorioDeSinaisDinamicos.BuscarPorId(signDescription).Descricao.Should().Be(signDescription);
+            repositorioDeSinaisDinamicos.BuscarPorDescricao(signDescription).Descricao.Should().Be(signDescription);
             repositorioDeSinaisDinamicos.BuscarPorIndice(signIndex).Descricao.Should().Be(signDescription);
         }
 
@@ -106,7 +105,7 @@ namespace Testes.Integracao.Dados.Repositorio
 
             Action loadCall = () => repositorioDeSinaisDinamicos.Carregar();
             Action getByIndexCall = () => repositorioDeSinaisDinamicos.BuscarPorIndice(0);
-            Action getByIdCall = () => repositorioDeSinaisDinamicos.BuscarPorId("");
+            Action getByIdCall = () => repositorioDeSinaisDinamicos.BuscarPorDescricao("");
 
             loadCall.ShouldNotThrow();
             getByIndexCall.ShouldNotThrow();
@@ -152,7 +151,7 @@ namespace Testes.Integracao.Dados.Repositorio
             }
         }
 
-        private ICollection<SinalDinamico> GivenSomeSignsInTheSamplesFile()
+        private ICollection<Sinal> GivenSomeSignsInTheSamplesFile()
         {
             var signs = new ColecaoDeSinaisDinamicosBuilder()
                             .ComTamanho(4)
@@ -170,27 +169,27 @@ namespace Testes.Integracao.Dados.Repositorio
             return signs;
         }
 
-        private static SinalDinamico GivenANewSign(string description)
+        private static Sinal GivenANewSign(string description)
         {
             var sign = new SinalBuilder()
-                            .WithDescription(description)
-                            .WithPath("new-sign.json")
-                            .ComAmostra(new AmostraDeSinalBuilder().Construir())
+                            .ComDescricao(description)
+                            .ComCaminhoParaArquivoDeExemplo("new-sign.json")
+                            .ComAmostra(new AmostraBuilder().Construir())
                             .Construir();
             return sign;
         }
 
-        private void MustBeAbleToGetSignsByDescriptionAsId(ICollection<SinalDinamico> signs)
+        private void MustBeAbleToGetSignsByDescriptionAsId(ICollection<Sinal> signs)
         {
             string signId;
             for (int i = 0; i < signs.Count; i++)
             {
                 signId = String.Format(DescriptionTemplate, i);
-                repositorioDeSinaisDinamicos.BuscarPorId(signId).Descricao.Should().Be(signId);
+                repositorioDeSinaisDinamicos.BuscarPorDescricao(signId).Descricao.Should().Be(signId);
             }
         }
 
-        private void MustHaveTheSignsOfTheFile(ICollection<SinalDinamico> signs)
+        private void MustHaveTheSignsOfTheFile(ICollection<Sinal> signs)
         {
             repositorioDeSinaisDinamicos.Quantidade.Should().Be(signs.Count);
             for (int i = 0; i < signs.Count; i++)
@@ -198,7 +197,7 @@ namespace Testes.Integracao.Dados.Repositorio
                 repositorioDeSinaisDinamicos
                     .BuscarPorIndice(i)
                     .Should()
-                    .Match<SinalDinamico>(sign =>
+                    .Match<Sinal>(sign =>
                         sign.Descricao == String.Format(DescriptionTemplate, i) &&
                         sign.CaminhoParaArquivoDeExemplo == String.Format(PathTemplate, i) &&
                         sign.Amostras.Count == 4);

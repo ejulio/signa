@@ -1,4 +1,4 @@
-﻿using Signa.Dominio.Sinais.Estatico;
+﻿using Signa.Dominio.Sinais;
 
 namespace Signa.Dados.Repositorio
 {
@@ -6,14 +6,14 @@ namespace Signa.Dados.Repositorio
     {
         private readonly string caminhoDoArquivoDeDados;
 
-        private static IRepositorio<SinalEstatico> repositorioDeSinaisEstaticos; 
+        private static IRepositorio<Sinal> repositorioDeSinaisEstaticos; 
 
         public RepositorioFactory(string caminhoDoArquivoDeDados)
         {
             this.caminhoDoArquivoDeDados = caminhoDoArquivoDeDados;
         }
 
-        public IRepositorio<SinalEstatico> CriarECarregarRepositorioDeSinaisEstaticos()
+        public IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisEstaticos()
         {
             if (repositorioDeSinaisEstaticos == null)
             {

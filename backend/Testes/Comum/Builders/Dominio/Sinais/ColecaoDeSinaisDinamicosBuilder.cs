@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Signa.Dominio.Sinais.Dinamico;
-using Testes.Comum.Builders.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 
 namespace Testes.Comum.Builders.Dominio.Sinais
 {
@@ -11,7 +10,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
         private int sampleCount = 4;
         private string descriptionTemplate = "{0}";
         private string pathTemplate = "{0}";
-        private Func<int, AmostraDeSinal> sampleGenerator;
+        private Func<int, Amostra> sampleGenerator;
 
 
         public ColecaoDeSinaisDinamicosBuilder()
@@ -19,14 +18,14 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             sampleGenerator = index =>
             {
                 var length = index + 2;
-                var frames = new FrameDeSinal[length];
+                var frames = new Frame[length];
 
                 for (var i = 0; i < length; i++)
                 {
-                    frames[i] = new FrameDeSinalBuilder().Construir();
+                    frames[i] = new FrameBuilder().Construir();
                 }
 
-                return new AmostraDeSinal
+                return new Amostra
                 {
                     Frames = frames
                 };
@@ -51,7 +50,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
-        public ColecaoDeSinaisDinamicosBuilder ComGeradorDeAmostras(Func<int, AmostraDeSinal> sampleGenerator)
+        public ColecaoDeSinaisDinamicosBuilder ComGeradorDeAmostras(Func<int, Amostra> sampleGenerator)
         {
             this.sampleGenerator = sampleGenerator;
             return this;
@@ -63,16 +62,16 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
-        public ICollection<SinalDinamico> Construir()
+        public ICollection<Sinal> Construir()
         {
-            var signs = new List<SinalDinamico>();
+            var signs = new List<Sinal>();
             SinalBuilder sinalBuilder;
 
             for (int i = 0; i < size; i++)
             {
                 sinalBuilder = new SinalBuilder()
-                    .WithDescription(String.Format(descriptionTemplate, i))
-                    .WithPath(String.Format(pathTemplate, i));
+                    .ComDescricao(String.Format(descriptionTemplate, i))
+                    .ComCaminhoParaArquivoDeExemplo(String.Format(pathTemplate, i));
 
                 for (int j = 0; j < sampleCount; j++)
                 {

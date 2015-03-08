@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Signa.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
@@ -12,11 +12,11 @@ namespace Signa.Dominio.Algoritmos.Dinamico
 
         public int QuantidadeDeClasses { get; private set; }
 
-        private IEnumerable<SinalDinamico> sinais;
+        private IEnumerable<Sinal> sinais;
         private LinkedList<double[][]> entradas;
         private LinkedList<int> saidas; 
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<SinalDinamico> sinais)
+        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<Sinal> sinais)
         {
             this.sinais = sinais;
             entradas = new LinkedList<double[][]>();

@@ -4,22 +4,22 @@ using Moq;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos;
-using Signa.Dominio.Sinais.Estatico;
-using Testes.Comum.Builders.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
+using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dados
 {
     [TestClass]
     public class SinaisEstaticosControllerTest
     {
-        private Mock<IRepositorio<SinalEstatico>> repositorio;
+        private Mock<IRepositorio<Sinal>> repositorio;
         private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmo;
         private SinaisEstaticosController sinaisEstaticosController;
 
         [TestInitialize]
         public void Setup()
         {
-            repositorio = new Mock<IRepositorio<SinalEstatico>>();
+            repositorio = new Mock<IRepositorio<Sinal>>();
             algoritmo = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
             sinaisEstaticosController = new SinaisEstaticosController(repositorio.Object, algoritmo.Object);
         }
@@ -62,12 +62,12 @@ namespace Testes.Unidade.Dados
             sinalReconhecido.Should().Be(idDoSinal);
         }
 
-        private SinalEstatico DadoQueORepositorioRetorneUmSinalParaADescricao(string descricaoDoSinal)
+        private Sinal DadoQueORepositorioRetorneUmSinalParaADescricao(string descricaoDoSinal)
         {
             var sinal = DadoUmSinalComDuasAmostras(descricaoDoSinal);
 
             repositorio
-                .Setup(r => r.BuscarPorId(descricaoDoSinal))
+                .Setup(r => r.BuscarPorDescricao(descricaoDoSinal))
                 .Returns(sinal);
 
             return sinal;
@@ -75,10 +75,10 @@ namespace Testes.Unidade.Dados
 
         private void DadoQueORepositorioRetorneNullParaADescricao(string descricaoDoSinal)
         {
-            repositorio.Setup(r => r.BuscarPorId(descricaoDoSinal)).Returns((SinalEstatico)null);
+            repositorio.Setup(r => r.BuscarPorDescricao(descricaoDoSinal)).Returns((Sinal)null);
         }
 
-        private static SinalEstatico DadoUmSinalComDuasAmostras(string descricaoDoSinal)
+        private Sinal DadoUmSinalComDuasAmostras(string descricaoDoSinal)
         {
             var sinal = new SinalBuilder()
                             .ComDescricao(descricaoDoSinal)
@@ -88,15 +88,15 @@ namespace Testes.Unidade.Dados
             return sinal;
         }
 
-        private void DeveTerAdicionadoOSinalNoRepositorioESalvoAsAlteracoes(SinalEstatico sinalEstatico)
+        private void DeveTerAdicionadoOSinalNoRepositorioESalvoAsAlteracoes(Sinal sinalEstatico)
         {
             repositorio.Verify(r => r.Adicionar(sinalEstatico));
             repositorio.Verify(r => r.SalvarAlteracoes());
         }
 
-        private void DeveTerJuntadoAsAmostrasESalvoAsAlteracoes(SinalEstatico sinalAntigo, SinalEstatico novoSinal)
+        private void DeveTerJuntadoAsAmostrasESalvoAsAlteracoes(Sinal sinalAntigo, Sinal novoSinal)
         {
-            repositorio.Verify(r => r.Adicionar(It.IsAny<SinalEstatico>()), Times.Never);
+            repositorio.Verify(r => r.Adicionar(It.IsAny<Sinal>()), Times.Never);
             repositorio.Verify(r => r.SalvarAlteracoes());
             sinalAntigo.Amostras.Count.Should().Be(4);
             sinalAntigo.Amostras.Should().Contain(novoSinal.Amostras);

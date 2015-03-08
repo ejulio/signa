@@ -2,15 +2,14 @@
 using Signa.Dados.Repositorio;
 using System;
 using Signa.Dominio.Sinais;
-using Signa.Dominio.Sinais.Estatico;
 
 namespace Signa.Hubs
 {
-    public class SignSequence : Hub
+    public class SequenciaDeSinais : Hub
     {
-        private readonly IRepositorio<SinalEstatico> repositorio;
+        private readonly IRepositorio<Sinal> repositorio;
 
-        public SignSequence(IRepositorio<SinalEstatico> repositorio)
+        public SequenciaDeSinais(IRepositorio<Sinal> repositorio)
         {
             this.repositorio = repositorio;
         }
@@ -24,8 +23,8 @@ namespace Signa.Hubs
             var signInfo = new InformacoesDoSinal
             {
                 Id = index,
-                Description = sign.Description,
-                ExampleFilePath = sign.ExampleFilePath
+                Descricao = sign.Descricao,
+                CaminhoParaArquivoDeExemplo = sign.CaminhoParaArquivoDeExemplo
             };
 
             return signInfo;

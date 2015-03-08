@@ -69,13 +69,11 @@
     <Compile Include="Comum\Builders\ArrayDeDouble.cs" />
     <Compile Include="Comum\Builders\Dominio\Caracteristicas\DedoBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Caracteristicas\MaoBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\Dinamico\AmostraDeSinalBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\Dinamico\FrameDeSinalBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\Dinamico\SinalBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\DynamicSignCollectionBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\Estatico\AmostraBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\Estatico\SinalBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\StaticSignCollectionBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\AmostraBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\FrameBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\SinalBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeSinaisEstaticosBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeSinaisDinamicosBuilder.cs" />
     <Compile Include="Integracao\Caminhos.cs" />
     <Compile Include="Integracao\Dados\Repositorio\RepositoryFactoryTest.cs" />
     <Compile Include="Integracao\Dados\Repositorio\SignRepositoryTest.cs" />
@@ -93,7 +91,6 @@
     <Compile Include="Unidade\Dominio\Caracteristicas\HandTest.cs" />
     <Compile Include="Unidade\Dominio\Sinais\Dinamico\SignFrameTest.cs" />
     <Compile Include="Unidade\Dominio\Sinais\Dinamico\SignSampleTest.cs" />
-    <Compile Include="Unidade\Dominio\Sinais\Estatico\SampleTest.cs" />
     <Compile Include="Unidade\Util\IEnumerableExtensionsTest.cs" />
     <Compile Include="Unidade\Util\StringExtensionsTest.cs" />
   </ItemGroup>

@@ -3,7 +3,7 @@ using Signa.Util;
 
 namespace Signa.Dominio.Caracteristicas
 {
-    public class Mao : IFeature
+    public class Mao : ICaracteristica
     {
         public double[] PalmNormal { get; set; }
         public double[] HandDirection { get; set; }

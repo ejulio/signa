@@ -1,43 +1,43 @@
 ﻿using Signa.Dominio.Caracteristicas;
-using Signa.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 
-namespace Testes.Comum.Builders.Dominio.Sinais.Dinamico
+namespace Testes.Comum.Builders.Dominio.Sinais
 {
-    public class FrameDeSinalBuilder
+    public class FrameBuilder
     {
         private Mao maoEsquerda;
         private Mao maoDireita;
 
-        public FrameDeSinalBuilder ComMaoEsquerda(Mao leftMao)
+        public FrameBuilder ComMaoEsquerda(Mao leftMao)
         {
             this.maoEsquerda = leftMao;
             return this;
         }
 
-        public FrameDeSinalBuilder WithRightHand(Mao rightMao)
+        public FrameBuilder WithRightHand(Mao rightMao)
         {
             this.maoDireita = rightMao;
             return this;
         }
 
-        public FrameDeSinalBuilder ComMaosEsquerdaEDireitaPadroes()
+        public FrameBuilder ComMaosEsquerdaEDireitaPadroes()
         {
             maoDireita = new MaoBuilder().Construir();
             maoEsquerda = new MaoBuilder().Construir();
             return this;
         }
 
-        public FrameDeSinalBuilder ParaOIndice(int indice)
+        public FrameBuilder ParaOIndice(int indice)
         {
             maoDireita = new MaoBuilder().ParaOIndice(indice).Construir();
             maoEsquerda = new MaoBuilder().ParaOIndice(indice).Construir();
             return this;
         }
 
-        public FrameDeSinal Construir()
+        public Frame Construir()
         {
-            return new FrameDeSinal
+            return new Frame
             {
                 LeftMao = maoEsquerda,
                 RightMao = maoDireita

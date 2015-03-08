@@ -1,11 +1,11 @@
 ﻿using Signa.Dominio.Algoritmos.Estatico;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dominio.Algoritmos
 {
     public interface IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
-        int Reconhecer(Sample sample);
-        void Train(IDadosParaAlgoritmoDeReconhecimentoDeSinal data);
+        int Reconhecer(Amostra amostra);
+        void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinal dados);
     }
 }

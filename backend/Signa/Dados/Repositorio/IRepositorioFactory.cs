@@ -1,9 +1,9 @@
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dados.Repositorio
 {
     public interface IRepositorioFactory
     {
-        IRepositorio<SinalEstatico> CriarECarregarRepositorioDeSinaisEstaticos();
+        IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisEstaticos();
     }
 }

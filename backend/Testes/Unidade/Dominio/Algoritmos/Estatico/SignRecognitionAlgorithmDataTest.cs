@@ -5,16 +5,15 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Estatico;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
-using Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 {
     [TestClass]
     public class SignRecognitionAlgorithmDataTest
     {
-        private readonly Sample defaultSignSample;
+        private readonly Amostra defaultSignSample;
 
         public SignRecognitionAlgorithmDataTest()
         {
@@ -22,33 +21,33 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         }
 
         [TestMethod]
-        public void creating_algorithm_trainning_data_with_a_collection_of_one_sign()
+        public void criando_dados_com_uma_colecao_de_um_sinal()
         {
-            var signs = GivenACollectionOfOneSign();
+            var sinais = DadaUmaColecaoDeUmSinal();
 
-            var algorithmData = new SignRecognitionAlgorithmData(signs);
+            var dadosDoAlgoritmo = new SignRecognitionAlgorithmData(sinais);
 
-            MustHaveOneTrainningData(algorithmData);
+            DeveTerUmDadoDeTreinamento(dadosDoAlgoritmo);
         }
 
         [TestMethod]
-        public void creating_algorithm_trainning_data_with_a_collection_signs()
+        public void criando_dados_com_uma_colecao_de_sinais()
         {
-            const int samplesPerSign = 5;
-            const int signCount = 6;
+            const int quantidadeDeAmostrasPorSinal = 5;
+            const int quantidadeDeSinais = 6;
 
-            var signs = GivenACollectionOfSigns(samplesPerSign, signCount);
+            var sinais = DadaUmaColecaoDeSinais(quantidadeDeAmostrasPorSinal, quantidadeDeSinais);
 
-            var algorithmData = new SignRecognitionAlgorithmData(signs);
+            var dadosDoAlgoritmo = new SignRecognitionAlgorithmData(sinais);
 
-            MustHaveTheDataOfTheCollectionOfSigns(algorithmData, signs, samplesPerSign);
+            DeveTerOsDadosDaColecaoDeSinais(dadosDoAlgoritmo, sinais, quantidadeDeAmostrasPorSinal);
         }
 
-        private ICollection<SinalEstatico> GivenACollectionOfOneSign()
+        private ICollection<Sinal> DadaUmaColecaoDeUmSinal()
         {
-            Func<int, Sample> sampleGenerator = index => defaultSignSample;
+            Func<int, Amostra> sampleGenerator = index => defaultSignSample;
 
-            var signs = new StaticSignCollectionBuilder()
+            var signs = new ColecaoDeSinaisEstaticosBuilder()
                         .WithSampleCount(1)
                         .WithSampleGenerator(sampleGenerator)
                         .WithSize(1)
@@ -57,9 +56,9 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             return signs;
         }
 
-        private static ICollection<SinalEstatico> GivenACollectionOfSigns(int samplesPerSign, int signCount)
+        private static ICollection<Sinal> DadaUmaColecaoDeSinais(int samplesPerSign, int signCount)
         {
-            var signs = new StaticSignCollectionBuilder()
+            var signs = new ColecaoDeSinaisEstaticosBuilder()
                         .WithSampleCount(samplesPerSign)
                         .WithSize(signCount)
                         .Build();
@@ -67,7 +66,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             return signs;
         }
 
-        private void MustHaveTheDataOfTheCollectionOfSigns(SignRecognitionAlgorithmData algorithmData, ICollection<SinalEstatico> signs, int samplesPerSign)
+        private void DeveTerOsDadosDaColecaoDeSinais(SignRecognitionAlgorithmData algorithmData, ICollection<Sinal> signs, int samplesPerSign)
         {
             algorithmData.QuantidadeDeClasses.Should().Be(signs.Count);
             algorithmData.Entradas.Should().HaveCount(samplesPerSign * signs.Count);
@@ -83,7 +82,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             }
         }
 
-        private void MustHaveOneTrainningData(SignRecognitionAlgorithmData algorithmData)
+        private void DeveTerUmDadoDeTreinamento(SignRecognitionAlgorithmData algorithmData)
         {
             algorithmData.QuantidadeDeClasses.Should().Be(1);
             algorithmData.Entradas.Should().HaveCount(1);
@@ -92,7 +91,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             algorithmData.Saidas[0].Should().Be(0);
         }
 
-        private double[][] ExpectedInputArrayFor(ICollection<SinalEstatico> signs)
+        private double[][] ExpectedInputArrayFor(ICollection<Sinal> signs)
         {
             var inputs = new LinkedList<double[]>();
 
@@ -100,7 +99,8 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             {
                 foreach (var sample in sign.Amostras)
                 {
-                    inputs.AddFirst(sample.ToArray());
+                    throw new NotImplementedException("Utilizar a interface IAmostraDeSinalEstatico");
+                    //inputs.AddFirst(sample.ToArray());
                 }
             }
 

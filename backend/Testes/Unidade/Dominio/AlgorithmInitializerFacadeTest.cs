@@ -7,7 +7,7 @@ using Signa.Dados.Repositorio;
 using Signa.Dominio;
 using Signa.Dominio.Algoritmos;
 using Signa.Dominio.Algoritmos.Estatico;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio
@@ -15,62 +15,62 @@ namespace Testes.Unidade.Dominio
     [TestClass]
     public class AlgorithmInitializerFacadeTest
     {
-        private Mock<ISignRecognitionAlgorithmFactory> signRecognitionAlgorithmFactory;
-        private Mock<IRepositorio<SinalEstatico>> repository;
-        private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> staticSignRecognitionAlgorithm;
-        private Mock<IRepositorioFactory> repositoryFactory;
-        private AlgorithmInitializerFacade algorithmInitializerFacade;
+        private Mock<ISignRecognitionAlgorithmFactory> algoritmoDeReconhecimentoDeSinaisFactory;
+        private Mock<IRepositorio<Sinal>> repositorio;
+        private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmoDeReconhecimentoDeSinaisEstaticos;
+        private Mock<IRepositorioFactory> repositorioFactory;
+        private AlgorithmInitializerFacade inicializadorDeAlgoritmoFacade;
 
         [TestInitialize]
         public void Setup()
         {
-            repository = new Mock<IRepositorio<SinalEstatico>>();
-            repositoryFactory = new Mock<IRepositorioFactory>();
-            staticSignRecognitionAlgorithm = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
-            signRecognitionAlgorithmFactory = new Mock<ISignRecognitionAlgorithmFactory>();
+            repositorio = new Mock<IRepositorio<Sinal>>();
+            repositorioFactory = new Mock<IRepositorioFactory>();
+            algoritmoDeReconhecimentoDeSinaisEstaticos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
+            algoritmoDeReconhecimentoDeSinaisFactory = new Mock<ISignRecognitionAlgorithmFactory>();
 
-            algorithmInitializerFacade =
-                new AlgorithmInitializerFacade(signRecognitionAlgorithmFactory.Object, repositoryFactory.Object);
+            inicializadorDeAlgoritmoFacade =
+                new AlgorithmInitializerFacade(algoritmoDeReconhecimentoDeSinaisFactory.Object, repositorioFactory.Object);
 
-            repositoryFactory
+            repositorioFactory
                 .Setup(r => r.CriarECarregarRepositorioDeSinaisEstaticos())
-                .Returns(repository.Object);
+                .Returns(repositorio.Object);
 
-            signRecognitionAlgorithmFactory
+            algoritmoDeReconhecimentoDeSinaisFactory
                 .Setup(f => f.CreateStaticSignRecognizer())
-                .Returns(staticSignRecognitionAlgorithm.Object);
+                .Returns(algoritmoDeReconhecimentoDeSinaisEstaticos.Object);
         }
 
         [TestMethod]
-        public void training_static_sign_recognition_algorithm()
+        public void treinando_o_algoritmo_de_reconhecimento_de_sinais_estaticos()
         {
-            repository
+            repositorio
                 .Setup(r => r.GetEnumerator())
-                .Returns(GivenACollectionOfSigns().GetEnumerator());
+                .Returns(DadaUmaColecaoDeSinais().GetEnumerator());
 
-            algorithmInitializerFacade.TrainStaticSignRecognitionAlgorithm();
+            inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
-            staticSignRecognitionAlgorithm
+            algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a => 
-                    a.Train(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinal>(d => VerifyAlgorithmData(d))));
+                    a.Treinar(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinal>(d => VerificarDadosDoAlgoritmo(d))));
         }
 
         [TestMethod]
-        public void training_static_sign_recognition_algorithm_without_data()
+        public void treinando_o_algoritmo_de_reconhecimento_de_sinais_estaticos_sem_dados()
         {
-            var emptySignList = new List<SinalEstatico>();
-            repository
+            var listaDeSinaisVazia = new List<Sinal>();
+            repositorio
                 .Setup(r => r.GetEnumerator())
-                .Returns(emptySignList.GetEnumerator());
+                .Returns(listaDeSinaisVazia.GetEnumerator());
 
-            Action action = () => algorithmInitializerFacade.TrainStaticSignRecognitionAlgorithm();
+            Action acao = () => inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
-            action.ShouldNotThrow();
+            acao.ShouldNotThrow();
         }
 
-        private ICollection<SinalEstatico> GivenACollectionOfSigns()
+        private ICollection<Sinal> DadaUmaColecaoDeSinais()
         {
-            var signs = new StaticSignCollectionBuilder()
+            var signs = new ColecaoDeSinaisEstaticosBuilder()
                         .WithSampleCount(2)
                         .WithSize(2)
                         .Build();
@@ -78,7 +78,7 @@ namespace Testes.Unidade.Dominio
             return signs;
         }
 
-        private bool VerifyAlgorithmData(IDadosParaAlgoritmoDeReconhecimentoDeSinal data)
+        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinal data)
         {
             data.QuantidadeDeClasses.Should().Be(2);
             data.Saidas.Should().HaveCount(4);

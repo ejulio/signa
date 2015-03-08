@@ -4,10 +4,9 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Caracteristicas;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
-using Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 {
@@ -15,77 +14,78 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
     public class SvmTest
     {
         [TestMethod]
-        public void recognizing_without_trainning_throw_an_error()
+        public void reconhecendo_um_sinal_sem_treinar_o_algoritmo()
         {
-            var sample = new AmostraBuilder().Construir();
-            Action recognizeCall = () => new Svm().Reconhecer(sample);
+            var amostra = new AmostraBuilder().Construir();
+            Action acao = () => new Svm().Reconhecer(amostra);
 
-            recognizeCall.ShouldThrow<InvalidOperationException>();
+            acao.ShouldThrow<InvalidOperationException>();
         }
 
         [TestMethod]
-        public void recognizing_an_input()
+        public void reconhecendo_um_sinal()
         {
-            const int signCount = 3;
-            const int samplesPerSign = 2;
-            const int signResultIndex = 2;
+            const int quantidadeDeSinais = 3;
+            const int quantidadeDeAmostrasPorSinal = 2;
+            const int indiceDoSinalEsperado = 2;
 
-            var svm = GivenATrainedAlgorithm(signCount, samplesPerSign);
+            var svm = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 
-            var sample = BuildSignSampleByIndex(signResultIndex);
+            var amostra = CriarAmostraPeloIndice(indiceDoSinalEsperado);
 
-            var result = svm.Reconhecer(sample);
+            var indiceReconhecido = svm.Reconhecer(amostra);
 
-            result.Should().Be(signResultIndex);
+            indiceReconhecido.Should().Be(indiceDoSinalEsperado);
         }
 
-        private Svm GivenATrainedAlgorithm(int signCount, int samplesPerSign)
+        private Svm DadoUmAlgoritmoTreinado(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
-            var signs = GivenACollectionOfSigns(signCount, samplesPerSign);
-            var trainningData = new SignRecognitionAlgorithmData(signs);
+            var sinais = DadaUmaColecaoDeSinais(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
+            var dadosDeTreinamento = new SignRecognitionAlgorithmData(sinais);
 
             var svm = new Svm();
-            svm.Train(trainningData);
+            svm.Treinar(dadosDeTreinamento);
 
             return svm;
         }
 
-        private ICollection<SinalEstatico> GivenACollectionOfSigns(int signCount, int samplesPerSign)
+        private ICollection<Sinal> DadaUmaColecaoDeSinais(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
-            var signs = new StaticSignCollectionBuilder()
-                            .WithSize(signCount)            
-                            .WithSampleCount(samplesPerSign)
-                            .WithSampleGenerator(BuildSignSampleByIndex)
+            var signs = new ColecaoDeSinaisEstaticosBuilder()
+                            .WithSize(quantidadeDeSinais)            
+                            .WithSampleCount(quantidadeDeAmostrasPorSinal)
+                            .WithSampleGenerator(CriarAmostraPeloIndice)
                             .Build();
             return signs;
         }
 
-        private Sample BuildSignSampleByIndex(int index)
+        private Amostra CriarAmostraPeloIndice(int index)
         {
-            var leftHand = GivenHandWithFingers(index);
-            var rightHand = GivenHandWithFingers(index);
+            var leftHand = DadaUmaMaoComDedos(index);
+            var rightHand = DadaUmaMaoComDedos(index);
 
-            return new AmostraBuilder()
-                .WithLeftHand(leftHand)
-                .WithRightHand(rightHand)
-                .Construir();
+            throw new NotImplementedException("Implementar para ter apenas um frame");
+            //return new AmostraDeSinalBuilder()
+            //    .WithLeftHand(leftHand)
+            //    .WithRightHand(rightHand)
+            //    .Construir();
         }
 
-        private Mao GivenHandWithFingers(int index)
+        private Mao DadaUmaMaoComDedos(int indice)
         {
             var fingers = new[] 
             {
-                new DedoBuilder().DoTipo(TipoDeDedo.Dedao).ComDirecao(new double[] { index, index, index }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Indicador).ComDirecao(new double[] { index, index, index }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Meio).ComDirecao(new double[] { index, index, index }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Anelar).ComDirecao(new double[] { index, index, index }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Mindinho).ComDirecao(new double[] { index, index, index }).Construir()
+                new DedoBuilder().DoTipo(TipoDeDedo.Dedao).ComDirecao(new double[] { indice, indice, indice }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Indicador).ComDirecao(new double[] { indice, indice, indice }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Meio).ComDirecao(new double[] { indice, indice, indice }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Anelar).ComDirecao(new double[] { indice, indice, indice }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Mindinho).ComDirecao(new double[] { indice, indice, indice }).Construir()
             };
 
             return new MaoBuilder()
                     .ComDedos(fingers)
-                    .ComVetorNormalDaPalma(new double[] { index, index, index })
-                    .ComDirecaoDaMao(new double[] { index, index, index })
+                    .ComVetorNormalDaPalma(new double[] { indice, indice, indice })
+                    .ComDirecaoDaMao(new double[] { indice, indice, indice })
                     .Construir();
         }
     }

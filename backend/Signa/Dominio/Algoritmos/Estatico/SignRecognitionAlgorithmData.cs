@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
@@ -10,11 +11,11 @@ namespace Signa.Dominio.Algoritmos.Estatico
         public int[] Saidas { get; private set; }
         public int QuantidadeDeClasses { get; private set; }
 
-        private IEnumerable<SinalEstatico> signs;
+        private IEnumerable<Sinal> signs;
         private LinkedList<int> outputs;
         private LinkedList<double[]> inputs;
 
-        public SignRecognitionAlgorithmData(IEnumerable<SinalEstatico> signs)
+        public SignRecognitionAlgorithmData(IEnumerable<Sinal> signs)
         {
             this.signs = signs;
             Process();
@@ -22,6 +23,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
 
         public void Process()
         {
+            throw new NotImplementedException("Recuperar os dados de um sinal");
             int signIndex = 0;
             QuantidadeDeClasses = 0;
             inputs = new LinkedList<double[]>();
@@ -38,12 +40,12 @@ namespace Signa.Dominio.Algoritmos.Estatico
             Entradas = inputs.ToArray();
         }
 
-        private void ExtracSignSampleData(SinalEstatico sinalEstatico, int signIndex)
+        private void ExtracSignSampleData(Sinal sinalEstatico, int signIndex)
         {
             foreach (var sample in sinalEstatico.Amostras)
             {
                 outputs.AddFirst(signIndex);
-                inputs.AddFirst(sample.ToArray());
+                //inputs.AddFirst(sample.ToArray());
             }
         }
     }

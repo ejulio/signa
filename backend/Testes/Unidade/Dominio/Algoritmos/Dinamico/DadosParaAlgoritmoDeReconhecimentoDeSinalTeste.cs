@@ -3,9 +3,8 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Dinamico;
-using Signa.Dominio.Sinais.Dinamico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
-using Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 {
@@ -24,18 +23,18 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             DeveTerExtraidoOsDadosDasAmostras(dados, 1, 1, saidasEsperadas, sinal.Amostras);
         }
 
-        private static SinalDinamico[] DadaUmaColecaoComUmSinalComCincoFrames()
+        private static Sinal[] DadaUmaColecaoComUmSinalComCincoFrames()
         {
             var frames = new[]
             {
-                new FrameDeSinalBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
-                new FrameDeSinalBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
-                new FrameDeSinalBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
-                new FrameDeSinalBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
-                new FrameDeSinalBuilder().ComMaosEsquerdaEDireitaPadroes().Construir()
+                new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
+                new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
+                new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
+                new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir(),
+                new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir()
             };
 
-            var amostra = new AmostraDeSinalBuilder().ComFrames(frames).Construir();
+            var amostra = new AmostraBuilder().ComFrames(frames).Construir();
             var sinais = new[] {new SinalBuilder().ComAmostra(amostra).Construir()};
             return sinais;
         }
@@ -55,7 +54,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             DeveTerExtraidoOsDadosDasAmostras(dados, quantidadeDeSinais, quantidadeDeAmostras, saidasEsperadas, amostrasEsperadas);
         }
 
-        private static ICollection<SinalDinamico> DadaUmaColecaoDeSinaisComAmostras(int quantidadeDeAmostras, int quantidadeDeSinais)
+        private static ICollection<Sinal> DadaUmaColecaoDeSinaisComAmostras(int quantidadeDeAmostras, int quantidadeDeSinais)
         {
             var colecaoDeSinais = new ColecaoDeSinaisDinamicosBuilder()
                 .ComTemplateDeDescricao("Sinal dinâmico {0}")
@@ -67,9 +66,9 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             return colecaoDeSinais;
         }
 
-        private IList<AmostraDeSinal> ConcatenarAmostrasDosSinais(ICollection<SinalDinamico> colecaoDeSinais)
+        private IList<Amostra> ConcatenarAmostrasDosSinais(ICollection<Sinal> colecaoDeSinais)
         {
-            IEnumerable<AmostraDeSinal> amostrasConcatenadas = new AmostraDeSinal[0];
+            IEnumerable<Amostra> amostrasConcatenadas = new Amostra[0];
 
             foreach (var sinal in colecaoDeSinais)
             {
@@ -80,7 +79,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
         }
 
         private void DeveTerExtraidoOsDadosDasAmostras(DadosParaAlgoritmoDeReconhecimentoDeSinal dados, int quantidadeDeSinais, 
-            int quantidadeDeAmostras, int[] saidasEsperadas, IList<AmostraDeSinal> amostrasEsperadas)
+            int quantidadeDeAmostras, int[] saidasEsperadas, IList<Amostra> amostrasEsperadas)
         {
             dados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
             dados.Saidas.Should().HaveSameCount(dados.Entradas);
@@ -89,7 +88,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             DeveTerAsEntradasDasAmostras(dados.Entradas, amostrasEsperadas);
         }
 
-        private void DeveTerAsEntradasDasAmostras(double[][][] entradas, IList<AmostraDeSinal> amostras)
+        private void DeveTerAsEntradasDasAmostras(double[][][] entradas, IList<Amostra> amostras)
         {
             for (var i = 0; i < entradas.Length; i++)
             {

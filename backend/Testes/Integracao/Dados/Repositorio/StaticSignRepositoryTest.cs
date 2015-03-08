@@ -5,164 +5,163 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Dados.Repositorio;
-using Signa.Dominio.Sinais.Estatico;
+using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
-using Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
 namespace Testes.Integracao.Dados.Repositorio
 {
     [TestClass]
     public class StaticSignRepositoryTest
     {
-        private RepositorioSinaisEstaticos signRepositorioSinaisEstaticos;
-        private const string SamplesFilePath = Caminhos.CaminhoDoArquivoDeDeAmostras;
-        private const string DescriptionTemplate = "Static sign sample {0}";
-        private const string PathTemplate = "static-sample-{0}.json";
+        private RepositorioSinaisEstaticos repositorioDeSinaisEstaticos;
+        private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeDeAmostras;
+        private const string TemplateDaDescricao = "Static sign sample {0}";
+        private const string TemplateDoCaminhoDeExemplo = "static-sample-{0}.json";
 
         [TestInitialize]
         public void TestInitialize()
         {
-            signRepositorioSinaisEstaticos = new RepositorioSinaisEstaticos(SamplesFilePath);
+            repositorioDeSinaisEstaticos = new RepositorioSinaisEstaticos(CaminhoDoArquivoDeDeAmostras);
         }
 
         [TestMethod]
-        public void loading_samples_from_file()
+        public void carregando_sinais_do_arquivo()
         {
-            var signs = GivenSomeSignsInTheSamplesFile();
+            var sinais = DadoQueExistamDadosNoArquivoDeSinais();
 
-            signRepositorioSinaisEstaticos.Carregar();
+            repositorioDeSinaisEstaticos.Carregar();
 
-            MustHaveTheSignsOfTheFile(signs);
+            DeveTerCarregadoOsSinaisDoArquivo(sinais);
         }
 
         [TestMethod]
-        public void getting_a_sign_by_id()
+        public void buscando_um_sinal_pela_descricao()
         {
-            var signs = GivenSomeSignsInTheSamplesFile();
+            var sinais = DadoQueExistamDadosNoArquivoDeSinais();
             
-            signRepositorioSinaisEstaticos.Carregar();
+            repositorioDeSinaisEstaticos.Carregar();
 
-            MustBeAbleToGetSignsByDescriptionAsId(signs);
+            DevePoderBuscarOsSinaisPelaDescricao(sinais);
         }
 
         [TestMethod]
-        public void adding_sign_do_not_save_to_file_before_saving_changes()
+        public void adicionando_um_sinal()
         {
-            var signs = GivenSomeSignsInTheSamplesFile();
+            DadoQueExistamDadosNoArquivoDeSinais();
             
-            signRepositorioSinaisEstaticos.Carregar();
+            repositorioDeSinaisEstaticos.Carregar();
 
-            var samplesFileContent = GetSamplesFileContent();
+            var conteudoDoArquivoDeSinais = BuscarConteudoDoArquivoDeSinais();
             
-            var sign = GivenANewSign("New sign");
-            signRepositorioSinaisEstaticos.Adicionar(sign);
+            var sinal = DadoUmNovoSinal("New sign");
+            repositorioDeSinaisEstaticos.Adicionar(sinal);
 
-            GetSamplesFileContent().Should().Be(samplesFileContent);
+            BuscarConteudoDoArquivoDeSinais().Should().Be(conteudoDoArquivoDeSinais);
 
-            signRepositorioSinaisEstaticos.SalvarAlteracoes();
+            repositorioDeSinaisEstaticos.SalvarAlteracoes();
 
-            GetSamplesFileContent().Should().NotBe(samplesFileContent);
-            GetSamplesFileContent().Length.Should().BeGreaterThan(samplesFileContent.Length);
+            BuscarConteudoDoArquivoDeSinais().Should().NotBe(conteudoDoArquivoDeSinais);
+            BuscarConteudoDoArquivoDeSinais().Length.Should().BeGreaterThan(conteudoDoArquivoDeSinais.Length);
         }
 
         [TestMethod]
-        public void adding_sign_must_be_able_to_get_sign_by_index_and_by_id()
+        public void adicionando_um_sinal_e_buscando()
         {
-            var signs = GivenSomeSignsInTheSamplesFile();
+            var sinais = DadoQueExistamDadosNoArquivoDeSinais();
             
-            signRepositorioSinaisEstaticos.Carregar();
+            repositorioDeSinaisEstaticos.Carregar();
 
-            var signDescription = "New sign";
-            var signIndex = signs.Count;
+            var descricaoDoSinal = "New sign";
+            var indiceDoSinal = sinais.Count;
 
-            var sign = GivenANewSign(signDescription);
-            signRepositorioSinaisEstaticos.Adicionar(sign);
+            var sinal = DadoUmNovoSinal(descricaoDoSinal);
+            repositorioDeSinaisEstaticos.Adicionar(sinal);
 
-            signRepositorioSinaisEstaticos.Quantidade.Should().Be(signs.Count + 1);
-            signRepositorioSinaisEstaticos.BuscarPorId(signDescription).Description.Should().Be(signDescription);
-            signRepositorioSinaisEstaticos.BuscarPorIndice(signIndex).Description.Should().Be(signDescription);
+            repositorioDeSinaisEstaticos.Quantidade.Should().Be(sinais.Count + 1);
+            repositorioDeSinaisEstaticos.BuscarPorDescricao(descricaoDoSinal).Descricao.Should().Be(descricaoDoSinal);
+            repositorioDeSinaisEstaticos.BuscarPorIndice(indiceDoSinal).Descricao.Should().Be(descricaoDoSinal);
         }
 
         [TestMethod]
-        public void enumerating_return_items_like_GetByIndex()
+        public void enumerando_os_itens_do_repositorio()
         {
-            GivenSomeSignsInTheSamplesFile();
+            DadoQueExistamDadosNoArquivoDeSinais();
             
-            signRepositorioSinaisEstaticos.Carregar();
+            repositorioDeSinaisEstaticos.Carregar();
 
-            int index = 0;
+            int indice = 0;
 
-            foreach (var sign in signRepositorioSinaisEstaticos)
+            foreach (var sinal in repositorioDeSinaisEstaticos)
             {
-                sign.Should().Be(signRepositorioSinaisEstaticos.BuscarPorIndice(index));
-                index++;
+                sinal.Should().Be(repositorioDeSinaisEstaticos.BuscarPorIndice(indice));
+                indice++;
             }
         }
 
         [TestMethod]
-        public void loading_an_empty_file_should_not_throw_an_exception()
+        public void carregando_um_arquivo_vazio()
         {
-            GivenAnEmptySamplesFile();
+            DadoQueOArquivoDeSinaisEstejaVazio();
 
-            Action loadCall = () => signRepositorioSinaisEstaticos.Carregar();
-            Action getByIndexCall = () => signRepositorioSinaisEstaticos.BuscarPorIndice(0);
-            Action getByIdCall = () => signRepositorioSinaisEstaticos.BuscarPorId("");
+            Action acaoDeCarregar = () => repositorioDeSinaisEstaticos.Carregar();
+            Action acaoDeBuscarPorIndice = () => repositorioDeSinaisEstaticos.BuscarPorIndice(0);
+            Action acaoDeBuscarPorDescricao = () => repositorioDeSinaisEstaticos.BuscarPorDescricao("");
 
-            loadCall.ShouldNotThrow();
-            getByIndexCall.ShouldNotThrow();
-            getByIdCall.ShouldNotThrow();
+            acaoDeCarregar.ShouldNotThrow();
+            acaoDeBuscarPorIndice.ShouldNotThrow();
+            acaoDeBuscarPorDescricao.ShouldNotThrow();
         }
 
         [TestMethod]
-        public void loading_when_file_does_not_exist()
+        public void carregando_dados_quando_arquivo_nao_existe()
         {
-            GivenThatTheSamplesFileDoesNotExist();
+            DadoQueOArquivoDeSinaisNaoExista();
 
-            Action loadCall = () => signRepositorioSinaisEstaticos.Carregar();
+            Action acao = () => repositorioDeSinaisEstaticos.Carregar();
 
-            loadCall.ShouldNotThrow();
+            acao.ShouldNotThrow();
         }
 
         [TestMethod]
-        public void saving_changes_when_file_does_not_exist()
+        public void salvando_alteracoes_quando_o_arquivo_nao_existe()
         {
-            GivenThatTheSamplesFileDoesNotExist();
+            DadoQueOArquivoDeSinaisNaoExista();
 
-            var sign = GivenANewSign("saving sign");
-            signRepositorioSinaisEstaticos.Adicionar(sign);
+            var sinal = DadoUmNovoSinal("saving sign");
+            repositorioDeSinaisEstaticos.Adicionar(sinal);
 
-            Action loadCall = () => signRepositorioSinaisEstaticos.SalvarAlteracoes();
+            Action acao = () => repositorioDeSinaisEstaticos.SalvarAlteracoes();
 
-            loadCall.ShouldNotThrow();
-            File.Exists(SamplesFilePath).Should().BeTrue();
-            GetSamplesFileContent().Should().NotBe("");
+            acao.ShouldNotThrow();
+            File.Exists(CaminhoDoArquivoDeDeAmostras).Should().BeTrue();
+            BuscarConteudoDoArquivoDeSinais().Should().NotBe("");
         }
 
-        private static void GivenThatTheSamplesFileDoesNotExist()
+        private static void DadoQueOArquivoDeSinaisNaoExista()
         {
-            if (File.Exists(SamplesFilePath))
-                File.Delete(SamplesFilePath);
+            if (File.Exists(CaminhoDoArquivoDeDeAmostras))
+                File.Delete(CaminhoDoArquivoDeDeAmostras);
         }
 
-        private void GivenAnEmptySamplesFile()
+        private void DadoQueOArquivoDeSinaisEstejaVazio()
         {
-            using (StreamWriter writer = new StreamWriter(SamplesFilePath))
+            using (StreamWriter writer = new StreamWriter(CaminhoDoArquivoDeDeAmostras))
             {
                 writer.Write("");
             }
         }
 
-        private ICollection<SinalEstatico> GivenSomeSignsInTheSamplesFile()
+        private ICollection<Sinal> DadoQueExistamDadosNoArquivoDeSinais()
         {
-            var signs = new StaticSignCollectionBuilder()
+            var signs = new ColecaoDeSinaisEstaticosBuilder()
                             .WithSize(4)
-                            .WithDescriptionTemplate(DescriptionTemplate)
-                            .WithPathTemplate(PathTemplate)
+                            .WithDescriptionTemplate(TemplateDaDescricao)
+                            .WithPathTemplate(TemplateDoCaminhoDeExemplo)
                             .Build();
 
             var json = JsonConvert.SerializeObject(signs);
 
-            using (StreamWriter writer = new StreamWriter(SamplesFilePath))
+            using (StreamWriter writer = new StreamWriter(CaminhoDoArquivoDeDeAmostras))
             {
                 writer.Write(json);
             }
@@ -170,43 +169,43 @@ namespace Testes.Integracao.Dados.Repositorio
             return signs;
         }
 
-        private static SinalEstatico GivenANewSign(string description)
+        private Sinal DadoUmNovoSinal(string description)
         {
             var sign = new SinalBuilder()
                             .ComDescricao(description)
-                            .WithPath("new-sign.json")
+                            .ComCaminhoParaArquivoDeExemplo("new-sign.json")
                             .ComAmostra(new AmostraBuilder().Construir())
                             .Construir();
             return sign;
         }
 
-        private void MustBeAbleToGetSignsByDescriptionAsId(ICollection<SinalEstatico> signs)
+        private void DevePoderBuscarOsSinaisPelaDescricao(ICollection<Sinal> signs)
         {
             string signId;
             for (int i = 0; i < signs.Count; i++)
             {
-                signId = String.Format(DescriptionTemplate, i);
-                signRepositorioSinaisEstaticos.BuscarPorId(signId).Description.Should().Be(signId);
+                signId = String.Format(TemplateDaDescricao, i);
+                repositorioDeSinaisEstaticos.BuscarPorDescricao(signId).Descricao.Should().Be(signId);
             }
         }
 
-        private void MustHaveTheSignsOfTheFile(ICollection<SinalEstatico> signs)
+        private void DeveTerCarregadoOsSinaisDoArquivo(ICollection<Sinal> signs)
         {
-            signRepositorioSinaisEstaticos.Quantidade.Should().Be(signs.Count);
+            repositorioDeSinaisEstaticos.Quantidade.Should().Be(signs.Count);
             for (int i = 0; i < signs.Count; i++)
             {
-                signRepositorioSinaisEstaticos
+                repositorioDeSinaisEstaticos
                     .BuscarPorIndice(i)
                     .Should()
-                    .Match<SinalEstatico>(sign =>
-                        sign.Description == String.Format(DescriptionTemplate, i) &&
-                        sign.ExampleFilePath == String.Format(PathTemplate, i) &&
+                    .Match<Sinal>(sign =>
+                        sign.Descricao == String.Format(TemplateDaDescricao, i) &&
+                        sign.CaminhoParaArquivoDeExemplo == String.Format(TemplateDoCaminhoDeExemplo, i) &&
                         sign.Amostras.Count == 4);
             }
         }
-        private string GetSamplesFileContent()
+        private string BuscarConteudoDoArquivoDeSinais()
         {
-            using (StreamReader reader = new StreamReader(SamplesFilePath))
+            using (StreamReader reader = new StreamReader(CaminhoDoArquivoDeDeAmostras))
             {
                 return reader.ReadToEnd();
             }

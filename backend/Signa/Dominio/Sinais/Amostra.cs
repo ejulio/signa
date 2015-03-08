@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace Signa.Dominio.Sinais.Dinamico
+namespace Signa.Dominio.Sinais
 {
-    public class AmostraDeSinal
+    public class Amostra
     {
-        public IList<FrameDeSinal> Frames { get; set; }
+        public IList<Frame> Frames { get; set; }
 
-        public AmostraDeSinal()
+        public Amostra()
         {
-            Frames = new FrameDeSinal[0];
+            Frames = new Frame[0];
         }
 
         public double[][] ToArray()

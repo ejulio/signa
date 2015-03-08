@@ -8,7 +8,7 @@ namespace Signa.Dados.Repositorio
         int Quantidade { get; }
         void Adicionar(TEntidade sinal);
         TEntidade BuscarPorIndice(int indice);
-        TEntidade BuscarPorId(string id);
+        TEntidade BuscarPorDescricao(string id);
         void Carregar();
         void SalvarAlteracoes();
     }
