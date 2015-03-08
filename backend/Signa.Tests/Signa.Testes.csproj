@@ -45,6 +45,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -62,27 +66,37 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Dados\SinaisEstaticosControllerTest.cs" />
-    <Compile Include="Dominio\AlgorithmInitializerFacadeTest.cs" />
-    <Compile Include="Dominio\Algoritmos\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinalTeste.cs" />
-    <Compile Include="Dominio\Algoritmos\Dinamico\HcrfTeste.cs" />
-    <Compile Include="Dominio\Algoritmos\SignRecognitionAlgorithmFactoryTest.cs" />
-    <Compile Include="Dominio\Algoritmos\Estatico\SignRecognitionAlgorithmDataTest.cs" />
-    <Compile Include="Dominio\Caracteristicas\HandTest.cs" />
-    <Compile Include="Dominio\Sinais\Dinamico\SignSampleTest.cs" />
-    <Compile Include="Dominio\Sinais\Dinamico\SignFrameTest.cs" />
-    <Compile Include="Dominio\Caracteristicas\FingerTest.cs" />
-    <Compile Include="Dominio\Sinais\Estatico\SampleTest.cs" />
+    <Compile Include="Comum\Builders\ArrayDeDouble.cs" />
+    <Compile Include="Comum\Builders\Dominio\Caracteristicas\DedoBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Caracteristicas\MaoBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Dinamico\AmostraDeSinalBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Dinamico\FrameDeSinalBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Dinamico\SinalBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\DynamicSignCollectionBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Estatico\AmostraBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Estatico\SinalBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\StaticSignCollectionBuilder.cs" />
+    <Compile Include="Integracao\Dados\Repositorio\RepositoryFactoryTest.cs" />
+    <Compile Include="Integracao\Dados\Repositorio\SignRepositoryTest.cs" />
+    <Compile Include="Integracao\Dados\Repositorio\StaticSignRepositoryTest.cs" />
+    <Compile Include="Integracao\Dados\StaticSignControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Dominio\Algoritmos\Estatico\SvmTest.cs" />
-    <Compile Include="Util\IEnumerableExtensionsTest.cs" />
-    <Compile Include="Util\StringExtensionsTest.cs" />
+    <Compile Include="Unidade\Dados\SinaisEstaticosControllerTest.cs" />
+    <Compile Include="Unidade\Dominio\AlgorithmInitializerFacadeTest.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinalTeste.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\HcrfTeste.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Estatico\SignRecognitionAlgorithmDataTest.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Estatico\SvmTest.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\SignRecognitionAlgorithmFactoryTest.cs" />
+    <Compile Include="Unidade\Dominio\Caracteristicas\FingerTest.cs" />
+    <Compile Include="Unidade\Dominio\Caracteristicas\HandTest.cs" />
+    <Compile Include="Unidade\Dominio\Sinais\Dinamico\SignFrameTest.cs" />
+    <Compile Include="Unidade\Dominio\Sinais\Dinamico\SignSampleTest.cs" />
+    <Compile Include="Unidade\Dominio\Sinais\Estatico\SampleTest.cs" />
+    <Compile Include="Unidade\Util\IEnumerableExtensionsTest.cs" />
+    <Compile Include="Unidade\Util\StringExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Signa.Tests.Common\Signa.Testes.Comum.csproj">
-      <Project>{1fe9a1aa-e9c8-4836-8679-eb9997b8816d}</Project>
-      <Name>Signa.Testes.Comum</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Signa\Signa.csproj">
       <Project>{b73a5508-76e4-4a0d-ad09-f436a851b558}</Project>
       <Name>Signa</Name>
@@ -90,6 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Integracao\JsonTestData\sign-samples.json" />
+    <None Include="Integracao\samples\samples.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

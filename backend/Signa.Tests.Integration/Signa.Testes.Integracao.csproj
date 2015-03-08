@@ -79,10 +79,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Signa.Tests.Common\Signa.Testes.Comum.csproj">
-      <Project>{1fe9a1aa-e9c8-4836-8679-eb9997b8816d}</Project>
-      <Name>Signa.Testes.Comum</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Signa\Signa.csproj">
       <Project>{b73a5508-76e4-4a0d-ad09-f436a851b558}</Project>
       <Name>Signa</Name>
