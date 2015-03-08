@@ -1,15 +1,15 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Dados.Repositorio;
 using Signa.Domain.Sinais.Dinamico;
-using Signa.Tests.Common.Builders.Dominio.Sinais;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Dinamico;
-using System;
-using System.Collections.Generic;
-using System.IO;
+using Signa.Testes.Comum.Builders.Dominio.Sinais;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
-namespace Signa.Tests.Integration.Dados.Repositorio
+namespace Signa.Testes.Integracao.Dados.Repositorio
 {
     [TestClass]
     public class SignRepositoryTest

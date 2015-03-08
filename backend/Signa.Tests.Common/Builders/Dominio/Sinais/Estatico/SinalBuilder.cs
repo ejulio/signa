@@ -1,7 +1,7 @@
-﻿using Signa.Domain.Sinais.Estatico;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Signa.Domain.Sinais.Estatico;
 
-namespace Signa.Tests.Common.Builders.Dominio.Sinais.Estatico
+namespace Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico
 {
     public class SinalBuilder
     {

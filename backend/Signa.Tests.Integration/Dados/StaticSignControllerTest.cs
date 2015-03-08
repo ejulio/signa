@@ -1,13 +1,13 @@
-﻿using FluentAssertions;
+﻿using System.IO;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Estatico;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico;
 using Signa.Util;
-using System.IO;
 
-namespace Signa.Tests.Integration.Dados
+namespace Signa.Testes.Integracao.Dados
 {
     [TestClass]
     public class StaticSignControllerTest

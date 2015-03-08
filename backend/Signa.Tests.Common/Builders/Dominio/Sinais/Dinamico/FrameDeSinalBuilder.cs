@@ -1,8 +1,8 @@
 ﻿using Signa.Domain.Caracteristicas;
 using Signa.Domain.Sinais.Dinamico;
-using Signa.Tests.Common.Builders.Dominio.Caracteristicas;
+using Signa.Testes.Comum.Builders.Dominio.Caracteristicas;
 
-namespace Signa.Tests.Common.Builders.Dominio.Sinais.Dinamico
+namespace Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico
 {
     public class FrameDeSinalBuilder
     {

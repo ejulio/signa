@@ -1,12 +1,12 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Caracteristicas;
 using Signa.Domain.Sinais.Dinamico;
-using Signa.Tests.Common.Builders.Dominio.Caracteristicas;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Dinamico;
-using System.Linq;
+using Signa.Testes.Comum.Builders.Dominio.Caracteristicas;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
-namespace Signa.Tests.Dominio.Sinais.Dinamico
+namespace Signa.Testes.Dominio.Sinais.Dinamico
 {
     [TestClass]
     public class SignFrameTest

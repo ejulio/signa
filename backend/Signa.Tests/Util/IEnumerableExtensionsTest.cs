@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Util;
-using System.Linq;
 
-namespace Signa.Tests.Util
+namespace Signa.Testes.Util
 {
     [TestClass]
     public class IEnumerableExtensionsTest

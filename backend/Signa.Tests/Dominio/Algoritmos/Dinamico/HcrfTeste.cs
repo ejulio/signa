@@ -1,13 +1,13 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Algoritmos.Dinamico;
 using Signa.Domain.Sinais.Dinamico;
-using Signa.Tests.Common.Builders.Dominio.Caracteristicas;
-using Signa.Tests.Common.Builders.Dominio.Sinais;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Dinamico;
-using System;
+using Signa.Testes.Comum.Builders.Dominio.Caracteristicas;
+using Signa.Testes.Comum.Builders.Dominio.Sinais;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
-namespace Signa.Tests.Dominio.Algoritmos.Dinamico
+namespace Signa.Testes.Dominio.Algoritmos.Dinamico
 {
     [TestClass]
     public class HcrfTeste

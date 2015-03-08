@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Caracteristicas;
 
-namespace Signa.Tests.Dominio.Caracteristicas
+namespace Signa.Testes.Dominio.Caracteristicas
 {
     [TestClass]
     public class FingerTest

@@ -1,8 +1,8 @@
 ﻿using Signa.Domain.Caracteristicas;
 using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Caracteristicas;
+using Signa.Testes.Comum.Builders.Dominio.Caracteristicas;
 
-namespace Signa.Tests.Common.Builders.Dominio.Sinais.Estatico
+namespace Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico
 {
     public class AmostraBuilder
     {

@@ -6,8 +6,8 @@
     <ProjectGuid>{6A52C36B-BFE5-440D-BCDB-13500F42E151}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Signa.Tests</RootNamespace>
-    <AssemblyName>Signa.Tests</AssemblyName>
+    <RootNamespace>Signa.Testes</RootNamespace>
+    <AssemblyName>Signa.Testes</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -79,9 +79,9 @@
     <Compile Include="Util\StringExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Signa.Tests.Common\Signa.Tests.Common.csproj">
+    <ProjectReference Include="..\Signa.Tests.Common\Signa.Testes.Comum.csproj">
       <Project>{1fe9a1aa-e9c8-4836-8679-eb9997b8816d}</Project>
-      <Name>Signa.Tests.Common</Name>
+      <Name>Signa.Testes.Comum</Name>
     </ProjectReference>
     <ProjectReference Include="..\Signa\Signa.csproj">
       <Project>{b73a5508-76e4-4a0d-ad09-f436a851b558}</Project>

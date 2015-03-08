@@ -1,9 +1,9 @@
-﻿using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Estatico;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Signa.Domain.Sinais.Estatico;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
-namespace Signa.Tests.Common.Builders.Dominio.Sinais
+namespace Signa.Testes.Comum.Builders.Dominio.Sinais
 {
     public class StaticSignCollectionBuilder
     {

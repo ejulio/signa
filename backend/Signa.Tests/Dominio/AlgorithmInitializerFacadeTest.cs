@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections.Generic;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Dados.Repositorio;
@@ -6,11 +8,9 @@ using Signa.Domain;
 using Signa.Domain.Algoritmos;
 using Signa.Domain.Algoritmos.Estatico;
 using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Sinais;
-using System;
-using System.Collections.Generic;
+using Signa.Testes.Comum.Builders.Dominio.Sinais;
 
-namespace Signa.Tests.Dominio
+namespace Signa.Testes.Dominio
 {
     [TestClass]
     public class AlgorithmInitializerFacadeTest

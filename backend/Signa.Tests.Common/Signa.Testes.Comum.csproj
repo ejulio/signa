@@ -7,8 +7,8 @@
     <ProjectGuid>{1FE9A1AA-E9C8-4836-8679-EB9997B8816D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Signa.Tests.Common</RootNamespace>
-    <AssemblyName>Signa.Tests.Common</AssemblyName>
+    <RootNamespace>Signa.Testes.Comum</RootNamespace>
+    <AssemblyName>Signa.Testes.Comum</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

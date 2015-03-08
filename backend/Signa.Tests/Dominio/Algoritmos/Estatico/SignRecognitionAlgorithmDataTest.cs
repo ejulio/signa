@@ -1,15 +1,15 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Domain.Algoritmos.Estatico;
-using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Sinais;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Estatico;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Signa.Domain.Algoritmos.Estatico;
+using Signa.Domain.Sinais.Estatico;
+using Signa.Testes.Comum.Builders.Dominio.Sinais;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
-namespace Signa.Tests.Dominio.Algoritmos.Estatico
+namespace Signa.Testes.Dominio.Algoritmos.Estatico
 {
     [TestClass]
     public class SignRecognitionAlgorithmDataTest

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Signa.Tests.Common.Builders
+namespace Signa.Testes.Comum.Builders
 {
     public class ArrayDeDouble
     {

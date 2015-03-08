@@ -1,12 +1,12 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Caracteristicas;
 using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Caracteristicas;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Estatico;
-using System.Linq;
+using Signa.Testes.Comum.Builders.Dominio.Caracteristicas;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
-namespace Signa.Tests.Dominio.Sinais.Estatico
+namespace Signa.Testes.Dominio.Sinais.Estatico
 {
     [TestClass]
     public class SampleTest

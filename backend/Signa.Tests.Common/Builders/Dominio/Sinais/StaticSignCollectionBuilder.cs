@@ -1,9 +1,9 @@
-﻿using Signa.Domain.Sinais.Dinamico;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Dinamico;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Signa.Domain.Sinais.Dinamico;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
-namespace Signa.Tests.Common.Builders.Dominio.Sinais
+namespace Signa.Testes.Comum.Builders.Dominio.Sinais
 {
     public class ColecaoDeSinaisDinamicosBuilder
     {

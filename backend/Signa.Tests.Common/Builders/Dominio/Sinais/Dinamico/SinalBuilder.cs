@@ -1,7 +1,7 @@
-﻿using Signa.Domain.Sinais.Dinamico;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Signa.Domain.Sinais.Dinamico;
 
-namespace Signa.Tests.Common.Builders.Dominio.Sinais.Dinamico
+namespace Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico
 {
     public class SinalBuilder
     {

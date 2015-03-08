@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Util;
 
-namespace Signa.Tests.Util
+namespace Signa.Testes.Util
 {
     [TestClass]
     public class StringExtensionsTest

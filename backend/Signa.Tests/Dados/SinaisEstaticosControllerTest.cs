@@ -5,9 +5,9 @@ using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Domain.Algoritmos;
 using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Sinais.Estatico;
+using Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
-namespace Signa.Tests.Dados
+namespace Signa.Testes.Dados
 {
     [TestClass]
     public class SinaisEstaticosControllerTest

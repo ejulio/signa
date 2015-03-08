@@ -1,13 +1,13 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using System.IO;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Dados.Repositorio;
 using Signa.Domain.Sinais.Estatico;
-using Signa.Tests.Common.Builders.Dominio.Sinais;
-using System.Collections.Generic;
-using System.IO;
+using Signa.Testes.Comum.Builders.Dominio.Sinais;
 
-namespace Signa.Tests.Integration.Dados.Repositorio
+namespace Signa.Testes.Integracao.Dados.Repositorio
 {
     [TestClass]
     public class RepositoryFactoryTest

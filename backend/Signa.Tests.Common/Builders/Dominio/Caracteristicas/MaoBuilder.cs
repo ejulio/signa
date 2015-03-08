@@ -1,6 +1,6 @@
 ﻿using Signa.Domain.Caracteristicas;
 
-namespace Signa.Tests.Common.Builders.Dominio.Caracteristicas
+namespace Signa.Testes.Comum.Builders.Dominio.Caracteristicas
 {
     public class MaoBuilder
     {
