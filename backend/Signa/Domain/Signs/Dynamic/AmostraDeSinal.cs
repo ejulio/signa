@@ -4,11 +4,11 @@ namespace Signa.Domain.Signs.Dynamic
 {
     public class AmostraDeSinal
     {
-        public IList<SignFrame> Frames { get; set; }
+        public IList<FrameDeSinal> Frames { get; set; }
 
         public AmostraDeSinal()
         {
-            Frames = new SignFrame[0];
+            Frames = new FrameDeSinal[0];
         }
 
         public double[][] ToArray()

@@ -3,27 +3,27 @@ using System.Linq;
 
 namespace Signa.Domain.Features
 {
-    public class Hand : IFeature
+    public class Mao : IFeature
     {
         public double[] PalmNormal { get; set; }
         public double[] HandDirection { get; set; }
 
-        public Finger[] Fingers { get; set; }
+        public Dedo[] Dedos { get; set; }
 
         public double[] ToArray()
         {
-            var fingersData = Fingers.Select(f => f.ToArray()).Concatenate();
+            var fingersData = Dedos.Select(f => f.ToArray()).Concatenate();
             
             return PalmNormal
                 .Concat(HandDirection)
                 .Concat(fingersData)
                 .ToArray();
         }
-        public static Hand Empty()
+        public static Mao Empty()
         {
-            return new Hand
+            return new Mao
             {
-                Fingers = new [] { Finger.Empty(), Finger.Empty(), Finger.Empty(), Finger.Empty(), Finger.Empty() },
+                Dedos = new [] { Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty() },
                 HandDirection = new[] { 0.0, 0.0, 0.0 },
                 PalmNormal = new[] { 0.0, 0.0, 0.0 }
             };

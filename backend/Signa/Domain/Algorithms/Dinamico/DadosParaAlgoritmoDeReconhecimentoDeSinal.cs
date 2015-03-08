@@ -21,10 +21,10 @@ namespace Signa.Domain.Algorithms.Dinamico
             this.sinais = sinais;
             entradas = new LinkedList<double[][]>();
             saidas = new LinkedList<int>();
-            ExtrairDadosDos();
+            ExtrairDadosDasAmostras();
         }
 
-        private void ExtrairDadosDos()
+        private void ExtrairDadosDasAmostras()
         {
             QuantidadeDeClasses = 0;
             int identificadorDoSinal = 0;

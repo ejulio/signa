@@ -16,18 +16,18 @@ namespace Signa.Tests.Domain.Features
             var handDirection = new[] { 0.896, 0.132, 0.745 };
             var fingers = new[] 
             { 
-                FingerBuilder.Thumb(), 
-                FingerBuilder.Index(), 
-                FingerBuilder.Middle(), 
-                FingerBuilder.Ring(), 
-                FingerBuilder.Pinky() 
+                DedoBuilder.Dedao(), 
+                DedoBuilder.Indicador(), 
+                DedoBuilder.Meio(), 
+                DedoBuilder.Anelar(), 
+                DedoBuilder.Mindinho() 
             };
 
-            var hand = new Hand
+            var hand = new Mao
             {
                 PalmNormal = palmNormal,
                 HandDirection = handDirection,
-                Fingers = fingers
+                Dedos = fingers
             };
 
             var handData = hand.ToArray();
@@ -38,15 +38,15 @@ namespace Signa.Tests.Domain.Features
             handData.Should().ContainInOrder(expectedHandData);
         }
 
-        private double[] GivenExpectedHandDataFor(double[] palmNormal, double[] handDirection, Finger[] fingers)
+        private double[] GivenExpectedHandDataFor(double[] palmNormal, double[] handDirection, Dedo[] dedos)
         {
             return palmNormal
                 .Concat(handDirection)
-                .Concat(fingers[0].ToArray())
-                .Concat(fingers[1].ToArray())
-                .Concat(fingers[2].ToArray())
-                .Concat(fingers[3].ToArray())
-                .Concat(fingers[4].ToArray())
+                .Concat(dedos[0].ToArray())
+                .Concat(dedos[1].ToArray())
+                .Concat(dedos[2].ToArray())
+                .Concat(dedos[3].ToArray())
+                .Concat(dedos[4].ToArray())
                 .ToArray();
         }
     }

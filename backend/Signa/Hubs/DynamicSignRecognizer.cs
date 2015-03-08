@@ -6,22 +6,22 @@ namespace Signa.Hubs
 {
     public class DynamicSignRecognizer : Hub
     {
-        public int Recognize(SignFrame[] frames)
+        public int Recognize(FrameDeSinal[] framesDeSinal)
         {
             throw new NotImplementedException("Implementar para reconhecer o sinal utilizando HMM ou HCRF");
         }
 
-        public int RecognizeFirstFrame(SignFrame frame)
+        public int RecognizeFirstFrame(FrameDeSinal frameDeSinal)
         {
             throw new NotImplementedException("Implemetar para reconhecer o frame utilizando SVM");
         }
 
-        public int RecognizeLastFrame(SignFrame frame)
+        public int RecognizeLastFrame(FrameDeSinal frameDeSinal)
         {
             throw new NotImplementedException("Implemetar para reconhecer o frame utilizando SVM");
         }
 
-        public void Save(string name, string exampleFileContent, SignFrame[] frames)
+        public void Save(string name, string exampleFileContent, FrameDeSinal[] framesDeSinal)
         {
             throw new NotImplementedException("Implementar para salvar o sinal e treinar o algoritmo HMM ou HCRF");
         }

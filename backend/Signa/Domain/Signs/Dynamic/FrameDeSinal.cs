@@ -1,10 +1,11 @@
 ﻿using Signa.Domain.Features;
 using System.Linq;
 
-namespace Signa.Domain.Signs.Static
+namespace Signa.Domain.Signs.Dynamic
 {
-    public class Sample
+    public class FrameDeSinal
     {
+        // TODO: Adicionar o tipo do frame: Gesto Estático, Frame Inicial, Frame Final
         private Mao leftMao;
         public Mao LeftMao
         {

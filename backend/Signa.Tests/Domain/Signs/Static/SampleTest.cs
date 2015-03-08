@@ -15,7 +15,7 @@ namespace Signa.Tests.Domain.Signs.Static
         public void building_a_sample_with_left_hand()
         {
             var leftHand = GivenLeftHand();
-            var rightHand = Hand.Empty();
+            var rightHand = Mao.Empty();
             var sample = GivenSampleWithHands(leftHand, null);
 
             var sampleArray = sample.ToArray();
@@ -26,7 +26,7 @@ namespace Signa.Tests.Domain.Signs.Static
         [TestMethod]
         public void building_a_sample_with_right_hand()
         {
-            var leftHand = Hand.Empty();
+            var leftHand = Mao.Empty();
             var rightHand = GivenRightHand();
             var sample = GivenSampleWithHands(null, rightHand);
 
@@ -52,51 +52,51 @@ namespace Signa.Tests.Domain.Signs.Static
         {
             var sample = new Sample
             {
-                LeftHand = null,
-                RightHand = null
+                LeftMao = null,
+                RightMao = null
             };
 
-            var defaultValues = Hand.Empty();
+            var defaultValues = Mao.Empty();
 
-            sample.LeftHand.ToArray().Should().ContainInOrder(defaultValues.ToArray());
-            sample.RightHand.ToArray().Should().ContainInOrder(defaultValues.ToArray());
+            sample.LeftMao.ToArray().Should().ContainInOrder(defaultValues.ToArray());
+            sample.RightMao.ToArray().Should().ContainInOrder(defaultValues.ToArray());
         }
 
-        private Sample GivenSampleWithHands(Hand leftHand, Hand rightHand)
+        private Sample GivenSampleWithHands(Mao leftMao, Mao rightMao)
         {
             var sample = new AmostraBuilder()
-                .WithLeftHand(leftHand)
-                .WithRightHand(rightHand)
+                .WithLeftHand(leftMao)
+                .WithRightHand(rightMao)
                 .Construir();
 
             return sample;
         }
 
-        private Hand GivenRightHand()
+        private Mao GivenRightHand()
         {
-            var rightHand = new HandBuilder()
-                .WithFingers(FingerBuilder.DefaultFingers())
-                .WithHandDirection(new[] { 0.4, 0.5, 0.6 })
-                .WithPalmNormal(new[] { 0.0, 1.0, 1.0 })
-                .Build();
+            var rightHand = new MaoBuilder()
+                .ComDedos(DedoBuilder.DedosPadroes())
+                .ComDirecaoDaMao(new[] { 0.4, 0.5, 0.6 })
+                .ComVetorNormalDaPalma(new[] { 0.0, 1.0, 1.0 })
+                .Construir();
 
             return rightHand;
         }
 
-        private Hand GivenLeftHand()
+        private Mao GivenLeftHand()
         {
-            var leftHand = new HandBuilder()
-                .WithFingers(FingerBuilder.DefaultFingers())
-                .WithHandDirection(new[] { 0.1, 0.2, 0.3 })
-                .WithPalmNormal(new[] { 1.0, 0.0, 1.0 })
-                .Build();
+            var leftHand = new MaoBuilder()
+                .ComDedos(DedoBuilder.DedosPadroes())
+                .ComDirecaoDaMao(new[] { 0.1, 0.2, 0.3 })
+                .ComVetorNormalDaPalma(new[] { 1.0, 0.0, 1.0 })
+                .Construir();
 
             return leftHand;
         }
 
-        private void MustReturnAnArrayWithLeftAndRightHandData(Hand leftHand, Hand rightHand, double[] frameArray)
+        private void MustReturnAnArrayWithLeftAndRightHandData(Mao leftMao, Mao rightMao, double[] frameArray)
         {
-            var expectedFrameData = leftHand.ToArray().Concat(rightHand.ToArray()).ToArray();
+            var expectedFrameData = leftMao.ToArray().Concat(rightMao.ToArray()).ToArray();
 
             frameArray.Should().HaveCount(expectedFrameData.Count());
             frameArray.Should().ContainInOrder(expectedFrameData);

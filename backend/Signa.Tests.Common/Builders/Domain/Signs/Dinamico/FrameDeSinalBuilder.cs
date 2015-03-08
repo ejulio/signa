@@ -6,34 +6,41 @@ namespace Signa.Tests.Common.Builders.Domain.Signs.Dinamico
 {
     public class FrameDeSinalBuilder
     {
-        private Hand leftHand;
-        private Hand rightHand;
+        private Mao maoEsquerda;
+        private Mao maoDireita;
 
-        public FrameDeSinalBuilder WithLeftHand(Hand leftHand)
+        public FrameDeSinalBuilder ComMaoEsquerda(Mao leftMao)
         {
-            this.leftHand = leftHand;
+            this.maoEsquerda = leftMao;
             return this;
         }
 
-        public FrameDeSinalBuilder WithRightHand(Hand rightHand)
+        public FrameDeSinalBuilder WithRightHand(Mao rightMao)
         {
-            this.rightHand = rightHand;
+            this.maoDireita = rightMao;
             return this;
         }
 
         public FrameDeSinalBuilder ComMaosEsquerdaEDireitaPadroes()
         {
-            rightHand = new HandBuilder().Build();
-            leftHand = new HandBuilder().Build();
+            maoDireita = new MaoBuilder().Construir();
+            maoEsquerda = new MaoBuilder().Construir();
             return this;
         }
 
-        public SignFrame Construir()
+        public FrameDeSinalBuilder ParaOIndice(int indice)
         {
-            return new SignFrame
+            maoDireita = new MaoBuilder().ParaOIndice(indice).Construir();
+            maoEsquerda = new MaoBuilder().ParaOIndice(indice).Construir();
+            return this;
+        }
+
+        public FrameDeSinal Construir()
+        {
+            return new FrameDeSinal
             {
-                LeftHand = leftHand,
-                RightHand = rightHand
+                LeftMao = maoEsquerda,
+                RightMao = maoDireita
             };
         }
     }

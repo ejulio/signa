@@ -50,9 +50,9 @@ namespace Signa.Tests.Domain.Signs.Dynamic
             MustReturnAnArrayWithFrameData(frames, sampleArray);
         }
 
-        private SignFrame[] GivenAnArrayOfSignFramesWithCount(int count)
+        private FrameDeSinal[] GivenAnArrayOfSignFramesWithCount(int count)
         {
-            var frames = new SignFrame[count];
+            var frames = new FrameDeSinal[count];
 
             for (var i = 0; i < count; i++)
             {
@@ -62,9 +62,9 @@ namespace Signa.Tests.Domain.Signs.Dynamic
             return frames;
         }
 
-        private void MustReturnAnArrayWithFrameData(SignFrame[] frames, double[][] sampleArray)
+        private void MustReturnAnArrayWithFrameData(FrameDeSinal[] framesDeSinal, double[][] sampleArray)
         {
-            var expectedFrameData = frames.Select(f => f.ToArray());
+            var expectedFrameData = framesDeSinal.Select(f => f.ToArray());
 
             sampleArray.Should().HaveCount(expectedFrameData.Count());
 

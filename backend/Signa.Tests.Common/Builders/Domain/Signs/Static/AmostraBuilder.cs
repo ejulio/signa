@@ -6,25 +6,25 @@ namespace Signa.Tests.Common.Builders.Domain.Signs.Static
 {
     public class AmostraBuilder
     {
-        private Hand leftHand;
-        private Hand rightHand;
+        private Mao leftMao;
+        private Mao rightMao;
 
-        public AmostraBuilder WithLeftHand(Hand leftHand)
+        public AmostraBuilder WithLeftHand(Mao leftMao)
         {
-            this.leftHand = leftHand;
+            this.leftMao = leftMao;
             return this;
         }
 
-        public AmostraBuilder WithRightHand(Hand rightHand)
+        public AmostraBuilder WithRightHand(Mao rightMao)
         {
-            this.rightHand = rightHand;
+            this.rightMao = rightMao;
             return this;
         }
 
         public AmostraBuilder WithDefaultLeftAndRightHand()
         {
-            rightHand = new HandBuilder().Build();
-            leftHand = new HandBuilder().Build();
+            rightMao = new MaoBuilder().Construir();
+            leftMao = new MaoBuilder().Construir();
             return this;
         }
 
@@ -32,8 +32,8 @@ namespace Signa.Tests.Common.Builders.Domain.Signs.Static
         {
             return new Sample
             {
-                LeftHand = leftHand,
-                RightHand = rightHand
+                LeftMao = leftMao,
+                RightMao = rightMao
             };
         } 
     }

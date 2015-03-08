@@ -2,17 +2,17 @@
 
 namespace Signa.Tests.Common.Builders
 {
-    public class DoubleArrayBuilder
+    public class ArrayDeDouble
     {
         private int size;
         
-        public DoubleArrayBuilder WithSize(int size)
+        public ArrayDeDouble ComTamanho(int size)
         {
             this.size = size;
             return this;
         }
 
-        public double[] Build()
+        public double[] Construir()
         {
             double[] array = new double[size];
             Random random = new Random();

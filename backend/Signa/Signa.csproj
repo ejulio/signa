@@ -130,6 +130,7 @@
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
     <Compile Include="Domain\AlgorithmInitializerFacade.cs" />
     <Compile Include="Domain\Algorithms\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
+    <Compile Include="Domain\Algorithms\Dinamico\Hcrf.cs" />
     <Compile Include="Domain\Algorithms\ISignRecognitionAlgorithmFactory.cs" />
     <Compile Include="Domain\Algorithms\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
     <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactory.cs" />
@@ -139,11 +140,11 @@
     <Compile Include="Hubs\DynamicSignRecognizer.cs" />
     <Compile Include="Hubs\SignSequence.cs" />
     <Compile Include="Hubs\StaticSignRecognizer.cs" />
-    <Compile Include="Domain\Features\Finger.cs" />
-    <Compile Include="Domain\Features\FingerType.cs" />
-    <Compile Include="Domain\Features\Hand.cs" />
+    <Compile Include="Domain\Features\Dedo.cs" />
+    <Compile Include="Domain\Features\TipoDeDedo.cs" />
+    <Compile Include="Domain\Features\Mao.cs" />
     <Compile Include="Domain\Signs\Dynamic\SinalDinamico.cs" />
-    <Compile Include="Domain\Signs\Dynamic\SignFrame.cs" />
+    <Compile Include="Domain\Signs\Dynamic\FrameDeSinal.cs" />
     <Compile Include="Domain\Signs\SignInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Signs\Dynamic\AmostraDeSinal.cs" />

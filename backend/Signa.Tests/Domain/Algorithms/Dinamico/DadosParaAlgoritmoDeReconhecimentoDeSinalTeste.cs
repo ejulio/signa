@@ -10,7 +10,7 @@ using Signa.Tests.Common.Builders.Domain.Signs.Dinamico;
 namespace Signa.Tests.Domain.Algorithms.Dinamico
 {
     [TestClass]
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinalTest
+    public class DadosParaAlgoritmoDeReconhecimentoDeSinalTeste
     {
         [TestMethod]
         public void criando_dados_para_um_sinal_com_cinco_frames()

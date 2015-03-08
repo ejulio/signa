@@ -42,13 +42,13 @@
     <Compile Include="Builders\Domain\Signs\StaticSignCollectionBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\Static\AmostraBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\Static\SinalBuilder.cs" />
-    <Compile Include="Builders\DoubleArrayBuilder.cs" />
-    <Compile Include="Builders\Domain\Features\FingerBuilder.cs" />
+    <Compile Include="Builders\ArrayDeDouble.cs" />
+    <Compile Include="Builders\Domain\Features\DedoBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\Dinamico\FrameDeSinalBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\Dinamico\AmostraDeSinalBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\Dinamico\SinalBuilder.cs" />
     <Compile Include="Builders\Domain\Signs\DynamicSignCollectionBuilder.cs" />
-    <Compile Include="Builders\Domain\Features\HandBuilder.cs" />
+    <Compile Include="Builders\Domain\Features\MaoBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

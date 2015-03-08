@@ -19,7 +19,7 @@ namespace Signa.Tests.Common.Builders.Domain.Signs
             sampleGenerator = index =>
             {
                 var length = index + 2;
-                var frames = new SignFrame[length];
+                var frames = new FrameDeSinal[length];
 
                 for (var i = 0; i < length; i++)
                 {

@@ -71,22 +71,22 @@ namespace Signa.Tests.Domain.Algorithms.Static
                 .Construir();
         }
 
-        private Hand GivenHandWithFingers(int index)
+        private Mao GivenHandWithFingers(int index)
         {
             var fingers = new[] 
             {
-                new FingerBuilder().OfType(FingerType.Thumb).WithDirection(new double[] { index, index, index }).Build(),
-                new FingerBuilder().OfType(FingerType.Index).WithDirection(new double[] { index, index, index }).Build(),
-                new FingerBuilder().OfType(FingerType.Middle).WithDirection(new double[] { index, index, index }).Build(),
-                new FingerBuilder().OfType(FingerType.Ring).WithDirection(new double[] { index, index, index }).Build(),
-                new FingerBuilder().OfType(FingerType.Pinky).WithDirection(new double[] { index, index, index }).Build()
+                new DedoBuilder().DoTipo(TipoDeDedo.Dedao).ComDirecao(new double[] { index, index, index }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Indicador).ComDirecao(new double[] { index, index, index }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Meio).ComDirecao(new double[] { index, index, index }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Anelar).ComDirecao(new double[] { index, index, index }).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Mindinho).ComDirecao(new double[] { index, index, index }).Construir()
             };
 
-            return new HandBuilder()
-                    .WithFingers(fingers)
-                    .WithPalmNormal(new double[] { index, index, index })
-                    .WithHandDirection(new double[] { index, index, index })
-                    .Build();
+            return new MaoBuilder()
+                    .ComDedos(fingers)
+                    .ComVetorNormalDaPalma(new double[] { index, index, index })
+                    .ComDirecaoDaMao(new double[] { index, index, index })
+                    .Construir();
         }
     }
 }
