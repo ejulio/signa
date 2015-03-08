@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Dados;
-using Signa.Domain.Sinais.Estatico;
+using Signa.Dominio.Sinais.Estatico;
 
 namespace Signa.Hubs
 {

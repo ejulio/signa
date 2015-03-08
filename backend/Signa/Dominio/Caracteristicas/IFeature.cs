@@ -1,4 +1,4 @@
-﻿namespace Signa.Domain.Caracteristicas
+﻿namespace Signa.Dominio.Caracteristicas
 {
     public interface IFeature
     {

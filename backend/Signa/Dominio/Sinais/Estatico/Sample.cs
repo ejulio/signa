@@ -1,7 +1,7 @@
-﻿using Signa.Domain.Caracteristicas;
-using System.Linq;
+﻿using System.Linq;
+using Signa.Dominio.Caracteristicas;
 
-namespace Signa.Domain.Sinais.Estatico
+namespace Signa.Dominio.Sinais.Estatico
 {
     public class Sample
     {

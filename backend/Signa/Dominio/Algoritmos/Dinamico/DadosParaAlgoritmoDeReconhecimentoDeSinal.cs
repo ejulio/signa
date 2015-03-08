@@ -1,8 +1,8 @@
-﻿using Signa.Domain.Sinais.Dinamico;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Signa.Dominio.Sinais.Dinamico;
 
-namespace Signa.Domain.Algoritmos.Dinamico
+namespace Signa.Dominio.Algoritmos.Dinamico
 {
     public class DadosParaAlgoritmoDeReconhecimentoDeSinal
     {

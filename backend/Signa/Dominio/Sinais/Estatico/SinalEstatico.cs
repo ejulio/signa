@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Signa.Domain.Sinais.Estatico
+namespace Signa.Dominio.Sinais.Estatico
 {
     public class SinalEstatico
     {

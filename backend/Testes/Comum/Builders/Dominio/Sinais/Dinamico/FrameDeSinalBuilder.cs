@@ -1,5 +1,5 @@
-﻿using Signa.Domain.Caracteristicas;
-using Signa.Domain.Sinais.Dinamico;
+﻿using Signa.Dominio.Caracteristicas;
+using Signa.Dominio.Sinais.Dinamico;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 
 namespace Testes.Comum.Builders.Dominio.Sinais.Dinamico

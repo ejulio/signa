@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Domain.Algoritmos;
+using Signa.Dominio.Algoritmos;
 
 namespace Testes.Unidade.Dominio.Algoritmos
 {

@@ -1,8 +1,8 @@
-﻿using Signa.Domain.Sinais.Estatico;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Signa.Dominio.Sinais.Estatico;
 
-namespace Signa.Domain.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos.Estatico
 {
     public class SignRecognitionAlgorithmData : IDadosParaAlgoritmoDeReconhecimentoDeSinal
     {

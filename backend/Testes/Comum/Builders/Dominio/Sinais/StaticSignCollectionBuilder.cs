@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Signa.Domain.Sinais.Dinamico;
+using Signa.Dominio.Sinais.Dinamico;
 using Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
 namespace Testes.Comum.Builders.Dominio.Sinais

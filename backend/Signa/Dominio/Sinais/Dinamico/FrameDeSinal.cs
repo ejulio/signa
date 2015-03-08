@@ -1,7 +1,7 @@
-﻿using Signa.Domain.Caracteristicas;
-using System.Linq;
+﻿using System.Linq;
+using Signa.Dominio.Caracteristicas;
 
-namespace Signa.Domain.Sinais.Dinamico
+namespace Signa.Dominio.Sinais.Dinamico
 {
     public class FrameDeSinal
     {

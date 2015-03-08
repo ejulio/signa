@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
-using Signa.Domain.Sinais.Estatico;
+using Signa.Dominio.Sinais.Estatico;
 using Signa.Util;
 using Testes.Comum.Builders.Dominio.Sinais.Estatico;
 

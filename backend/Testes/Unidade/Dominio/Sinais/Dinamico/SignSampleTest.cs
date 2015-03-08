@@ -2,7 +2,7 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Domain.Sinais.Dinamico;
+using Signa.Dominio.Sinais.Dinamico;
 using Testes.Comum.Builders.Dominio.Sinais.Dinamico;
 
 namespace Testes.Unidade.Dominio.Sinais.Dinamico

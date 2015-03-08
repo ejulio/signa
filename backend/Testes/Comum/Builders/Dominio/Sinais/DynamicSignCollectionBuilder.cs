@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Signa.Domain.Sinais.Estatico;
+using Signa.Dominio.Sinais.Estatico;
 using Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
 namespace Testes.Comum.Builders.Dominio.Sinais

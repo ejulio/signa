@@ -1,8 +1,8 @@
 ﻿using Signa.Dados.Repositorio;
-using Signa.Domain.Algoritmos;
-using Signa.Domain.Algoritmos.Estatico;
+using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Estatico;
 
-namespace Signa.Domain
+namespace Signa.Dominio
 {
     public class AlgorithmInitializerFacade
     {

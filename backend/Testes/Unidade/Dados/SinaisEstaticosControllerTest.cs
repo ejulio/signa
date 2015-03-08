@@ -3,8 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
-using Signa.Domain.Algoritmos;
-using Signa.Domain.Sinais.Estatico;
+using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Sinais.Estatico;
 using Testes.Comum.Builders.Dominio.Sinais.Estatico;
 
 namespace Testes.Unidade.Dados

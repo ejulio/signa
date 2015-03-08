@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Dados.Repositorio;
-using Signa.Domain.Sinais.Estatico;
+using Signa.Dominio.Sinais.Estatico;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Estatico;
 

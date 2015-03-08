@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Domain.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos.Estatico
 {
     public interface IDadosParaAlgoritmoDeReconhecimentoDeSinal
     {

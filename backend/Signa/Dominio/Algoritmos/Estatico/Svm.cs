@@ -1,9 +1,9 @@
-﻿using Accord.MachineLearning.VectorMachines;
+﻿using System;
+using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
-using Signa.Domain.Sinais.Estatico;
-using System;
+using Signa.Dominio.Sinais.Estatico;
 
-namespace Signa.Domain.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos.Estatico
 {
     public class Svm : IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {

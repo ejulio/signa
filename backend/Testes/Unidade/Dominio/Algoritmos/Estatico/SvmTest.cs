@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Domain.Algoritmos.Estatico;
-using Signa.Domain.Caracteristicas;
-using Signa.Domain.Sinais.Estatico;
+using Signa.Dominio.Algoritmos.Estatico;
+using Signa.Dominio.Caracteristicas;
+using Signa.Dominio.Sinais.Estatico;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Estatico;

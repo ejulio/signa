@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Domain.Sinais
+namespace Signa.Dominio.Sinais
 {
     public class InformacoesDoSinal
     {

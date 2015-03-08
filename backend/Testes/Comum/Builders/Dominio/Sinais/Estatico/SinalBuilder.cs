@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Signa.Domain.Sinais.Estatico;
+using Signa.Dominio.Sinais.Estatico;
 
 namespace Testes.Comum.Builders.Dominio.Sinais.Estatico
 {

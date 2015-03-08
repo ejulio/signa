@@ -1,4 +1,4 @@
-namespace Signa.Domain.Algoritmos
+namespace Signa.Dominio.Algoritmos
 {
     public interface ISignRecognitionAlgorithmFactory
     {

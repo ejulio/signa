@@ -1,7 +1,7 @@
-﻿using Signa.Domain.Algoritmos.Estatico;
-using Signa.Domain.Sinais.Estatico;
+﻿using Signa.Dominio.Algoritmos.Estatico;
+using Signa.Dominio.Sinais.Estatico;
 
-namespace Signa.Domain.Algoritmos
+namespace Signa.Dominio.Algoritmos
 {
     public interface IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {

@@ -7,7 +7,7 @@ using Owin;
 using Signa.ContentTypeProviders;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
-using Signa.Domain.Algoritmos;
+using Signa.Dominio.Algoritmos;
 
 namespace Signa
 {

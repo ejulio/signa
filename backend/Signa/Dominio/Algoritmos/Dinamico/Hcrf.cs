@@ -1,13 +1,13 @@
-﻿using Accord.Statistics.Distributions.Fitting;
+﻿using System;
+using Accord.Statistics.Distributions.Fitting;
 using Accord.Statistics.Distributions.Multivariate;
 using Accord.Statistics.Distributions.Univariate;
 using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
-using Signa.Domain.Sinais.Dinamico;
-using System;
+using Signa.Dominio.Sinais.Dinamico;
 
-namespace Signa.Domain.Algoritmos.Dinamico
+namespace Signa.Dominio.Algoritmos.Dinamico
 {
     public class Hcrf
     {

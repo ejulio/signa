@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Signa.Domain.Sinais.Dinamico
+namespace Signa.Dominio.Sinais.Dinamico
 {
     public class SinalDinamico
     {

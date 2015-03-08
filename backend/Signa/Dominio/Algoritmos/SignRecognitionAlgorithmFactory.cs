@@ -1,6 +1,6 @@
-﻿using Signa.Domain.Algoritmos.Estatico;
+﻿using Signa.Dominio.Algoritmos.Estatico;
 
-namespace Signa.Domain.Algoritmos
+namespace Signa.Dominio.Algoritmos
 {
     public class SignRecognitionAlgorithmFactory : ISignRecognitionAlgorithmFactory
     {
