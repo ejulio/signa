@@ -1,11 +1,11 @@
-﻿using Microsoft.Owin.Hosting;
+﻿using System;
+using Microsoft.Owin.Hosting;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Domain;
 using Signa.Domain.Algoritmos;
-using System;
 
-namespace Host
+namespace Infraestrutura
 {
     class Program
     {

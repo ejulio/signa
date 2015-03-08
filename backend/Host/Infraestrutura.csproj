@@ -7,8 +7,8 @@
     <ProjectGuid>{074B0BE4-2EA8-4249-B273-F764CC314FBF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Host</RootNamespace>
-    <AssemblyName>Host</AssemblyName>
+    <RootNamespace>Infraestrutura</RootNamespace>
+    <AssemblyName>Infraestrutura</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
