@@ -38,7 +38,7 @@ namespace Signa.Dados
 
         public string CriarArquivoDeExemploSeNaoExistir(string signDescription, string signSample)
         {
-            var filePath = DiretorioDeAmostras + signDescription.RemoveAccents().Underscore() + ".json";
+            var filePath = DiretorioDeAmostras + signDescription.RemoverAcentos().Underscore() + ".json";
 
             if (File.Exists(filePath))
                 return filePath;

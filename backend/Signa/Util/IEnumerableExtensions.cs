@@ -5,11 +5,11 @@ namespace Signa.Util
 {
     public static class IEnumerableExtensions
     {
-        public static IEnumerable<TInput> Concatenate<TInput>(this IEnumerable<IEnumerable<TInput>> enumerables)
+        public static IEnumerable<TInput> Concatenar<TInput>(this IEnumerable<IEnumerable<TInput>> enumeraveis)
         {
-            IEnumerable<TInput> collection = new TInput[0];
+            IEnumerable<TInput> colecaoVazia = new TInput[0];
 
-            return enumerables.Aggregate(collection, (current, enumerable) => current.Concat(enumerable));
+            return enumeraveis.Aggregate(colecaoVazia, (atual, enumeravel) => atual.Concat(enumeravel));
         }
     }
 }

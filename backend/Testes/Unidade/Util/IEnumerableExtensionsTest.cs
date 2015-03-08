@@ -9,7 +9,7 @@ namespace Testes.Unidade.Util
     public class IEnumerableExtensionsTest
     {
         [TestMethod]
-        public void concatenating_arrays_of_double()
+        public void concatenando_arrays_de_double()
         {
             var arrays = new[]
             {
@@ -17,12 +17,12 @@ namespace Testes.Unidade.Util
                 new [] { 1.4, 1.6, 1.8 }
             };
 
-            var concatenatedArray = arrays.Concatenate().ToArray();
+            var arrayConcatenado = arrays.Concatenar().ToArray();
 
-            var expectedArray = new[] { 0.8, 0.7, 0.5, 1.4, 1.6, 1.8 };
+            var arrayEsperado = new[] { 0.8, 0.7, 0.5, 1.4, 1.6, 1.8 };
 
-            concatenatedArray.Should().HaveSameCount(expectedArray);
-            concatenatedArray.Should().ContainInOrder(expectedArray);
+            arrayConcatenado.Should().HaveSameCount(arrayEsperado);
+            arrayConcatenado.Should().ContainInOrder(arrayEsperado);
         }
     }
 }

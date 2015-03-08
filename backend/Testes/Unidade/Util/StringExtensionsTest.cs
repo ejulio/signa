@@ -8,22 +8,22 @@ namespace Testes.Unidade.Util
     public class StringExtensionsTest
     {
         [TestMethod]
-        public void underscore_a_string()
+        public void colocando_underscore_em_uma_string()
         {
-            var text = "Hello World with  some  SPACES";
+            const string texto = "Hello World with  some  SPACES";
 
-            var result = text.Underscore();
+            var resultado = texto.Underscore();
 
-            result.Should().Be("Hello_World_with__some__SPACES");
+            resultado.Should().Be("Hello_World_with__some__SPACES");
         }
 
         [TestMethod]
-        public void removing_accents_from_a_string()
+        public void removendo_acentos_de_uma_string()
         {
-            var text = "duas mãos com INFORMAÇÕES do sinal em um frequência";
+            const string texto = "duas mãos com INFORMAÇÕES do sinal em um frequência";
 
-            var result = text.RemoveAccents();
-            result.Should().Be("duas maos com INFORMACOES do sinal em um frequencia");
+            var resultado = texto.RemoverAcentos();
+            resultado.Should().Be("duas maos com INFORMACOES do sinal em um frequencia");
         }
     }
 }

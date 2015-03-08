@@ -13,7 +13,7 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Unidade.Dominio
 {
     [TestClass]
-    public class AlgorithmInitializerFacadeTest
+    public class InicializadorDeAlgoritmoFacadeTest
     {
         private Mock<IAlgoritmoDeReconhecimentoDeSinalFactory> algoritmoDeReconhecimentoDeSinaisFactory;
         private Mock<IRepositorio<Sinal>> repositorio;

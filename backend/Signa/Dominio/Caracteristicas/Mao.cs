@@ -12,7 +12,7 @@ namespace Signa.Dominio.Caracteristicas
 
         public double[] ToArray()
         {
-            var fingersData = Dedos.Select(f => f.ToArray()).Concatenate();
+            var fingersData = Dedos.Select(f => f.ToArray()).Concatenar();
             
             return PalmNormal
                 .Concat(HandDirection)

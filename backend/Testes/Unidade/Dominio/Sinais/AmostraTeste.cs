@@ -8,7 +8,7 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Unidade.Dominio.Sinais.Dinamico
 {
     [TestClass]
-    public class SignSampleTest
+    public class AmostraTeste
     {
         [TestMethod]
         public void building_a_sample_with_one_frame()
