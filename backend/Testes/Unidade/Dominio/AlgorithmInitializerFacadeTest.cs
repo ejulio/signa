@@ -15,11 +15,11 @@ namespace Testes.Unidade.Dominio
     [TestClass]
     public class AlgorithmInitializerFacadeTest
     {
-        private Mock<ISignRecognitionAlgorithmFactory> algoritmoDeReconhecimentoDeSinaisFactory;
+        private Mock<IAlgoritmoDeReconhecimentoDeSinalFactory> algoritmoDeReconhecimentoDeSinaisFactory;
         private Mock<IRepositorio<Sinal>> repositorio;
         private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmoDeReconhecimentoDeSinaisEstaticos;
         private Mock<IRepositorioFactory> repositorioFactory;
-        private AlgorithmInitializerFacade inicializadorDeAlgoritmoFacade;
+        private InicializadorDeAlgoritmoFacade inicializadorDeAlgoritmoFacade;
 
         [TestInitialize]
         public void Setup()
@@ -27,10 +27,10 @@ namespace Testes.Unidade.Dominio
             repositorio = new Mock<IRepositorio<Sinal>>();
             repositorioFactory = new Mock<IRepositorioFactory>();
             algoritmoDeReconhecimentoDeSinaisEstaticos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
-            algoritmoDeReconhecimentoDeSinaisFactory = new Mock<ISignRecognitionAlgorithmFactory>();
+            algoritmoDeReconhecimentoDeSinaisFactory = new Mock<IAlgoritmoDeReconhecimentoDeSinalFactory>();
 
             inicializadorDeAlgoritmoFacade =
-                new AlgorithmInitializerFacade(algoritmoDeReconhecimentoDeSinaisFactory.Object, repositorioFactory.Object);
+                new InicializadorDeAlgoritmoFacade(algoritmoDeReconhecimentoDeSinaisFactory.Object, repositorioFactory.Object);
 
             repositorioFactory
                 .Setup(r => r.CriarECarregarRepositorioDeSinaisEstaticos())

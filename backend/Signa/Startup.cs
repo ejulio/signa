@@ -30,13 +30,13 @@ namespace Signa
             app.MapSignalR();
         }
 
-        private static SignRecognitionAlgorithmFactory algorithmFactory;
+        private static AlgoritmoDeReconhecimentoDeSinalFactory algorithmFactory;
         private static IRepositorioFactory repositorioFactory;
         private static void ConfigureHubs()
         {
             repositorioFactory = new RepositorioFactory(SinaisEstaticosController.SignSamplesFilePath);
 
-            algorithmFactory = new SignRecognitionAlgorithmFactory();
+            algorithmFactory = new AlgoritmoDeReconhecimentoDeSinalFactory();
 
             var container = GlobalHost.DependencyResolver;
 

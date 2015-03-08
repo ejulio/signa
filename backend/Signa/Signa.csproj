@@ -128,12 +128,12 @@
     <Compile Include="Dados\Repositorio\RepositorioFactory.cs" />
     <Compile Include="Dados\Repositorio\RepositorioSinaisEstaticos.cs" />
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
-    <Compile Include="Dominio\AlgorithmInitializerFacade.cs" />
+    <Compile Include="Dominio\InicializadorDeAlgoritmoFacade.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\Hcrf.cs" />
-    <Compile Include="Dominio\Algoritmos\ISignRecognitionAlgorithmFactory.cs" />
+    <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinalFactory.cs" />
     <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
-    <Compile Include="Dominio\Algoritmos\SignRecognitionAlgorithmFactory.cs" />
+    <Compile Include="Dominio\Algoritmos\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
     <Compile Include="Dominio\Caracteristicas\ICaracteristica.cs" />
     <Compile Include="Hubs\ReconhecedorDeSinaisDinamicos.cs" />
     <Compile Include="Hubs\SequenciaDeSinais.cs" />
@@ -150,7 +150,7 @@
     <Compile Include="Dominio\Algoritmos\Estatico\IDadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\Svm.cs" />
-    <Compile Include="Dominio\Algoritmos\Estatico\SignRecognitionAlgorithmData.cs" />
+    <Compile Include="Dominio\Algoritmos\Estatico\DadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
     <Compile Include="Util\IEnumerableExtensions.cs" />
     <Compile Include="Util\StringExtensions.cs" />
   </ItemGroup>

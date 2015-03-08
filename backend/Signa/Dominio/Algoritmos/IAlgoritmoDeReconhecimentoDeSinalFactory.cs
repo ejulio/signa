@@ -1,6 +1,6 @@
 namespace Signa.Dominio.Algoritmos
 {
-    public interface ISignRecognitionAlgorithmFactory
+    public interface IAlgoritmoDeReconhecimentoDeSinalFactory
     {
         IAlgoritmoDeReconhecimentoDeSinaisEstaticos CreateStaticSignRecognizer();
     }

@@ -2,11 +2,11 @@
 
 namespace Signa.Dominio.Algoritmos
 {
-    public class SignRecognitionAlgorithmFactory : ISignRecognitionAlgorithmFactory
+    public class AlgoritmoDeReconhecimentoDeSinalFactory : IAlgoritmoDeReconhecimentoDeSinalFactory
     {
         private static readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos AlgoritmoDeReconhecimentoDeSinaisEstaticos;
 
-        static SignRecognitionAlgorithmFactory()
+        static AlgoritmoDeReconhecimentoDeSinalFactory()
         {
             AlgoritmoDeReconhecimentoDeSinaisEstaticos = new Svm();
         }

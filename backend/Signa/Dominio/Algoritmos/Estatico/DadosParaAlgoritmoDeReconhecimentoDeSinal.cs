@@ -5,7 +5,7 @@ using Signa.Dominio.Sinais;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public class SignRecognitionAlgorithmData : IDadosParaAlgoritmoDeReconhecimentoDeSinal
+    public class DadosParaAlgoritmoDeReconhecimentoDeSinal : IDadosParaAlgoritmoDeReconhecimentoDeSinal
     {
         public double[][] Entradas { get; private set; }
         public int[] Saidas { get; private set; }
@@ -15,7 +15,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
         private LinkedList<int> outputs;
         private LinkedList<double[]> inputs;
 
-        public SignRecognitionAlgorithmData(IEnumerable<Sinal> signs)
+        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<Sinal> signs)
         {
             this.signs = signs;
             Process();

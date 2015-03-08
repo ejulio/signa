@@ -41,7 +41,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         private Svm DadoUmAlgoritmoTreinado(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
             var sinais = DadaUmaColecaoDeSinais(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
-            var dadosDeTreinamento = new SignRecognitionAlgorithmData(sinais);
+            var dadosDeTreinamento = new DadosParaAlgoritmoDeReconhecimentoDeSinal(sinais);
 
             var svm = new Svm();
             svm.Treinar(dadosDeTreinamento);

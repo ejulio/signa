@@ -25,7 +25,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         {
             var sinais = DadaUmaColecaoDeUmSinal();
 
-            var dadosDoAlgoritmo = new SignRecognitionAlgorithmData(sinais);
+            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinal(sinais);
 
             DeveTerUmDadoDeTreinamento(dadosDoAlgoritmo);
         }
@@ -38,7 +38,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
             var sinais = DadaUmaColecaoDeSinais(quantidadeDeAmostrasPorSinal, quantidadeDeSinais);
 
-            var dadosDoAlgoritmo = new SignRecognitionAlgorithmData(sinais);
+            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinal(sinais);
 
             DeveTerOsDadosDaColecaoDeSinais(dadosDoAlgoritmo, sinais, quantidadeDeAmostrasPorSinal);
         }
@@ -66,7 +66,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             return signs;
         }
 
-        private void DeveTerOsDadosDaColecaoDeSinais(SignRecognitionAlgorithmData algorithmData, ICollection<Sinal> signs, int samplesPerSign)
+        private void DeveTerOsDadosDaColecaoDeSinais(DadosParaAlgoritmoDeReconhecimentoDeSinal algorithmData, ICollection<Sinal> signs, int samplesPerSign)
         {
             algorithmData.QuantidadeDeClasses.Should().Be(signs.Count);
             algorithmData.Entradas.Should().HaveCount(samplesPerSign * signs.Count);
@@ -82,7 +82,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             }
         }
 
-        private void DeveTerUmDadoDeTreinamento(SignRecognitionAlgorithmData algorithmData)
+        private void DeveTerUmDadoDeTreinamento(DadosParaAlgoritmoDeReconhecimentoDeSinal algorithmData)
         {
             algorithmData.QuantidadeDeClasses.Should().Be(1);
             algorithmData.Entradas.Should().HaveCount(1);

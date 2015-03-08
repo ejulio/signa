@@ -29,8 +29,8 @@ namespace Infraestrutura
         {
             Console.WriteLine("Treinando algoritmos");
             var repositoryFactory = new RepositorioFactory(SinaisEstaticosController.SignSamplesFilePath);
-            var signRecognitionAlgorithmFactory = new SignRecognitionAlgorithmFactory();
-            var algorithmInitializerFacade = new AlgorithmInitializerFacade(signRecognitionAlgorithmFactory, repositoryFactory);
+            var signRecognitionAlgorithmFactory = new AlgoritmoDeReconhecimentoDeSinalFactory();
+            var algorithmInitializerFacade = new InicializadorDeAlgoritmoFacade(signRecognitionAlgorithmFactory, repositoryFactory);
 
             algorithmInitializerFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
