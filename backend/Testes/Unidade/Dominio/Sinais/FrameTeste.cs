@@ -6,7 +6,7 @@ using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 
-namespace Testes.Unidade.Dominio.Sinais.Dinamico
+namespace Testes.Unidade.Dominio.Sinais
 {
     [TestClass]
     public class FrameTeste

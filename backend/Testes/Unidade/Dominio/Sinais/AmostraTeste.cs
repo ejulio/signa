@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
-namespace Testes.Unidade.Dominio.Sinais.Dinamico
+namespace Testes.Unidade.Dominio.Sinais
 {
     [TestClass]
     public class AmostraTeste
@@ -84,12 +84,13 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
         {
             var expectedFrameData = frames.Select(f => f.ToArray());
 
-            arrayDeAmostras.Should().HaveCount(expectedFrameData.Count());
+            var dadosDosFrames = expectedFrameData.ToArray();
+            arrayDeAmostras.Should().HaveCount(dadosDosFrames.Count());
 
-            for (var i = 0; i < expectedFrameData.Count(); i++)
+            for (var i = 0; i < dadosDosFrames.Count(); i++)
             {
-                arrayDeAmostras[i].Should().HaveSameCount(expectedFrameData.ElementAt(i));
-                arrayDeAmostras[i].Should().ContainInOrder(expectedFrameData.ElementAt(i));
+                arrayDeAmostras[i].Should().HaveSameCount(dadosDosFrames.ElementAt(i));
+                arrayDeAmostras[i].Should().ContainInOrder(dadosDosFrames.ElementAt(i));
             }
         }
     }
