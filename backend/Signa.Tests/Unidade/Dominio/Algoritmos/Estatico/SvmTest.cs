@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Algoritmos.Estatico;
 using Signa.Domain.Caracteristicas;
@@ -8,8 +6,10 @@ using Signa.Domain.Sinais.Estatico;
 using Signa.Testes.Comum.Builders.Dominio.Caracteristicas;
 using Signa.Testes.Comum.Builders.Dominio.Sinais;
 using Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico;
+using System;
+using System.Collections.Generic;
 
-namespace Signa.Testes.Dominio.Algoritmos.Estatico
+namespace Signa.Testes.Unidade.Dominio.Algoritmos.Estatico
 {
     [TestClass]
     public class SvmTest

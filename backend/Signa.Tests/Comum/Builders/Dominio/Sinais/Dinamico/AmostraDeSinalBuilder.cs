@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Signa.Domain.Sinais.Dinamico;
+﻿using Signa.Domain.Sinais.Dinamico;
+using System.Collections.Generic;
 
 namespace Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico
 {

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Algoritmos;
 
-namespace Signa.Testes.Dominio.Algoritmos
+namespace Signa.Testes.Unidade.Dominio.Algoritmos
 {
     [TestClass]
     public class SignRecognitionAlgorithmFactoryTest

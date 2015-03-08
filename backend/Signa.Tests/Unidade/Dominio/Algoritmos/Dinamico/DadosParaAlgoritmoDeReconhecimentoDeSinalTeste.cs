@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Algoritmos.Dinamico;
 using Signa.Domain.Sinais.Dinamico;
 using Signa.Testes.Comum.Builders.Dominio.Sinais;
 using Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Signa.Testes.Dominio.Algoritmos.Dinamico
+namespace Signa.Testes.Unidade.Dominio.Algoritmos.Dinamico
 {
     [TestClass]
     public class DadosParaAlgoritmoDeReconhecimentoDeSinalTeste

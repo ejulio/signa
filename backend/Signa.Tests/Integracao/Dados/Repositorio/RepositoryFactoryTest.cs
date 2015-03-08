@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Signa.Dados.Repositorio;
 using Signa.Domain.Sinais.Estatico;
 using Signa.Testes.Comum.Builders.Dominio.Sinais;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Signa.Testes.Integracao.Dados.Repositorio
 {
     [TestClass]
     public class RepositoryFactoryTest
     {
-        private const string SamplesFilePath = "JsonTestData/test-samples.json";
+        private const string SamplesFilePath = Caminhos.CaminhoDoArquivoDeDeAmostras;
         private const string DescriptionTemplate = "Static sign sample {0}";
         private const string PathTemplate = "static-sample-{0}.json";
 

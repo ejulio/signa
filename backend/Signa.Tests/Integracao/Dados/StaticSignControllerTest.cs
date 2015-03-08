@@ -1,25 +1,25 @@
-﻿using System.IO;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Domain.Sinais.Estatico;
 using Signa.Testes.Comum.Builders.Dominio.Sinais.Estatico;
 using Signa.Util;
+using System.IO;
 
 namespace Signa.Testes.Integracao.Dados
 {
     [TestClass]
     public class StaticSignControllerTest
     {
-        private const string samplesFilePath = "JsonTestData/test-samples.json";
+        private const string SamplesFilePath = Caminhos.CaminhoDoArquivoDeDeAmostras;
         private IRepositorio<SinalEstatico> repositorio;
         private SinaisEstaticosController sinaisEstaticosController;
 
         [TestInitialize]
         public void Setup()
         {
-            repositorio = new RepositorioSinaisEstaticos(samplesFilePath);
+            repositorio = new RepositorioSinaisEstaticos(SamplesFilePath);
             sinaisEstaticosController = new SinaisEstaticosController(repositorio, null);
 
             Directory.CreateDirectory(SinaisEstaticosController.SamplesDirectory);

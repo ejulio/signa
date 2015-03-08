@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Domain.Sinais.Dinamico;
 using Signa.Testes.Comum.Builders.Dominio.Sinais.Dinamico;
+using System;
+using System.Linq;
 
-namespace Signa.Testes.Dominio.Sinais.Dinamico
+namespace Signa.Testes.Unidade.Dominio.Sinais.Dinamico
 {
     [TestClass]
     public class SignSampleTest
