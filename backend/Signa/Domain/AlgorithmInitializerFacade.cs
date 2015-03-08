@@ -1,6 +1,6 @@
 ﻿using Signa.Dados.Repositorio;
-using Signa.Domain.Algorithms;
-using Signa.Domain.Algorithms.Static;
+using Signa.Domain.Algoritmos;
+using Signa.Domain.Algoritmos.Estatico;
 
 namespace Signa.Domain
 {

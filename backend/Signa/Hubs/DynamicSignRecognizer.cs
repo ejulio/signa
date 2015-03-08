@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
-using Signa.Domain.Signs.Dynamic;
+using Signa.Domain.Sinais.Dinamico;
 using System;
 
 namespace Signa.Hubs

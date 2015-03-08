@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin.Hosting;
-using Signa.Domain;
-using Signa.Domain.Algorithms;
-using System;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
+using Signa.Domain;
+using Signa.Domain.Algoritmos;
+using System;
 
 namespace Host
 {

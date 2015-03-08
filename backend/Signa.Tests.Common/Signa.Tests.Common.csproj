@@ -39,16 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\Domain\Signs\StaticSignCollectionBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Static\AmostraBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Static\SinalBuilder.cs" />
+    <Compile Include="Builders\Dominio\Sinais\StaticSignCollectionBuilder.cs" />
+    <Compile Include="Builders\Dominio\Sinais\Estatico\AmostraBuilder.cs" />
+    <Compile Include="Builders\Dominio\Sinais\Estatico\SinalBuilder.cs" />
     <Compile Include="Builders\ArrayDeDouble.cs" />
-    <Compile Include="Builders\Domain\Features\DedoBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Dinamico\FrameDeSinalBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Dinamico\AmostraDeSinalBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\Dinamico\SinalBuilder.cs" />
-    <Compile Include="Builders\Domain\Signs\DynamicSignCollectionBuilder.cs" />
-    <Compile Include="Builders\Domain\Features\MaoBuilder.cs" />
+    <Compile Include="Builders\Dominio\Caracteristicas\DedoBuilder.cs" />
+    <Compile Include="Builders\Dominio\Sinais\Dinamico\FrameDeSinalBuilder.cs" />
+    <Compile Include="Builders\Dominio\Sinais\Dinamico\AmostraDeSinalBuilder.cs" />
+    <Compile Include="Builders\Dominio\Sinais\Dinamico\SinalBuilder.cs" />
+    <Compile Include="Builders\Dominio\Sinais\DynamicSignCollectionBuilder.cs" />
+    <Compile Include="Builders\Dominio\Caracteristicas\MaoBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -63,18 +63,18 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Dados\SinaisEstaticosControllerTest.cs" />
-    <Compile Include="Domain\AlgorithmInitializerFacadeTest.cs" />
-    <Compile Include="Domain\Algorithms\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinalTeste.cs" />
-    <Compile Include="Domain\Algorithms\Dinamico\HcrfTeste.cs" />
-    <Compile Include="Domain\Algorithms\SignRecognitionAlgorithmFactoryTest.cs" />
-    <Compile Include="Domain\Algorithms\Static\SignRecognitionAlgorithmDataTest.cs" />
-    <Compile Include="Domain\Features\HandTest.cs" />
-    <Compile Include="Domain\Signs\Dynamic\SignSampleTest.cs" />
-    <Compile Include="Domain\Signs\Dynamic\SignFrameTest.cs" />
-    <Compile Include="Domain\Features\FingerTest.cs" />
-    <Compile Include="Domain\Signs\Static\SampleTest.cs" />
+    <Compile Include="Dominio\AlgorithmInitializerFacadeTest.cs" />
+    <Compile Include="Dominio\Algoritmos\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinalTeste.cs" />
+    <Compile Include="Dominio\Algoritmos\Dinamico\HcrfTeste.cs" />
+    <Compile Include="Dominio\Algoritmos\SignRecognitionAlgorithmFactoryTest.cs" />
+    <Compile Include="Dominio\Algoritmos\Estatico\SignRecognitionAlgorithmDataTest.cs" />
+    <Compile Include="Dominio\Caracteristicas\HandTest.cs" />
+    <Compile Include="Dominio\Sinais\Dinamico\SignSampleTest.cs" />
+    <Compile Include="Dominio\Sinais\Dinamico\SignFrameTest.cs" />
+    <Compile Include="Dominio\Caracteristicas\FingerTest.cs" />
+    <Compile Include="Dominio\Sinais\Estatico\SampleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\Algorithms\Static\SvmTest.cs" />
+    <Compile Include="Dominio\Algoritmos\Estatico\SvmTest.cs" />
     <Compile Include="Util\IEnumerableExtensionsTest.cs" />
     <Compile Include="Util\StringExtensionsTest.cs" />
   </ItemGroup>

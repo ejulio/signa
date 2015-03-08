@@ -3,11 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
-using Signa.Domain.Algorithms;
-using Signa.Domain.Signs.Static;
-using Signa.Tests.Common.Builders.Domain.Signs.Static;
+using Signa.Domain.Algoritmos;
+using Signa.Domain.Sinais.Estatico;
+using Signa.Tests.Common.Builders.Dominio.Sinais.Estatico;
 
-namespace Signa.Tests.Data
+namespace Signa.Tests.Dados
 {
     [TestClass]
     public class SinaisEstaticosControllerTest

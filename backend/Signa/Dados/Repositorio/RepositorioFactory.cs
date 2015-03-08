@@ -1,4 +1,4 @@
-﻿using Signa.Domain.Signs.Static;
+﻿using Signa.Domain.Sinais.Estatico;
 
 namespace Signa.Dados.Repositorio
 {

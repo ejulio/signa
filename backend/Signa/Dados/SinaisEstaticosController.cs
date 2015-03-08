@@ -1,9 +1,9 @@
-﻿using System.IO;
-using System.Linq;
-using Signa.Dados.Repositorio;
-using Signa.Domain.Algorithms;
-using Signa.Domain.Signs.Static;
+﻿using Signa.Dados.Repositorio;
+using Signa.Domain.Algoritmos;
+using Signa.Domain.Sinais.Estatico;
 using Signa.Util;
+using System.IO;
+using System.Linq;
 
 namespace Signa.Dados
 {

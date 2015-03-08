@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using Signa.Domain.Sinais.Estatico;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
-using Signa.Domain.Signs.Static;
 
 namespace Signa.Dados.Repositorio
 {

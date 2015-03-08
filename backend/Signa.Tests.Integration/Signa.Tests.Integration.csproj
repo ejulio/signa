@@ -62,10 +62,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Data\Repository\RepositoryFactoryTest.cs" />
-    <Compile Include="Data\Repository\StaticSignRepositoryTest.cs" />
-    <Compile Include="Data\Repository\SignRepositoryTest.cs" />
-    <Compile Include="Data\StaticSignControllerTest.cs" />
+    <Compile Include="Dados\Repositorio\RepositoryFactoryTest.cs" />
+    <Compile Include="Dados\Repositorio\StaticSignRepositoryTest.cs" />
+    <Compile Include="Dados\Repositorio\SignRepositoryTest.cs" />
+    <Compile Include="Dados\StaticSignControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
