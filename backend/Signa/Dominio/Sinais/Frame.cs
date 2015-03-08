@@ -6,30 +6,30 @@ namespace Signa.Dominio.Sinais
     public class Frame
     {
         // TODO: Adicionar o tipo do frame: Gesto Estático, Frame Inicial, Frame Final
-        private Mao leftMao;
-        public Mao LeftMao
+        private Mao maoEsquerda;
+        public Mao MaoEsquerda
         {
-            get { return leftMao; }
+            get { return maoEsquerda; }
             set
             {
-                leftMao = value ?? Mao.Empty();
+                maoEsquerda = value ?? Mao.Vazia();
             }
         }
 
-        private Mao rightMao;
-        public Mao RightMao
+        private Mao maoDireita;
+        public Mao MaoDireita
         {
-            get { return rightMao; }
+            get { return maoDireita; }
             set
             {
-                rightMao = value ?? Mao.Empty();
+                maoDireita = value ?? Mao.Vazia();
             }
         }
 
         public double[] ToArray()
         {
-            return LeftMao.ToArray()
-                .Concat(RightMao.ToArray())
+            return MaoEsquerda.ToArray()
+                .Concat(MaoDireita.ToArray())
                 .ToArray();
         }
     }

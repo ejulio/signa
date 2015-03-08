@@ -15,7 +15,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
-        public FrameBuilder WithRightHand(Mao rightMao)
+        public FrameBuilder ComMaoDireita(Mao rightMao)
         {
             this.maoDireita = rightMao;
             return this;
@@ -39,8 +39,8 @@ namespace Testes.Comum.Builders.Dominio.Sinais
         {
             return new Frame
             {
-                LeftMao = maoEsquerda,
-                RightMao = maoDireita
+                MaoEsquerda = maoEsquerda,
+                MaoDireita = maoDireita
             };
         }
     }

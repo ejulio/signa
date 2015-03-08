@@ -5,7 +5,7 @@ using Signa.Dominio.Caracteristicas;
 namespace Testes.Unidade.Dominio.Caracteristicas
 {
     [TestClass]
-    public class FingerTest
+    public class DedoTeste
     {
         [TestMethod]
         public void returning_an_array_with_finger_data()

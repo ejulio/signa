@@ -11,43 +11,43 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
     public class AmostraTeste
     {
         [TestMethod]
-        public void building_a_sample_with_one_frame()
+        public void criando_uma_amostra_com_um_frame()
         {
-            var frames = GivenAnArrayOfSignFramesWithCount(1);
-            var signSample = new AmostraBuilder()
+            var frames = DadoUmArrayDeFrameComQuantidade(1);
+            var amostra = new AmostraBuilder()
                 .ComFrames(frames)
                 .Construir();
 
-            var sampleArray = signSample.ToArray();
+            var arrayDeAmostras = amostra.ToArray();
 
-            MustReturnAnArrayWithFrameData(frames, sampleArray);
+            DeveTerRetornadoUmArrayComDadosDoFrame(frames, arrayDeAmostras);
         }
 
         [TestMethod]
-        public void building_a_sample_two_frames()
+        public void criando_uma_amostra_com_dois_frames()
         {
-            var frames = GivenAnArrayOfSignFramesWithCount(2);
-            var signSample = new AmostraBuilder()
+            var frames = DadoUmArrayDeFrameComQuantidade(2);
+            var amostra = new AmostraBuilder()
                 .ComFrames(frames)
                 .Construir();
 
-            var sampleArray = signSample.ToArray();
+            var arrayDeAmostras = amostra.ToArray();
 
-            MustReturnAnArrayWithFrameData(frames, sampleArray);
+            DeveTerRetornadoUmArrayComDadosDoFrame(frames, arrayDeAmostras);
         }
 
         [TestMethod]
-        public void building_a_sample_with_random_number_of_frames()
+        public void criando_uma_amostra_com_um_numero_aleatorio_de_frames()
         {
-            var numberOfFrames = new Random().Next(3, 15);
-            var frames = GivenAnArrayOfSignFramesWithCount(numberOfFrames);
-            var signSample = new AmostraBuilder()
+            var quantidadeDeFrames = new Random().Next(3, 15);
+            var frames = DadoUmArrayDeFrameComQuantidade(quantidadeDeFrames);
+            var amostra = new AmostraBuilder()
                 .ComFrames(frames)
                 .Construir();
 
-            var sampleArray = signSample.ToArray();
+            var arrayDeAmostras = amostra.ToArray();
 
-            MustReturnAnArrayWithFrameData(frames, sampleArray);
+            DeveTerRetornadoUmArrayComDadosDoFrame(frames, arrayDeAmostras);
         }
 
         [TestMethod]
@@ -68,11 +68,11 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
             throw new NotImplementedException("Implementar uma amostra com vários frames apenas com a mão direita");
         }
 
-        private Frame[] GivenAnArrayOfSignFramesWithCount(int count)
+        private Frame[] DadoUmArrayDeFrameComQuantidade(int quantidadeDeFrames)
         {
-            var frames = new Frame[count];
+            var frames = new Frame[quantidadeDeFrames];
 
-            for (var i = 0; i < count; i++)
+            for (var i = 0; i < quantidadeDeFrames; i++)
             {
                 frames[i] = new FrameBuilder().Construir();
             }
@@ -80,16 +80,16 @@ namespace Testes.Unidade.Dominio.Sinais.Dinamico
             return frames;
         }
 
-        private void MustReturnAnArrayWithFrameData(Frame[] framesDeSinal, double[][] sampleArray)
+        private void DeveTerRetornadoUmArrayComDadosDoFrame(Frame[] frames, double[][] arrayDeAmostras)
         {
-            var expectedFrameData = framesDeSinal.Select(f => f.ToArray());
+            var expectedFrameData = frames.Select(f => f.ToArray());
 
-            sampleArray.Should().HaveCount(expectedFrameData.Count());
+            arrayDeAmostras.Should().HaveCount(expectedFrameData.Count());
 
             for (var i = 0; i < expectedFrameData.Count(); i++)
             {
-                sampleArray[i].Should().HaveSameCount(expectedFrameData.ElementAt(i));
-                sampleArray[i].Should().ContainInOrder(expectedFrameData.ElementAt(i));
+                arrayDeAmostras[i].Should().HaveSameCount(expectedFrameData.ElementAt(i));
+                arrayDeAmostras[i].Should().ContainInOrder(expectedFrameData.ElementAt(i));
             }
         }
     }

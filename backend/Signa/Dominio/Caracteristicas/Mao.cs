@@ -19,7 +19,7 @@ namespace Signa.Dominio.Caracteristicas
                 .Concat(fingersData)
                 .ToArray();
         }
-        public static Mao Empty()
+        public static Mao Vazia()
         {
             return new Mao
             {

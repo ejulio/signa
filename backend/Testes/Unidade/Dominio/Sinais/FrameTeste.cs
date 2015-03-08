@@ -9,95 +9,95 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Unidade.Dominio.Sinais.Dinamico
 {
     [TestClass]
-    public class SignFrameTest
+    public class FrameTeste
     {
         [TestMethod]
-        public void building_a_frame_with_left_hand()
+        public void criando_um_frame_com_a_mao_esquerda()
         {
-            var leftHand = GivenLeftHand();
-            var rightHand = Mao.Empty();
-            var signFrame = GivenSignFrameWithHands(leftHand, null);
+            var maoEsquerda = DadaUmaMaoEsquerda();
+            var maoDireita = Mao.Vazia();
+            var frame = DadoUmFrameComMaos(maoEsquerda, null);
 
-            var frameArray = signFrame.ToArray();
+            var frameArray = frame.ToArray();
 
-            MustReturnAnArrayWithLeftAndRightData(leftHand, rightHand, frameArray);
+            DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(maoEsquerda, maoDireita, frameArray);
         }
 
         [TestMethod]
-        public void building_a_frame_with_right_hand()
+        public void criando_um_frame_com_a_mao_direita()
         {
-            var leftHand = Mao.Empty();
-            var rightHand = GivenRightHand();
-            var signFrame = GivenSignFrameWithHands(null, rightHand);
+            var maoEsquerda = Mao.Vazia();
+            var maoDireita = DadaUmaMaoDireita();
+            var frame = DadoUmFrameComMaos(null, maoDireita);
 
-            var frameArray = signFrame.ToArray();
+            var frameArray = frame.ToArray();
 
-            MustReturnAnArrayWithLeftAndRightData(leftHand, rightHand, frameArray);
+            DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(maoEsquerda, maoDireita, frameArray);
         }
 
         [TestMethod]
-        public void building_a_frame_with_two_hands()
+        public void criando_um_frame_com_duas_maos()
         {
-            var leftHand = GivenLeftHand();
-            var rightHand = GivenRightHand();
-            var signFrame = GivenSignFrameWithHands(leftHand, rightHand);
+            var maoEsquerda = DadaUmaMaoEsquerda();
+            var maoDireita = DadaUmaMaoDireita();
+            var frame = DadoUmFrameComMaos(maoEsquerda, maoDireita);
 
-            var frameArray = signFrame.ToArray();
+            var frameArray = frame.ToArray();
 
-            MustReturnAnArrayWithLeftAndRightData(leftHand, rightHand, frameArray);
+            DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(maoEsquerda, maoDireita, frameArray);
         }
 
         [TestMethod]
-        public void when_null_right_and_left_hand_should_have_default_values()
+        public void criando_um_frame_sem_maos()
         {
-            var signFrame = new Frame
+            var frame = new Frame
             {
-                LeftMao = null,
-                RightMao = null
+                MaoEsquerda = null,
+                MaoDireita = null
             };
 
-            var defaultValues = Mao.Empty();
+            var valoresPadroes = Mao.Vazia();
 
-            signFrame.LeftMao.ToArray().Should().ContainInOrder(defaultValues.ToArray());
-            signFrame.RightMao.ToArray().Should().ContainInOrder(defaultValues.ToArray());
+            frame.MaoEsquerda.ToArray().Should().ContainInOrder(valoresPadroes.ToArray());
+            frame.MaoDireita.ToArray().Should().ContainInOrder(valoresPadroes.ToArray());
         }
 
-        private Frame GivenSignFrameWithHands(Mao leftMao, Mao rightMao)
+        private Frame DadoUmFrameComMaos(Mao maoEsquerda, Mao maoDireita)
         {
-            var signFrame = new FrameBuilder()
-                .ComMaoEsquerda(leftMao)
-                .WithRightHand(rightMao)
+            var frame = new FrameBuilder()
+                .ComMaoEsquerda(maoEsquerda)
+                .ComMaoDireita(maoDireita)
                 .Construir();
 
-            return signFrame;
+            return frame;
         }
 
-        private Mao GivenRightHand()
+        private Mao DadaUmaMaoDireita()
         {
-            var rightHand = new MaoBuilder()
+            var maoDireita = new MaoBuilder()
                 .ComDedos(DedoBuilder.DedosPadroes())
                 .ComDirecaoDaMao(new[] { 0.4, 0.5, 0.6 })
                 .ComVetorNormalDaPalma(new[] { 0.0, 1.0, 1.0 })
                 .Construir();
-            return rightHand;
+            return maoDireita;
         }
 
-        private Mao GivenLeftHand()
+        private Mao DadaUmaMaoEsquerda()
         {
-            var leftHand = new MaoBuilder()
+            var maoEsquerda = new MaoBuilder()
                 .ComDedos(DedoBuilder.DedosPadroes())
                 .ComDirecaoDaMao(new[] { 0.1, 0.2, 0.3 })
                 .ComVetorNormalDaPalma(new[] { 1.0, 0.0, 1.0 })
                 .Construir();
-            return leftHand;
+            return maoEsquerda;
         }
 
-        private void MustReturnAnArrayWithLeftAndRightData(Mao leftMao, Mao rightMao, double[] frameArray)
+        private void DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(Mao maoEsquerda, Mao maoDireita, double[] frameArray)
         {
-            var expectedFrameData = leftMao.ToArray().Concat(rightMao.ToArray());
+            var dadosDoFrameEsperados = maoEsquerda.ToArray().Concat(maoDireita.ToArray());
 
-            frameArray.Should().HaveCount(expectedFrameData.Count());
-            frameArray.Should().ContainInOrder(expectedFrameData);
+            frameArray.Should().HaveCount(dadosDoFrameEsperados.Count());
+            frameArray.Should().ContainInOrder(dadosDoFrameEsperados);
         }
     }
 }

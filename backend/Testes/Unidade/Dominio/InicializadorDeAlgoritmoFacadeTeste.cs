@@ -13,7 +13,7 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Unidade.Dominio
 {
     [TestClass]
-    public class InicializadorDeAlgoritmoFacadeTest
+    public class InicializadorDeAlgoritmoFacadeTeste
     {
         private Mock<IAlgoritmoDeReconhecimentoDeSinalFactory> algoritmoDeReconhecimentoDeSinaisFactory;
         private Mock<IRepositorio<Sinal>> repositorio;
@@ -70,19 +70,19 @@ namespace Testes.Unidade.Dominio
 
         private ICollection<Sinal> DadaUmaColecaoDeSinais()
         {
-            var signs = new ColecaoDeSinaisEstaticosBuilder()
+            var sinais = new ColecaoDeSinaisEstaticosBuilder()
                         .WithSampleCount(2)
                         .WithSize(2)
                         .Build();
 
-            return signs;
+            return sinais;
         }
 
-        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinal data)
+        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinal dados)
         {
-            data.QuantidadeDeClasses.Should().Be(2);
-            data.Saidas.Should().HaveCount(4);
-            data.Entradas.Should().HaveCount(4);
+            dados.QuantidadeDeClasses.Should().Be(2);
+            dados.Saidas.Should().HaveCount(4);
+            dados.Entradas.Should().HaveCount(4);
             return true;
         }
     }
