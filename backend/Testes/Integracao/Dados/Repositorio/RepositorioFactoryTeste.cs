@@ -10,9 +10,9 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Integracao.Dados.Repositorio
 {
     [TestClass]
-    public class RepositoryFactoryTest
+    public class RepositorioFactoryTeste
     {
-        private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
+        private const string CaminhoDoArquivoDeDeAmostras = "Integracao/JsonTestData/repositorio-factory-teste.json";
         private const string TemplateDaDescricao = "Static sign sample {0}";
         private const string TemplateDoCaminhoDoArquivoDeExemplo = "static-sample-{0}.json";
 

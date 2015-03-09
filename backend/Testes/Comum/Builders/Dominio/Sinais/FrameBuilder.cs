@@ -6,8 +6,8 @@ namespace Testes.Comum.Builders.Dominio.Sinais
 {
     public class FrameBuilder
     {
-        private Mao maoEsquerda;
-        private Mao maoDireita;
+        private Mao maoEsquerda = new MaoBuilder().Construir();
+        private Mao maoDireita = new MaoBuilder().Construir();
 
         public FrameBuilder ComMaoEsquerda(Mao leftMao)
         {

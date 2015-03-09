@@ -11,7 +11,7 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 {
     [TestClass]
-    public class SvmTest
+    public class SvmTeste
     {
         [TestMethod]
         public void reconhecendo_um_sinal_sem_treinar_o_algoritmo()
@@ -61,14 +61,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
         private Amostra CriarAmostraPeloIndice(int index)
         {
-            var leftHand = DadaUmaMaoComDedos(index);
-            var rightHand = DadaUmaMaoComDedos(index);
-
-            throw new NotImplementedException("Implementar para ter apenas um frame");
-            //return new AmostraDeSinalBuilder()
-            //    .WithLeftHand(leftHand)
-            //    .WithRightHand(rightHand)
-            //    .Construir();
+            return new AmostraBuilder().ParaOIndiceComQuantidade(index, 1).Construir();
         }
 
         private Mao DadaUmaMaoComDedos(int indice)

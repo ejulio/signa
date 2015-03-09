@@ -15,7 +15,8 @@ namespace Testes.Comum.Builders.Dominio.Sinais
 
         public ColecaoDeSinaisEstaticosBuilder()
         {
-            geradorDeAmostras = index => new AmostraBuilder().Construir();
+            var frames = new[] {new FrameBuilder().Construir()};
+            geradorDeAmostras = index => new AmostraBuilder().ComFrames(frames).Construir();
         }
 
         public ColecaoDeSinaisEstaticosBuilder ComQuantidadeDeSinais(int quantidadeDeSinais)

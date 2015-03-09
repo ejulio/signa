@@ -75,7 +75,7 @@
     <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeSinaisEstaticosBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeSinaisDinamicosBuilder.cs" />
     <Compile Include="Integracao\Caminhos.cs" />
-    <Compile Include="Integracao\Dados\Repositorio\RepositoryFactoryTest.cs" />
+    <Compile Include="Integracao\Dados\Repositorio\RepositorioFactoryTeste.cs" />
     <Compile Include="Integracao\Dados\Repositorio\RepositorioDeSinaisDinamicosTeste.cs" />
     <Compile Include="Integracao\Dados\Repositorio\RepositorioSinaisEstaticosTeste.cs" />
     <Compile Include="Integracao\Dados\SinaisEstaticosControllerTeste.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinalTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\HcrfTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\DadosParaAlgoritmoDeReconhecimentoDeSinalTeste.cs" />
-    <Compile Include="Unidade\Dominio\Algoritmos\Estatico\SvmTest.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Estatico\SvmTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\SignRecognitionAlgorithmFactoryTest.cs" />
     <Compile Include="Unidade\Dominio\Caracteristicas\DedoTeste.cs" />
     <Compile Include="Unidade\Dominio\Caracteristicas\MaoTeste.cs" />

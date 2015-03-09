@@ -11,41 +11,40 @@ namespace Signa.Dominio.Algoritmos.Estatico
         public int[] Saidas { get; private set; }
         public int QuantidadeDeClasses { get; private set; }
 
-        private IEnumerable<Sinal> signs;
-        private LinkedList<int> outputs;
-        private LinkedList<double[]> inputs;
+        private IEnumerable<Sinal> sinais;
+        private LinkedList<int> saidas;
+        private LinkedList<double[]> entradas;
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<Sinal> signs)
+        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<Sinal> sinais)
         {
-            this.signs = signs;
-            Process();
+            this.sinais = sinais;
+            ExtrairInformacoesDosSinais();
         }
 
-        public void Process()
+        public void ExtrairInformacoesDosSinais()
         {
-            throw new NotImplementedException("Recuperar os dados de um sinal");
-            int signIndex = 0;
+            int indiceDoSinal = 0;
             QuantidadeDeClasses = 0;
-            inputs = new LinkedList<double[]>();
-            outputs = new LinkedList<int>();
+            entradas = new LinkedList<double[]>();
+            saidas = new LinkedList<int>();
 
-            foreach (var sign in signs)
+            foreach (var sinal in sinais)
             {
-                ExtracSignSampleData(sign, signIndex);
+                ExtrairDadosDasAmostras(sinal, indiceDoSinal);
                 QuantidadeDeClasses++;
-                signIndex++;
+                indiceDoSinal++;
             }
 
-            Saidas = outputs.ToArray();
-            Entradas = inputs.ToArray();
+            Saidas = saidas.ToArray();
+            Entradas = entradas.ToArray();
         }
 
-        private void ExtracSignSampleData(Sinal sinalEstatico, int signIndex)
+        private void ExtrairDadosDasAmostras(Sinal sinalEstatico, int indiceDoSinal)
         {
-            foreach (var sample in sinalEstatico.Amostras)
+            foreach (IAmostraDeSinalEstatico amostra in sinalEstatico.Amostras)
             {
-                outputs.AddFirst(signIndex);
-                //inputs.AddFirst(sample.ToArray());
+                saidas.AddFirst(indiceDoSinal);
+                entradas.AddFirst(amostra.ParaArray());
             }
         }
     }
