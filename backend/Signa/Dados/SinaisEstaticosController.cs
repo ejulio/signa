@@ -51,7 +51,7 @@ namespace Signa.Dados
             return filePath;
         }
 
-        public int Reconhecer(Amostra sample)
+        public int Reconhecer(IAmostraDeSinalEstatico sample)
         {
             return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(sample);
         }

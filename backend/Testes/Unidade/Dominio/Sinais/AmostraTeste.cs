@@ -3,6 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Sinais;
+using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Sinais
@@ -11,50 +12,45 @@ namespace Testes.Unidade.Dominio.Sinais
     public class AmostraTeste
     {
         [TestMethod]
-        public void criando_uma_amostra_com_um_frame()
+        public void criando_uma_amostra_de_sinal_estatico()
         {
             var frames = DadoUmArrayDeFrameComQuantidade(1);
             var amostra = new AmostraBuilder()
                 .ComFrames(frames)
-                .Construir();
+                .ConstruirAmostraDinamica();
 
-            var arrayDeAmostras = amostra.ToArray();
+            var arrayDeAmostras = amostra.ParaArray();
 
             DeveTerRetornadoUmArrayComDadosDoFrame(frames, arrayDeAmostras);
         }
 
         [TestMethod]
-        public void criando_uma_amostra_com_dois_frames()
+        public void criando_uma_amostra_de_sinal_dinamico()
         {
             var frames = DadoUmArrayDeFrameComQuantidade(2);
             var amostra = new AmostraBuilder()
                 .ComFrames(frames)
-                .Construir();
+                .ConstruirAmostraDinamica();
 
-            var arrayDeAmostras = amostra.ToArray();
+            var arrayDeAmostras = amostra.ParaArray();
 
             DeveTerRetornadoUmArrayComDadosDoFrame(frames, arrayDeAmostras);
         }
 
         [TestMethod]
-        public void criando_uma_amostra_com_um_numero_aleatorio_de_frames()
+        public void criando_uma_amostra_de_sinal_dinamico_com_um_numero_aleatorio_de_frames()
         {
             var quantidadeDeFrames = new Random().Next(3, 15);
             var frames = DadoUmArrayDeFrameComQuantidade(quantidadeDeFrames);
             var amostra = new AmostraBuilder()
                 .ComFrames(frames)
-                .Construir();
+                .ConstruirAmostraDinamica();
 
-            var arrayDeAmostras = amostra.ToArray();
+            var arrayDeAmostras = amostra.ParaArray();
 
             DeveTerRetornadoUmArrayComDadosDoFrame(frames, arrayDeAmostras);
         }
 
-        [TestMethod]
-        public void criando_uma_amostra_de_sinal_estatico()
-        {
-            throw new NotImplementedException("Implementar uma amostra com apenas um frame");
-        }
 
         [TestMethod]
         public void criando_uma_amostra_apenas_com_a_mao_esquerda()

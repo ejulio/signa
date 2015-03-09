@@ -6,67 +6,67 @@ namespace Testes.Comum.Builders.Dominio.Sinais
 {
     public class ColecaoDeSinaisEstaticosBuilder
     {
-        private int size = 2;
-        private int sampleCount = 4;
-        private string descriptionTemplate = "{0}";
-        private string pathTemplate = "{0}";
-        private Func<int, Amostra> sampleGenerator;
+        private int quantidadeDeSinais = 2;
+        private int quantidadeDeAmostrasPorSinal = 4;
+        private string templateDaDescricao = "{0}";
+        private string templateDoCaminhoDoArquivoDeExemplo = "{0}";
+        private Func<int, Amostra> geradorDeAmostras;
 
 
         public ColecaoDeSinaisEstaticosBuilder()
         {
-            sampleGenerator = index => new AmostraBuilder().Construir();
+            geradorDeAmostras = index => new AmostraBuilder().Construir();
         }
 
-        public ColecaoDeSinaisEstaticosBuilder WithSize(int size)
+        public ColecaoDeSinaisEstaticosBuilder ComQuantidadeDeSinais(int quantidadeDeSinais)
         {
-            this.size = size;
+            this.quantidadeDeSinais = quantidadeDeSinais;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder WithDescriptionTemplate(string descriptionTemplate)
+        public ColecaoDeSinaisEstaticosBuilder ComTemplateDeDescricao(string templateDeDescricao)
         {
-            this.descriptionTemplate = descriptionTemplate;
+            this.templateDaDescricao = templateDeDescricao;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder WithPathTemplate(string pathTemplate)
+        public ColecaoDeSinaisEstaticosBuilder ComTemplateDoCaminhoDoArquivoDeExemplo(string templateDoCaminhoDoArquivoDeExemplo)
         {
-            this.pathTemplate = pathTemplate;
+            this.templateDoCaminhoDoArquivoDeExemplo = templateDoCaminhoDoArquivoDeExemplo;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder WithSampleGenerator(Func<int, Amostra> sampleGenerator)
+        public ColecaoDeSinaisEstaticosBuilder ComGeradorDeAmostras(Func<int, Amostra> geradorDeAmostras)
         {
-            this.sampleGenerator = sampleGenerator;
+            this.geradorDeAmostras = geradorDeAmostras;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder WithSampleCount(int sampleCount)
+        public ColecaoDeSinaisEstaticosBuilder ComQuantidadeDeAmostrasPorSinal(int quantidadeDeAmostrasPorSinal)
         {
-            this.sampleCount = sampleCount;
+            this.quantidadeDeAmostrasPorSinal = quantidadeDeAmostrasPorSinal;
             return this;
         }
 
-        public ICollection<Sinal> Build()
+        public ICollection<Sinal> Construir()
         {
-            var signs = new List<Sinal>();
+            var sinais = new List<Sinal>();
 
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < quantidadeDeSinais; i++)
             {
-                var signBuilder = new SinalBuilder()
-                    .ComDescricao(String.Format(descriptionTemplate, i))
-                    .ComCaminhoParaArquivoDeExemplo(String.Format(pathTemplate, i));
+                var sinalBuilder = new SinalBuilder()
+                    .ComDescricao(String.Format(templateDaDescricao, i))
+                    .ComCaminhoParaArquivoDeExemplo(String.Format(templateDoCaminhoDoArquivoDeExemplo, i));
 
-                for (int j = 0; j < sampleCount; j++)
+                for (int j = 0; j < quantidadeDeAmostrasPorSinal; j++)
                 {
-                    signBuilder.ComAmostra(sampleGenerator(i));
+                    sinalBuilder.ComAmostra(geradorDeAmostras(i));
                 }
 
-                signs.Add(signBuilder.Construir());
+                sinais.Add(sinalBuilder.Construir());
             }
 
-            return signs;
+            return sinais;
         }
     }
 }

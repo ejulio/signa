@@ -10,9 +10,9 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Integracao.Dados
 {
     [TestClass]
-    public class StaticSignControllerTest
+    public class SinaisEstaticosControllerTeste
     {
-        private const string CaminhoParaOArquivoDeAmostras = Caminhos.CaminhoDoArquivoDeDeAmostras;
+        private const string CaminhoParaOArquivoDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
         private IRepositorio<Sinal> repositorio;
         private SinaisEstaticosController sinaisEstaticosController;
 

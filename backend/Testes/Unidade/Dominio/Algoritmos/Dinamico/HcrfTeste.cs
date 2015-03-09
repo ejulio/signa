@@ -2,8 +2,6 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Dinamico;
-using Signa.Dominio.Sinais;
-using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
@@ -14,7 +12,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
         [TestMethod]
         public void reconhecendo_sem_treinar_o_algoritmo()
         {
-            var amostra = new AmostraBuilder().Construir();
+            var amostra = new AmostraBuilder().ConstruirAmostraDinamica();
             Action acao = () => new Hcrf().Reconhecer(amostra);
 
             acao.ShouldThrow<InvalidOperationException>();
@@ -29,7 +27,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 
             var hcrf = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 
-            var amostraParaReconhecer = new AmostraBuilder().ParaOIndiceComQuantidade(indiceDoSinalResultante).Construir();
+            var amostraParaReconhecer = new AmostraBuilder().ParaOIndiceComQuantidade(indiceDoSinalResultante).ConstruirAmostraDinamica();
 
             int sinalReconhecido = hcrf.Reconhecer(amostraParaReconhecer);
 
@@ -42,30 +40,13 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             var colecaoDeSinais = new ColecaoDeSinaisDinamicosBuilder()
                 .ComTamanho(quantidadeDeSinais)
                 .ComQuantidadeDeAmostras(quantidadeDeAmostrasPorSinal)
-                .ComGeradorDeAmostras(CriarAmostraPorIndice)
-                .ComGeradorDeAmostras(i => new AmostraBuilder().ParaOIndiceComQuantidade(i).Construir())
+                .ComGeradorDeAmostras(i => new AmostraBuilder().ParaOIndiceComQuantidade(i, i + 2).Construir())
                 .Construir();
 
             var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinal(colecaoDeSinais);
             hcrf.TreinarCom(dados);
 
             return hcrf;
-        }
-
-        private Amostra CriarAmostraPorIndice(int indice)
-        {
-            var frames = new Frame[indice + 2];
-
-            for (int i = 0; i < frames.Length; i++)
-            {
-                frames[i] = new FrameBuilder()
-                    .ComMaoEsquerda(new MaoBuilder().Construir())
-                    .Construir();
-            }
-
-            return new AmostraBuilder()
-                .ComFrames(frames)
-                .Construir();
         }
     }
 }

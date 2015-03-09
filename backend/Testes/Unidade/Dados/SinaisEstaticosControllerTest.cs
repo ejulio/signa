@@ -54,7 +54,7 @@ namespace Testes.Unidade.Dados
         public void reconhecendo_um_sinal()
         {
             const int idDoSinal = 23;
-            var amostra = new AmostraBuilder().Construir();
+            var amostra = new AmostraBuilder().ConstruirAmostraEstatica();
             algoritmo.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
 
             var sinalReconhecido = sinaisEstaticosController.Reconhecer(amostra);

@@ -16,7 +16,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         [TestMethod]
         public void reconhecendo_um_sinal_sem_treinar_o_algoritmo()
         {
-            var amostra = new AmostraBuilder().Construir();
+            var amostra = new AmostraBuilder().ConstruirAmostraEstatica();
             Action acao = () => new Svm().Reconhecer(amostra);
 
             acao.ShouldThrow<InvalidOperationException>();
@@ -52,10 +52,10 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         private ICollection<Sinal> DadaUmaColecaoDeSinais(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
             var signs = new ColecaoDeSinaisEstaticosBuilder()
-                            .WithSize(quantidadeDeSinais)            
-                            .WithSampleCount(quantidadeDeAmostrasPorSinal)
-                            .WithSampleGenerator(CriarAmostraPeloIndice)
-                            .Build();
+                            .ComQuantidadeDeSinais(quantidadeDeSinais)            
+                            .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
+                            .ComGeradorDeAmostras(CriarAmostraPeloIndice)
+                            .Construir();
             return signs;
         }
 

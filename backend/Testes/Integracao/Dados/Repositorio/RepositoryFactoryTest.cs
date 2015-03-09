@@ -12,7 +12,7 @@ namespace Testes.Integracao.Dados.Repositorio
     [TestClass]
     public class RepositoryFactoryTest
     {
-        private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeDeAmostras;
+        private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
         private const string TemplateDaDescricao = "Static sign sample {0}";
         private const string TemplateDoCaminhoDoArquivoDeExemplo = "static-sample-{0}.json";
 
@@ -42,10 +42,10 @@ namespace Testes.Integracao.Dados.Repositorio
         private ICollection<Sinal> DadoQueExistamAlgunsSinaisNoArquivoDeExemplos()
         {
             var signs = new ColecaoDeSinaisEstaticosBuilder()
-                            .WithSize(4)
-                            .WithDescriptionTemplate(TemplateDaDescricao)
-                            .WithPathTemplate(TemplateDoCaminhoDoArquivoDeExemplo)
-                            .Build();
+                            .ComQuantidadeDeSinais(4)
+                            .ComTemplateDeDescricao(TemplateDaDescricao)
+                            .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDoArquivoDeExemplo)
+                            .Construir();
 
             var json = JsonConvert.SerializeObject(signs);
 

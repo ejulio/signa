@@ -25,6 +25,16 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
+        public IAmostraDeSinalDinamico ConstruirAmostraDinamica()
+        {
+            return Construir();
+        }
+
+        public IAmostraDeSinalEstatico ConstruirAmostraEstatica()
+        {
+            return Construir();
+        }
+
         public Amostra Construir()
         {
             return new Amostra

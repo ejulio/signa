@@ -11,10 +11,10 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Integracao.Dados.Repositorio
 {
     [TestClass]
-    public class StaticSignRepositoryTest
+    public class RepositorioSinaisEstaticosTeste
     {
         private RepositorioSinaisEstaticos repositorioDeSinaisEstaticos;
-        private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeDeAmostras;
+        private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
         private const string TemplateDaDescricao = "Static sign sample {0}";
         private const string TemplateDoCaminhoDeExemplo = "static-sample-{0}.json";
 
@@ -154,10 +154,10 @@ namespace Testes.Integracao.Dados.Repositorio
         private ICollection<Sinal> DadoQueExistamDadosNoArquivoDeSinais()
         {
             var signs = new ColecaoDeSinaisEstaticosBuilder()
-                            .WithSize(4)
-                            .WithDescriptionTemplate(TemplateDaDescricao)
-                            .WithPathTemplate(TemplateDoCaminhoDeExemplo)
-                            .Build();
+                            .ComQuantidadeDeSinais(4)
+                            .ComTemplateDeDescricao(TemplateDaDescricao)
+                            .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDeExemplo)
+                            .Construir();
 
             var json = JsonConvert.SerializeObject(signs);
 
@@ -169,10 +169,10 @@ namespace Testes.Integracao.Dados.Repositorio
             return signs;
         }
 
-        private Sinal DadoUmNovoSinal(string description)
+        private Sinal DadoUmNovoSinal(string descricao)
         {
             var sign = new SinalBuilder()
-                            .ComDescricao(description)
+                            .ComDescricao(descricao)
                             .ComCaminhoParaArquivoDeExemplo("new-sign.json")
                             .ComAmostra(new AmostraBuilder().Construir())
                             .Construir();

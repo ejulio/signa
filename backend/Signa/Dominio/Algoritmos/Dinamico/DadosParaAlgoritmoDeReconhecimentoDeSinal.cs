@@ -31,9 +31,9 @@ namespace Signa.Dominio.Algoritmos.Dinamico
 
             foreach (var sinal in sinais)
             {
-                foreach (var amostra in sinal.Amostras)
+                foreach (IAmostraDeSinalDinamico amostra in sinal.Amostras)
                 {
-                    entradas.AddLast(amostra.ToArray());
+                    entradas.AddLast(amostra.ParaArray());
                     saidas.AddLast(identificadorDoSinal);
                 }
                 identificadorDoSinal++;
