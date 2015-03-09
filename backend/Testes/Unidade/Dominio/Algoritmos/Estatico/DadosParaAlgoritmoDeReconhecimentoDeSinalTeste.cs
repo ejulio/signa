@@ -17,7 +17,8 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
         public DadosParaAlgoritmoDeReconhecimentoDeSinalTeste()
         {
-            amostraPadrao = new AmostraBuilder().Construir();
+            var frames = new[] {new FrameBuilder().Construir()};
+            amostraPadrao = new AmostraBuilder().ComFrames(frames).Construir();
         }
 
         [TestMethod]

@@ -13,7 +13,7 @@ namespace Signa.Dominio.Sinais
 
         double[] IAmostraDeSinalEstatico.ParaArray()
         {
-            throw new System.NotImplementedException();
+            return Frames[0].ToArray();
         }
 
         public IAmostraDeSinalEstatico PrimeiroFrame()
@@ -28,14 +28,14 @@ namespace Signa.Dominio.Sinais
 
         double[][] IAmostraDeSinalDinamico.ParaArray()
         {
-            var framesData = new double[Frames.Count][];
+            var dadosDosFrames = new double[Frames.Count][];
 
-            for (var i = 0; i < framesData.Length; i++)
+            for (var i = 0; i < dadosDosFrames.Length; i++)
             {
-                framesData[i] = Frames[i].ToArray();
+                dadosDosFrames[i] = Frames[i].ToArray();
             }
 
-            return framesData;
+            return dadosDosFrames;
         }
     }
 }
