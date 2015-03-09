@@ -1,7 +1,7 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Dinamico;
+using System;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico

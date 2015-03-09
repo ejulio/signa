@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Dados.Repositorio;
@@ -8,6 +6,8 @@ using Signa.Dominio;
 using Signa.Dominio.Algoritmos;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
+using System;
+using System.Collections.Generic;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio

@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Caracteristicas;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 
 namespace Testes.Unidade.Dominio.Caracteristicas

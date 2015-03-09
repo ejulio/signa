@@ -1,11 +1,11 @@
-﻿using System;
-using Accord.Statistics.Distributions.Fitting;
+﻿using Accord.Statistics.Distributions.Fitting;
 using Accord.Statistics.Distributions.Multivariate;
 using Accord.Statistics.Distributions.Univariate;
 using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
 using Signa.Dominio.Sinais;
+using System;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {

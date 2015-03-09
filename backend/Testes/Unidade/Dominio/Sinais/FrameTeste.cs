@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Caracteristicas;
 using Signa.Dominio.Sinais;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 

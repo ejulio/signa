@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Signa.Dominio.Sinais;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Signa.Dominio.Sinais;
 
 namespace Signa.Dados.Repositorio
 {

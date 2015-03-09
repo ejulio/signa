@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 using System.Linq;
-using Signa.Dominio.Sinais;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {

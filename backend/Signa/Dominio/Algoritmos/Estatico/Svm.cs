@@ -1,7 +1,7 @@
-﻿using System;
-using Accord.MachineLearning.VectorMachines;
+﻿using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Signa.Dominio.Sinais;
+using System;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico

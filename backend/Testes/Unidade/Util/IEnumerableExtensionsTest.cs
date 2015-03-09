@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Util;
+using System.Linq;
 
 namespace Testes.Unidade.Util
 {

@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.Owin.Hosting;
+﻿using Microsoft.Owin.Hosting;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Dominio;
 using Signa.Dominio.Algoritmos;
+using System;
 
 namespace Infraestrutura
 {

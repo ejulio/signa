@@ -1,8 +1,9 @@
-﻿using System;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Signa.Dominio.Caracteristicas;
 using Signa.Dominio.Sinais;
+using System;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 
@@ -55,13 +56,31 @@ namespace Testes.Unidade.Dominio.Sinais
         [TestMethod]
         public void criando_uma_amostra_apenas_com_a_mao_esquerda()
         {
-            throw new NotImplementedException("Implementar uma amostra com vários frames apenas com a mão esquerda");
+            var maoEsquerda = new MaoBuilder().Construir();
+            var frames = DadoUmArrayDeFramesComQuantidadeComAsMaos(1, maoEsquerda, null);
+
+            var amostra = new AmostraBuilder()
+                .ComFrames(frames)
+                .ConstruirAmostraEstatica();
+
+            var arrayDeAmostras = amostra.ParaArray();
+
+            DeveTerRetornadoUmArrayComDadosDoFrame(frames[0], arrayDeAmostras);
         }
 
         [TestMethod]
         public void criando_uma_amostra_apenas_com_a_mao_direita()
         {
-            throw new NotImplementedException("Implementar uma amostra com vários frames apenas com a mão direita");
+            var maoDireita = new MaoBuilder().Construir();
+            var frames = DadoUmArrayDeFramesComQuantidadeComAsMaos(3, null, maoDireita);
+
+            var amostra = new AmostraBuilder()
+                .ComFrames(frames)
+                .ConstruirAmostraDinamica();
+
+            var arrayDeAmostras = amostra.ParaArray();
+
+            DeveTerRetornadoUmArrayComDadosDosFrames(frames, arrayDeAmostras);
         }
 
         private Frame[] DadoUmArrayDeFramesComQuantidade(int quantidadeDeFrames)
@@ -71,6 +90,21 @@ namespace Testes.Unidade.Dominio.Sinais
             for (var i = 0; i < quantidadeDeFrames; i++)
             {
                 frames[i] = new FrameBuilder().Construir();
+            }
+
+            return frames;
+        }
+
+        private Frame[] DadoUmArrayDeFramesComQuantidadeComAsMaos(int quantidadeDeFrames, Mao maoEsquerda, Mao maoDireita)
+        {
+            var frames = new Frame[quantidadeDeFrames];
+
+            for (var i = 0; i < quantidadeDeFrames; i++)
+            {
+                frames[i] = new FrameBuilder()
+                    .ComMaoEsquerda(maoEsquerda)
+                    .ComMaoDireita(maoDireita)
+                    .Construir();
             }
 
             return frames;

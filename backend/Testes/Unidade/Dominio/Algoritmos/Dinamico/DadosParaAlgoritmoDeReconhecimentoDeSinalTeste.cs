@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Sinais;
+using System.Collections.Generic;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
