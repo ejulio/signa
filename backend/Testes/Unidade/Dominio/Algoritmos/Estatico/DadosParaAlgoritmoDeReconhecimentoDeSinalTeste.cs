@@ -48,7 +48,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         {
             Func<int, Amostra> geradorDeAmostras = index => amostraPadrao;
 
-            var sinais = new ColecaoDeSinaisEstaticosBuilder()
+            var sinais = new ColecaoDeSinaisBuilder()
                         .ComQuantidadeDeAmostrasPorSinal(1)
                         .ComGeradorDeAmostras(geradorDeAmostras)
                         .ComQuantidadeDeSinais(1)
@@ -59,9 +59,10 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
         private static ICollection<Sinal> DadaUmaColecaoDeSinais(int quantidadeDeAmostrasPorSinal, int quantidadeDeSinais)
         {
-            var sinais = new ColecaoDeSinaisEstaticosBuilder()
+            var sinais = new ColecaoDeSinaisBuilder()
                         .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
                         .ComQuantidadeDeSinais(quantidadeDeSinais)
+                        .ComGeradorDeAmostrasEstaticas()
                         .Construir();
 
             return sinais;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Testes.Comum.Builders.Dominio.Sinais
 {
-    public class ColecaoDeSinaisEstaticosBuilder
+    public class ColecaoDeSinaisBuilder
     {
         private int quantidadeDeSinais = 2;
         private int quantidadeDeAmostrasPorSinal = 4;
@@ -13,39 +13,63 @@ namespace Testes.Comum.Builders.Dominio.Sinais
         private Func<int, Amostra> geradorDeAmostras;
 
 
-        public ColecaoDeSinaisEstaticosBuilder()
+        public ColecaoDeSinaisBuilder()
         {
-            var frames = new[] {new FrameBuilder().Construir()};
-            geradorDeAmostras = index => new AmostraBuilder().ComFrames(frames).Construir();
+            geradorDeAmostras = index => new AmostraBuilder().Construir();
         }
 
-        public ColecaoDeSinaisEstaticosBuilder ComQuantidadeDeSinais(int quantidadeDeSinais)
+        public ColecaoDeSinaisBuilder ComQuantidadeDeSinais(int quantidadeDeSinais)
         {
             this.quantidadeDeSinais = quantidadeDeSinais;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder ComTemplateDeDescricao(string templateDeDescricao)
+        public ColecaoDeSinaisBuilder ComTemplateDeDescricao(string templateDeDescricao)
         {
             this.templateDaDescricao = templateDeDescricao;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder ComTemplateDoCaminhoDoArquivoDeExemplo(string templateDoCaminhoDoArquivoDeExemplo)
+        public ColecaoDeSinaisBuilder ComTemplateDoCaminhoDoArquivoDeExemplo(string templateDoCaminhoDoArquivoDeExemplo)
         {
             this.templateDoCaminhoDoArquivoDeExemplo = templateDoCaminhoDoArquivoDeExemplo;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder ComGeradorDeAmostras(Func<int, Amostra> geradorDeAmostras)
+        public ColecaoDeSinaisBuilder ComGeradorDeAmostras(Func<int, Amostra> geradorDeAmostras)
         {
             this.geradorDeAmostras = geradorDeAmostras;
             return this;
         }
 
-        public ColecaoDeSinaisEstaticosBuilder ComQuantidadeDeAmostrasPorSinal(int quantidadeDeAmostrasPorSinal)
+        public ColecaoDeSinaisBuilder ComQuantidadeDeAmostrasPorSinal(int quantidadeDeAmostrasPorSinal)
         {
             this.quantidadeDeAmostrasPorSinal = quantidadeDeAmostrasPorSinal;
+            return this;
+        }
+
+        public ColecaoDeSinaisBuilder ComGeradorDeAmostrasEstaticas()
+        {
+            geradorDeAmostras = i =>
+            {
+                var frames = new[] {new FrameBuilder().Construir()};
+                return new AmostraBuilder().ComFrames(frames).Construir();
+            };
+            return this;
+        }
+
+        public ColecaoDeSinaisBuilder ComGeradorDeAmostrasDinamicas()
+        {
+            geradorDeAmostras = i =>
+            {
+                var frames = new[]
+                {
+                    new FrameBuilder().Construir(), 
+                    new FrameBuilder().Construir(), 
+                    new FrameBuilder().Construir()
+                };
+                return new AmostraBuilder().ComFrames(frames).Construir();
+            };
             return this;
         }
 

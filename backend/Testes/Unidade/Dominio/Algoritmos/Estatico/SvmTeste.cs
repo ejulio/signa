@@ -51,7 +51,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
         private ICollection<Sinal> DadaUmaColecaoDeSinais(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
-            var signs = new ColecaoDeSinaisEstaticosBuilder()
+            var signs = new ColecaoDeSinaisBuilder()
                             .ComQuantidadeDeSinais(quantidadeDeSinais)            
                             .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
                             .ComGeradorDeAmostras(CriarAmostraPeloIndice)

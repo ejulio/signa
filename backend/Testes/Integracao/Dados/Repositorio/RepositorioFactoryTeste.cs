@@ -41,7 +41,7 @@ namespace Testes.Integracao.Dados.Repositorio
 
         private ICollection<Sinal> DadoQueExistamAlgunsSinaisNoArquivoDeExemplos()
         {
-            var signs = new ColecaoDeSinaisEstaticosBuilder()
+            var signs = new ColecaoDeSinaisBuilder()
                             .ComQuantidadeDeSinais(4)
                             .ComTemplateDeDescricao(TemplateDaDescricao)
                             .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDoArquivoDeExemplo)

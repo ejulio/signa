@@ -70,10 +70,11 @@ namespace Testes.Unidade.Dominio
 
         private ICollection<Sinal> DadaUmaColecaoDeSinais()
         {
-            var sinais = new ColecaoDeSinaisEstaticosBuilder()
-                        .ComQuantidadeDeAmostrasPorSinal(2)
-                        .ComQuantidadeDeSinais(2)
-                        .Construir();
+            var sinais = new ColecaoDeSinaisBuilder()
+                .ComQuantidadeDeAmostrasPorSinal(2)
+                .ComQuantidadeDeSinais(2)
+                .ComGeradorDeAmostrasEstaticas()
+                .Construir();
 
             return sinais;
         }

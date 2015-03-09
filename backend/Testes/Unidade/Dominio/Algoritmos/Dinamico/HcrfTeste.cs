@@ -37,10 +37,10 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
         private Hcrf DadoUmAlgoritmoTreinado(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
             var hcrf = new Hcrf();
-            var colecaoDeSinais = new ColecaoDeSinaisDinamicosBuilder()
-                .ComTamanho(quantidadeDeSinais)
-                .ComQuantidadeDeAmostras(quantidadeDeAmostrasPorSinal)
-                .ComGeradorDeAmostras(i => new AmostraBuilder().ParaOIndiceComQuantidade(i, i + 2).Construir())
+            var colecaoDeSinais = new ColecaoDeSinaisBuilder()
+                .ComQuantidadeDeSinais(quantidadeDeSinais)
+                .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
+                .ComGeradorDeAmostras(i => new AmostraBuilder().ParaOIndiceComQuantidade(i, 5).Construir())
                 .Construir();
 
             var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinal(colecaoDeSinais);

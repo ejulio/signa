@@ -56,11 +56,11 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 
         private static ICollection<Sinal> DadaUmaColecaoDeSinaisComAmostras(int quantidadeDeAmostras, int quantidadeDeSinais)
         {
-            var colecaoDeSinais = new ColecaoDeSinaisDinamicosBuilder()
+            var colecaoDeSinais = new ColecaoDeSinaisBuilder()
                 .ComTemplateDeDescricao("Sinal dinâmico {0}")
-                .ComTemplateDeCaminho("sinal-dinamico-{0}.json")
-                .ComQuantidadeDeAmostras(quantidadeDeAmostras)
-                .ComTamanho(quantidadeDeSinais)
+                .ComTemplateDoCaminhoDoArquivoDeExemplo("sinal-dinamico-{0}.json")
+                .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostras)
+                .ComQuantidadeDeSinais(quantidadeDeSinais)
                 .Construir();
 
             return colecaoDeSinais;

@@ -153,10 +153,10 @@ namespace Testes.Integracao.Dados.Repositorio
 
         private ICollection<Sinal> DadoQueExistamAlgunsSinaisNoArquivoDeExemplo()
         {
-            var sinais = new ColecaoDeSinaisDinamicosBuilder()
-                            .ComTamanho(4)
+            var sinais = new ColecaoDeSinaisBuilder()
+                            .ComQuantidadeDeSinais(4)
                             .ComTemplateDeDescricao(TemplateDaDescricao)
-                            .ComTemplateDeCaminho(TemplateDoCaminhoDoArquivoDeExemplo)
+                            .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDoArquivoDeExemplo)
                             .Construir();
 
             var json = JsonConvert.SerializeObject(sinais);
