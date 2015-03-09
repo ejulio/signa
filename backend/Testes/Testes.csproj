@@ -86,7 +86,7 @@
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\HcrfTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\DadosParaAlgoritmoDeReconhecimentoDeSinalTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\SvmTeste.cs" />
-    <Compile Include="Unidade\Dominio\Algoritmos\SignRecognitionAlgorithmFactoryTest.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\AlgoritmoDeReconhecimentoDeSinalFactoryTeste.cs" />
     <Compile Include="Unidade\Dominio\Caracteristicas\DedoTeste.cs" />
     <Compile Include="Unidade\Dominio\Caracteristicas\MaoTeste.cs" />
     <Compile Include="Unidade\Dominio\Sinais\FrameTeste.cs" />

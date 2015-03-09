@@ -37,7 +37,7 @@ namespace Testes.Unidade.Dominio
                 .Returns(repositorio.Object);
 
             algoritmoDeReconhecimentoDeSinaisFactory
-                .Setup(f => f.CreateStaticSignRecognizer())
+                .Setup(f => f.CriarReconhecedorDeSinaisEstaticos())
                 .Returns(algoritmoDeReconhecimentoDeSinaisEstaticos.Object);
         }
 

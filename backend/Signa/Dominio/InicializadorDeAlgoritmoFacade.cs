@@ -17,7 +17,7 @@ namespace Signa.Dominio
 
         public void TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos()
         {
-            var algorithm = algoritmoDeReconhecimentoDeSinalFactory.CreateStaticSignRecognizer();
+            var algorithm = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisEstaticos();
             var repository = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
             var algorithmData = new DadosParaAlgoritmoDeReconhecimentoDeSinal(repository);
 

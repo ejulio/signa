@@ -128,11 +128,13 @@
     <Compile Include="Dados\Repositorio\RepositorioFactory.cs" />
     <Compile Include="Dados\Repositorio\RepositorioSinaisEstaticos.cs" />
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
+    <Compile Include="Dominio\Algoritmos\Dinamico\IDadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
+    <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
     <Compile Include="Dominio\InicializadorDeAlgoritmoFacade.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinal.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\Hcrf.cs" />
     <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinalFactory.cs" />
-    <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
+    <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinaisDinamicos.cs" />
     <Compile Include="Dominio\Algoritmos\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
     <Compile Include="Dominio\Caracteristicas\ICaracteristica.cs" />
     <Compile Include="Dominio\Sinais\IAmostra.cs" />

@@ -44,7 +44,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
                 .Construir();
 
             var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinal(colecaoDeSinais);
-            hcrf.TreinarCom(dados);
+            hcrf.Treinar(dados);
 
             return hcrf;
         }

@@ -9,7 +9,7 @@ using System;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
-    public class Hcrf
+    public class Hcrf : IAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {
         private HiddenMarkovClassifier<Independent<NormalDistribution>> classificador;
 
@@ -21,7 +21,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
             return classificador.Compute(amostra.ParaArray());
         }
 
-        public void TreinarCom(DadosParaAlgoritmoDeReconhecimentoDeSinal dados)
+        public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinal dados)
         {
             var initial = CriarDistribuicao(dados.Entradas);
 
@@ -59,7 +59,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
             teacher.Run(dados.Entradas, dados.Saidas);
         }
 
-        private static Independent<NormalDistribution> CriarDistribuicao(double[][][] entradas)
+        private Independent<NormalDistribution> CriarDistribuicao(double[][][] entradas)
         {
             // TODO: Como a distribuição é por feature do vetor, verificar para essa implementação ficar nos dados de treinamento
             var distribuicoes = new NormalDistribution[entradas[0][0].Length];

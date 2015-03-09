@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinal
+    public class DadosParaAlgoritmoDeReconhecimentoDeSinal : IDadosParaAlgoritmoDeReconhecimentoDeSinal
     {
         public double[][][] Entradas { get; private set; }
 

@@ -44,7 +44,7 @@ namespace Signa
                 () => new Hubs.SequenciaDeSinais(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos()));
 
             container.Register(typeof(SinaisEstaticosController),
-                () => new SinaisEstaticosController(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(), algorithmFactory.CreateStaticSignRecognizer()));
+                () => new SinaisEstaticosController(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(), algorithmFactory.CriarReconhecedorDeSinaisEstaticos()));
 
             container.Register(typeof(Hubs.ReconhecedorDeSinaisEstaticos), 
                 () => new Hubs.ReconhecedorDeSinaisEstaticos(container.Resolve<SinaisEstaticosController>()));
