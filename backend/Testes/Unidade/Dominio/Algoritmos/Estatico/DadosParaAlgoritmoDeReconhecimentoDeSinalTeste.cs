@@ -26,7 +26,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         {
             var sinais = DadaUmaColecaoDeUmSinal();
 
-            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinal(sinais);
+            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(sinais);
 
             DeveTerUmDadoDeTreinamento(dadosDoAlgoritmo);
         }
@@ -39,7 +39,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
             var sinais = DadaUmaColecaoDeSinais(quantidadeDeAmostrasPorSinal, quantidadeDeSinais);
 
-            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinal(sinais);
+            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(sinais);
 
             DeveTerOsDadosDaColecaoDeSinais(dadosDoAlgoritmo, sinais, quantidadeDeAmostrasPorSinal);
         }
@@ -68,7 +68,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             return sinais;
         }
 
-        private void DeveTerOsDadosDaColecaoDeSinais(DadosParaAlgoritmoDeReconhecimentoDeSinal dadosDoAlgoritmo, ICollection<Sinal> sinais, int quantidadeDeAmostrasPorSinal)
+        private void DeveTerOsDadosDaColecaoDeSinais(DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dadosDoAlgoritmo, ICollection<Sinal> sinais, int quantidadeDeAmostrasPorSinal)
         {
             dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(sinais.Count);
             dadosDoAlgoritmo.Entradas.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
@@ -84,7 +84,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             }
         }
 
-        private void DeveTerUmDadoDeTreinamento(DadosParaAlgoritmoDeReconhecimentoDeSinal dadosDoAlgoritmo)
+        private void DeveTerUmDadoDeTreinamento(DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dadosDoAlgoritmo)
         {
             var arrayDaAmostra = (amostraPadrao as IAmostraDeSinalEstatico).ParaArray();
             dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);

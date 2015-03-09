@@ -1,5 +1,6 @@
 ﻿using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
 
 namespace Signa.Dominio
@@ -17,11 +18,20 @@ namespace Signa.Dominio
 
         public void TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos()
         {
-            var algorithm = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisEstaticos();
-            var repository = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
-            var algorithmData = new DadosParaAlgoritmoDeReconhecimentoDeSinal(repository);
+            var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisEstaticos();
+            var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
+            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(repositorio);
 
-            algorithm.Treinar(algorithmData);
+            algoritmo.Treinar(dadosDoAlgoritmo);
+        }
+
+        public void TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos()
+        {
+            var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisDinamicos();
+            var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos();
+            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(repositorio);
+
+            algoritmo.Treinar(dadosDoAlgoritmo);
         }
     }
 }

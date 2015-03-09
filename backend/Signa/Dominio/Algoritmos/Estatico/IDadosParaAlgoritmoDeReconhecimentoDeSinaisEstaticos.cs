@@ -1,7 +1,7 @@
 ﻿
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public interface IDadosParaAlgoritmoDeReconhecimentoDeSinal
+    public interface IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
         double[][] Entradas { get; }
         int[] Saidas { get; }

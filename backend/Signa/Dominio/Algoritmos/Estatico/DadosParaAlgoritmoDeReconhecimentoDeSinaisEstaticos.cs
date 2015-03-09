@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinal : IDadosParaAlgoritmoDeReconhecimentoDeSinal
+    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos : IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
         public double[][] Entradas { get; private set; }
         public int[] Saidas { get; private set; }
@@ -14,7 +14,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
         private LinkedList<int> saidas;
         private LinkedList<double[]> entradas;
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<Sinal> sinais)
+        public DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(IEnumerable<Sinal> sinais)
         {
             this.sinais = sinais;
             ExtrairInformacoesDosSinais();

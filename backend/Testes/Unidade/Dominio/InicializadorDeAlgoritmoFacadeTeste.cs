@@ -4,6 +4,7 @@ using Moq;
 using Signa.Dados.Repositorio;
 using Signa.Dominio;
 using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using System;
@@ -19,6 +20,7 @@ namespace Testes.Unidade.Dominio
         private Mock<IRepositorio<Sinal>> repositorio;
         private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmoDeReconhecimentoDeSinaisEstaticos;
         private Mock<IRepositorioFactory> repositorioFactory;
+        private Mock<IAlgoritmoDeReconhecimentoDeSinaisDinamicos> algoritmoDeReconhecimentoDeSinaisDinamicos;
         private InicializadorDeAlgoritmoFacade inicializadorDeAlgoritmoFacade;
 
         [TestInitialize]
@@ -27,6 +29,7 @@ namespace Testes.Unidade.Dominio
             repositorio = new Mock<IRepositorio<Sinal>>();
             repositorioFactory = new Mock<IRepositorioFactory>();
             algoritmoDeReconhecimentoDeSinaisEstaticos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
+            algoritmoDeReconhecimentoDeSinaisDinamicos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisDinamicos>();
             algoritmoDeReconhecimentoDeSinaisFactory = new Mock<IAlgoritmoDeReconhecimentoDeSinalFactory>();
 
             inicializadorDeAlgoritmoFacade =
@@ -36,9 +39,17 @@ namespace Testes.Unidade.Dominio
                 .Setup(r => r.CriarECarregarRepositorioDeSinaisEstaticos())
                 .Returns(repositorio.Object);
 
+            repositorioFactory
+                .Setup(r => r.CriarECarregarRepositorioDeSinaisDinamicos())
+                .Returns(repositorio.Object);
+
             algoritmoDeReconhecimentoDeSinaisFactory
                 .Setup(f => f.CriarReconhecedorDeSinaisEstaticos())
                 .Returns(algoritmoDeReconhecimentoDeSinaisEstaticos.Object);
+
+            algoritmoDeReconhecimentoDeSinaisFactory
+                .Setup(f => f.CriarReconhecedorDeSinaisDinamicos())
+                .Returns(algoritmoDeReconhecimentoDeSinaisDinamicos.Object);
         }
 
         [TestMethod]
@@ -46,13 +57,13 @@ namespace Testes.Unidade.Dominio
         {
             repositorio
                 .Setup(r => r.GetEnumerator())
-                .Returns(DadaUmaColecaoDeSinais().GetEnumerator());
+                .Returns(DadaUmaColecaoDeSinaisEstaticos().GetEnumerator());
 
             inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
-                .Verify(a => 
-                    a.Treinar(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinal>(d => VerificarDadosDoAlgoritmo(d))));
+                .Verify(a =>
+                    a.Treinar(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos>(d => VerificarDadosDoAlgoritmo(d))));
         }
 
         [TestMethod]
@@ -68,7 +79,21 @@ namespace Testes.Unidade.Dominio
             acao.ShouldNotThrow();
         }
 
-        private ICollection<Sinal> DadaUmaColecaoDeSinais()
+        [TestMethod]
+        public void treinando_o_algoritmo_de_reconhecimento_de_sinais_dinamicos()
+        {
+            repositorio
+                .Setup(r => r.GetEnumerator())
+                .Returns(DadaUmaColecaoDeSinaisDinamicos().GetEnumerator());
+
+            inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+
+            algoritmoDeReconhecimentoDeSinaisDinamicos
+                .Verify(a =>
+                    a.Treinar(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos>(d => VerificarDadosDoAlgoritmo(d))));
+        }
+
+        private ICollection<Sinal> DadaUmaColecaoDeSinaisEstaticos()
         {
             var sinais = new ColecaoDeSinaisBuilder()
                 .ComQuantidadeDeAmostrasPorSinal(2)
@@ -79,7 +104,26 @@ namespace Testes.Unidade.Dominio
             return sinais;
         }
 
-        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinal dados)
+        private ICollection<Sinal> DadaUmaColecaoDeSinaisDinamicos()
+        {
+            var sinais = new ColecaoDeSinaisBuilder()
+                .ComQuantidadeDeAmostrasPorSinal(2)
+                .ComQuantidadeDeSinais(2)
+                .ComGeradorDeAmostrasDinamicas()
+                .Construir();
+
+            return sinais;
+        }
+
+        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dados)
+        {
+            dados.QuantidadeDeClasses.Should().Be(2);
+            dados.Saidas.Should().HaveCount(4);
+            dados.Entradas.Should().HaveCount(4);
+            return true;
+        }
+
+        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados)
         {
             dados.QuantidadeDeClasses.Should().Be(2);
             dados.Saidas.Should().HaveCount(4);

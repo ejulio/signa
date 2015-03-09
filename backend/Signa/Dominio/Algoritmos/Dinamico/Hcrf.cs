@@ -21,7 +21,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
             return classificador.Compute(amostra.ParaArray());
         }
 
-        public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinal dados)
+        public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados)
         {
             var initial = CriarDistribuicao(dados.Entradas);
 

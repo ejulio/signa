@@ -43,7 +43,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
                 .ComGeradorDeAmostras(i => new AmostraBuilder().ParaOIndiceComQuantidade(i, 5).Construir())
                 .Construir();
 
-            var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinal(colecaoDeSinais);
+            var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(colecaoDeSinais);
             hcrf.Treinar(dados);
 
             return hcrf;

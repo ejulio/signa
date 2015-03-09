@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinal : IDadosParaAlgoritmoDeReconhecimentoDeSinal
+    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos : IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {
         public double[][][] Entradas { get; private set; }
 
@@ -16,7 +16,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
         private LinkedList<double[][]> entradas;
         private LinkedList<int> saidas; 
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinal(IEnumerable<Sinal> sinais)
+        public DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(IEnumerable<Sinal> sinais)
         {
             this.sinais = sinais;
             entradas = new LinkedList<double[][]>();

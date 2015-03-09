@@ -17,7 +17,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             var sinais = DadaUmaColecaoComUmSinalComCincoFrames();
             var sinal = sinais[0];
 
-            var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinal(sinais);
+            var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(sinais);
             var saidasEsperadas = new [] { 0 };
 
             DeveTerExtraidoOsDadosDasAmostras(dados, 1, 1, saidasEsperadas, sinal.Amostras);
@@ -46,7 +46,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             const int quantidadeDeSinais = 4;
             var colecaoDeSinais = DadaUmaColecaoDeSinaisComAmostras(quantidadeDeAmostras, quantidadeDeSinais);
 
-            var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinal(colecaoDeSinais);
+            var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(colecaoDeSinais);
             
             var amostrasEsperadas = ConcatenarAmostrasDosSinais(colecaoDeSinais);
             var saidasEsperadas = new[] { 0, 0, 1, 1, 2, 2, 3, 3 };
@@ -78,7 +78,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             return amostrasConcatenadas.ToArray();
         }
 
-        private void DeveTerExtraidoOsDadosDasAmostras(DadosParaAlgoritmoDeReconhecimentoDeSinal dados, int quantidadeDeSinais, 
+        private void DeveTerExtraidoOsDadosDasAmostras(DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados, int quantidadeDeSinais, 
             int quantidadeDeAmostras, int[] saidasEsperadas, IList<Amostra> amostrasEsperadas)
         {
             dados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);

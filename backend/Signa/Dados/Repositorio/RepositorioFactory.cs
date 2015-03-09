@@ -23,5 +23,10 @@ namespace Signa.Dados.Repositorio
             
             return repositorioDeSinaisEstaticos;
         }
+
+        public IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisDinamicos()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

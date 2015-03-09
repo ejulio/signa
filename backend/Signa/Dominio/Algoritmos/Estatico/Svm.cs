@@ -18,7 +18,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
             return svm.Compute(amostra.ParaArray());
         }
 
-        public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinal dados)
+        public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dados)
         {
             svm = new MulticlassSupportVectorMachine(0, dados.QuantidadeDeClasses);
 

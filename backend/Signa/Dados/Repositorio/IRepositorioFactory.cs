@@ -5,5 +5,6 @@ namespace Signa.Dados.Repositorio
     public interface IRepositorioFactory
     {
         IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisEstaticos();
+        IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisDinamicos();
     }
 }
