@@ -1,6 +1,6 @@
 ﻿namespace Signa.Dominio.Sinais
 {
-    public interface IAmostraDeSinalEstatico
+    public interface IAmostraDeSinalEstatico : IAmostra
     {
         double[] ParaArray();
     }

@@ -5,7 +5,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
 {
     public class AmostraBuilder
     {
-        private IList<Frame> frames;
+        private IList<Frame> frames = new List<Frame>();
 
         public AmostraBuilder ComFrames(IList<Frame> frames)
         {

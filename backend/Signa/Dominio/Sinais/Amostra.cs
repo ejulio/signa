@@ -4,7 +4,29 @@ namespace Signa.Dominio.Sinais
 {
     public class Amostra : IAmostraDeSinalEstatico, IAmostraDeSinalDinamico
     {
-        public IList<Frame> Frames { get; set; }
+        public int QuantidadeDeFrames { get; private set; }
+
+        public int QuantidadeDeCaracteristicas { get; private set; }
+
+        private IList<Frame> frames; 
+        public IList<Frame> Frames 
+        { 
+            get { return frames; }
+            set
+            {
+                frames = value;
+                if (frames != null && frames.Count > 0)
+                {
+                    QuantidadeDeFrames = frames.Count;
+                    QuantidadeDeCaracteristicas = frames[0].ToArray().Length;
+                }
+                else
+                {
+                    QuantidadeDeFrames = 0;
+                    QuantidadeDeCaracteristicas = 0;
+                }
+            } 
+        }
 
         public Amostra()
         {
@@ -18,12 +40,18 @@ namespace Signa.Dominio.Sinais
 
         public IAmostraDeSinalEstatico PrimeiroFrame()
         {
-            throw new System.NotImplementedException();
+            return new Amostra
+            {
+                Frames = new []{ Frames[0] }
+            };
         }
 
         public IAmostraDeSinalEstatico UltimoFrame()
         {
-            throw new System.NotImplementedException();
+            return new Amostra
+            {
+                Frames = new[] { Frames[Frames.Count - 1] }
+            };
         }
 
         double[][] IAmostraDeSinalDinamico.ParaArray()

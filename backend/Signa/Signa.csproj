@@ -135,6 +135,7 @@
     <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
     <Compile Include="Dominio\Algoritmos\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
     <Compile Include="Dominio\Caracteristicas\ICaracteristica.cs" />
+    <Compile Include="Dominio\Sinais\IAmostra.cs" />
     <Compile Include="Dominio\Sinais\IAmostraDeSinalDinamico.cs" />
     <Compile Include="Dominio\Sinais\IAmostraDeSinalEstatico.cs" />
     <Compile Include="Hubs\ReconhecedorDeSinaisDinamicos.cs" />

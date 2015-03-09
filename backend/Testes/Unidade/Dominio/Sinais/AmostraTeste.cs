@@ -83,6 +83,64 @@ namespace Testes.Unidade.Dominio.Sinais
             DeveTerRetornadoUmArrayComDadosDosFrames(frames, arrayDeAmostras);
         }
 
+        [TestMethod]
+        public void buscando_o_primeiro_e_ultimo_frame_de_um_sinal_dinamico()
+        {
+            var frames = DadoUmArrayDeFramesComQuantidade(6);
+            var amostra = new AmostraBuilder()
+                .ComFrames(frames)
+                .ConstruirAmostraDinamica();
+
+            amostra.PrimeiroFrame().ParaArray().Should().ContainInOrder(frames[0].ToArray());
+            amostra.UltimoFrame().ParaArray().Should().ContainInOrder(frames[5].ToArray());
+        }
+
+        [TestMethod]
+        public void buscando_a_quantidade_de_frames_em_um_sinal_dinamico()
+        {
+            const int quantidadeDeFrames = 6;
+            var frames = DadoUmArrayDeFramesComQuantidade(quantidadeDeFrames);
+            var amostra = new AmostraBuilder()
+                .ComFrames(frames)
+                .ConstruirAmostraDinamica();
+
+            amostra.QuantidadeDeFrames.Should().Be(quantidadeDeFrames);
+        }
+
+        [TestMethod]
+        public void buscando_a_quantidade_de_frames_em_um_sinal_estatico()
+        {
+            const int quantidadeDeFrames = 1;
+            var frames = DadoUmArrayDeFramesComQuantidade(quantidadeDeFrames);
+            var amostra = new AmostraBuilder()
+                .ComFrames(frames)
+                .ConstruirAmostraEstatica();
+
+            amostra.QuantidadeDeFrames.Should().Be(quantidadeDeFrames);
+        }
+
+        [TestMethod]
+        public void buscando_a_quantidade_de_caracteristicas_em_um_sinal_dinamico()
+        {
+            var frames = DadoUmArrayDeFramesComQuantidade(3);
+            var amostra = new AmostraBuilder()
+                .ComFrames(frames)
+                .ConstruirAmostraDinamica();
+
+            amostra.QuantidadeDeCaracteristicas.Should().Be(frames[0].ToArray().Length);
+        }
+
+        [TestMethod]
+        public void buscando_a_quantidade_de_caracteristicas_em_um_sinal_estatico()
+        {
+            var frames = DadoUmArrayDeFramesComQuantidade(1);
+            var amostra = new AmostraBuilder()
+                .ComFrames(frames)
+                .ConstruirAmostraEstatica();
+
+            amostra.QuantidadeDeCaracteristicas.Should().Be(frames[0].ToArray().Length);
+        }
+
         private Frame[] DadoUmArrayDeFramesComQuantidade(int quantidadeDeFrames)
         {
             var frames = new Frame[quantidadeDeFrames];
