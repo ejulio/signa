@@ -1,10 +1,10 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Caracteristicas;
-using System.Linq;
+using Signa.Dominio.Sinais.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 
-namespace Testes.Unidade.Dominio.Caracteristicas
+namespace Testes.Unidade.Dominio.Sinais.Caracteristicas
 {
     [TestClass]
     public class MaoTeste

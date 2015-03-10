@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Caracteristicas;
+using Signa.Dominio.Sinais.Caracteristicas;
 
-namespace Testes.Unidade.Dominio.Caracteristicas
+namespace Testes.Unidade.Dominio.Sinais.Caracteristicas
 {
     [TestClass]
     public class DedoTeste

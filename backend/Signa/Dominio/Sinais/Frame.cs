@@ -1,5 +1,5 @@
-﻿using Signa.Dominio.Caracteristicas;
-using System.Linq;
+﻿using System.Linq;
+using Signa.Dominio.Sinais.Caracteristicas;
 
 namespace Signa.Dominio.Sinais
 {

@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Dominio.Caracteristicas
+namespace Signa.Dominio.Sinais.Caracteristicas
 {
     public enum TipoDeDedo
     {

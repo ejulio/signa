@@ -1,7 +1,7 @@
-﻿using Signa.Util;
-using System.Linq;
+﻿using System.Linq;
+using Signa.Util;
 
-namespace Signa.Dominio.Caracteristicas
+namespace Signa.Dominio.Sinais.Caracteristicas
 {
     public class Mao : ICaracteristica
     {

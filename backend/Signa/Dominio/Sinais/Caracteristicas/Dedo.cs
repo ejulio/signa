@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Signa.Dominio.Caracteristicas
+namespace Signa.Dominio.Sinais.Caracteristicas
 {
     public class Dedo : ICaracteristica
     {

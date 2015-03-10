@@ -1,4 +1,4 @@
-﻿using Signa.Dominio.Caracteristicas;
+﻿using Signa.Dominio.Sinais.Caracteristicas;
 
 namespace Testes.Comum.Builders.Dominio.Caracteristicas
 {

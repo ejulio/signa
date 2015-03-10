@@ -1,4 +1,4 @@
-﻿namespace Signa.Dominio.Caracteristicas
+﻿namespace Signa.Dominio.Sinais.Caracteristicas
 {
     public interface ICaracteristica
     {
