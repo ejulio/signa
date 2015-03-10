@@ -6,7 +6,9 @@ namespace Signa.Dados.Repositorio
     {
         private readonly string caminhoDoArquivoDeDados;
 
-        private static IRepositorio<Sinal> repositorioDeSinaisEstaticos; 
+        private static IRepositorio<Sinal> repositorioDeSinais;
+        private static IRepositorio<Sinal> repositorioDeSinaisEstaticos;
+        private static IRepositorio<Sinal> repositorioDeSinaisDinamicos;
 
         public RepositorioFactory(string caminhoDoArquivoDeDados)
         {
@@ -17,7 +19,7 @@ namespace Signa.Dados.Repositorio
         {
             if (repositorioDeSinaisEstaticos == null)
             {
-                repositorioDeSinaisEstaticos = new RepositorioSinaisEstaticos(caminhoDoArquivoDeDados);
+                repositorioDeSinaisEstaticos = new RepositorioDeSinaisEstaticos(InstanciaUnicaDeReposiotioDeSinais());
                 repositorioDeSinaisEstaticos.Carregar();    
             }
             
@@ -26,7 +28,23 @@ namespace Signa.Dados.Repositorio
 
         public IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisDinamicos()
         {
-            throw new System.NotImplementedException();
+            if (repositorioDeSinaisDinamicos == null)
+            {
+                repositorioDeSinaisDinamicos = new RepositorioDeSinaisDinamicos(InstanciaUnicaDeReposiotioDeSinais());
+                repositorioDeSinaisDinamicos.Carregar();
+            }
+
+            return repositorioDeSinaisDinamicos;
+        }
+
+        private IRepositorio<Sinal> InstanciaUnicaDeReposiotioDeSinais()
+        {
+            if (repositorioDeSinais == null)
+            {
+                repositorioDeSinais = new RepositorioDeSinais(caminhoDoArquivoDeDados);
+            }
+
+            return repositorioDeSinais;
         }
     }
 }

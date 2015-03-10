@@ -3,24 +3,24 @@ using Signa.Dominio.Sinais;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Signa.Dados.Repositorio
 {
-    public class RepositorioSinaisEstaticos : IRepositorio<Sinal>
+    public class RepositorioDeSinaisEstaticos : IRepositorio<Sinal>
     {
+        private readonly IRepositorio<Sinal> repositorioDeSinais;
         private IList<Sinal> sinaisPorIndice;
-        private readonly IDictionary<string, Sinal> sinaisPorId;
-
-        private readonly string caminhoDoArquivoDeDados;
+        private IDictionary<string, Sinal> sinaisPorId;
 
         public int Quantidade
         {
             get { return sinaisPorIndice.Count; }
         }
 
-        public RepositorioSinaisEstaticos(string caminhoDoArquivoDeDados)
+        public RepositorioDeSinaisEstaticos(IRepositorio<Sinal> repositorioDeSinais)
         {
-            this.caminhoDoArquivoDeDados = caminhoDoArquivoDeDados;
+            this.repositorioDeSinais = repositorioDeSinais;
             sinaisPorIndice = new List<Sinal>();
             sinaisPorId = new Dictionary<string, Sinal>();
         }
@@ -29,6 +29,7 @@ namespace Signa.Dados.Repositorio
         {
             sinaisPorId.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
+            repositorioDeSinais.Adicionar(sinal);
         }
 
         public Sinal BuscarPorIndice(int indice)
@@ -41,25 +42,18 @@ namespace Signa.Dados.Repositorio
 
         public Sinal BuscarPorDescricao(string id)
         {
-            Sinal Sinal;
-            if (sinaisPorId.TryGetValue(id, out Sinal))
-                return Sinal;
+            Sinal sinal;
+            if (sinaisPorId.TryGetValue(id, out sinal))
+                return sinal;
 
             return null;
         }
 
         public void Carregar()
         {
-            if (!File.Exists(caminhoDoArquivoDeDados))
-                return;
-
-            using (var reader = new StreamReader(caminhoDoArquivoDeDados))
-            {
-                var sinaisEmFormatoJson = reader.ReadToEnd();
-                var sinais = JsonConvert.DeserializeObject<List<Sinal>>(sinaisEmFormatoJson);
-                sinaisPorIndice = sinais ?? sinaisPorIndice;
-                CarregarSinaisPorId();
-            }
+            repositorioDeSinais.Carregar();
+            sinaisPorIndice = repositorioDeSinais.Where(s => s.Tipo == TipoSinal.Estatico).ToList();
+            CarregarSinaisPorId();
         }
 
         private void CarregarSinaisPorId()
@@ -72,11 +66,7 @@ namespace Signa.Dados.Repositorio
 
         public void SalvarAlteracoes()
         {
-            using (StreamWriter writer = new StreamWriter(caminhoDoArquivoDeDados))
-            {
-                var sinaisEmFormatoJson = JsonConvert.SerializeObject(sinaisPorId.Values);
-                writer.Write(sinaisEmFormatoJson);
-            }
+            repositorioDeSinais.SalvarAlteracoes();
         }
 
         public IEnumerator<Sinal> GetEnumerator()

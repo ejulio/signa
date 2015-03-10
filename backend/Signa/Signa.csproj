@@ -125,8 +125,9 @@
     <Compile Include="ContentTypeProviders\JsonContentTypeProvider.cs" />
     <Compile Include="Dados\Repositorio\IRepositorio.cs" />
     <Compile Include="Dados\Repositorio\IRepositorioFactory.cs" />
+    <Compile Include="Dados\Repositorio\RepositorioDeSinais.cs" />
     <Compile Include="Dados\Repositorio\RepositorioFactory.cs" />
-    <Compile Include="Dados\Repositorio\RepositorioSinaisEstaticos.cs" />
+    <Compile Include="Dados\Repositorio\RepositorioDeSinaisEstaticos.cs" />
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos.cs" />
     <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Dominio\Sinais\IAmostra.cs" />
     <Compile Include="Dominio\Sinais\IAmostraDeSinalDinamico.cs" />
     <Compile Include="Dominio\Sinais\IAmostraDeSinalEstatico.cs" />
+    <Compile Include="Dominio\Sinais\TipoSinal.cs" />
     <Compile Include="Hubs\ReconhecedorDeSinaisDinamicos.cs" />
     <Compile Include="Hubs\SequenciaDeSinais.cs" />
     <Compile Include="Hubs\ReconhecedorDeSinaisEstaticos.cs" />

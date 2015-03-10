@@ -12,18 +12,18 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Integracao.Dados.Repositorio
 {
     [TestClass]
-    public class RepositorioDeSinaisDinamicosTeste
+    public class RepositorioDeSinaisTeste
     {
-        private RepositorioDeSinaisDinamicos repositorioDeSinaisDinamicos;
-        private const string CaminhoDoArquivoDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
+        private RepositorioDeSinais repositorioDeSinais;
+        private const string CaminhoDoArquivoDeAmostras = "Integracao/JsonTestData/repositorio-de-sinais-teste.json";
         private const string TemplateDaDescricaoDeSinalEstatico = "sinal estático {0}";
         private const string TemplateDaDescricaoDeSinalDinamico = "sinal dinâmico {0}";
-        private const string TemplateDoCaminhoDoArquivoDeExemplo = "sample-{0}.json";
+        private const string TemplateDoCaminhoDoArquivoDeExemplo = "sinal-{0}.json";
 
         [TestInitialize]
         public void Setup()
         {
-            repositorioDeSinaisDinamicos = new RepositorioDeSinaisDinamicos(new RepositorioDeSinais(CaminhoDoArquivoDeAmostras));
+            repositorioDeSinais = new RepositorioDeSinais(CaminhoDoArquivoDeAmostras);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
 
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioDeSinais.Carregar();
 
             DeveTerOsSinaisDoArquivo(sinais);
         }
@@ -41,7 +41,7 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioDeSinais.Carregar();
 
             DevePoderBuscarUmSinalPelaDescricao(sinais);
         }
@@ -51,16 +51,16 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioDeSinais.Carregar();
 
             var conteudoDoArquivoDeSinais = RecuperarConteudoDoArquivoDeSinais();
             
             var sinal = DadoUmNovoSinal("New sign");
-            repositorioDeSinaisDinamicos.Adicionar(sinal);
+            repositorioDeSinais.Adicionar(sinal);
 
             RecuperarConteudoDoArquivoDeSinais().Should().Be(conteudoDoArquivoDeSinais);
 
-            repositorioDeSinaisDinamicos.SalvarAlteracoes();
+            repositorioDeSinais.SalvarAlteracoes();
 
             RecuperarConteudoDoArquivoDeSinais().Should().NotBe(conteudoDoArquivoDeSinais);
             RecuperarConteudoDoArquivoDeSinais().Length.Should().BeGreaterThan(conteudoDoArquivoDeSinais.Length);
@@ -71,17 +71,17 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioDeSinais.Carregar();
 
             var descricaoDoSinal = "New sign";
             var indiceDoSinal = sinais.Count;
 
             var sinal = DadoUmNovoSinal(descricaoDoSinal);
-            repositorioDeSinaisDinamicos.Adicionar(sinal);
+            repositorioDeSinais.Adicionar(sinal);
 
-            repositorioDeSinaisDinamicos.Quantidade.Should().Be(sinais.Count + 1);
-            repositorioDeSinaisDinamicos.BuscarPorDescricao(descricaoDoSinal).Descricao.Should().Be(descricaoDoSinal);
-            repositorioDeSinaisDinamicos.BuscarPorIndice(indiceDoSinal).Descricao.Should().Be(descricaoDoSinal);
+            repositorioDeSinais.Quantidade.Should().Be(sinais.Count + 1);
+            repositorioDeSinais.BuscarPorDescricao(descricaoDoSinal).Descricao.Should().Be(descricaoDoSinal);
+            repositorioDeSinais.BuscarPorIndice(indiceDoSinal).Descricao.Should().Be(descricaoDoSinal);
         }
 
         [TestMethod]
@@ -89,13 +89,13 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioDeSinais.Carregar();
 
             int indice = 0;
 
-            foreach (var sinal in repositorioDeSinaisDinamicos)
+            foreach (var sinal in repositorioDeSinais)
             {
-                sinal.Should().Be(repositorioDeSinaisDinamicos.BuscarPorIndice(indice));
+                sinal.Should().Be(repositorioDeSinais.BuscarPorIndice(indice));
                 indice++;
             }
         }
@@ -105,9 +105,9 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueOArquivoDeSinaisEstejaVazio();
 
-            Action acaoDeCarregar = () => repositorioDeSinaisDinamicos.Carregar();
-            Action acaoBuscarPorIndice = () => repositorioDeSinaisDinamicos.BuscarPorIndice(0);
-            Action acaoBuscarPorId = () => repositorioDeSinaisDinamicos.BuscarPorDescricao("");
+            Action acaoDeCarregar = () => repositorioDeSinais.Carregar();
+            Action acaoBuscarPorIndice = () => repositorioDeSinais.BuscarPorIndice(0);
+            Action acaoBuscarPorId = () => repositorioDeSinais.BuscarPorDescricao("");
 
             acaoDeCarregar.ShouldNotThrow();
             acaoBuscarPorIndice.ShouldNotThrow();
@@ -119,7 +119,7 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueOArquivoDeSinaisNaoExiste();
 
-            Action acao = () => repositorioDeSinaisDinamicos.Carregar();
+            Action acao = () => repositorioDeSinais.Carregar();
 
             acao.ShouldNotThrow();
         }
@@ -130,9 +130,9 @@ namespace Testes.Integracao.Dados.Repositorio
             DadoQueOArquivoDeSinaisNaoExiste();
 
             var sinal = DadoUmNovoSinal("saving sign");
-            repositorioDeSinaisDinamicos.Adicionar(sinal);
+            repositorioDeSinais.Adicionar(sinal);
 
-            Action acao = () => repositorioDeSinaisDinamicos.SalvarAlteracoes();
+            Action acao = () => repositorioDeSinais.SalvarAlteracoes();
 
             acao.ShouldNotThrow();
             File.Exists(CaminhoDoArquivoDeAmostras).Should().BeTrue();
@@ -155,19 +155,19 @@ namespace Testes.Integracao.Dados.Repositorio
 
         private ICollection<Sinal> DadoQueExistamAlgunsSinaisNoArquivoDeExemplo()
         {
-            var sinaisDinamicos = new ColecaoDeSinaisBuilder()
-                    .ComQuantidadeDeSinais(4)
-                    .ComTemplateDeDescricao(TemplateDaDescricaoDeSinalDinamico)
-                    .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDoArquivoDeExemplo)
-                    .ComGeradorDeAmostrasDinamicas()
-                    .Construir();
-
             var sinaisEstaticos = new ColecaoDeSinaisBuilder()
-                    .ComQuantidadeDeSinais(4)
-                    .ComTemplateDeDescricao(TemplateDaDescricaoDeSinalEstatico)
-                    .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDoArquivoDeExemplo)
-                    .ComGeradorDeAmostrasEstaticas()
-                    .Construir();
+                            .ComQuantidadeDeSinais(4)
+                            .ComTemplateDeDescricao(TemplateDaDescricaoDeSinalEstatico)
+                            .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDoArquivoDeExemplo)
+                            .ComGeradorDeAmostrasEstaticas()
+                            .Construir();
+
+            var sinaisDinamicos = new ColecaoDeSinaisBuilder()
+                            .ComQuantidadeDeSinais(4)
+                            .ComTemplateDeDescricao(TemplateDaDescricaoDeSinalDinamico)
+                            .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDoArquivoDeExemplo)
+                            .ComGeradorDeAmostrasDinamicas()
+                            .Construir();
 
             var sinais = sinaisDinamicos.Concat(sinaisEstaticos).ToList();
 
@@ -178,7 +178,7 @@ namespace Testes.Integracao.Dados.Repositorio
                 writer.Write(json);
             }
 
-            return sinaisDinamicos;
+            return sinais;
         }
 
         private static Sinal DadoUmNovoSinal(string descricao)
@@ -193,26 +193,27 @@ namespace Testes.Integracao.Dados.Repositorio
 
         private void DevePoderBuscarUmSinalPelaDescricao(ICollection<Sinal> sinais)
         {
-            string idSinal;
-            for (int i = 0; i < sinais.Count; i++)
+            for (int i = 0; i < sinais.Count(s => s.Tipo == TipoSinal.Estatico); i++)
             {
-                idSinal = String.Format(TemplateDaDescricaoDeSinalDinamico, i);
-                repositorioDeSinaisDinamicos.BuscarPorDescricao(idSinal).Descricao.Should().Be(idSinal);
+                var idSinal = String.Format(TemplateDaDescricaoDeSinalEstatico, i);
+                repositorioDeSinais.BuscarPorDescricao(idSinal).Descricao.Should().Be(idSinal);
+            }
+
+            for (int i = 0; i < sinais.Count(s => s.Tipo == TipoSinal.Dinamico); i++)
+            {
+                var idSinal = String.Format(TemplateDaDescricaoDeSinalDinamico, i);
+                repositorioDeSinais.BuscarPorDescricao(idSinal).Descricao.Should().Be(idSinal);
             }
         }
 
         private void DeveTerOsSinaisDoArquivo(ICollection<Sinal> sinais)
         {
-            repositorioDeSinaisDinamicos.Quantidade.Should().Be(sinais.Count);
+            repositorioDeSinais.Quantidade.Should().Be(sinais.Count);
             for (int i = 0; i < sinais.Count; i++)
             {
-                repositorioDeSinaisDinamicos
+                repositorioDeSinais
                     .BuscarPorIndice(i)
-                    .Should()
-                    .Match<Sinal>(sinal =>
-                        sinal.Descricao == String.Format(TemplateDaDescricaoDeSinalDinamico, i) &&
-                        sinal.CaminhoParaArquivoDeExemplo == String.Format(TemplateDoCaminhoDoArquivoDeExemplo, i) &&
-                        sinal.Amostras.Count == 4);
+                    .Should().NotBeNull();
             }
         }
         private string RecuperarConteudoDoArquivoDeSinais()

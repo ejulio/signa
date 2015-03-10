@@ -3,25 +3,24 @@ using Signa.Dominio.Sinais;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Signa.Dados.Repositorio
 {
-    public class RepositorioDeSinaisDinamicos : IRepositorio<Sinal>
+    public class RepositorioDeSinais : IRepositorio<Sinal>
     {
-        private readonly IRepositorio<Sinal> repositorioDeSinais;
         private IList<Sinal> sinaisPorIndice;
-        private readonly IDictionary<string, Sinal> sinaisPorId;
+        private IDictionary<string, Sinal> sinaisPorId;
 
+        private readonly string caminhoDoArquivoDeDados;
 
         public int Quantidade
         {
             get { return sinaisPorIndice.Count; }
         }
 
-        public RepositorioDeSinaisDinamicos(IRepositorio<Sinal> repositorioDeSinais)
+        public RepositorioDeSinais(string caminhoDoArquivoDeDados)
         {
-            this.repositorioDeSinais = repositorioDeSinais;
+            this.caminhoDoArquivoDeDados = caminhoDoArquivoDeDados;
             sinaisPorIndice = new List<Sinal>();
             sinaisPorId = new Dictionary<string, Sinal>();
         }
@@ -30,7 +29,6 @@ namespace Signa.Dados.Repositorio
         {
             sinaisPorId.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
-            repositorioDeSinais.Adicionar(sinal);
         }
 
         public Sinal BuscarPorIndice(int indice)
@@ -52,13 +50,21 @@ namespace Signa.Dados.Repositorio
 
         public void Carregar()
         {
-            repositorioDeSinais.Carregar();
-            sinaisPorIndice = repositorioDeSinais.Where(s => s.Tipo == TipoSinal.Dinamico).ToList();
-            CarregarSinaisPorId();
+            if (!File.Exists(caminhoDoArquivoDeDados))
+                return;
+
+            using (var reader = new StreamReader(caminhoDoArquivoDeDados))
+            {
+                var sinaisEmFormatoJson = reader.ReadToEnd();
+                var sinais = JsonConvert.DeserializeObject<List<Sinal>>(sinaisEmFormatoJson);
+                sinaisPorIndice = sinais ?? sinaisPorIndice;
+                CarregarSinaisPorId();
+            }
         }
 
         private void CarregarSinaisPorId()
         {
+            sinaisPorId = new Dictionary<string, Sinal>();
             foreach (var sinal in sinaisPorIndice)
             {
                 sinaisPorId.Add(sinal.Descricao, sinal);
@@ -67,7 +73,11 @@ namespace Signa.Dados.Repositorio
 
         public void SalvarAlteracoes()
         {
-            repositorioDeSinais.SalvarAlteracoes();
+            using (StreamWriter writer = new StreamWriter(caminhoDoArquivoDeDados))
+            {
+                var sinaisEmFormatoJson = JsonConvert.SerializeObject(sinaisPorId.Values);
+                writer.Write(sinaisEmFormatoJson);
+            }
         }
 
         public IEnumerator<Sinal> GetEnumerator()

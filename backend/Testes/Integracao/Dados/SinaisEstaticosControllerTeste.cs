@@ -19,7 +19,7 @@ namespace Testes.Integracao.Dados
         [TestInitialize]
         public void Setup()
         {
-            repositorio = new RepositorioSinaisEstaticos(CaminhoParaOArquivoDeAmostras);
+            repositorio = new RepositorioDeSinaisEstaticos(new RepositorioDeSinais(CaminhoParaOArquivoDeAmostras));
             sinaisEstaticosController = new SinaisEstaticosController(repositorio, null);
 
             Directory.CreateDirectory(SinaisEstaticosController.DiretorioDeAmostras);

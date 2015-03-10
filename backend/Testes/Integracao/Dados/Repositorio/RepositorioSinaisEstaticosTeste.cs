@@ -6,6 +6,7 @@ using Signa.Dominio.Sinais;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados.Repositorio
@@ -13,15 +14,16 @@ namespace Testes.Integracao.Dados.Repositorio
     [TestClass]
     public class RepositorioSinaisEstaticosTeste
     {
-        private RepositorioSinaisEstaticos repositorioDeSinaisEstaticos;
+        private RepositorioDeSinaisEstaticos repositorioDeDeSinaisEstaticos;
         private const string CaminhoDoArquivoDeDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
-        private const string TemplateDaDescricao = "Static sign sample {0}";
+        private const string TemplateDaDescricaoDeSinalEstatico = "sinal estático {0}";
+        private const string TemplateDaDescricaoDeSinalDinamico = "sinal dinâmico {0}";
         private const string TemplateDoCaminhoDeExemplo = "static-sample-{0}.json";
 
         [TestInitialize]
         public void TestInitialize()
         {
-            repositorioDeSinaisEstaticos = new RepositorioSinaisEstaticos(CaminhoDoArquivoDeDeAmostras);
+            repositorioDeDeSinaisEstaticos = new RepositorioDeSinaisEstaticos(new RepositorioDeSinais(CaminhoDoArquivoDeDeAmostras));
         }
 
         [TestMethod]
@@ -29,7 +31,7 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             var sinais = DadoQueExistamDadosNoArquivoDeSinais();
 
-            repositorioDeSinaisEstaticos.Carregar();
+            repositorioDeDeSinaisEstaticos.Carregar();
 
             DeveTerCarregadoOsSinaisDoArquivo(sinais);
         }
@@ -39,7 +41,7 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             var sinais = DadoQueExistamDadosNoArquivoDeSinais();
             
-            repositorioDeSinaisEstaticos.Carregar();
+            repositorioDeDeSinaisEstaticos.Carregar();
 
             DevePoderBuscarOsSinaisPelaDescricao(sinais);
         }
@@ -49,16 +51,16 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueExistamDadosNoArquivoDeSinais();
             
-            repositorioDeSinaisEstaticos.Carregar();
+            repositorioDeDeSinaisEstaticos.Carregar();
 
             var conteudoDoArquivoDeSinais = BuscarConteudoDoArquivoDeSinais();
             
             var sinal = DadoUmNovoSinal("New sign");
-            repositorioDeSinaisEstaticos.Adicionar(sinal);
+            repositorioDeDeSinaisEstaticos.Adicionar(sinal);
 
             BuscarConteudoDoArquivoDeSinais().Should().Be(conteudoDoArquivoDeSinais);
 
-            repositorioDeSinaisEstaticos.SalvarAlteracoes();
+            repositorioDeDeSinaisEstaticos.SalvarAlteracoes();
 
             BuscarConteudoDoArquivoDeSinais().Should().NotBe(conteudoDoArquivoDeSinais);
             BuscarConteudoDoArquivoDeSinais().Length.Should().BeGreaterThan(conteudoDoArquivoDeSinais.Length);
@@ -69,17 +71,17 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             var sinais = DadoQueExistamDadosNoArquivoDeSinais();
             
-            repositorioDeSinaisEstaticos.Carregar();
+            repositorioDeDeSinaisEstaticos.Carregar();
 
             var descricaoDoSinal = "New sign";
             var indiceDoSinal = sinais.Count;
 
             var sinal = DadoUmNovoSinal(descricaoDoSinal);
-            repositorioDeSinaisEstaticos.Adicionar(sinal);
+            repositorioDeDeSinaisEstaticos.Adicionar(sinal);
 
-            repositorioDeSinaisEstaticos.Quantidade.Should().Be(sinais.Count + 1);
-            repositorioDeSinaisEstaticos.BuscarPorDescricao(descricaoDoSinal).Descricao.Should().Be(descricaoDoSinal);
-            repositorioDeSinaisEstaticos.BuscarPorIndice(indiceDoSinal).Descricao.Should().Be(descricaoDoSinal);
+            repositorioDeDeSinaisEstaticos.Quantidade.Should().Be(sinais.Count + 1);
+            repositorioDeDeSinaisEstaticos.BuscarPorDescricao(descricaoDoSinal).Descricao.Should().Be(descricaoDoSinal);
+            repositorioDeDeSinaisEstaticos.BuscarPorIndice(indiceDoSinal).Descricao.Should().Be(descricaoDoSinal);
         }
 
         [TestMethod]
@@ -87,13 +89,13 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueExistamDadosNoArquivoDeSinais();
             
-            repositorioDeSinaisEstaticos.Carregar();
+            repositorioDeDeSinaisEstaticos.Carregar();
 
             int indice = 0;
 
-            foreach (var sinal in repositorioDeSinaisEstaticos)
+            foreach (var sinal in repositorioDeDeSinaisEstaticos)
             {
-                sinal.Should().Be(repositorioDeSinaisEstaticos.BuscarPorIndice(indice));
+                sinal.Should().Be(repositorioDeDeSinaisEstaticos.BuscarPorIndice(indice));
                 indice++;
             }
         }
@@ -103,9 +105,9 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueOArquivoDeSinaisEstejaVazio();
 
-            Action acaoDeCarregar = () => repositorioDeSinaisEstaticos.Carregar();
-            Action acaoDeBuscarPorIndice = () => repositorioDeSinaisEstaticos.BuscarPorIndice(0);
-            Action acaoDeBuscarPorDescricao = () => repositorioDeSinaisEstaticos.BuscarPorDescricao("");
+            Action acaoDeCarregar = () => repositorioDeDeSinaisEstaticos.Carregar();
+            Action acaoDeBuscarPorIndice = () => repositorioDeDeSinaisEstaticos.BuscarPorIndice(0);
+            Action acaoDeBuscarPorDescricao = () => repositorioDeDeSinaisEstaticos.BuscarPorDescricao("");
 
             acaoDeCarregar.ShouldNotThrow();
             acaoDeBuscarPorIndice.ShouldNotThrow();
@@ -117,7 +119,7 @@ namespace Testes.Integracao.Dados.Repositorio
         {
             DadoQueOArquivoDeSinaisNaoExista();
 
-            Action acao = () => repositorioDeSinaisEstaticos.Carregar();
+            Action acao = () => repositorioDeDeSinaisEstaticos.Carregar();
 
             acao.ShouldNotThrow();
         }
@@ -128,9 +130,9 @@ namespace Testes.Integracao.Dados.Repositorio
             DadoQueOArquivoDeSinaisNaoExista();
 
             var sinal = DadoUmNovoSinal("saving sign");
-            repositorioDeSinaisEstaticos.Adicionar(sinal);
+            repositorioDeDeSinaisEstaticos.Adicionar(sinal);
 
-            Action acao = () => repositorioDeSinaisEstaticos.SalvarAlteracoes();
+            Action acao = () => repositorioDeDeSinaisEstaticos.SalvarAlteracoes();
 
             acao.ShouldNotThrow();
             File.Exists(CaminhoDoArquivoDeDeAmostras).Should().BeTrue();
@@ -153,20 +155,30 @@ namespace Testes.Integracao.Dados.Repositorio
 
         private ICollection<Sinal> DadoQueExistamDadosNoArquivoDeSinais()
         {
-            var signs = new ColecaoDeSinaisBuilder()
-                            .ComQuantidadeDeSinais(4)
-                            .ComTemplateDeDescricao(TemplateDaDescricao)
-                            .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDeExemplo)
-                            .Construir();
+            var sinaisEstaticos = new ColecaoDeSinaisBuilder()
+                    .ComQuantidadeDeSinais(4)
+                    .ComTemplateDeDescricao(TemplateDaDescricaoDeSinalEstatico)
+                    .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDeExemplo)
+                    .ComGeradorDeAmostrasEstaticas()
+                    .Construir();
 
-            var json = JsonConvert.SerializeObject(signs);
+            var sinaisDinamicos = new ColecaoDeSinaisBuilder()
+                    .ComQuantidadeDeSinais(4)
+                    .ComTemplateDeDescricao(TemplateDaDescricaoDeSinalDinamico)
+                    .ComTemplateDoCaminhoDoArquivoDeExemplo(TemplateDoCaminhoDeExemplo)
+                    .ComGeradorDeAmostrasDinamicas()
+                    .Construir();
+
+            var sinais = sinaisEstaticos.Concat(sinaisDinamicos).ToList();
+
+            var json = JsonConvert.SerializeObject(sinaisEstaticos);
 
             using (StreamWriter writer = new StreamWriter(CaminhoDoArquivoDeDeAmostras))
             {
                 writer.Write(json);
             }
 
-            return signs;
+            return sinaisEstaticos;
         }
 
         private Sinal DadoUmNovoSinal(string descricao)
@@ -184,21 +196,21 @@ namespace Testes.Integracao.Dados.Repositorio
             string signId;
             for (int i = 0; i < signs.Count; i++)
             {
-                signId = String.Format(TemplateDaDescricao, i);
-                repositorioDeSinaisEstaticos.BuscarPorDescricao(signId).Descricao.Should().Be(signId);
+                signId = String.Format(TemplateDaDescricaoDeSinalEstatico, i);
+                repositorioDeDeSinaisEstaticos.BuscarPorDescricao(signId).Descricao.Should().Be(signId);
             }
         }
 
         private void DeveTerCarregadoOsSinaisDoArquivo(ICollection<Sinal> signs)
         {
-            repositorioDeSinaisEstaticos.Quantidade.Should().Be(signs.Count);
+            repositorioDeDeSinaisEstaticos.Quantidade.Should().Be(signs.Count);
             for (int i = 0; i < signs.Count; i++)
             {
-                repositorioDeSinaisEstaticos
+                repositorioDeDeSinaisEstaticos
                     .BuscarPorIndice(i)
                     .Should()
                     .Match<Sinal>(sign =>
-                        sign.Descricao == String.Format(TemplateDaDescricao, i) &&
+                        sign.Descricao == String.Format(TemplateDaDescricaoDeSinalEstatico, i) &&
                         sign.CaminhoParaArquivoDeExemplo == String.Format(TemplateDoCaminhoDeExemplo, i) &&
                         sign.Amostras.Count == 4);
             }
