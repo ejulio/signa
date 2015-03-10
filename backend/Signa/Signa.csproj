@@ -130,6 +130,8 @@
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisEstaticos.cs" />
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos.cs" />
+    <Compile Include="Dominio\Algoritmos\Dinamico\GeradorDeAmostraDeSinalDinamico.cs" />
+    <Compile Include="Dominio\Algoritmos\Estatico\GeradorDeAmostraDeSinalEstatico.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
     <Compile Include="Dominio\InicializadorDeAlgoritmoFacade.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos.cs" />

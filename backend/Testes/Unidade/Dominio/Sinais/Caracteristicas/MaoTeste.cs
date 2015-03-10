@@ -25,8 +25,8 @@ namespace Testes.Unidade.Dominio.Sinais.Caracteristicas
 
             var hand = new Mao
             {
-                PalmNormal = palmNormal,
-                HandDirection = handDirection,
+                VetorNormalDaPalma = palmNormal,
+                DirecaoDaMao = handDirection,
                 Dedos = fingers
             };
 

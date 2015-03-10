@@ -56,8 +56,8 @@ namespace Testes.Comum.Builders.Dominio.Caracteristicas
             return new Mao
             {
                 Dedos = dedos,
-                PalmNormal = vetorNormalDaPalma,
-                HandDirection = direcaoDaMao
+                VetorNormalDaPalma = vetorNormalDaPalma,
+                DirecaoDaMao = direcaoDaMao
             };
         }
     }

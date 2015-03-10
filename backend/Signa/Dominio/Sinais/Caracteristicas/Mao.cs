@@ -5,8 +5,8 @@ namespace Signa.Dominio.Sinais.Caracteristicas
 {
     public class Mao
     {
-        public double[] PalmNormal { get; set; }
-        public double[] HandDirection { get; set; }
+        public double[] VetorNormalDaPalma { get; set; }
+        public double[] DirecaoDaMao { get; set; }
 
         public Dedo[] Dedos { get; set; }
 
@@ -14,8 +14,8 @@ namespace Signa.Dominio.Sinais.Caracteristicas
         {
             var fingersData = Dedos.Select(f => f.ToArray()).Concatenar();
             
-            return PalmNormal
-                .Concat(HandDirection)
+            return VetorNormalDaPalma
+                .Concat(DirecaoDaMao)
                 .Concat(fingersData)
                 .ToArray();
         }
@@ -24,8 +24,8 @@ namespace Signa.Dominio.Sinais.Caracteristicas
             return new Mao
             {
                 Dedos = new [] { Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty() },
-                HandDirection = new[] { 0.0, 0.0, 0.0 },
-                PalmNormal = new[] { 0.0, 0.0, 0.0 }
+                DirecaoDaMao = new[] { 0.0, 0.0, 0.0 },
+                VetorNormalDaPalma = new[] { 0.0, 0.0, 0.0 }
             };
         }
 
