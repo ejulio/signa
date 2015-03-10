@@ -4,6 +4,7 @@ using Signa.Dominio.Sinais;
 using Signa.Util;
 using System.IO;
 using System.Linq;
+using Signa.Dominio.Algoritmos.Estatico;
 
 namespace Signa.Dados
 {

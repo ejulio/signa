@@ -4,6 +4,7 @@ using Moq;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
