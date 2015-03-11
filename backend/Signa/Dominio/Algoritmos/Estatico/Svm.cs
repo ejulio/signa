@@ -9,13 +9,15 @@ namespace Signa.Dominio.Algoritmos.Estatico
     {
         private MulticlassSupportVectorMachine svm;
 
-        public int Reconhecer(IAmostraDeSinalEstatico amostra)
+        public int Reconhecer(Frame amostra)
         {
             if (svm == null)
             {
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
-            return svm.Compute(amostra.ParaArray());
+            var geradorDeAmostra = new GeradorDeAmostraDeSinalEstatico();
+
+            return svm.Compute(geradorDeAmostra.ExtrairCaracteristicasDaAmostra(new[] { amostra }));
         }
 
         public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dados)

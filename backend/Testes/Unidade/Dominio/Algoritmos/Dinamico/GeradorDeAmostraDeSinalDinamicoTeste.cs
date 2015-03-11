@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Dinamico;
-using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
-using Signa.Dominio.Sinais.Caracteristicas;
-using Signa.Util;
-using Testes.Comum.Builders.Dominio.Caracteristicas;
+using System;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
+using Testes.Comum.Util;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 {
@@ -41,7 +38,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 
         private void DeveTerRetornadoUmArrayComDadosDosFrames(Frame[] frames, double[][] arrayDeAmostras)
         {
-            var dadosDosFrames = frames.Select(MontarArrayEsperadoParaOFrame);
+            var dadosDosFrames = frames.Select(f => f.MontarArrayEsperado());
 
             var dadosEsperadosDoFrame = dadosDosFrames.ToArray();
             arrayDeAmostras.Should().HaveCount(dadosEsperadosDoFrame.Count());
@@ -51,27 +48,6 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
                 arrayDeAmostras[i].Should().HaveSameCount(dadosEsperadosDoFrame.ElementAt(i));
                 arrayDeAmostras[i].Should().ContainInOrder(dadosEsperadosDoFrame.ElementAt(i));
             }
-        }
-
-        private double[] MontarArrayEsperadoParaOFrame(Frame frame)
-        {
-            return MontarArrayEsperadoParaAMao(frame.MaoEsquerda)
-                .Concat(MontarArrayEsperadoParaAMao(frame.MaoDireita))
-                .ToArray();
-        }
-
-        private double[] MontarArrayEsperadoParaAMao(Mao mao)
-        {
-            var dadosDosDedos = mao.Dedos.Select(d =>
-            {
-                var tipo = new double[] { (int)d.Tipo };
-                return tipo.Concat(d.Direcao).ToArray();
-            }).Concatenar();
-
-            return mao.VetorNormalDaPalma
-                    .Concat(mao.DirecaoDaMao)
-                    .Concat(dadosDosDedos)
-                    .ToArray();
         }
     }
 }

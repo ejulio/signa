@@ -4,8 +4,6 @@ using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using System;
 using System.Collections.Generic;
-using Signa.Dominio.Sinais.Caracteristicas;
-using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
@@ -16,8 +14,8 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         [TestMethod]
         public void reconhecendo_um_sinal_sem_treinar_o_algoritmo()
         {
-            var amostra = new AmostraBuilder().ConstruirAmostraEstatica();
-            Action acao = () => new Svm().Reconhecer(amostra);
+            var frame = new FrameBuilder().Construir();
+            Action acao = () => new Svm().Reconhecer(frame);
 
             acao.ShouldThrow<InvalidOperationException>();
         }
@@ -31,7 +29,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
             var svm = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 
-            var amostra = CriarAmostraPeloIndice(indiceDoSinalEsperado);
+            var amostra = CriarAmostraPeloIndice(indiceDoSinalEsperado)[0];
 
             var indiceReconhecido = svm.Reconhecer(amostra);
 
@@ -59,27 +57,9 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             return signs;
         }
 
-        private Amostra CriarAmostraPeloIndice(int index)
+        private IList<Frame> CriarAmostraPeloIndice(int index)
         {
-            return new AmostraBuilder().ParaOIndiceComQuantidade(index, 1).Construir();
-        }
-
-        private Mao DadaUmaMaoComDedos(int indice)
-        {
-            var fingers = new[] 
-            {
-                new DedoBuilder().DoTipo(TipoDeDedo.Dedao).ComDirecao(new double[] { indice, indice, indice }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Indicador).ComDirecao(new double[] { indice, indice, indice }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Meio).ComDirecao(new double[] { indice, indice, indice }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Anelar).ComDirecao(new double[] { indice, indice, indice }).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Mindinho).ComDirecao(new double[] { indice, indice, indice }).Construir()
-            };
-
-            return new MaoBuilder()
-                    .ComDedos(fingers)
-                    .ComVetorNormalDaPalma(new double[] { indice, indice, indice })
-                    .ComDirecaoDaMao(new double[] { indice, indice, indice })
-                    .Construir();
+            return new []{ new FrameBuilder().ParaOIndice(index).Construir() };
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using Signa.Util;
 using System.IO;
 using System.Linq;
-using Signa.Dominio.Algoritmos.Estatico;
 
 namespace Signa.Dados
 {
@@ -37,34 +36,34 @@ namespace Signa.Dados
             repositorio.SalvarAlteracoes();
         }
 
-        public string CriarArquivoDeExemploSeNaoExistir(string signDescription, string signSample)
+        public string CriarArquivoDeExemploSeNaoExistir(string descricaoDoSinal, string conteudoDoArquivoDeExemplo)
         {
-            var filePath = DiretorioDeAmostras + signDescription.RemoverAcentos().Underscore() + ".json";
+            var filePath = DiretorioDeAmostras + descricaoDoSinal.RemoverAcentos().Underscore() + ".json";
 
             if (File.Exists(filePath))
                 return filePath;
 
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                writer.Write(signSample);
+                writer.Write(conteudoDoArquivoDeExemplo);
             }
 
             return filePath;
         }
 
-        public int Reconhecer(IAmostraDeSinalEstatico sample)
+        public int Reconhecer(Frame amostra)
         {
-            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(sample);
+            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
         }
 
-        public void SalvarAmostraDoSinal(string signDescription, string exampleFileContent, Amostra sample)
+        public void SalvarAmostraDoSinal(string descricaoDoSinal, string conteudoDoArquivoDeExemplo, Frame amostra)
         {
-            var fileName = CriarArquivoDeExemploSeNaoExistir(signDescription, exampleFileContent);
+            var fileName = CriarArquivoDeExemploSeNaoExistir(descricaoDoSinal, conteudoDoArquivoDeExemplo);
             Adicionar(new Sinal
             {
-                Descricao = signDescription,
+                Descricao = descricaoDoSinal,
                 CaminhoParaArquivoDeExemplo = fileName,
-                Amostras = new[] { sample }
+                Amostras = new[] { new[] { amostra } }
             });
         }
     }

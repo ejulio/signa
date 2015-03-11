@@ -13,12 +13,13 @@ namespace Signa.Dominio.Algoritmos.Dinamico
     {
         private HiddenMarkovClassifier<Independent<NormalDistribution>> classificador;
 
-        public int Reconhecer(IAmostraDeSinalDinamico amostra)
+        public int Reconhecer(Frame[] amostra)
         {
             if (classificador == null)
                 throw new InvalidOperationException();
 
-            return classificador.Compute(amostra.ParaArray());
+            var geradorDeAmostra = new GeradorDeAmostraDeSinalDinamico();
+            return classificador.Compute(geradorDeAmostra.ExtrairCaracteristicasDaAmostra(amostra));
         }
 
         public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados)

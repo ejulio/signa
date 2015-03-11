@@ -1,17 +1,10 @@
-﻿using System.Linq;
-
+﻿
 namespace Signa.Dominio.Sinais.Caracteristicas
 {
     public class Dedo
     {
         public double[] Direcao { get; set; }
         public TipoDeDedo Tipo { get; set; }
-
-        public double[] ToArray()
-        {
-            var type = new double[] { (int)Tipo };
-            return type.Concat(Direcao).ToArray();
-        }
 
         public static Dedo Empty()
         {

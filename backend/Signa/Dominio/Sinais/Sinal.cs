@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Signa.Dominio.Sinais
 {
@@ -7,27 +6,36 @@ namespace Signa.Dominio.Sinais
     {
         public string Descricao { get; set; }
         public string CaminhoParaArquivoDeExemplo { get; set; }
-        private IList<Amostra> amostras;
 
-        public IList<Amostra> Amostras
+        public TipoSinal Tipo { get; set; }
+        
+        private IList<IList<Frame>> amostras;
+
+        public IList<IList<Frame>> Amostras
         {
             get { return amostras; }
             set
             {
                 amostras = value;
-                if (amostras != null && amostras.Count > 0)
-                {
-                    Tipo = amostras[0].QuantidadeDeFrames > 1 ? TipoSinal.Dinamico : TipoSinal.Estatico;
-                }
+                DefinirTipoDoSinal();
             }
         }
-
-        public TipoSinal Tipo { get; set; }
 
         public Sinal()
         {
             Tipo = TipoSinal.Estatico;
-            Amostras = new List<Amostra>();
+            Amostras = new List<IList<Frame>>();
+        }
+
+        private void DefinirTipoDoSinal()
+        {
+            if (amostras != null && amostras.Count > 0)
+                Tipo = EhUmSinalDinamico() ? TipoSinal.Dinamico : TipoSinal.Estatico;
+        }
+
+        private bool EhUmSinalDinamico()
+        {
+            return amostras[0].Count > 1;
         }
     }
 }

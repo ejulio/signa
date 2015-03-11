@@ -7,18 +7,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
+using Testes.Comum.Util;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 {
     [TestClass]
     public class DadosParaAlgoritmoDeReconhecimentoDeSinalTeste
     {
-        private readonly Amostra amostraPadrao;
+        private readonly IList<Frame> amostraPadrao;
 
         public DadosParaAlgoritmoDeReconhecimentoDeSinalTeste()
         {
-            var frames = new[] {new FrameBuilder().Construir()};
-            amostraPadrao = new AmostraBuilder().ComFrames(frames).Construir();
+            amostraPadrao = new[] {new FrameBuilder().Construir()};
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
         private ICollection<Sinal> DadaUmaColecaoDeUmSinal()
         {
-            Func<int, Amostra> geradorDeAmostras = index => amostraPadrao;
+            Func<int, IList<Frame>> geradorDeAmostras = index => amostraPadrao;
 
             var sinais = new ColecaoDeSinaisBuilder()
                         .ComQuantidadeDeAmostrasPorSinal(1)
@@ -86,7 +86,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
         private void DeveTerUmDadoDeTreinamento(DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dadosDoAlgoritmo)
         {
-            var arrayDaAmostra = (amostraPadrao as IAmostraDeSinalEstatico).ParaArray();
+            var arrayDaAmostra = amostraPadrao[0].MontarArrayEsperado();
             dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
             dadosDoAlgoritmo.Entradas.Should().HaveCount(1);
             dadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
@@ -100,9 +100,9 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
             foreach (var sinal in sinais)
             {
-                foreach (IAmostraDeSinalEstatico amostra in sinal.Amostras)
+                foreach (var amostra in sinal.Amostras)
                 {
-                    entradasEsperadas.AddFirst(amostra.ParaArray());
+                    entradasEsperadas.AddFirst(amostra[0].MontarArrayEsperado());
                 }
             }
 

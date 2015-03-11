@@ -139,9 +139,6 @@
     <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinalFactory.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\IAlgoritmoDeReconhecimentoDeSinaisDinamicos.cs" />
     <Compile Include="Dominio\Algoritmos\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
-    <Compile Include="Dominio\Sinais\IAmostra.cs" />
-    <Compile Include="Dominio\Sinais\IAmostraDeSinalDinamico.cs" />
-    <Compile Include="Dominio\Sinais\IAmostraDeSinalEstatico.cs" />
     <Compile Include="Dominio\Sinais\TipoSinal.cs" />
     <Compile Include="Hubs\ReconhecedorDeSinaisDinamicos.cs" />
     <Compile Include="Hubs\SequenciaDeSinais.cs" />
@@ -153,7 +150,6 @@
     <Compile Include="Dominio\Sinais\Frame.cs" />
     <Compile Include="Dominio\Sinais\InformacoesDoSinal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Dominio\Sinais\Amostra.cs" />
     <Compile Include="Dados\SinaisEstaticosController.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
     <Compile Include="Startup.cs" />

@@ -62,9 +62,9 @@ namespace Testes.Integracao.Dados
         [TestMethod]
         public void salvando_uma_amostra_de_um_sinal()
         {
-            var amostra = new AmostraBuilder().Construir();
-            const string descricaoDoSinal = "New Sign";
-            const string conteudoDoArquivo = "New sign file content";
+            var amostra = new FrameBuilder().Construir();
+            const string descricaoDoSinal = "Novo sinal";
+            const string conteudoDoArquivo = "conteúdo do arquivo do novo sinal";
 
             sinaisEstaticosController.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
 
@@ -73,7 +73,7 @@ namespace Testes.Integracao.Dados
 
             var sinalAdicionadoNoRepositorio = repositorio.BuscarPorDescricao(descricaoDoSinal);
             sinalAdicionadoNoRepositorio.Should().NotBeNull();
-            sinalAdicionadoNoRepositorio.Amostras.Should().Contain(amostra);
+            sinalAdicionadoNoRepositorio.Amostras[0].Should().Contain(amostra);
         }
 
         private void DadoQueExistaUmArquivoDeExemplo(string descricaoDoSinal, string conteudoDoArquivoDoSinal)

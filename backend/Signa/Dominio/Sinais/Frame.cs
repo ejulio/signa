@@ -1,11 +1,9 @@
-﻿using System.Linq;
-using Signa.Dominio.Sinais.Caracteristicas;
+﻿using Signa.Dominio.Sinais.Caracteristicas;
 
 namespace Signa.Dominio.Sinais
 {
     public class Frame
     {
-        // TODO: Adicionar o tipo do frame: Gesto Estático, Frame Inicial, Frame Final
         private Mao maoEsquerda;
         public Mao MaoEsquerda
         {
@@ -24,13 +22,6 @@ namespace Signa.Dominio.Sinais
             {
                 maoDireita = value ?? Mao.Vazia();
             }
-        }
-
-        public double[] ToArray()
-        {
-            return MaoEsquerda.ToArray()
-                .Concat(MaoDireita.ToArray())
-                .ToArray();
         }
     }
 }

@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
@@ -55,10 +54,10 @@ namespace Testes.Unidade.Dados
         public void reconhecendo_um_sinal()
         {
             const int idDoSinal = 23;
-            var amostra = new AmostraBuilder().ConstruirAmostraEstatica();
-            algoritmo.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            var frame = new FrameBuilder().Construir();
+            algoritmo.Setup(a => a.Reconhecer(frame)).Returns(idDoSinal);
 
-            var sinalReconhecido = sinaisEstaticosController.Reconhecer(amostra);
+            var sinalReconhecido = sinaisEstaticosController.Reconhecer(frame);
 
             sinalReconhecido.Should().Be(idDoSinal);
         }
@@ -83,8 +82,8 @@ namespace Testes.Unidade.Dados
         {
             var sinal = new SinalBuilder()
                             .ComDescricao(descricaoDoSinal)
-                            .ComAmostra(new AmostraBuilder().Construir())
-                            .ComAmostra(new AmostraBuilder().Construir())
+                            .ComAmostra(new NewAmostraBuilder().Construir())
+                            .ComAmostra(new NewAmostraBuilder().Construir())
                             .Construir();
             return sinal;
         }

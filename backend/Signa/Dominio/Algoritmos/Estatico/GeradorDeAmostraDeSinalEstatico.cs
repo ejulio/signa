@@ -1,13 +1,14 @@
-﻿using System.Linq;
-using Signa.Dominio.Sinais;
+﻿using Signa.Dominio.Sinais;
 using Signa.Dominio.Sinais.Caracteristicas;
 using Signa.Util;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
     public class GeradorDeAmostraDeSinalEstatico
     {
-        public double[] ExtrairCaracteristicasDaAmostra(Frame[] frames)
+        public double[] ExtrairCaracteristicasDaAmostra(IList<Frame> frames)
         {
             var frame = frames[0];
             return ExtrairCaracteristicasDaMao(frame.MaoEsquerda)

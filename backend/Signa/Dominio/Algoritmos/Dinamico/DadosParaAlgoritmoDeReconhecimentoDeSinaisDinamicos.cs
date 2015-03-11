@@ -28,12 +28,12 @@ namespace Signa.Dominio.Algoritmos.Dinamico
         {
             QuantidadeDeClasses = 0;
             int identificadorDoSinal = 0;
-
+            var geradorDeAmostras = new GeradorDeAmostraDeSinalDinamico();
             foreach (var sinal in sinais)
             {
-                foreach (IAmostraDeSinalDinamico amostra in sinal.Amostras)
+                foreach (var amostra in sinal.Amostras)
                 {
-                    entradas.AddLast(amostra.ParaArray());
+                    entradas.AddLast(geradorDeAmostras.ExtrairCaracteristicasDaAmostra(amostra));
                     saidas.AddLast(identificadorDoSinal);
                 }
                 identificadorDoSinal++;

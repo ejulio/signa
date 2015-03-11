@@ -13,12 +13,12 @@ namespace Signa.Hubs
             this.sinaisEstaticosController = sinaisEstaticosController;
         }
 
-        public int Reconhecer(Amostra amostra)
+        public int Reconhecer(Frame amostra)
         {
             return sinaisEstaticosController.Reconhecer(amostra);
         }
 
-        public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Amostra amostra)
+        public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Frame amostra)
         {
             sinaisEstaticosController.SalvarAmostraDoSinal(descricao, conteudoDoArquivoDeExemplo, amostra);
         }

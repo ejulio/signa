@@ -10,12 +10,12 @@ namespace Testes.Comum.Builders.Dominio.Sinais
         private int quantidadeDeAmostrasPorSinal = 4;
         private string templateDaDescricao = "{0}";
         private string templateDoCaminhoDoArquivoDeExemplo = "{0}";
-        private Func<int, Amostra> geradorDeAmostras;
+        private Func<int, IList<Frame>> geradorDeAmostras;
 
 
         public ColecaoDeSinaisBuilder()
         {
-            geradorDeAmostras = index => new AmostraBuilder().Construir();
+            geradorDeAmostras = index => new NewAmostraBuilder().Construir();
         }
 
         public ColecaoDeSinaisBuilder ComQuantidadeDeSinais(int quantidadeDeSinais)
@@ -36,7 +36,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
-        public ColecaoDeSinaisBuilder ComGeradorDeAmostras(Func<int, Amostra> geradorDeAmostras)
+        public ColecaoDeSinaisBuilder ComGeradorDeAmostras(Func<int, IList<Frame>> geradorDeAmostras)
         {
             this.geradorDeAmostras = geradorDeAmostras;
             return this;
@@ -50,25 +50,17 @@ namespace Testes.Comum.Builders.Dominio.Sinais
 
         public ColecaoDeSinaisBuilder ComGeradorDeAmostrasEstaticas()
         {
-            geradorDeAmostras = i =>
-            {
-                var frames = new[] {new FrameBuilder().Construir()};
-                return new AmostraBuilder().ComFrames(frames).Construir();
-            };
+            geradorDeAmostras = i => new[] {new FrameBuilder().Construir()};
             return this;
         }
 
         public ColecaoDeSinaisBuilder ComGeradorDeAmostrasDinamicas()
         {
-            geradorDeAmostras = i =>
+            geradorDeAmostras = i => new[]
             {
-                var frames = new[]
-                {
-                    new FrameBuilder().Construir(), 
-                    new FrameBuilder().Construir(), 
-                    new FrameBuilder().Construir()
-                };
-                return new AmostraBuilder().ComFrames(frames).Construir();
+                new FrameBuilder().Construir(), 
+                new FrameBuilder().Construir(), 
+                new FrameBuilder().Construir()
             };
             return this;
         }

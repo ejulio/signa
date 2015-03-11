@@ -4,7 +4,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
 {
     public interface IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
-        int Reconhecer(IAmostraDeSinalEstatico amostra);
+        int Reconhecer(Frame amostra);
         void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dados);
     }
 }

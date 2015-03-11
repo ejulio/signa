@@ -186,7 +186,7 @@ namespace Testes.Integracao.Dados.Repositorio
             var sinal = new SinalBuilder()
                             .ComDescricao(descricao)
                             .ComCaminhoParaArquivoDeExemplo("new-sign.json")
-                            .ComAmostra(new AmostraBuilder().Construir())
+                            .ComAmostra(new NewAmostraBuilder().Construir())
                             .Construir();
             return sinal;
         }

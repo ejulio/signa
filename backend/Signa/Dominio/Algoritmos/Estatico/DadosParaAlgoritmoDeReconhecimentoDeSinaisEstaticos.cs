@@ -40,10 +40,11 @@ namespace Signa.Dominio.Algoritmos.Estatico
 
         private void ExtrairDadosDasAmostras(Sinal sinalEstatico, int indiceDoSinal)
         {
-            foreach (IAmostraDeSinalEstatico amostra in sinalEstatico.Amostras)
+            var geradorDeAmostras = new GeradorDeAmostraDeSinalEstatico();
+            foreach (var amostra in sinalEstatico.Amostras)
             {
                 saidas.AddFirst(indiceDoSinal);
-                entradas.AddFirst(amostra.ParaArray());
+                entradas.AddFirst(geradorDeAmostras.ExtrairCaracteristicasDaAmostra(amostra));
             }
         }
     }

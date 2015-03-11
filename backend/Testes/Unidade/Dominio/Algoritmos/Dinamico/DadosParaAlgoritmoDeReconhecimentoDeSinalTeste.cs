@@ -5,6 +5,7 @@ using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
+using Testes.Comum.Util;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 {
@@ -34,8 +35,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
                 new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir()
             };
 
-            var amostra = new AmostraBuilder().ComFrames(frames).Construir();
-            var sinais = new[] {new SinalBuilder().ComAmostra(amostra).Construir()};
+            var sinais = new[] { new SinalBuilder().ComAmostra(frames).Construir() };
             return sinais;
         }
 
@@ -66,9 +66,9 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             return colecaoDeSinais;
         }
 
-        private IList<Amostra> ConcatenarAmostrasDosSinais(ICollection<Sinal> colecaoDeSinais)
+        private IList<IList<Frame>> ConcatenarAmostrasDosSinais(ICollection<Sinal> colecaoDeSinais)
         {
-            IEnumerable<Amostra> amostrasConcatenadas = new Amostra[0];
+            IEnumerable<IList<Frame>> amostrasConcatenadas = new Frame[0][];
 
             foreach (var sinal in colecaoDeSinais)
             {
@@ -79,7 +79,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
         }
 
         private void DeveTerExtraidoOsDadosDasAmostras(DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados, int quantidadeDeSinais, 
-            int quantidadeDeAmostras, int[] saidasEsperadas, IList<Amostra> amostrasEsperadas)
+            int quantidadeDeAmostras, int[] saidasEsperadas, IList<IList<Frame>> amostrasEsperadas)
         {
             dados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
             dados.Saidas.Should().HaveSameCount(dados.Entradas);
@@ -88,13 +88,13 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             DeveTerAsEntradasDasAmostras(dados.Entradas, amostrasEsperadas);
         }
 
-        private void DeveTerAsEntradasDasAmostras(double[][][] entradas, IList<Amostra> amostras)
+        private void DeveTerAsEntradasDasAmostras(double[][][] entradas, IList<IList<Frame>> amostras)
         {
             for (var i = 0; i < entradas.Length; i++)
             {
                 for (var j = 0; j < entradas[i].Length; j++)
                 {
-                    entradas[i][j].Should().ContainInOrder(amostras[i].Frames[j].ToArray());
+                    entradas[i][j].Should().ContainInOrder(amostras[i][j].MontarArrayEsperado());
                 }
             }
         }

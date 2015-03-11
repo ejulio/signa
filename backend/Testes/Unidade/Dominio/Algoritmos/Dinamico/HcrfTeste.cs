@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Dinamico;
+using Signa.Dominio.Sinais;
 using System;
 using Testes.Comum.Builders.Dominio.Sinais;
 
@@ -12,8 +13,8 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
         [TestMethod]
         public void reconhecendo_sem_treinar_o_algoritmo()
         {
-            var amostra = new AmostraBuilder().ConstruirAmostraDinamica();
-            Action acao = () => new Hcrf().Reconhecer(amostra);
+            var frames = new Frame[0];
+            Action acao = () => new Hcrf().Reconhecer(frames);
 
             acao.ShouldThrow<InvalidOperationException>();
         }
@@ -27,9 +28,16 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 
             var hcrf = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 
-            var amostraParaReconhecer = new AmostraBuilder().ParaOIndiceComQuantidade(indiceDoSinalResultante).ConstruirAmostraDinamica();
+            var framesParaReconhecer = new []
+            {
+                new FrameBuilder().ParaOIndice(indiceDoSinalResultante).Construir(),
+                new FrameBuilder().ParaOIndice(indiceDoSinalResultante).Construir(),
+                new FrameBuilder().ParaOIndice(indiceDoSinalResultante).Construir(),
+                new FrameBuilder().ParaOIndice(indiceDoSinalResultante).Construir(),
+                new FrameBuilder().ParaOIndice(indiceDoSinalResultante).Construir()
+            };
 
-            int sinalReconhecido = hcrf.Reconhecer(amostraParaReconhecer);
+            int sinalReconhecido = hcrf.Reconhecer(framesParaReconhecer);
 
             sinalReconhecido.Should().Be(indiceDoSinalResultante);
         }
@@ -40,7 +48,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             var colecaoDeSinais = new ColecaoDeSinaisBuilder()
                 .ComQuantidadeDeSinais(quantidadeDeSinais)
                 .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
-                .ComGeradorDeAmostras(i => new AmostraBuilder().ParaOIndiceComQuantidade(i, 5).Construir())
+                .ComGeradorDeAmostras(i => new NewAmostraBuilder().ParaOIndiceComQuantidade(i, 5).Construir())
                 .Construir();
 
             var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(colecaoDeSinais);

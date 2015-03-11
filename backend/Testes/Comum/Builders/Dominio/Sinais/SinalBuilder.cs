@@ -7,11 +7,11 @@ namespace Testes.Comum.Builders.Dominio.Sinais
     {
         private string descricao;
         private string caminhoParaArquivoDeExemplo;
-        private IList<Amostra> amostras;
+        private IList<IList<Frame>> amostras;
 
         public SinalBuilder()
         {
-            amostras = new List<Amostra>();
+            amostras = new List<IList<Frame>>();
         }
 
         public SinalBuilder ComDescricao(string descricao)
@@ -26,7 +26,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
-        public SinalBuilder ComAmostra(Amostra amostra)
+        public SinalBuilder ComAmostra(IList<Frame> amostra)
         {
             this.amostras.Add(amostra);
             return this;
