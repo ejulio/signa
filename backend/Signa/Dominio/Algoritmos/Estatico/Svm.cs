@@ -21,7 +21,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
             return svm.Compute(geradorDeAmostra.ExtrairCaracteristicasDaAmostra(frame));
         }
 
-        public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dados)
+        public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)
         {
             svm = new MulticlassSupportVectorMachine(0, dados.QuantidadeDeClasses);
 

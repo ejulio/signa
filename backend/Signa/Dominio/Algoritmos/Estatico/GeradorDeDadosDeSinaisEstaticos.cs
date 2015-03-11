@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
-        IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos
+    public class GeradorDeDadosDeSinaisEstaticos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
+        IGeradorDeDadosDeSinaisEstaticos
     {
         public double[][] Entradas { get; private set; }
         
@@ -13,7 +13,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
 
         private GeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(IEnumerable<Sinal> sinais)
+        public GeradorDeDadosDeSinaisEstaticos(IEnumerable<Sinal> sinais)
             : base(sinais)
         {
         }

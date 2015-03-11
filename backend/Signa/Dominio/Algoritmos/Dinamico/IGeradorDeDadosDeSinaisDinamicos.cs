@@ -1,7 +1,7 @@
 ﻿
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
-    public interface IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos
+    public interface IGeradorDeDadosDeSinaisDinamicos
     {
         double[][][] Entradas { get; }
         int[] Saidas { get; }

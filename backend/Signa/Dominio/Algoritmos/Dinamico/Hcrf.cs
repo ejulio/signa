@@ -23,16 +23,16 @@ namespace Signa.Dominio.Algoritmos.Dinamico
             return classificador.Compute(geradorDeAmostra.ExtrairCaracteristicasDaAmostra(amostra));
         }
 
-        public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados)
+        public void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
         {
-            var initial = CriarDistribuicao(dados.Entradas);
+            var initial = CriarDistribuicao(geradorDeDados.Entradas);
 
 
             int numberOfStates = 5; // this value can be found by trial-and-error
 
             classificador = new HiddenMarkovClassifier<Independent<NormalDistribution>>
             (
-               classes: dados.QuantidadeDeClasses,
+               classes: geradorDeDados.QuantidadeDeClasses,
                topology: new Forward(numberOfStates), // word classifiers should use a forward topology
                initial: initial
             );
@@ -58,7 +58,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
             );
 
             // Finally, we can run the learning algorithm!
-            teacher.Run(dados.Entradas, dados.Saidas);
+            teacher.Run(geradorDeDados.Entradas, geradorDeDados.Saidas);
         }
 
         private Independent<NormalDistribution> CriarDistribuicao(double[][][] entradas)

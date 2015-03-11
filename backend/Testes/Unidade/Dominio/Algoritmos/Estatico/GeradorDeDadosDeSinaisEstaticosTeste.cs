@@ -12,11 +12,11 @@ using Testes.Comum.Util;
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 {
     [TestClass]
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinalTeste
+    public class GeradorDeDadosDeSinaisEstaticosTeste
     {
         private readonly IList<Frame> amostraPadrao;
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinalTeste()
+        public GeradorDeDadosDeSinaisEstaticosTeste()
         {
             amostraPadrao = new[] {new FrameBuilder().Construir()};
         }
@@ -26,7 +26,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         {
             var sinais = DadaUmaColecaoDeUmSinal();
 
-            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(sinais);
+            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(sinais);
 
             DeveTerUmDadoDeTreinamento(dadosDoAlgoritmo);
         }
@@ -39,7 +39,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
             var sinais = DadaUmaColecaoDeSinais(quantidadeDeAmostrasPorSinal, quantidadeDeSinais);
 
-            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(sinais);
+            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(sinais);
 
             DeveTerOsDadosDaColecaoDeSinais(dadosDoAlgoritmo, sinais, quantidadeDeAmostrasPorSinal);
         }
@@ -68,30 +68,30 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             return sinais;
         }
 
-        private void DeveTerOsDadosDaColecaoDeSinais(DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dadosDoAlgoritmo, ICollection<Sinal> sinais, int quantidadeDeAmostrasPorSinal)
+        private void DeveTerOsDadosDaColecaoDeSinais(GeradorDeDadosDeSinaisEstaticos geradorDeDadosDoAlgoritmo, ICollection<Sinal> sinais, int quantidadeDeAmostrasPorSinal)
         {
-            dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(sinais.Count);
-            dadosDoAlgoritmo.Entradas.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
-            dadosDoAlgoritmo.Entradas.Should().HaveSameCount(dadosDoAlgoritmo.Saidas);
-            dadosDoAlgoritmo.Saidas.Should().ContainInOrder(SaidasEsperadas(sinais.Count, quantidadeDeAmostrasPorSinal));
+            geradorDeDadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(sinais.Count);
+            geradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
+            geradorDeDadosDoAlgoritmo.Entradas.Should().HaveSameCount(geradorDeDadosDoAlgoritmo.Saidas);
+            geradorDeDadosDoAlgoritmo.Saidas.Should().ContainInOrder(SaidasEsperadas(sinais.Count, quantidadeDeAmostrasPorSinal));
 
             int indiceDaEntrada = 0;
             var entradasEsperadas = EntradasEsperadasParaOsSinais(sinais);
-            foreach (var input in dadosDoAlgoritmo.Entradas)
+            foreach (var input in geradorDeDadosDoAlgoritmo.Entradas)
             {
                 input.Should().ContainInOrder(entradasEsperadas[indiceDaEntrada]);
                 indiceDaEntrada++;
             }
         }
 
-        private void DeveTerUmDadoDeTreinamento(DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dadosDoAlgoritmo)
+        private void DeveTerUmDadoDeTreinamento(GeradorDeDadosDeSinaisEstaticos geradorDeDadosDoAlgoritmo)
         {
             var arrayDaAmostra = amostraPadrao[0].MontarArrayEsperado();
-            dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
-            dadosDoAlgoritmo.Entradas.Should().HaveCount(1);
-            dadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
-            dadosDoAlgoritmo.Saidas.Should().HaveCount(1);
-            dadosDoAlgoritmo.Saidas[0].Should().Be(0);
+            geradorDeDadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
+            geradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(1);
+            geradorDeDadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
+            geradorDeDadosDoAlgoritmo.Saidas.Should().HaveCount(1);
+            geradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(0);
         }
 
         private double[][] EntradasEsperadasParaOsSinais(ICollection<Sinal> sinais)

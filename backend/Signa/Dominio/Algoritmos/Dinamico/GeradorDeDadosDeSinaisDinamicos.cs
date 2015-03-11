@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
-        IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos
+    public class GeradorDeDadosDeSinaisDinamicos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
+        IGeradorDeDadosDeSinaisDinamicos
     {
         public double[][][] Entradas { get; private set; }
 
         private LinkedList<double[][]> entradas;
         private GeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas;
 
-        public DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(IEnumerable<Sinal> sinais)
+        public GeradorDeDadosDeSinaisDinamicos(IEnumerable<Sinal> sinais)
             :base(sinais)
         {
         }

@@ -63,7 +63,7 @@ namespace Testes.Unidade.Dominio
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos>(d => VerificarDadosDoAlgoritmo(d))));
+                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisEstaticos>(d => VerificarDadosDoAlgoritmo(d))));
         }
 
         [TestMethod]
@@ -90,7 +90,7 @@ namespace Testes.Unidade.Dominio
 
             algoritmoDeReconhecimentoDeSinaisDinamicos
                 .Verify(a =>
-                    a.Treinar(It.Is<IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos>(d => VerificarDadosDoAlgoritmo(d))));
+                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisDinamicos>(d => VerificarDadosDoAlgoritmo(d))));
         }
 
         private ICollection<Sinal> DadaUmaColecaoDeSinaisEstaticos()
@@ -115,7 +115,7 @@ namespace Testes.Unidade.Dominio
             return sinais;
         }
 
-        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dados)
+        private bool VerificarDadosDoAlgoritmo(IGeradorDeDadosDeSinaisEstaticos dados)
         {
             dados.QuantidadeDeClasses.Should().Be(2);
             dados.Saidas.Should().HaveCount(4);
@@ -123,11 +123,11 @@ namespace Testes.Unidade.Dominio
             return true;
         }
 
-        private bool VerificarDadosDoAlgoritmo(IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados)
+        private bool VerificarDadosDoAlgoritmo(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
         {
-            dados.QuantidadeDeClasses.Should().Be(2);
-            dados.Saidas.Should().HaveCount(4);
-            dados.Entradas.Should().HaveCount(4);
+            geradorDeDados.QuantidadeDeClasses.Should().Be(2);
+            geradorDeDados.Saidas.Should().HaveCount(4);
+            geradorDeDados.Entradas.Should().HaveCount(4);
             return true;
         }
     }

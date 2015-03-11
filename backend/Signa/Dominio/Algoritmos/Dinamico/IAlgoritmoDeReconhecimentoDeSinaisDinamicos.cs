@@ -6,6 +6,6 @@ namespace Signa.Dominio.Algoritmos.Dinamico
     public interface IAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {
         int Reconhecer(IList<Frame> amostra);
-        void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos dados);
+        void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados);
     }
 }

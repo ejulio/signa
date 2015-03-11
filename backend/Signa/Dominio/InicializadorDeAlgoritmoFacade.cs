@@ -20,7 +20,7 @@ namespace Signa.Dominio
         {
             var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisEstaticos();
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
-            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(repositorio);
+            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(repositorio);
 
             algoritmo.Treinar(dadosDoAlgoritmo);
         }
@@ -29,7 +29,7 @@ namespace Signa.Dominio
         {
             var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisDinamicos();
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos();
-            var dadosDoAlgoritmo = new DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(repositorio);
+            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisDinamicos(repositorio);
 
             algoritmo.Treinar(dadosDoAlgoritmo);
         }

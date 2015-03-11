@@ -15,7 +15,7 @@ namespace Testes.Unidade.Dominio.Algoritmos
             var algoritmo1 = factory.CriarReconhecedorDeSinaisEstaticos();
             var algoritmo2 = factory.CriarReconhecedorDeSinaisEstaticos();
 
-            algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma classe, como se fosse um Singleton");
+            algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma instância, como se fosse um Singleton");
         }
 
         [TestMethod]
@@ -26,7 +26,18 @@ namespace Testes.Unidade.Dominio.Algoritmos
             var algoritmo1 = factory.CriarReconhecedorDeSinaisDinamicos();
             var algoritmo2 = factory.CriarReconhecedorDeSinaisDinamicos();
 
-            algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma classe, como se fosse um Singleton");
+            algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma instância, como se fosse um Singleton");
+        }
+
+        [TestMethod]
+        public void criando_algoritmo_de_reconhecimento_de_frames_de_sinal_dinamico()
+        {
+            var factory = new AlgoritmoDeReconhecimentoDeSinalFactory();
+
+            var algoritmo1 = factory.CriarReconhecedorDeFramesDeSinaisDinamicos();
+            var algoritmo2 = factory.CriarReconhecedorDeFramesDeSinaisDinamicos();
+
+            algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma instância, como se fosse um Singleton");
         }
     }
 }
