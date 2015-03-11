@@ -18,7 +18,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             var numeroAleatorio = new Random().Next(2, 20);
             var frames = DadoUmArrayDeFramesComQuantidade(numeroAleatorio);
 
-            var geradorDeAmostraDeSinalDinamico = new GeradorDeAmostraDeSinalDinamico();
+            var geradorDeAmostraDeSinalDinamico = new GeradorDeCaracteristicasDeSinalDinamico();
             var arrayDeAmostras = geradorDeAmostraDeSinalDinamico.ExtrairCaracteristicasDaAmostra(frames);
 
             DeveTerRetornadoUmArrayComDadosDosFrames(frames, arrayDeAmostras);

@@ -20,7 +20,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             var maoDireita = DadaUmaMaoDireita();
             var frame = DadoUmFrameComMaos(maoEsquerda, maoDireita);
 
-            var geradorDeAmostraDeSinalEstatico = new GeradorDeAmostraDeSinalEstatico();
+            var geradorDeAmostraDeSinalEstatico = new GeradorDeCaracteristicasDeSinalEstatico();
             var frameArray = geradorDeAmostraDeSinalEstatico.ExtrairCaracteristicasDaAmostra(new[] { frame });
 
             DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(maoEsquerda, maoDireita, frameArray);

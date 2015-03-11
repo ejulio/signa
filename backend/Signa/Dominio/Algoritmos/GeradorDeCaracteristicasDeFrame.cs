@@ -1,31 +1,29 @@
-﻿using Signa.Dominio.Sinais;
+using Signa.Dominio.Sinais;
 using Signa.Dominio.Sinais.Caracteristicas;
 using Signa.Util;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Dominio.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos
 {
-    public class GeradorDeAmostraDeSinalEstatico
+    public abstract class GeradorDeCaracteristicasDeFrame
     {
-        public double[] ExtrairCaracteristicasDaAmostra(IList<Frame> frames)
+        public double[] ExtrairCaracteristicasDoFrame(Frame frame)
         {
-            var frame = frames[0];
             return ExtrairCaracteristicasDaMao(frame.MaoEsquerda)
                 .Concat(ExtrairCaracteristicasDaMao(frame.MaoDireita))
-                .ToArray();
+                .ToArray();    
         }
 
         private double[] ExtrairCaracteristicasDaMao(Mao mao)
         {
-            var caracteristicasDosDedos = mao.Dedos.Select(ExtrairCaracteristicasDoMedod).Concatenar();
+            var caracteristicasDosDedos = IEnumerableExtensions.Concatenar<double>(mao.Dedos.Select(ExtrairCaracteristicasDoDedo));
             return mao.VetorNormalDaPalma
                 .Concat(mao.DirecaoDaMao)
                 .Concat(caracteristicasDosDedos)
                 .ToArray();
         }
 
-        private double[] ExtrairCaracteristicasDoMedod(Dedo dedo)
+        private double[] ExtrairCaracteristicasDoDedo(Dedo dedo)
         {
             var tipo = new double[] { (int)dedo.Tipo };
             return tipo.Concat(dedo.Direcao).ToArray();

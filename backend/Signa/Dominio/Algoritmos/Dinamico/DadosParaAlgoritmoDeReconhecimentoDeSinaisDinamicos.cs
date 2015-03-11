@@ -4,44 +4,32 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos : IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos
+    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
+        IDadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {
         public double[][][] Entradas { get; private set; }
 
-        public int[] Saidas { get; private set; }
-
-        public int QuantidadeDeClasses { get; private set; }
-
-        private IEnumerable<Sinal> sinais;
         private LinkedList<double[][]> entradas;
-        private LinkedList<int> saidas; 
+        private GeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas;
 
         public DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(IEnumerable<Sinal> sinais)
+            :base(sinais)
         {
-            this.sinais = sinais;
+        }
+        protected override void InicializarExtracaoDeInformacoesDosSinais()
+        {
             entradas = new LinkedList<double[][]>();
-            saidas = new LinkedList<int>();
-            ExtrairDadosDasAmostras();
+            geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalDinamico();
         }
 
-        private void ExtrairDadosDasAmostras()
+        protected override void GerarEntradaParaAAmostra(IList<Frame> amostra)
         {
-            QuantidadeDeClasses = 0;
-            int identificadorDoSinal = 0;
-            var geradorDeAmostras = new GeradorDeAmostraDeSinalDinamico();
-            foreach (var sinal in sinais)
-            {
-                foreach (var amostra in sinal.Amostras)
-                {
-                    entradas.AddLast(geradorDeAmostras.ExtrairCaracteristicasDaAmostra(amostra));
-                    saidas.AddLast(identificadorDoSinal);
-                }
-                identificadorDoSinal++;
-                QuantidadeDeClasses++;
-            }
-            
+            entradas.AddLast(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra));
+        }
+
+        protected override void FinalizarExtracaoDeInformacoesDosSinais()
+        {
             Entradas = entradas.ToArray();
-            Saidas = saidas.ToArray();
         }
     }
 }

@@ -4,48 +4,34 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos : IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos
+    public class DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
+        IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
         public double[][] Entradas { get; private set; }
-        public int[] Saidas { get; private set; }
-        public int QuantidadeDeClasses { get; private set; }
-
-        private IEnumerable<Sinal> sinais;
-        private LinkedList<int> saidas;
+        
         private LinkedList<double[]> entradas;
 
+        private GeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
+
         public DadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos(IEnumerable<Sinal> sinais)
+            : base(sinais)
         {
-            this.sinais = sinais;
-            ExtrairInformacoesDosSinais();
         }
 
-        public void ExtrairInformacoesDosSinais()
+        protected override void InicializarExtracaoDeInformacoesDosSinais()
         {
-            int indiceDoSinal = 0;
-            QuantidadeDeClasses = 0;
             entradas = new LinkedList<double[]>();
-            saidas = new LinkedList<int>();
-
-            foreach (var sinal in sinais)
-            {
-                ExtrairDadosDasAmostras(sinal, indiceDoSinal);
-                QuantidadeDeClasses++;
-                indiceDoSinal++;
-            }
-
-            Saidas = saidas.ToArray();
-            Entradas = entradas.ToArray();
+            geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalEstatico();
         }
 
-        private void ExtrairDadosDasAmostras(Sinal sinalEstatico, int indiceDoSinal)
+        protected override void GerarEntradaParaAAmostra(IList<Frame> amostra)
         {
-            var geradorDeAmostras = new GeradorDeAmostraDeSinalEstatico();
-            foreach (var amostra in sinalEstatico.Amostras)
-            {
-                saidas.AddFirst(indiceDoSinal);
-                entradas.AddFirst(geradorDeAmostras.ExtrairCaracteristicasDaAmostra(amostra));
-            }
+            entradas.AddLast(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra));
+        }
+
+        protected override void FinalizarExtracaoDeInformacoesDosSinais()
+        {
+            Entradas = entradas.ToArray();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
             if (classificador == null)
                 throw new InvalidOperationException();
 
-            var geradorDeAmostra = new GeradorDeAmostraDeSinalDinamico();
+            var geradorDeAmostra = new GeradorDeCaracteristicasDeSinalDinamico();
             return classificador.Compute(geradorDeAmostra.ExtrairCaracteristicasDaAmostra(amostra));
         }
 

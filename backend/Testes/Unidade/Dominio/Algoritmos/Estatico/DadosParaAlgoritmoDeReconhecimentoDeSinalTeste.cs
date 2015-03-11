@@ -102,7 +102,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    entradasEsperadas.AddFirst(amostra[0].MontarArrayEsperado());
+                    entradasEsperadas.AddLast(amostra[0].MontarArrayEsperado());
                 }
             }
 
@@ -112,7 +112,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         private IEnumerable SaidasEsperadas(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
             int[] saidas = new int[quantidadeDeSinais * quantidadeDeAmostrasPorSinal];
-            int indiceDoSinal = quantidadeDeSinais - 1;
+            int indiceDoSinal = 0;
 
             int i = 0;
             while (i < saidas.Length)
@@ -123,7 +123,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
                 if (i % quantidadeDeAmostrasPorSinal == 0)
                 {
-                    indiceDoSinal--;
+                    indiceDoSinal++;
                 }
             }
 
