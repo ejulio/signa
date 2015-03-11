@@ -7,10 +7,12 @@ namespace Signa.Dominio.Algoritmos
     {
         private static readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos AlgoritmoDeReconhecimentoDeSinaisEstaticos;
         private static readonly IAlgoritmoDeReconhecimentoDeSinaisDinamicos AlgoritmoDeReconhecimentoDeSinaisDinamicos;
+        private static readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
 
         static AlgoritmoDeReconhecimentoDeSinalFactory()
         {
             AlgoritmoDeReconhecimentoDeSinaisEstaticos = new Svm();
+            AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos = new Svm();
             AlgoritmoDeReconhecimentoDeSinaisDinamicos = new Hcrf();
         }
 
@@ -22,6 +24,11 @@ namespace Signa.Dominio.Algoritmos
         public IAlgoritmoDeReconhecimentoDeSinaisDinamicos CriarReconhecedorDeSinaisDinamicos()
         {
             return AlgoritmoDeReconhecimentoDeSinaisDinamicos;
+        }
+
+        public IAlgoritmoDeReconhecimentoDeSinaisEstaticos CriarReconhecedorDeFramesDeSinaisDinamicos()
+        {
+            return AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
         }
     }
 }
