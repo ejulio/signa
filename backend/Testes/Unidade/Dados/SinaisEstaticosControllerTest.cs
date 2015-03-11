@@ -54,10 +54,10 @@ namespace Testes.Unidade.Dados
         public void reconhecendo_um_sinal()
         {
             const int idDoSinal = 23;
-            var frame = new FrameBuilder().Construir();
-            algoritmo.Setup(a => a.Reconhecer(frame)).Returns(idDoSinal);
+            var amostra = new ColecaoDeFramesBuilder().Construir();
+            algoritmo.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
 
-            var sinalReconhecido = sinaisEstaticosController.Reconhecer(frame);
+            var sinalReconhecido = sinaisEstaticosController.Reconhecer(amostra);
 
             sinalReconhecido.Should().Be(idDoSinal);
         }

@@ -6,6 +6,7 @@ using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
 using Signa.Dominio.Sinais;
 using System;
+using System.Collections.Generic;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
@@ -13,7 +14,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
     {
         private HiddenMarkovClassifier<Independent<NormalDistribution>> classificador;
 
-        public int Reconhecer(Frame[] amostra)
+        public int Reconhecer(IList<Frame> amostra)
         {
             if (classificador == null)
                 throw new InvalidOperationException();

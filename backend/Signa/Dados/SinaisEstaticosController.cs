@@ -1,4 +1,5 @@
-﻿using Signa.Dados.Repositorio;
+﻿using System.Collections.Generic;
+using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using Signa.Util;
@@ -51,7 +52,7 @@ namespace Signa.Dados
             return filePath;
         }
 
-        public int Reconhecer(Frame amostra)
+        public int Reconhecer(IList<Frame> amostra)
         {
             return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
         }

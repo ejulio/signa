@@ -14,8 +14,8 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         [TestMethod]
         public void reconhecendo_um_sinal_sem_treinar_o_algoritmo()
         {
-            var frame = new FrameBuilder().Construir();
-            Action acao = () => new Svm().Reconhecer(frame);
+            var amostra = new ColecaoDeFramesBuilder().Construir();
+            Action acao = () => new Svm().Reconhecer(amostra);
 
             acao.ShouldThrow<InvalidOperationException>();
         }
@@ -29,7 +29,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 
             var svm = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 
-            var amostra = CriarAmostraPeloIndice(indiceDoSinalEsperado)[0];
+            var amostra = CriarAmostraPeloIndice(indiceDoSinalEsperado);
 
             var indiceReconhecido = svm.Reconhecer(amostra);
 

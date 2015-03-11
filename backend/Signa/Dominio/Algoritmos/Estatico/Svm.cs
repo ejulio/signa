@@ -2,6 +2,7 @@
 using Accord.MachineLearning.VectorMachines.Learning;
 using Signa.Dominio.Sinais;
 using System;
+using System.Collections.Generic;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
@@ -9,7 +10,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
     {
         private MulticlassSupportVectorMachine svm;
 
-        public int Reconhecer(Frame frame)
+        public int Reconhecer(IList<Frame> frame)
         {
             if (svm == null)
             {
@@ -17,7 +18,7 @@ namespace Signa.Dominio.Algoritmos.Estatico
             }
             var geradorDeAmostra = new GeradorDeCaracteristicasDeSinalEstatico();
 
-            return svm.Compute(geradorDeAmostra.ExtrairCaracteristicasDoFrame(frame));
+            return svm.Compute(geradorDeAmostra.ExtrairCaracteristicasDaAmostra(frame));
         }
 
         public void Treinar(IDadosParaAlgoritmoDeReconhecimentoDeSinaisEstaticos dados)
