@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Signa.Dominio.Sinais;
+﻿using Signa.Dominio.Sinais;
+using System.Collections.Generic;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
