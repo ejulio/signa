@@ -48,7 +48,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
             var colecaoDeSinais = new ColecaoDeSinaisBuilder()
                 .ComQuantidadeDeSinais(quantidadeDeSinais)
                 .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
-                .ComGeradorDeAmostras(i => new NewAmostraBuilder().ParaOIndiceComQuantidade(i, 5).Construir())
+                .ComGeradorDeAmostras(i => new ColecaoDeFramesBuilder().ParaOIndiceComQuantidade(i, 5).Construir())
                 .Construir();
 
             var dados = new DadosParaAlgoritmoDeReconhecimentoDeSinaisDinamicos(colecaoDeSinais);

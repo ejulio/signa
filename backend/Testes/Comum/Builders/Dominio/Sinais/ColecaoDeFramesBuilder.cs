@@ -3,17 +3,11 @@ using System.Collections.Generic;
 
 namespace Testes.Comum.Builders.Dominio.Sinais
 {
-    public class NewAmostraBuilder
+    public class ColecaoDeFramesBuilder
     {
         private IList<Frame> frames = new []{ new FrameBuilder().Construir() };
 
-        public NewAmostraBuilder ComFrames(IList<Frame> frames)
-        {
-            this.frames = frames;
-            return this;
-        }
-
-        public NewAmostraBuilder ParaOIndiceComQuantidade(int indice, int quantidadeDeFrames = 2)
+        public ColecaoDeFramesBuilder ParaOIndiceComQuantidade(int indice, int quantidadeDeFrames = 2)
         {
             frames = new Frame[quantidadeDeFrames];
 
@@ -24,7 +18,6 @@ namespace Testes.Comum.Builders.Dominio.Sinais
 
             return this;
         }
-
 
         public IList<Frame> Construir()
         {

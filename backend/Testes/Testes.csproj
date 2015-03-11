@@ -70,7 +70,7 @@
     <Compile Include="Comum\Builders\Dominio\Caracteristicas\DedoBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Caracteristicas\MaoBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Sinais\FrameBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\NewAmostraBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeFramesBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Sinais\SinalBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeSinaisBuilder.cs" />
     <Compile Include="Comum\Util\FrameExtensions.cs" />

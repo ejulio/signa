@@ -82,8 +82,8 @@ namespace Testes.Unidade.Dados
         {
             var sinal = new SinalBuilder()
                             .ComDescricao(descricaoDoSinal)
-                            .ComAmostra(new NewAmostraBuilder().Construir())
-                            .ComAmostra(new NewAmostraBuilder().Construir())
+                            .ComAmostra(new ColecaoDeFramesBuilder().Construir())
+                            .ComAmostra(new ColecaoDeFramesBuilder().Construir())
                             .Construir();
             return sinal;
         }
