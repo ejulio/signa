@@ -7,23 +7,28 @@ using Signa.Util;
 using System.Linq;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
+using Testes.Comum.Util;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
 {
     [TestClass]
-    public class GeradorDeAmostraDeSinalEstaticoTeste
+    public class GeradorDeCaracteristicaDeSinalEstaticoComTipoFrameTeste
     {
         [TestMethod]
         public void extraindo_caracteristicas_de_um_frame()
         {
+            const TipoFrame tipoFrame = TipoFrame.Primeiro;
             var maoEsquerda = DadaUmaMaoEsquerda();
             var maoDireita = DadaUmaMaoDireita();
             var frame = DadoUmFrameComMaos(maoEsquerda, maoDireita);
 
-            var geradorDeAmostraDeSinalEstatico = new GeradorDeCaracteristicasDeSinalEstatico();
-            var frameArray = geradorDeAmostraDeSinalEstatico.ExtrairCaracteristicasDaAmostra(new[] { frame });
+            var geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalEstatico();
+            var geradorDeCaracteristicasComTipoFrame = new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
 
-            DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(maoEsquerda, maoDireita, frameArray);
+            geradorDeCaracteristicasComTipoFrame.TipoFrame = tipoFrame;
+            var frameArray = geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(new[] { frame });
+
+            DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(frame, tipoFrame, frameArray);
         }
 
         private Frame DadoUmFrameComMaos(Mao maoEsquerda, Mao maoDireita)
@@ -56,28 +61,12 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             return maoEsquerda;
         }
 
-        private void DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(Mao maoEsquerda, Mao maoDireita, double[] frameArray)
+        private void DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(Frame frame, TipoFrame tipoFrame, double[] frameArray)
         {
-            var dadosDoFrameEsperados = MontarArrayEsperadoParaAMao(maoEsquerda)
-                .Concat(MontarArrayEsperadoParaAMao(maoDireita))
-                .ToArray();
+            var dadosDoFrameEsperados = frame.MontarArrayEsperado(tipoFrame);
 
             frameArray.Should().HaveCount(dadosDoFrameEsperados.Count());
             frameArray.Should().ContainInOrder(dadosDoFrameEsperados);
-        }
-
-        private double[] MontarArrayEsperadoParaAMao(Mao mao)
-        {
-            var dadosDosDedos = mao.Dedos.Select(d =>
-            {
-                var tipo = new double[] { (int)d.Tipo };
-                return tipo.Concat(d.Direcao).ToArray();
-            }).Concatenar();
-
-            return mao.VetorNormalDaPalma
-                    .Concat(mao.DirecaoDaMao)
-                    .Concat(dadosDosDedos)
-                    .ToArray();
         }
     }
 }

@@ -10,7 +10,7 @@ using Testes.Comum.Util;
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
 {
     [TestClass]
-    public class GeradorDeAmostraDeSinalDinamicoTeste
+    public class GeradorDeCaracteristicaDeSinalDinamicoTeste
     {
         [TestMethod]
         public void criando_uma_amostra_de_sinal_dinamico()

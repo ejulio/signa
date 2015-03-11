@@ -7,10 +7,21 @@ namespace Testes.Comum.Util
 {
     public static class FrameExtensions
     {
-        public static double[] MontarArrayEsperado(this Frame frame)
+        public static double[] MontarArrayEsperado(this Frame frame, TipoFrame? tipoFrame = null)
         {
-            return MontarArrayEsperadoParaAMao(frame.MaoEsquerda)
+            double[] arrayTipoFrame;
+
+            if (tipoFrame.HasValue)
+                arrayTipoFrame = new[] { (double)tipoFrame.Value };
+            else
+            {
+                arrayTipoFrame = new double[0];
+            }
+
+            return arrayTipoFrame
+                .Concat(MontarArrayEsperadoParaAMao(frame.MaoEsquerda))
                 .Concat(MontarArrayEsperadoParaAMao(frame.MaoDireita))
+                .Concat(arrayTipoFrame)
                 .ToArray();
         }
 
