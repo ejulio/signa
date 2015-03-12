@@ -15,7 +15,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
         public void reconhecendo_um_sinal_sem_treinar_o_algoritmo()
         {
             var amostra = new ColecaoDeFramesBuilder().Construir();
-            Action acao = () => new Svm().Reconhecer(amostra);
+            Action acao = () => new Svm(new GeradorDeCaracteristicasDeSinalEstatico()).Reconhecer(amostra);
 
             acao.ShouldThrow<InvalidOperationException>();
         }
@@ -41,7 +41,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Estatico
             var sinais = DadaUmaColecaoDeSinais(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
             var dadosDeTreinamento = new GeradorDeDadosDeSinaisEstaticos(sinais);
 
-            var svm = new Svm();
+            var svm = new Svm(new GeradorDeCaracteristicasDeSinalEstatico());
             svm.Treinar(dadosDeTreinamento);
 
             return svm;

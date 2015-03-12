@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public class GeradorDeCaracteristicasDeSinalEstatico : GeradorDeCaracteristicasDeFrame
+    public class GeradorDeCaracteristicasDeSinalEstatico : GeradorDeCaracteristicasDeFrame, IGeradorDeCaracteristicasDeSinalEstatico
     {
         public double[] ExtrairCaracteristicasDaAmostra(IList<Frame> frames)
         {

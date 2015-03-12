@@ -129,11 +129,14 @@
     <Compile Include="Dados\Repositorio\RepositorioFactory.cs" />
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisEstaticos.cs" />
     <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
+    <Compile Include="Dados\SinaisDinamicosController.cs" />
     <Compile Include="Dominio\Algoritmos\DadosParaAlgoritmoDeReconhecimentoDeSinais.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\GeradorDeDadosDosLimitesDeSinaisDinamicos.cs" />
+    <Compile Include="Dominio\Algoritmos\Dinamico\IGeradorDeCaracteristicasDeSinalDinamico.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\IGeradorDeDadosDeSinaisDinamicos.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\GeradorDeCaracteristicasDeSinalDinamico.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
+    <Compile Include="Dominio\Algoritmos\Estatico\IGeradorDeCaracteristicasDeSinalEstatico.cs" />
     <Compile Include="Dominio\Algoritmos\GeradorDeCaracteristicasDeFrame.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\GeradorDeCaracteristicasDeSinalEstatico.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />

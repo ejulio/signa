@@ -1,29 +1,37 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Signa.Dominio.Sinais;
 using System;
+using Signa.Dados;
 
 namespace Signa.Hubs
 {
     public class ReconhecedorDeSinaisDinamicos : Hub
     {
-        public int Recognize(Frame[] framesDeSinal)
+        private readonly SinaisDinamicosController sinaisDinamicosController;
+
+        public ReconhecedorDeSinaisDinamicos(SinaisDinamicosController sinaisDinamicosController)
         {
-            throw new NotImplementedException("Implementar para reconhecer o sinal utilizando HMM ou HCRF");
+            this.sinaisDinamicosController = sinaisDinamicosController;
         }
 
-        public int RecognizeFirstFrame(Frame frameDeSinal)
+        public int Reconhecer(Frame[] amostra)
         {
-            throw new NotImplementedException("Implemetar para reconhecer o frame utilizando SVM");
+            return sinaisDinamicosController.Reconhecer(amostra);
         }
 
-        public int RecognizeLastFrame(Frame frameDeSinal)
+        public int ReconhecerPrimeiroFrame(Frame[] amostra)
         {
-            throw new NotImplementedException("Implemetar para reconhecer o frame utilizando SVM");
+            return sinaisDinamicosController.ReconhecerPrimeiroFrame(amostra);
         }
 
-        public void Save(string name, string exampleFileContent, Frame[] framesDeSinal)
+        public int ReconhecerUltimoFrame(Frame[] amostra)
         {
-            throw new NotImplementedException("Implementar para salvar o sinal e treinar o algoritmo HMM ou HCRF");
+            return sinaisDinamicosController.ReconhecerUltimoFrame(amostra);
+        }
+
+        public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Frame[] amostra)
+        {
+            sinaisDinamicosController.SalvarAmostraDoSinal(descricao, conteudoDoArquivoDeExemplo, amostra);
         }
     }
 }

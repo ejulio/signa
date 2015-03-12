@@ -12,15 +12,20 @@ namespace Signa.Dominio.Algoritmos.Dinamico
 {
     public class Hcrf : IAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {
+        private readonly IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas;
         private HiddenMarkovClassifier<Independent<NormalDistribution>> classificador;
+
+        public Hcrf(IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas)
+        {
+            this.geradorDeCaracteristicas = geradorDeCaracteristicas;
+        }
 
         public int Reconhecer(IList<Frame> amostra)
         {
             if (classificador == null)
                 throw new InvalidOperationException();
 
-            var geradorDeAmostra = new GeradorDeCaracteristicasDeSinalDinamico();
-            return classificador.Compute(geradorDeAmostra.ExtrairCaracteristicasDaAmostra(amostra));
+            return classificador.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra));
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)

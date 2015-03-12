@@ -11,9 +11,14 @@ namespace Signa.Dominio.Algoritmos
 
         static AlgoritmoDeReconhecimentoDeSinalFactory()
         {
-            AlgoritmoDeReconhecimentoDeSinaisEstaticos = new Svm();
-            AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos = new Svm();
-            AlgoritmoDeReconhecimentoDeSinaisDinamicos = new Hcrf();
+            var geradorDeCaracteristicasDeSinalDinamico = new GeradorDeCaracteristicasDeSinalDinamico();
+            var geradorDeCaracteristicasDeSinalEstatico = new GeradorDeCaracteristicasDeSinalEstatico();
+            var geradorDeCaracteristicasDeSinalEstaticoComTipoFrame = 
+                new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicasDeSinalEstatico);
+
+            AlgoritmoDeReconhecimentoDeSinaisEstaticos = new Svm(geradorDeCaracteristicasDeSinalEstatico);
+            AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos = new Svm(geradorDeCaracteristicasDeSinalEstaticoComTipoFrame);
+            AlgoritmoDeReconhecimentoDeSinaisDinamicos = new Hcrf(geradorDeCaracteristicasDeSinalDinamico);
         }
 
         public IAlgoritmoDeReconhecimentoDeSinaisEstaticos CriarReconhecedorDeSinaisEstaticos()

@@ -7,7 +7,7 @@ namespace Signa.Dominio.Algoritmos
 {
     public abstract class GeradorDeCaracteristicasDeFrame
     {
-        public double[] ExtrairCaracteristicasDoFrame(Frame frame)
+        protected double[] ExtrairCaracteristicasDoFrame(Frame frame)
         {
             return ExtrairCaracteristicasDaMao(frame.MaoEsquerda)
                 .Concat(ExtrairCaracteristicasDaMao(frame.MaoDireita))
