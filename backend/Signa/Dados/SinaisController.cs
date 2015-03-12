@@ -4,7 +4,6 @@ using Signa.Dominio.Sinais;
 using Signa.Util;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Signa.Dados
 {

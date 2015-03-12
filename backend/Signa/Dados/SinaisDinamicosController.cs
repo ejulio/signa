@@ -1,9 +1,8 @@
 ﻿using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos.Dinamico;
+using Signa.Dominio.Algoritmos;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using System.Collections.Generic;
-using Signa.Dominio.Algoritmos;
 
 namespace Signa.Dados
 {
