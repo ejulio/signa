@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Dados.Repositorio;
 using Signa.Dominio;
+using Signa.Dominio.Algoritmos.Dados;
 using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Algoritmos.Factories;

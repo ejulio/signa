@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Dominio.Algoritmos
+namespace Signa.Dominio.Algoritmos.Dados
 {
     public abstract class DadosParaAlgoritmoDeReconhecimentoDeSinais
     {

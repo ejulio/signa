@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Dominio.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos.Dados
 {
     public interface IGeradorDeDadosDeSinaisEstaticos
     {

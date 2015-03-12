@@ -5,6 +5,7 @@ using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
 using Signa.Dominio.Algoritmos.Caracteristicas;
+using Signa.Dominio.Algoritmos.Dados;
 using Signa.Dominio.Sinais;
 using System;
 using System.Collections.Generic;

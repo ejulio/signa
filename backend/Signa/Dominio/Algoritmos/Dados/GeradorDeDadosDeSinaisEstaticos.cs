@@ -3,7 +3,7 @@ using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Dominio.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos.Dados
 {
     public class GeradorDeDadosDeSinaisEstaticos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
         IGeradorDeDadosDeSinaisEstaticos

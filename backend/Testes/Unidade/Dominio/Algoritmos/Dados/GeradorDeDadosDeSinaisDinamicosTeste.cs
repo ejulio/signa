@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Algoritmos.Dinamico;
+using Signa.Dominio.Algoritmos.Dados;
 using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Util;
 
-namespace Testes.Unidade.Dominio.Algoritmos.Dinamico
+namespace Testes.Unidade.Dominio.Algoritmos.Dados
 {
     [TestClass]
     public class GeradorDeDadosDeSinaisDinamicosTeste

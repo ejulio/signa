@@ -1,5 +1,5 @@
 ﻿
-namespace Signa.Dominio.Algoritmos.Dinamico
+namespace Signa.Dominio.Algoritmos.Dados
 {
     public interface IGeradorDeDadosDeSinaisDinamicos
     {

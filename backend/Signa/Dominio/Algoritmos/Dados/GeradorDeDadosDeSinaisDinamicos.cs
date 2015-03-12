@@ -3,7 +3,7 @@ using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Dominio.Algoritmos.Dinamico
+namespace Signa.Dominio.Algoritmos.Dados
 {
     public class GeradorDeDadosDeSinaisDinamicos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
         IGeradorDeDadosDeSinaisDinamicos

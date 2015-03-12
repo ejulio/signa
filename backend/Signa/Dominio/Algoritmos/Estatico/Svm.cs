@@ -1,6 +1,7 @@
 ﻿using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Signa.Dominio.Algoritmos.Caracteristicas;
+using Signa.Dominio.Algoritmos.Dados;
 using Signa.Dominio.Sinais;
 using System;
 using System.Collections.Generic;
