@@ -34,35 +34,35 @@ namespace Signa.Dados
             {
                 Descricao = descricaoDoSinal,
                 CaminhoParaArquivoDeExemplo = nomeDoArquivo,
-                Amostras = new[] { amostra }
+                Amostras = new List<IList<Frame>> { amostra }
             });
         }
 
         private string CriarArquivoDeExemploSeNaoExistir(string descricaoDoSinal, string conteudoDoArquivoDeExemplo)
         {
-            var filePath = DiretorioDeExemplos + descricaoDoSinal.RemoverAcentos().Underscore() + ".json";
+            var caminhoDoArquivo = DiretorioDeExemplos + descricaoDoSinal.RemoverAcentos().Underscore() + ".json";
 
-            if (File.Exists(filePath))
-                return filePath;
+            if (File.Exists(caminhoDoArquivo))
+                return caminhoDoArquivo;
 
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(caminhoDoArquivo))
             {
                 writer.Write(conteudoDoArquivoDeExemplo);
             }
 
-            return filePath;
+            return caminhoDoArquivo;
         }
 
-        private void Adicionar(Sinal sinalEstatico)
+        private void Adicionar(Sinal sinal)
         {
-            Sinal sinalNoRepositorio = repositorio.BuscarPorDescricao(sinalEstatico.Descricao);
+            Sinal sinalNoRepositorio = repositorio.BuscarPorDescricao(sinal.Descricao);
             if (sinalNoRepositorio == null)
             {
-                repositorio.Adicionar(sinalEstatico);
+                repositorio.Adicionar(sinal);
             }
             else
             {
-                sinalNoRepositorio.Amostras = sinalNoRepositorio.Amostras.Concat(sinalEstatico.Amostras).ToArray();
+                sinalNoRepositorio.AdicionarAmostra(sinal.Amostras[0]);
             }
             repositorio.SalvarAlteracoes();
         }

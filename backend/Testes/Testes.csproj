@@ -94,6 +94,7 @@
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\SvmTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\AlgoritmoDeReconhecimentoDeSinalFactoryTeste.cs" />
     <Compile Include="Unidade\Dominio\Sinais\FrameTeste.cs" />
+    <Compile Include="Unidade\Dominio\Sinais\SinalTeste.cs" />
     <Compile Include="Unidade\Util\IEnumerableExtensionsTest.cs" />
     <Compile Include="Unidade\Util\StringExtensionsTest.cs" />
   </ItemGroup>

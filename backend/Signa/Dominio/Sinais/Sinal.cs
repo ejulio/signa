@@ -37,5 +37,10 @@ namespace Signa.Dominio.Sinais
         {
             return amostras[0].Count > 1;
         }
+
+        public void AdicionarAmostra(IList<Frame> amostra)
+        {
+            Amostras.Add(amostra);
+        }
     }
 }
