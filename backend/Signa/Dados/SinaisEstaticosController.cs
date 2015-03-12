@@ -10,9 +10,9 @@ namespace Signa.Dados
 {
     public class SinaisEstaticosController
     {
-        public const string SignSamplesFilePath = "./data/static-sign-samples.json";
+        public const string CaminhoDoArquivoDoRepositorio = "./data/repositorio-sinais.json";
 
-        public const string DiretorioDeAmostras = "samples/"; 
+        public const string DiretorioDeAmostras = "exemplos/"; 
 
         private readonly IRepositorio<Sinal> repositorio;
         private readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos;

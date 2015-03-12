@@ -48,6 +48,10 @@ namespace Testes.Unidade.Dominio
                 .Returns(algoritmoDeReconhecimentoDeSinaisEstaticos.Object);
 
             algoritmoDeReconhecimentoDeSinaisFactory
+                .Setup(f => f.CriarReconhecedorDeFramesDeSinaisDinamicos())
+                .Returns(algoritmoDeReconhecimentoDeSinaisEstaticos.Object);
+
+            algoritmoDeReconhecimentoDeSinaisFactory
                 .Setup(f => f.CriarReconhecedorDeSinaisDinamicos())
                 .Returns(algoritmoDeReconhecimentoDeSinaisDinamicos.Object);
         }
@@ -57,13 +61,13 @@ namespace Testes.Unidade.Dominio
         {
             repositorio
                 .Setup(r => r.GetEnumerator())
-                .Returns(DadaUmaColecaoDeSinaisEstaticos().GetEnumerator());
+                .Returns(DadaUmaColecaoDeSinaisEstaticos().GetEnumerator);
 
             inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisEstaticos>(d => VerificarDadosDoAlgoritmo(d))));
+                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisEstaticos>(d => VerificarDadosDoAlgoritmoDeSinaisEstaticos(d))));
         }
 
         [TestMethod]
@@ -84,13 +88,17 @@ namespace Testes.Unidade.Dominio
         {
             repositorio
                 .Setup(r => r.GetEnumerator())
-                .Returns(DadaUmaColecaoDeSinaisDinamicos().GetEnumerator());
+                .Returns(DadaUmaColecaoDeSinaisDinamicos().GetEnumerator);
 
             inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
 
+            algoritmoDeReconhecimentoDeSinaisEstaticos
+                .Verify(a =>
+                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisEstaticos>(d => VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(d))));
+
             algoritmoDeReconhecimentoDeSinaisDinamicos
                 .Verify(a =>
-                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisDinamicos>(d => VerificarDadosDoAlgoritmo(d))));
+                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisDinamicos>(d => VerificarDadosDoAlgoritmoDeSinaisDinamicos(d))));
         }
 
         private ICollection<Sinal> DadaUmaColecaoDeSinaisEstaticos()
@@ -115,7 +123,7 @@ namespace Testes.Unidade.Dominio
             return sinais;
         }
 
-        private bool VerificarDadosDoAlgoritmo(IGeradorDeDadosDeSinaisEstaticos dados)
+        private bool VerificarDadosDoAlgoritmoDeSinaisEstaticos(IGeradorDeDadosDeSinaisEstaticos dados)
         {
             dados.QuantidadeDeClasses.Should().Be(2);
             dados.Saidas.Should().HaveCount(4);
@@ -123,11 +131,19 @@ namespace Testes.Unidade.Dominio
             return true;
         }
 
-        private bool VerificarDadosDoAlgoritmo(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
+        private bool VerificarDadosDoAlgoritmoDeSinaisDinamicos(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
         {
             geradorDeDados.QuantidadeDeClasses.Should().Be(2);
             geradorDeDados.Saidas.Should().HaveCount(4);
             geradorDeDados.Entradas.Should().HaveCount(4);
+            return true;
+        }
+
+        private bool VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(IGeradorDeDadosDeSinaisEstaticos dados)
+        {
+            dados.QuantidadeDeClasses.Should().Be(2);
+            dados.Saidas.Should().HaveCount(8);
+            dados.Entradas.Should().HaveCount(8);
             return true;
         }
     }

@@ -34,7 +34,7 @@ namespace Signa
         private static IRepositorioFactory repositorioFactory;
         private static void ConfigureHubs()
         {
-            repositorioFactory = new RepositorioFactory(SinaisEstaticosController.SignSamplesFilePath);
+            repositorioFactory = new RepositorioFactory(SinaisEstaticosController.CaminhoDoArquivoDoRepositorio);
 
             algorithmFactory = new AlgoritmoDeReconhecimentoDeSinalFactory();
 

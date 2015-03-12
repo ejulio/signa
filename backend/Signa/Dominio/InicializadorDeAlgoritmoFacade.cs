@@ -27,11 +27,15 @@ namespace Signa.Dominio
 
         public void TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos()
         {
-            var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisDinamicos();
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos();
+            
+            var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisDinamicos();
             var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisDinamicos(repositorio);
-
             algoritmo.Treinar(dadosDoAlgoritmo);
+
+            var algoritmoDeLimitesDeSinaisDinamicos = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeFramesDeSinaisDinamicos();
+            var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new GeradorDeDadosDosLimitesDeSinaisDinamicos(repositorio);
+            algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
         }
     }
 }
