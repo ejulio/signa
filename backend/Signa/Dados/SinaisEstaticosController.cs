@@ -25,14 +25,14 @@ namespace Signa.Dados
 
         public void Adicionar(Sinal sinalEstatico)
         {
-            Sinal sinalEstaticoInRepository = repositorio.BuscarPorDescricao(sinalEstatico.Descricao);
-            if (sinalEstaticoInRepository == null)
+            Sinal sinalNoRepositorio = repositorio.BuscarPorDescricao(sinalEstatico.Descricao);
+            if (sinalNoRepositorio == null)
             {
                 repositorio.Adicionar(sinalEstatico);
             }
             else
             {
-                sinalEstaticoInRepository.Amostras = sinalEstaticoInRepository.Amostras.Concat(sinalEstatico.Amostras).ToArray();
+                sinalNoRepositorio.Amostras = sinalNoRepositorio.Amostras.Concat(sinalEstatico.Amostras).ToArray();
             }
             repositorio.SalvarAlteracoes();
         }

@@ -1,26 +1,48 @@
 ﻿using Signa.Dominio.Sinais;
 using System;
+using System.Collections.Generic;
+using Signa.Dados.Repositorio;
+using Signa.Dominio.Algoritmos.Dinamico;
+using Signa.Dominio.Algoritmos.Estatico;
 
 namespace Signa.Dados
 {
     public class SinaisDinamicosController
     {
-        public int Reconhecer(Frame[] amostra)
+        private readonly IRepositorio<Sinal> repositorio;
+        private readonly GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas;
+        private readonly IAlgoritmoDeReconhecimentoDeSinaisDinamicos algoritmoDeReconhecimentoDeSinaisDinamicos;
+        private readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos;
+
+        public SinaisDinamicosController(IRepositorio<Sinal> repositorio, 
+            GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas,
+            IAlgoritmoDeReconhecimentoDeSinaisDinamicos algoritmoDeReconhecimentoDeSinaisDinamicos, 
+            IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos)
         {
-            throw new NotImplementedException("Implementar para reconhecer o sinal utilizando HMM ou HCRF");
+            this.repositorio = repositorio;
+            this.geradorDeCaracteristicas = geradorDeCaracteristicas;
+            this.algoritmoDeReconhecimentoDeSinaisDinamicos = algoritmoDeReconhecimentoDeSinaisDinamicos;
+            this.algoritmoDeReconhecimentoDeSinaisEstaticos = algoritmoDeReconhecimentoDeSinaisEstaticos;
         }
 
-        public int ReconhecerPrimeiroFrame(Frame[] amostra)
+        public int Reconhecer(IList<Frame> amostra)
         {
-            throw new NotImplementedException("Implemetar para reconhecer o frame utilizando SVM");
+            return algoritmoDeReconhecimentoDeSinaisDinamicos.Reconhecer(amostra);
         }
 
-        public int ReconhecerUltimoFrame(Frame[] amostra)
+        public int ReconhecerPrimeiroFrame(IList<Frame> amostra)
         {
-            throw new NotImplementedException("Implemetar para reconhecer o frame utilizando SVM");
+            geradorDeCaracteristicas.TipoFrame = TipoFrame.Primeiro;
+            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
         }
 
-        public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Frame[] amostra)
+        public int ReconhecerUltimoFrame(IList<Frame> amostra)
+        {
+            geradorDeCaracteristicas.TipoFrame = TipoFrame.Ultimo;
+            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
+        }
+
+        public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, IList<Frame> amostra)
         {
             throw new NotImplementedException("Implementar para salvar o sinal e treinar o algoritmo HMM ou HCRF");
         } 

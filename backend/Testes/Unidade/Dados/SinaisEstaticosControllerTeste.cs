@@ -10,7 +10,7 @@ using Testes.Comum.Builders.Dominio.Sinais;
 namespace Testes.Unidade.Dados
 {
     [TestClass]
-    public class SinaisEstaticosControllerTest
+    public class SinaisEstaticosControllerTeste
     {
         private Mock<IRepositorio<Sinal>> repositorio;
         private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmo;
