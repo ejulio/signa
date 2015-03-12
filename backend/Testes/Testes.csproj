@@ -83,10 +83,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Integracao\Dados\SinaisDinamicosControllerTeste.cs" />
     <Compile Include="Unidade\Dados\SinaisEstaticosControllerTeste.cs" />
-    <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\GeradorDeCaracteristicaDeSinalDinamicoTeste.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Caracteristicas\GeradorDeCaracteristicaDeSinalDinamicoTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\GeradorDeDadosDosLimitiesDeSinaisDinamicosTeste.cs" />
-    <Compile Include="Unidade\Dominio\Algoritmos\Estatico\GeradorDeCaracteristicaDeSinalEstaticoComTipoFrameTeste.cs" />
-    <Compile Include="Unidade\Dominio\Algoritmos\Estatico\GeradorDeCaracteristicaDeSinalEstaticoTeste.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Caracteristicas\GeradorDeCaracteristicaDeSinalEstaticoComTipoFrameTeste.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Caracteristicas\GeradorDeCaracteristicaDeSinalEstaticoTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Factories\GeradorDeCaracteristicasFactoryTeste.cs" />
     <Compile Include="Unidade\Dominio\InicializadorDeAlgoritmoFacadeTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\GeradorDeDadosDeSinaisDinamicosTeste.cs" />

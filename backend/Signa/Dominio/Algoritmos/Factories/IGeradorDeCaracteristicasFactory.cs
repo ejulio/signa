@@ -1,5 +1,4 @@
-﻿using Signa.Dominio.Algoritmos.Dinamico;
-using Signa.Dominio.Algoritmos.Estatico;
+﻿using Signa.Dominio.Algoritmos.Caracteristicas;
 
 namespace Signa.Dominio.Algoritmos.Factories
 {

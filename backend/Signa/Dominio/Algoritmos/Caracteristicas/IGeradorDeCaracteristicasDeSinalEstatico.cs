@@ -1,7 +1,7 @@
 ﻿using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 
-namespace Signa.Dominio.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos.Caracteristicas
 {
     public interface IGeradorDeCaracteristicasDeSinalEstatico
     {

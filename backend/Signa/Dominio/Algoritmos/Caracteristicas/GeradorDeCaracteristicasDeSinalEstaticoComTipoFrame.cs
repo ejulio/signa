@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Dominio.Algoritmos.Estatico
+namespace Signa.Dominio.Algoritmos.Caracteristicas
 {
     public class GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame
     {

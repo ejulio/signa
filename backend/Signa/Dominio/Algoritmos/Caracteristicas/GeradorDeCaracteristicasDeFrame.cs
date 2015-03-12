@@ -3,7 +3,7 @@ using Signa.Dominio.Sinais.Caracteristicas;
 using Signa.Util;
 using System.Linq;
 
-namespace Signa.Dominio.Algoritmos
+namespace Signa.Dominio.Algoritmos.Caracteristicas
 {
     public abstract class GeradorDeCaracteristicasDeFrame
     {

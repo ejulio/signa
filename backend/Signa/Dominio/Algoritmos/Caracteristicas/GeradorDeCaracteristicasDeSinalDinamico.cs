@@ -1,7 +1,7 @@
 ﻿using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 
-namespace Signa.Dominio.Algoritmos.Dinamico
+namespace Signa.Dominio.Algoritmos.Caracteristicas
 {
     public class GeradorDeCaracteristicasDeSinalDinamico : GeradorDeCaracteristicasDeFrame, IGeradorDeCaracteristicasDeSinalDinamico
     {

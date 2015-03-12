@@ -1,4 +1,5 @@
-﻿using Signa.Dominio.Sinais;
+﻿using Signa.Dominio.Algoritmos.Caracteristicas;
+using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 using System.Linq;
 
