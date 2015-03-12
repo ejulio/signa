@@ -59,11 +59,11 @@ namespace Signa.Dados
 
         public void SalvarAmostraDoSinal(string descricaoDoSinal, string conteudoDoArquivoDeExemplo, Frame amostra)
         {
-            var fileName = CriarArquivoDeExemploSeNaoExistir(descricaoDoSinal, conteudoDoArquivoDeExemplo);
+            var nomeDoArquivo = CriarArquivoDeExemploSeNaoExistir(descricaoDoSinal, conteudoDoArquivoDeExemplo);
             Adicionar(new Sinal
             {
                 Descricao = descricaoDoSinal,
-                CaminhoParaArquivoDeExemplo = fileName,
+                CaminhoParaArquivoDeExemplo = nomeDoArquivo,
                 Amostras = new[] { new[] { amostra } }
             });
         }

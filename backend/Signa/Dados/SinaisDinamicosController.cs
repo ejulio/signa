@@ -1,14 +1,20 @@
 ﻿using Signa.Dominio.Sinais;
-using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
+using Signa.Util;
 
 namespace Signa.Dados
 {
     public class SinaisDinamicosController
     {
+        public const string CaminhoDoArquivoDoRepositorio = "./data/repositorio-sinais.json";
+
+        public const string DiretorioDeAmostras = "exemplos/"; 
+
         private readonly IRepositorio<Sinal> repositorio;
         private readonly GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas;
         private readonly IAlgoritmoDeReconhecimentoDeSinaisDinamicos algoritmoDeReconhecimentoDeSinaisDinamicos;
@@ -44,7 +50,42 @@ namespace Signa.Dados
 
         public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, IList<Frame> amostra)
         {
-            throw new NotImplementedException("Implementar para salvar o sinal e treinar o algoritmo HMM ou HCRF");
-        } 
+            var fileName = CriarArquivoDeExemploSeNaoExistir(descricao, conteudoDoArquivoDeExemplo);
+            Adicionar(new Sinal
+            {
+                Descricao = descricao,
+                CaminhoParaArquivoDeExemplo = fileName,
+                Amostras = new[] { amostra }
+            });
+        }
+
+        public void Adicionar(Sinal sinalEstatico)
+        {
+            Sinal sinalNoRepositorio = repositorio.BuscarPorDescricao(sinalEstatico.Descricao);
+            if (sinalNoRepositorio == null)
+            {
+                repositorio.Adicionar(sinalEstatico);
+            }
+            else
+            {
+                sinalNoRepositorio.Amostras = sinalNoRepositorio.Amostras.Concat(sinalEstatico.Amostras).ToArray();
+            }
+            repositorio.SalvarAlteracoes();
+        }
+
+        public string CriarArquivoDeExemploSeNaoExistir(string descricaoDoSinal, string conteudoDoArquivoDeExemplo)
+        {
+            var filePath = DiretorioDeAmostras + descricaoDoSinal.RemoverAcentos().Underscore() + ".json";
+
+            if (File.Exists(filePath))
+                return filePath;
+
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.Write(conteudoDoArquivoDeExemplo);
+            }
+
+            return filePath;
+        }
     }
 }
