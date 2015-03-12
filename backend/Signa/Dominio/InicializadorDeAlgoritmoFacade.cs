@@ -1,4 +1,5 @@
-﻿using Signa.Dados.Repositorio;
+﻿using System.Linq;
+using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos;
 using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
@@ -20,9 +21,12 @@ namespace Signa.Dominio
         {
             var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisEstaticos();
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
-            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(repositorio);
 
-            algoritmo.Treinar(dadosDoAlgoritmo);
+            if (repositorio.Any())
+            {
+                var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(repositorio);
+                algoritmo.Treinar(dadosDoAlgoritmo);
+            }
         }
 
         public void TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos()
@@ -30,12 +34,16 @@ namespace Signa.Dominio
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos();
             
             var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisDinamicos();
-            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisDinamicos(repositorio);
-            algoritmo.Treinar(dadosDoAlgoritmo);
-
             var algoritmoDeLimitesDeSinaisDinamicos = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeFramesDeSinaisDinamicos();
-            var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new GeradorDeDadosDosLimitesDeSinaisDinamicos(repositorio);
-            algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
+
+            if (repositorio.Any())
+            {
+                var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new GeradorDeDadosDosLimitesDeSinaisDinamicos(repositorio);
+                algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
+
+                var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisDinamicos(repositorio);
+                algoritmo.Treinar(dadosDoAlgoritmo);
+            }
         }
     }
 }

@@ -81,6 +81,8 @@ namespace Testes.Unidade.Dominio
             Action acao = () => inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
             acao.ShouldNotThrow();
+            algoritmoDeReconhecimentoDeSinaisEstaticos
+                .Verify(a => a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisEstaticos>()), Times.Never);
         }
 
         [TestMethod]
@@ -99,6 +101,24 @@ namespace Testes.Unidade.Dominio
             algoritmoDeReconhecimentoDeSinaisDinamicos
                 .Verify(a =>
                     a.Treinar(It.Is<IGeradorDeDadosDeSinaisDinamicos>(d => VerificarDadosDoAlgoritmoDeSinaisDinamicos(d))));
+        }
+
+        [TestMethod]
+        public void treinando_o_algoritmo_de_reconhecimento_de_sinais_dinamicos_sem_dados()
+        {
+            var listaDeSinaisVazia = new List<Sinal>();
+            repositorio
+                .Setup(r => r.GetEnumerator())
+                .Returns(listaDeSinaisVazia.GetEnumerator());
+
+            Action acao = () => inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+
+            acao.ShouldNotThrow();
+            algoritmoDeReconhecimentoDeSinaisEstaticos
+                .Verify(a => a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisEstaticos>()), Times.Never);
+
+            algoritmoDeReconhecimentoDeSinaisDinamicos
+                .Verify(a => a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisDinamicos>()), Times.Never);
         }
 
         private ICollection<Sinal> DadaUmaColecaoDeSinaisEstaticos()
