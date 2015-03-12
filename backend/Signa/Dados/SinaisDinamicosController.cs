@@ -1,5 +1,5 @@
-﻿using System;
-using Signa.Dominio.Sinais;
+﻿using Signa.Dominio.Sinais;
+using System;
 
 namespace Signa.Dados
 {

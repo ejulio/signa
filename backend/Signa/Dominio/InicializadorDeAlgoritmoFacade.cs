@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Signa.Dados.Repositorio;
+﻿using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos;
 using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
+using System.Linq;
 
 namespace Signa.Dominio
 {
