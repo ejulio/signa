@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Factories;
 
-namespace Testes.Unidade.Dominio.Algoritmos
+namespace Testes.Unidade.Dominio.Algoritmos.Factories
 {
     [TestClass]
     public class GeradorDeCaracteristicasFactoryTeste

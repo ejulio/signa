@@ -2,7 +2,7 @@
 using Signa.Dados;
 using Signa.Dados.Repositorio;
 using Signa.Dominio;
-using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Factories;
 using System;
 
 namespace Infraestrutura

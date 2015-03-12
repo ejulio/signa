@@ -87,13 +87,13 @@
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\GeradorDeDadosDosLimitiesDeSinaisDinamicosTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\GeradorDeCaracteristicaDeSinalEstaticoComTipoFrameTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\GeradorDeCaracteristicaDeSinalEstaticoTeste.cs" />
-    <Compile Include="Unidade\Dominio\Algoritmos\GeradorDeCaracteristicasFactoryTeste.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Factories\GeradorDeCaracteristicasFactoryTeste.cs" />
     <Compile Include="Unidade\Dominio\InicializadorDeAlgoritmoFacadeTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\GeradorDeDadosDeSinaisDinamicosTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Dinamico\HcrfTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\GeradorDeDadosDeSinaisEstaticosTeste.cs" />
     <Compile Include="Unidade\Dominio\Algoritmos\Estatico\SvmTeste.cs" />
-    <Compile Include="Unidade\Dominio\Algoritmos\AlgoritmoDeReconhecimentoDeSinalFactoryTeste.cs" />
+    <Compile Include="Unidade\Dominio\Algoritmos\Factories\AlgoritmoDeReconhecimentoDeSinalFactoryTeste.cs" />
     <Compile Include="Unidade\Dominio\Sinais\FrameTeste.cs" />
     <Compile Include="Unidade\Dominio\Sinais\SinalTeste.cs" />
     <Compile Include="Unidade\Util\IEnumerableExtensionsTest.cs" />

@@ -1,7 +1,7 @@
 ﻿using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
 
-namespace Signa.Dominio.Algoritmos
+namespace Signa.Dominio.Algoritmos.Factories
 {
     public class AlgoritmoDeReconhecimentoDeSinalFactory : IAlgoritmoDeReconhecimentoDeSinalFactory
     {

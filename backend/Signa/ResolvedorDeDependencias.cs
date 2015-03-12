@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Signa.Dados;
 using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos;
+using Signa.Dominio.Algoritmos.Factories;
 
 namespace Signa
 {
