@@ -3,22 +3,21 @@ using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using System.Collections.Generic;
+using Signa.Dominio.Algoritmos;
 
 namespace Signa.Dados
 {
     public class SinaisDinamicosController : SinaisController
     {
-        private readonly IRepositorio<Sinal> repositorio;
         private readonly GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas;
-        private readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos;
+        private readonly IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisEstaticos;
 
         public SinaisDinamicosController(IRepositorio<Sinal> repositorio, 
             GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas,
-            IAlgoritmoDeReconhecimentoDeSinaisDinamicos algoritmoDeReconhecimentoDeSinaisDinamicos, 
-            IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos)
+            IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisDinamicos,
+            IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisEstaticos)
             : base(repositorio, algoritmoDeReconhecimentoDeSinaisDinamicos)
         {
-            this.repositorio = repositorio;
             this.geradorDeCaracteristicas = geradorDeCaracteristicas;
             this.algoritmoDeReconhecimentoDeSinaisEstaticos = algoritmoDeReconhecimentoDeSinaisEstaticos;
         }

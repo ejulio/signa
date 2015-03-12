@@ -162,6 +162,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dados\SinaisEstaticosController.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\IGeradorDeDadosDeSinaisEstaticos.cs" />
+    <Compile Include="ResolvedorDeDependencias.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\Svm.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\GeradorDeDadosDeSinaisEstaticos.cs" />

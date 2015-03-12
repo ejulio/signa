@@ -15,47 +15,39 @@ namespace Signa
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureJsonSerializerSettings();
-            ConfigureHubs();
+            ConfigurarResolvedorDeDependencias();
+            ConfigurarCors(app);
+            ConfigurarServidorDeArquivos(app);
+            ConfigurarSignalR(app);
+        }
 
+        private static void ConfigurarCors(IAppBuilder app)
+        {
             app.UseCors(CorsOptions.AllowAll);
+        }
 
+        private static void ConfigurarServidorDeArquivos(IAppBuilder app)
+        {
             app.UseFileServer();
             var options = new StaticFileOptions
             {
                 ContentTypeProvider = new JsonContentTypeProvider()
             };
             app.UseStaticFiles(options);
-            
+        }
+
+        private static void ConfigurarSignalR(IAppBuilder app)
+        {
             app.MapSignalR();
         }
 
-        private static AlgoritmoDeReconhecimentoDeSinalFactory algorithmFactory;
-        private static IRepositorioFactory repositorioFactory;
-        private static void ConfigureHubs()
+        private static void ConfigurarResolvedorDeDependencias()
         {
-            repositorioFactory = new RepositorioFactory(SinaisEstaticosController.CaminhoDoArquivoDoRepositorio);
-
-            algorithmFactory = new AlgoritmoDeReconhecimentoDeSinalFactory();
-
             var container = GlobalHost.DependencyResolver;
-
-            container.Register(typeof(Hubs.SequenciaDeSinais),
-                () => new Hubs.SequenciaDeSinais(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos()));
-
-            container.Register(typeof(SinaisEstaticosController),
-                () => new SinaisEstaticosController(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(), algorithmFactory.CriarReconhecedorDeSinaisEstaticos()));
-
-            container.Register(typeof(Hubs.ReconhecedorDeSinaisEstaticos), 
-                () => new Hubs.ReconhecedorDeSinaisEstaticos(container.Resolve<SinaisEstaticosController>()));
+            var resolvedorDeDependencias = new ResolvedorDeDependencias(container);
+            resolvedorDeDependencias.Configurar();
         }
 
-        private static void ConfigureJsonSerializerSettings()
-        {
-            GlobalHost.DependencyResolver.Register(typeof (JsonSerializerSettings), () => new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
-        }
+        
     }
 }
