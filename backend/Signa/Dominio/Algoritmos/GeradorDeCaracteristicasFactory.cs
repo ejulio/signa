@@ -3,11 +3,11 @@ using Signa.Dominio.Algoritmos.Estatico;
 
 namespace Signa.Dominio.Algoritmos
 {
-    public class GeradorDeCaracteristicasFactory
+    public class GeradorDeCaracteristicasFactory : IGeradorDeCaracteristicasFactory
     {
         private static IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicasDeSinalDinamico;
         private static IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicasDeSinalEstatico;
-        private static GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicasDeSinalEstaticoComTipoFrame;
+        private static IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicasDeSinalEstaticoComTipoFrame;
 
         public GeradorDeCaracteristicasFactory()
         {
@@ -26,7 +26,7 @@ namespace Signa.Dominio.Algoritmos
             return geradorDeCaracteristicasDeSinalEstatico;
         }
 
-        public GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame()
+        public IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame()
         {
             return geradorDeCaracteristicasDeSinalEstaticoComTipoFrame;
         }

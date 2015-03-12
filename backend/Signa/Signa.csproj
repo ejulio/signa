@@ -138,11 +138,13 @@
     <Compile Include="Dominio\Algoritmos\Dinamico\GeradorDeCaracteristicasDeSinalDinamico.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\IGeradorDeCaracteristicasDeSinalEstatico.cs" />
+    <Compile Include="Dominio\Algoritmos\Estatico\IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
     <Compile Include="Dominio\Algoritmos\GeradorDeCaracteristicasDeFrame.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\GeradorDeCaracteristicasDeSinalEstatico.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
     <Compile Include="Dominio\Algoritmos\GeradorDeCaracteristicasFactory.cs" />
     <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinais.cs" />
+    <Compile Include="Dominio\Algoritmos\IGeradorDeCaracteristicasFactory.cs" />
     <Compile Include="Dominio\InicializadorDeAlgoritmoFacade.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\GeradorDeDadosDeSinaisDinamicos.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\Hcrf.cs" />

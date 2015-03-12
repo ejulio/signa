@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public class GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstatico
+    public class GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame
     {
         private readonly IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
 

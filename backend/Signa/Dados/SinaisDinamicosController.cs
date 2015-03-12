@@ -8,11 +8,11 @@ namespace Signa.Dados
 {
     public class SinaisDinamicosController : SinaisController
     {
-        private readonly GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas;
+        private readonly IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas;
         private readonly IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisEstaticos;
 
-        public SinaisDinamicosController(IRepositorio<Sinal> repositorio, 
-            GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas,
+        public SinaisDinamicosController(IRepositorio<Sinal> repositorio,
+            IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas,
             IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisDinamicos,
             IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisEstaticos)
             : base(repositorio, algoritmoDeReconhecimentoDeSinaisDinamicos)

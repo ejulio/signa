@@ -12,11 +12,14 @@ namespace Signa
         private readonly IDependencyResolver container;
         private static AlgoritmoDeReconhecimentoDeSinalFactory algoritmoFactory;
         private static IRepositorioFactory repositorioFactory;
+        private static GeradorDeCaracteristicasFactory geradorDeCaracteristicasFactory;
+
         public ResolvedorDeDependencias(IDependencyResolver container)
         {
             this.container = container;
             repositorioFactory = new RepositorioFactory(SinaisController.CaminhoDoArquivoDoRepositorio);
-            algoritmoFactory = new AlgoritmoDeReconhecimentoDeSinalFactory();
+            geradorDeCaracteristicasFactory = new GeradorDeCaracteristicasFactory();
+            algoritmoFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(geradorDeCaracteristicasFactory);
         }
 
         public void Configurar()
@@ -49,7 +52,7 @@ namespace Signa
             container.Register(typeof(SinaisDinamicosController),
                 () =>
                     new SinaisDinamicosController(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos(),
-                        null,
+                        geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(),
                         algoritmoFactory.CriarReconhecedorDeSinaisDinamicos(),
                         algoritmoFactory.CriarReconhecedorDeSinaisEstaticos()));
 

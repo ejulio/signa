@@ -10,7 +10,7 @@ namespace Testes.Unidade.Dominio.Algoritmos
         [TestMethod]
         public void crinando_o_algoritmo_de_reconhecimento_de_sinais_estaticos()
         {
-            var factory = new AlgoritmoDeReconhecimentoDeSinalFactory();
+            var factory = new AlgoritmoDeReconhecimentoDeSinalFactory(new GeradorDeCaracteristicasFactory());
 
             var algoritmo1 = factory.CriarReconhecedorDeSinaisEstaticos();
             var algoritmo2 = factory.CriarReconhecedorDeSinaisEstaticos();
@@ -21,7 +21,7 @@ namespace Testes.Unidade.Dominio.Algoritmos
         [TestMethod]
         public void crinando_o_algoritmo_de_reconhecimento_de_sinais_dinamicos()
         {
-            var factory = new AlgoritmoDeReconhecimentoDeSinalFactory();
+            var factory = new AlgoritmoDeReconhecimentoDeSinalFactory(new GeradorDeCaracteristicasFactory());
 
             var algoritmo1 = factory.CriarReconhecedorDeSinaisDinamicos();
             var algoritmo2 = factory.CriarReconhecedorDeSinaisDinamicos();
@@ -32,7 +32,7 @@ namespace Testes.Unidade.Dominio.Algoritmos
         [TestMethod]
         public void criando_algoritmo_de_reconhecimento_de_frames_de_sinal_dinamico()
         {
-            var factory = new AlgoritmoDeReconhecimentoDeSinalFactory();
+            var factory = new AlgoritmoDeReconhecimentoDeSinalFactory(new GeradorDeCaracteristicasFactory());
 
             var algoritmo1 = factory.CriarReconhecedorDeFramesDeSinaisDinamicos();
             var algoritmo2 = factory.CriarReconhecedorDeFramesDeSinaisDinamicos();

@@ -5,35 +5,35 @@ namespace Signa.Dominio.Algoritmos
 {
     public class AlgoritmoDeReconhecimentoDeSinalFactory : IAlgoritmoDeReconhecimentoDeSinalFactory
     {
-        private static readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos AlgoritmoDeReconhecimentoDeSinaisEstaticos;
-        private static readonly IAlgoritmoDeReconhecimentoDeSinaisDinamicos AlgoritmoDeReconhecimentoDeSinaisDinamicos;
-        private static readonly IAlgoritmoDeReconhecimentoDeSinaisEstaticos AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
+        private static IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos;
+        private static IAlgoritmoDeReconhecimentoDeSinaisDinamicos algoritmoDeReconhecimentoDeSinaisDinamicos;
+        private static IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
 
-        static AlgoritmoDeReconhecimentoDeSinalFactory()
+        public AlgoritmoDeReconhecimentoDeSinalFactory(IGeradorDeCaracteristicasFactory geradorDeCaracteristicasFactory)
         {
-            var geradorDeCaracteristicasDeSinalDinamico = new GeradorDeCaracteristicasDeSinalDinamico();
-            var geradorDeCaracteristicasDeSinalEstatico = new GeradorDeCaracteristicasDeSinalEstatico();
-            var geradorDeCaracteristicasDeSinalEstaticoComTipoFrame = 
-                new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicasDeSinalEstatico);
+            algoritmoDeReconhecimentoDeSinaisEstaticos 
+                = new Svm(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstatico());
 
-            AlgoritmoDeReconhecimentoDeSinaisEstaticos = new Svm(geradorDeCaracteristicasDeSinalEstatico);
-            AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos = new Svm(geradorDeCaracteristicasDeSinalEstaticoComTipoFrame);
-            AlgoritmoDeReconhecimentoDeSinaisDinamicos = new Hcrf(geradorDeCaracteristicasDeSinalDinamico);
+            algoritmoDeReconhecimentoDeFramesDeSinaisDinamicos 
+                = new Svm(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame());
+
+            algoritmoDeReconhecimentoDeSinaisDinamicos 
+                = new Hcrf(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalDinamico());
         }
 
         public IAlgoritmoDeReconhecimentoDeSinaisEstaticos CriarReconhecedorDeSinaisEstaticos()
         {
-            return AlgoritmoDeReconhecimentoDeSinaisEstaticos;
+            return algoritmoDeReconhecimentoDeSinaisEstaticos;
         }
 
         public IAlgoritmoDeReconhecimentoDeSinaisDinamicos CriarReconhecedorDeSinaisDinamicos()
         {
-            return AlgoritmoDeReconhecimentoDeSinaisDinamicos;
+            return algoritmoDeReconhecimentoDeSinaisDinamicos;
         }
 
         public IAlgoritmoDeReconhecimentoDeSinaisEstaticos CriarReconhecedorDeFramesDeSinaisDinamicos()
         {
-            return AlgoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
+            return algoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
         }
     }
 }
