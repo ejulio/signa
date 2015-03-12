@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
-    public interface IAlgoritmoDeReconhecimentoDeSinaisDinamicos
+    public interface IAlgoritmoDeReconhecimentoDeSinaisDinamicos : IAlgoritmoDeReconhecimentoDeSinais
     {
-        int Reconhecer(IList<Frame> amostra);
         void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados);
     }
 }

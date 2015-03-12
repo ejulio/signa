@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Signa.Dominio.Algoritmos.Estatico
 {
-    public interface IAlgoritmoDeReconhecimentoDeSinaisEstaticos
+    public interface IAlgoritmoDeReconhecimentoDeSinaisEstaticos : IAlgoritmoDeReconhecimentoDeSinais
     {
-        int Reconhecer(IList<Frame> frame);
         void Treinar(IGeradorDeDadosDeSinaisEstaticos dados);
     }
 }
