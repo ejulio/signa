@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System.Collections.Generic;
+using Microsoft.AspNet.SignalR;
 using Signa.Dados;
 using Signa.Dominio.Sinais;
 
@@ -18,7 +19,7 @@ namespace Signa.Hubs
             return sinaisEstaticosController.Reconhecer(amostra);
         }
 
-        public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Frame amostra)
+        public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, IList<Frame> amostra)
         {
             sinaisEstaticosController.SalvarAmostraDoSinal(descricao, conteudoDoArquivoDeExemplo, amostra);
         }

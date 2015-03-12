@@ -25,32 +25,6 @@ namespace Testes.Unidade.Dados
         }
 
         [TestMethod]
-        public void adicionando_um_sinal_que_nao_existe()
-        {
-            const string descricaoDoSinal = "new sign";
-            DadoQueORepositorioRetorneNullParaADescricao(descricaoDoSinal);
-
-            var sinal = DadoUmSinalComDuasAmostras(descricaoDoSinal);
-
-            sinaisEstaticosController.Adicionar(sinal);
-
-            DeveTerAdicionadoOSinalNoRepositorioESalvoAsAlteracoes(sinal);
-        }
-
-        [TestMethod]
-        public void adicionando_um_sinal_que_ja_existe()
-        {
-            const string descricaoDoSinal = "old sign";
-            var sinalAntigo = DadoQueORepositorioRetorneUmSinalParaADescricao(descricaoDoSinal);
-
-            var novoSinal = DadoUmSinalComDuasAmostras(descricaoDoSinal);
-
-            sinaisEstaticosController.Adicionar(novoSinal);
-
-            DeveTerJuntadoAsAmostrasESalvoAsAlteracoes(sinalAntigo, novoSinal);
-        }
-
-        [TestMethod]
         public void reconhecendo_um_sinal()
         {
             const int idDoSinal = 23;

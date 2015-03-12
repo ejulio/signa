@@ -37,15 +37,15 @@ namespace Testes.Integracao.Dados
                 algoritmoDeSinaisDinamicos.Object, 
                 algoritmoDeSinaisEstaticos.Object);
 
-            Directory.CreateDirectory(SinaisDinamicosController.DiretorioDeAmostras);
+            Directory.CreateDirectory(SinaisController.DiretorioDeExemplos);
         }
 
         [TestCleanup]
         public void DeletarArquivos()
         {
-            if (Directory.Exists(SinaisDinamicosController.DiretorioDeAmostras))
+            if (Directory.Exists(SinaisController.DiretorioDeExemplos))
             {
-                Directory.Delete(SinaisDinamicosController.DiretorioDeAmostras, true);
+                Directory.Delete(SinaisController.DiretorioDeExemplos, true);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Testes.Integracao.Dados
 
             sinaisDinamicosController.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
 
-            var caminhoDoArquivoCriado = SinaisEstaticosController.DiretorioDeAmostras + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriado = SinaisEstaticosController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             DeveTerCriadoOArquivoComConteudo(caminhoDoArquivoCriado, descricaoDoSinal, conteudoDoArquivo);
 
             var sinalAdicionadoNoRepositorio = repositorio.BuscarPorDescricao(descricaoDoSinal);
@@ -123,7 +123,7 @@ namespace Testes.Integracao.Dados
 
         private static void DeveTerCriadoOArquivoComConteudo(string caminhoDoArquivoCriado, string descricaoDoSinal, string conteudoDoArquivo)
         {
-            var caminhoDoArquivoCriadoEsperado = SinaisEstaticosController.DiretorioDeAmostras + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriadoEsperado = SinaisEstaticosController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             caminhoDoArquivoCriado.Should().Be(caminhoDoArquivoCriadoEsperado);
             File.Exists(caminhoDoArquivoCriadoEsperado).Should().BeTrue();
             using (StreamReader reader = new StreamReader(caminhoDoArquivoCriadoEsperado))
@@ -134,7 +134,7 @@ namespace Testes.Integracao.Dados
 
         private static void NaoDeveTerAlteradoOConteudoDoArquivo(string descricaoDoSinal, string conteudoDoArquivo)
         {
-            var caminhoDoArquivoCriadoEsperado = SinaisEstaticosController.DiretorioDeAmostras + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriadoEsperado = SinaisEstaticosController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             using (StreamReader reader = new StreamReader(caminhoDoArquivoCriadoEsperado))
             {
                 reader.ReadToEnd().Should().Be(conteudoDoArquivo);
