@@ -1,11 +1,8 @@
-﻿using Signa.Dominio.Sinais;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Signa.Dados.Repositorio;
+﻿using Signa.Dados.Repositorio;
 using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
-using Signa.Util;
+using Signa.Dominio.Sinais;
+using System.Collections.Generic;
 
 namespace Signa.Dados
 {

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Signa.Dados;
@@ -8,6 +7,7 @@ using Signa.Dominio.Algoritmos.Dinamico;
 using Signa.Dominio.Algoritmos.Estatico;
 using Signa.Dominio.Sinais;
 using Signa.Util;
+using System.IO;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Signa.Dados;
 using Signa.Dominio.Sinais;
+using System.Collections.Generic;
 
 namespace Signa.Hubs
 {
