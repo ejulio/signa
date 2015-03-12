@@ -6,9 +6,9 @@ namespace Signa.Dominio.Algoritmos.Estatico
 {
     public class GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstatico
     {
-        private readonly GeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
+        private readonly IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
 
-        public GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(GeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas)
+        public GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas)
         {
             this.geradorDeCaracteristicas = geradorDeCaracteristicas;
         }

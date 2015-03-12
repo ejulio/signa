@@ -141,6 +141,7 @@
     <Compile Include="Dominio\Algoritmos\GeradorDeCaracteristicasDeFrame.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\GeradorDeCaracteristicasDeSinalEstatico.cs" />
     <Compile Include="Dominio\Algoritmos\Estatico\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
+    <Compile Include="Dominio\Algoritmos\GeradorDeCaracteristicasFactory.cs" />
     <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinais.cs" />
     <Compile Include="Dominio\InicializadorDeAlgoritmoFacade.cs" />
     <Compile Include="Dominio\Algoritmos\Dinamico\GeradorDeDadosDeSinaisDinamicos.cs" />
