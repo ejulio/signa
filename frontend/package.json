@@ -5,10 +5,13 @@
   "main": "index.js",
   "devDependencies": {
     "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
     "gulp-connect": "^2.2.0",
     "gulp-jasmine": "^2.0.0",
     "gulp-jshint": "^1.9.2",
     "gulp-load-plugins": "^0.8.0",
+    "gulp-order": "^1.1.1",
+    "gulp-uglify": "^1.1.0",
     "jshint-stylish": "^1.0.0",
     "three": "^0.69.0"
   },
