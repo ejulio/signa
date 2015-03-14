@@ -17,9 +17,9 @@
     SignExample.prototype = {
         _leapRecordingPlayer: undefined,
 
-        onNewSign: function(signInfo)
+        onNewSign: function(informacoesDoSinal)
         {
-            this._leapRecordingPlayer.loadRecording('http://localhost:9000/' + signInfo.ExampleFilePath);
+            this._leapRecordingPlayer.loadRecording('http://localhost:9000/' + informacoesDoSinal.CaminhoParaArquivoDeExemplo);
         },
 
         onRecognize: function()

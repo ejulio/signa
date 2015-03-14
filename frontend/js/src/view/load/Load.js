@@ -6,83 +6,95 @@
 
     Load.prototype = {
         _leapRecordingPlayer: undefined,
-        _loadedFrames: undefined,
+        _framesCarregados: undefined,
         _frameSignDataProcessor: undefined,
-        _loadedFramesJson: undefined,
+        _framesCarregadosEmFormatoJson: undefined,
 
         init: function()
         {
             var leapController = new Leap.Controller();
 
-            Signa.Hubs.init();
-            this._initScene(leapController);
+            Signa.Hubs.iniciar();
+            this._iniciarCena(leapController);
 
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
             this._frameSignDataProcessor = new Signa.recognizer.FrameSignDataProcessor();
 
-            $('#sign-file').change(this._onSignFileChange.bind(this));
-            $('#save').click(this._onSaveClick.bind(this));
+            $('#sign-file').change(this._onArquivoDoSinalChange.bind(this));
+            $('#save').click(this._onSalvarClick.bind(this));
         },
 
-        _initScene: function(leapController)
+        _iniciarCena: function(leapController)
         {
-            var width = $("#handmodel-user").width(),
-                height = $("#handmodel-user").height(),
+            var largura = $("#handmodel-user").width(),
+                altura = $("#handmodel-user").height(),
                 container = $("#handmodel-user"),
-                cameraFactory = new Signa.camera.DefaultCameraFactory(width / height),
-                userHandmodelScene;
+                cameraFactory = new Signa.camera.DefaultCameraFactory(largura / altura),
+                cenaDaMaoDoUsuario;
 
             cameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory);
 
-            userHandmodelScene = new Signa.scene.Scene(cameraFactory, container, width, height);
-            userHandmodelScene = new Signa.scene.RiggedHandScene(leapController, userHandmodelScene);
+            cenaDaMaoDoUsuario = new Signa.scene.Scene(cameraFactory, container, largura, altura);
+            cenaDaMaoDoUsuario = new Signa.scene.RiggedHandScene(leapController, cenaDaMaoDoUsuario);
             
-            userHandmodelScene.render();
+            cenaDaMaoDoUsuario.render();
         },
 
-        _onSignFileChange: function(event)
+        _onArquivoDoSinalChange: function(event)
         {
-            var file = event.target.files[0];
-            this._readSignFile(file);  
+            var arquivo = event.target.files[0];
+            this._lerArquivoDoSinal(arquivo);  
         },
 
-        _readSignFile: function(file)
+        _lerArquivoDoSinal: function(arquivo)
         {
-            var fileReader = new FileReader();
+            var leitorDeArquivo = new FileReader();
 
-            fileReader.onload = function(event)
+            leitorDeArquivo.onload = function(event)
             {
-                this._loadedFramesJson = event.target.result;
-                var loadedFrames = JSON.parse(this._loadedFramesJson);
+                this._framesCarregadosEmFormatoJson = event.target.result;
+                var framesCarregados = JSON.parse(this._framesCarregadosEmFormatoJson);
                 
-                this._leapRecordingPlayer.loadFrames(loadedFrames, function(frames)
+                this._leapRecordingPlayer.loadFrames(framesCarregados, function(frames)
                 {
-                    this._loadedFrames = frames;
+                    this._framesCarregados = frames;
                 }.bind(this));
             }.bind(this);
 
-            fileReader.readAsText(file);
+            leitorDeArquivo.readAsText(arquivo);
         },
 
-        _onSaveClick: function()
+        _onSalvarClick: function()
         {
             this._saveSignSample();
         },
 
         _saveSignSample: function()
         {
-            var signDescription = $('#description').val(),
-                signData = this._getSignDataFromFrame();
+            var descricaoDoSinal = $('#description').val(),
+                amostra = this._gerarAmostra(),
+                hub;
 
-            Signa.Hubs
-                .staticSignRecognizer()
-                .save(signDescription, this._loadedFramesJson, signData);
+            if (amostra.length === 1) {
+                hub = Signa.Hubs.sinaisEstaticos();
+            } else {
+                hub = Signa.Hubs.sinaisDinamicos();
+            }
+
+            hub.salvarAmostraDoSinal(descricaoDoSinal, '', amostra);
         },
 
-        _getSignDataFromFrame: function()
+        _gerarAmostra: function()
         {
-            var frame = new Leap.Frame(this._loadedFrames[0]);
-            return this._frameSignDataProcessor.process(frame);
+            var framesCarregados = this._framesCarregados,
+                amostra = new Array(framesCarregados.length);
+
+            for (var i = 0; i < amostra.length; i++) {
+                var frame = new Leap.Frame(this._framesCarregados[0]);
+                amostra[i] = this._frameSignDataProcessor.extrairFrameDaAmostra(frame);
+            }
+            
+            return amostra;
         }
     };
 

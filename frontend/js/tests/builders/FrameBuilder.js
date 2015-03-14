@@ -1,37 +1,37 @@
 function FrameBuilder(){}
 FrameBuilder.prototype = {
-    _leftHand: undefined,
-    _rightHand: undefined,
+    _maoEsquerda: undefined,
+    _maoDireita: undefined,
 
-    withLeftHand: function(leftHand)
+    comMaoEsquerda: function(maoEsquerda)
     {
-        this._leftHand = leftHand;
+        this._maoEsquerda = maoEsquerda;
         return this;
     },
 
-    withRightHand: function(rightHand)
+    comMaoDireita: function(maoDireita)
     {
-        this._rightHand = rightHand;
+        this._maoDireita = maoDireita;
         return this;
     },
 
-    build: function()
+    construir: function()
     {
-        var hands = [];
+        var maos = [];
         
-        if (this._leftHand)
+        if (this._maoEsquerda)
         {
-            this._leftHand.type = 'left';
-            hands.push(this._leftHand);
+            this._maoEsquerda.type = 'left';
+            maos.push(this._maoEsquerda);
         }
 
-        if (this._rightHand)
+        if (this._maoDireita)
         {
-            this._rightHand.type = 'right';
-            hands.push(this._rightHand);
+            this._maoDireita.type = 'right';
+            maos.push(this._maoDireita);
         }
         return {
-            hands: hands
+            hands: maos
         };
     }
 };

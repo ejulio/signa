@@ -153,9 +153,9 @@
     <Compile Include="Dominio\Algoritmos\Factories\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
     <Compile Include="Dominio\Sinais\TipoFrame.cs" />
     <Compile Include="Dominio\Sinais\TipoSinal.cs" />
-    <Compile Include="Hubs\ReconhecedorDeSinaisDinamicos.cs" />
-    <Compile Include="Hubs\SequenciaDeSinais.cs" />
-    <Compile Include="Hubs\ReconhecedorDeSinaisEstaticos.cs" />
+    <Compile Include="Hubs\SinaisDinamicos.cs" />
+    <Compile Include="Hubs\Sinais.cs" />
+    <Compile Include="Hubs\SinaisEstaticos.cs" />
     <Compile Include="Dominio\Sinais\Caracteristicas\Dedo.cs" />
     <Compile Include="Dominio\Sinais\Caracteristicas\TipoDeDedo.cs" />
     <Compile Include="Dominio\Sinais\Caracteristicas\Mao.cs" />

@@ -37,6 +37,14 @@ namespace Signa.Dados.Repositorio
             return repositorioDeSinaisDinamicos;
         }
 
+        public IRepositorio<Sinal> CriarECarregarRepositorioDeSinais()
+        {
+            var repositorio = InstanciaUnicaDeReposiotioDeSinais();
+            repositorio.Carregar();
+
+            return repositorio;
+        }
+
         private IRepositorio<Sinal> InstanciaUnicaDeReposiotioDeSinais()
         {
             if (repositorioDeSinais == null)

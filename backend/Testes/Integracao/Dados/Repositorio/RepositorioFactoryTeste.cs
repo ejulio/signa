@@ -43,7 +43,7 @@ namespace Testes.Integracao.Dados.Repositorio
         }
 
         [TestMethod]
-        public void criando_o_repositorio_de_sinais_estaticos__duas_vezes()
+        public void criando_o_repositorio_de_sinais_estaticos_duas_vezes()
         {
             var fabrica = new RepositorioFactory(CaminhoDoArquivoDeDeAmostras);
 
@@ -54,14 +54,37 @@ namespace Testes.Integracao.Dados.Repositorio
         }
 
         [TestMethod]
-        public void criando_o_repositorio_de_sinais_dinamicos__duas_vezes()
+        public void criando_o_repositorio_de_sinais_dinamicos_duas_vezes()
         {
             var fabrica = new RepositorioFactory(CaminhoDoArquivoDeDeAmostras);
 
-            var repositorioDeSinaisEstaticos1 = fabrica.CriarECarregarRepositorioDeSinaisDinamicos();
-            var repositorioDeSinaisEstaticos2 = fabrica.CriarECarregarRepositorioDeSinaisDinamicos();
+            var repositorioDeSinaisDinamicos1 = fabrica.CriarECarregarRepositorioDeSinaisDinamicos();
+            var repositorioDeSinaisDinamicos2 = fabrica.CriarECarregarRepositorioDeSinaisDinamicos();
 
-            repositorioDeSinaisEstaticos1.Should().BeSameAs(repositorioDeSinaisEstaticos2);
+            repositorioDeSinaisDinamicos1.Should().BeSameAs(repositorioDeSinaisDinamicos2);
+        }
+
+        [TestMethod]
+        public void criando_e_carregando_o_repositorio_de_sinais()
+        {
+            var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplos();
+
+            var fabrica = new RepositorioFactory(CaminhoDoArquivoDeDeAmostras);
+
+            var repositorioDeSinaisDinamicos = fabrica.CriarECarregarRepositorioDeSinais();
+
+            repositorioDeSinaisDinamicos.Quantidade.Should().Be(sinais.Count());
+        }
+
+        [TestMethod]
+        public void criando_o_repositorio_de_sinais_duas_vezes()
+        {
+            var fabrica = new RepositorioFactory(CaminhoDoArquivoDeDeAmostras);
+
+            var repositorioDeSinais1 = fabrica.CriarECarregarRepositorioDeSinais();
+            var repositorioDeSinais2 = fabrica.CriarECarregarRepositorioDeSinais();
+
+            repositorioDeSinais1.Should().BeSameAs(repositorioDeSinais2);
         }
 
         private ICollection<Sinal> DadoQueExistamAlgunsSinaisNoArquivoDeExemplos()

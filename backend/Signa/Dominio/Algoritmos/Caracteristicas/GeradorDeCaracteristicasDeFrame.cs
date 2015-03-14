@@ -18,7 +18,7 @@ namespace Signa.Dominio.Algoritmos.Caracteristicas
         {
             var caracteristicasDosDedos = IEnumerableExtensions.Concatenar<double>(mao.Dedos.Select(ExtrairCaracteristicasDoDedo));
             return mao.VetorNormalDaPalma
-                .Concat(mao.DirecaoDaMao)
+                .Concat(mao.Direcao)
                 .Concat(caracteristicasDosDedos)
                 .ToArray();
         }

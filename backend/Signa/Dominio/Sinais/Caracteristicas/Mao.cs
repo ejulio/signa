@@ -4,7 +4,7 @@ namespace Signa.Dominio.Sinais.Caracteristicas
     public class Mao
     {
         public double[] VetorNormalDaPalma { get; set; }
-        public double[] DirecaoDaMao { get; set; }
+        public double[] Direcao { get; set; }
 
         public Dedo[] Dedos { get; set; }
 
@@ -13,7 +13,7 @@ namespace Signa.Dominio.Sinais.Caracteristicas
             return new Mao
             {
                 Dedos = new [] { Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty() },
-                DirecaoDaMao = new[] { 0.0, 0.0, 0.0 },
+                Direcao = new[] { 0.0, 0.0, 0.0 },
                 VetorNormalDaPalma = new[] { 0.0, 0.0, 0.0 }
             };
         }

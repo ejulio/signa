@@ -2,28 +2,28 @@
 {
     'use strict';
     
-    var connection = $.connection;
-    connection.hub.url = 'http://localhost:9000/signalr';
+    var conexao = $.connection;
+    conexao.hub.url = 'http://localhost:9000/signalr';
 
     Signa.Hubs = {
-        init: function()
+        iniciar: function()
         {
-            return connection.hub.start();
+            return conexao.hub.start();
         },
 
-        signSequence: function()
+        sinais: function()
         {
-            return connection.signSequence.server;
+            return conexao.sinais.server;
         },
 
-        staticSignRecognizer: function()
+        sinaisEstaticos: function()
         {
-            return connection.staticSignRecognizer.server;
+            return conexao.sinaisEstaticos.server;
         },
 
-        dynamicSignRecognizer: function()
+        sinaisDinamicos: function()
         {
-            return connection.dynamicSignRecognizer.server;
+            return conexao.sinaisDinamicos.server;
         }
     };
 

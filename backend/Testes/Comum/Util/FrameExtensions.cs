@@ -34,7 +34,7 @@ namespace Testes.Comum.Util
             }).Concatenar();
 
             return mao.VetorNormalDaPalma
-                    .Concat(mao.DirecaoDaMao)
+                    .Concat(mao.Direcao)
                     .Concat(dadosDosDedos)
                     .ToArray();
         } 

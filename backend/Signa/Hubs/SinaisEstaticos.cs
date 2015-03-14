@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace Signa.Hubs
 {
-    public class ReconhecedorDeSinaisEstaticos : Hub
+    public class SinaisEstaticos : Hub
     {
         private readonly SinaisEstaticosController sinaisEstaticosController;
 
-        public ReconhecedorDeSinaisEstaticos(SinaisEstaticosController sinaisEstaticosController)
+        public SinaisEstaticos(SinaisEstaticosController sinaisEstaticosController)
         {
             this.sinaisEstaticosController = sinaisEstaticosController;
         }

@@ -23,7 +23,7 @@
             if (!frame.hands.length)
                 return;
                 
-            var data = this._frameSignDataProcessor.process(frame);
+            var data = this._frameSignDataProcessor.extrairFrameDaAmostra(frame);
 
             Signa.Hubs
                 .staticSignRecognizer()

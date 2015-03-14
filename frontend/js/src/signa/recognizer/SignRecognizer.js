@@ -11,11 +11,11 @@
         me.ONLINE = new Signa.recognizer.OnlineSignRecognizer(this, this._eventEmitter);
         me.TRAINED = new Signa.recognizer.TrainedSignRecognizer(this._eventEmitter);
 
-        me._state = me.OFFLINE;
+        me._estado = me.OFFLINE;
 
-        Signa.Hubs.init().done(function()
+        Signa.Hubs.iniciar().done(function()
         {
-            me._state = me.TRAINED;
+            me._estado = me.TRAINED;
         });
     }
 
@@ -26,37 +26,37 @@
         TRAINED: undefined,
 
         _eventEmitter: undefined,
-        _state: undefined,
+        _estado: undefined,
         _frame: undefined,
-        _signToRecognizeId: -1,
+        _idDoSinalParaReconhecer: -1,
 
         setState: function(state)
         {
-            this._state = state;
-            state.setSignalToRecognizeId(this._signToRecognizeId);
+            this._estado = state;
+            state.setSignalToRecognizeId(this._idDoSinalParaReconhecer);
         },
 
         setSignToRecognizeId: function(signalToRecognizeId)
         {
-            this._state.setSignToRecognizeId(signalToRecognizeId);
-            this._signToRecognizeId = signalToRecognizeId;
+            this._estado.setSignToRecognizeId(signalToRecognizeId);
+            this._idDoSinalParaReconhecer = signalToRecognizeId;
         },
 
-        _recognize: function(frame)
+        _reconhecer: function(frame)
         {
-            this._state.recognize(frame);
+            this._estado.recognize(frame);
         },
 
         _onLeapFrame: function(frame)
         {
             // pegar os dados necessários do frame
             this._frame = frame;
-            this._recognize(frame);
+            this._reconhecer(frame);
         },
 
         addRecognizeEventListener: function(listener)
         {
-            this._state.addRecognizeEventListener(listener);
+            this._estado.addRecognizeEventListener(listener);
         }
     };
 

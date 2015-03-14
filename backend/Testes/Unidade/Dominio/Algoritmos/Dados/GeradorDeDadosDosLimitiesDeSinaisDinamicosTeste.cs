@@ -84,7 +84,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             geradorDeDados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras * 2);
             geradorDeDados.Saidas.Should().HaveSameCount(geradorDeDados.Entradas);
             geradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
-            geradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais);
+            geradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais * 2);
             DeveTerAsEntradasDasAmostras(geradorDeDados.Entradas, amostrasEsperadas);
         }
 

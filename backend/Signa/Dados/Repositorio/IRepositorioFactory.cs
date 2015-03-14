@@ -6,5 +6,6 @@ namespace Signa.Dados.Repositorio
     {
         IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisEstaticos();
         IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisDinamicos();
+        IRepositorio<Sinal> CriarECarregarRepositorioDeSinais();
     }
 }

@@ -4,11 +4,11 @@ using Signa.Dominio.Sinais;
 
 namespace Signa.Hubs
 {
-    public class ReconhecedorDeSinaisDinamicos : Hub
+    public class SinaisDinamicos : Hub
     {
         private readonly SinaisDinamicosController sinaisDinamicosController;
 
-        public ReconhecedorDeSinaisDinamicos(SinaisDinamicosController sinaisDinamicosController)
+        public SinaisDinamicos(SinaisDinamicosController sinaisDinamicosController)
         {
             this.sinaisDinamicosController = sinaisDinamicosController;
         }

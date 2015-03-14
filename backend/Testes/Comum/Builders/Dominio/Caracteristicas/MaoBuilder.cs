@@ -57,7 +57,7 @@ namespace Testes.Comum.Builders.Dominio.Caracteristicas
             {
                 Dedos = dedos,
                 VetorNormalDaPalma = vetorNormalDaPalma,
-                DirecaoDaMao = direcaoDaMao
+                Direcao = direcaoDaMao
             };
         }
     }

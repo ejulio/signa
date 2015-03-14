@@ -1,6 +1,6 @@
 var FrameBuilder = require('../../builders/FrameBuilder.js'),
-    HandBuilder = require('../../builders/HandBuilder.js'),
-    FingerBuilder = require('../../builders/FingerBuilder.js');
+    MaoBuilder = require('../../builders/MaoBuilder.js'),
+    DedoBuilder = require('../../builders/DedoBuilder.js');
 
 global.THREE = require('three');
 require('../../../src/signa/Signa.js');
@@ -10,10 +10,10 @@ var FrameSignDataProcessor = global.Signa.recognizer.FrameSignDataProcessor;
 
 describe('FrameSignDataProcessor', function()
 {
-    var LEFT_HAND_DIRECTION = [1, 2, 3],
-        LEFT_HAND_PALM_NORMAL = [0, 0, 1],
-        RIGHT_HAND_DIRECTION = [4, 5, 6],
-        RIGHT_HAND_PALM_NORMAL = [1, 1, 0];
+    var DIRECAO_MAO_ESQUERDA = [1, 2, 3],
+        VETOR_NORMAL_PALMA_MAO_ESQUERDA = [0, 0, 1],
+        DIRECAO_MAO_DIREITA = [4, 5, 6],
+        VETOR_NORMAL_PALMA_MAO_DIREITA = [1, 1, 0];
 
     var frameSignDataProcessor;
     beforeEach(function()
@@ -23,91 +23,91 @@ describe('FrameSignDataProcessor', function()
 
     it('is getting sign data from a frame with left hand', function()
     {
-        var leftHand = givenLeftHand();
-        var frame = givenFrameWithHands(leftHand, null);
+        var maoEsquerda = dadaUmaMaoEsquerda();
+        var frame = dadoUmFrameComMaos(maoEsquerda, null);
 
-        var signData = frameSignDataProcessor.process(frame);
+        var frameDaAmostra = frameSignDataProcessor.extrairFrameDaAmostra(frame);
 
-        expect(signData.RightHand).toBeNull();
-        mustReturnSignDataWithHandData(signData.LeftHand, leftHand);
+        expect(frameDaAmostra.maoDireita).toBeNull();
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoEsquerda, maoEsquerda);
     });
 
     it('is getting sign data from a frame with right hand', function()
     {
-        var rightHand = givenRightHand();
-        var frame = givenFrameWithHands(null, rightHand);
+        var maoDireita = dadaUmaMaoDireita();
+        var frame = dadoUmFrameComMaos(null, maoDireita);
 
-        var signData = frameSignDataProcessor.process(frame);
+        var frameDaAmostra = frameSignDataProcessor.extrairFrameDaAmostra(frame);
 
-        expect(signData.LeftHand).toBeNull();
-        mustReturnSignDataWithHandData(signData.RightHand, rightHand);
+        expect(frameDaAmostra.maoEsquerda).toBeNull();
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoDireita, maoDireita);
     });
 
     it('is getting sign data from a frame with two hands', function()
     {
-        var leftHand = givenLeftHand();
-        var rightHand = givenRightHand();
-        var frame = givenFrameWithHands(leftHand, rightHand);
+        var maoEsquerda = dadaUmaMaoEsquerda();
+        var maoDireita = dadaUmaMaoDireita();
+        var frame = dadoUmFrameComMaos(maoEsquerda, maoDireita);
 
-        var signData = frameSignDataProcessor.process(frame);
+        var frameDaAmostra = frameSignDataProcessor.extrairFrameDaAmostra(frame);
 
-        mustReturnSignDataWithHandData(signData.LeftHand, leftHand);
-        mustReturnSignDataWithHandData(signData.RightHand, rightHand);
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoEsquerda, maoEsquerda);
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoDireita, maoDireita);
     });
 
-    function givenLeftHand()
+    function dadaUmaMaoEsquerda()
     {
-        var fingers = [
-            FingerBuilder.thumb(),
-            FingerBuilder.index(),
-            FingerBuilder.middle(),
-            FingerBuilder.ring(),
-            FingerBuilder.pinky()
+        var dedos = [
+            DedoBuilder.dedao(),
+            DedoBuilder.indicador(),
+            DedoBuilder.meio(),
+            DedoBuilder.anelar(),
+            DedoBuilder.mindinho()
         ];
 
-        return new HandBuilder()
-            .withDirection(LEFT_HAND_DIRECTION)
-            .withPalmNormal(LEFT_HAND_PALM_NORMAL)
-            .withFingers(fingers)
-            .build();
+        return new MaoBuilder()
+            .comDirecao(DIRECAO_MAO_ESQUERDA)
+            .comVetorNormalDaPalma(VETOR_NORMAL_PALMA_MAO_ESQUERDA)
+            .comDedos(dedos)
+            .construir();
     }
 
-    function givenRightHand()
+    function dadaUmaMaoDireita()
     {
-        var fingers = [
-            FingerBuilder.thumb(),
-            FingerBuilder.index(),
-            FingerBuilder.middle(),
-            FingerBuilder.ring(),
-            FingerBuilder.pinky()
+        var dedos = [
+            DedoBuilder.dedao(),
+            DedoBuilder.indicador(),
+            DedoBuilder.meio(),
+            DedoBuilder.anelar(),
+            DedoBuilder.mindinho()
         ];
 
-        return new HandBuilder()
-            .withDirection(RIGHT_HAND_DIRECTION)
-            .withPalmNormal(RIGHT_HAND_PALM_NORMAL)
-            .withFingers(fingers)
-            .build();
+        return new MaoBuilder()
+            .comDirecao(DIRECAO_MAO_DIREITA)
+            .comVetorNormalDaPalma(VETOR_NORMAL_PALMA_MAO_DIREITA)
+            .comDedos(dedos)
+            .construir();
     }
 
-    function givenFrameWithHands(leftHand, rightHand)
+    function dadoUmFrameComMaos(maoEsquerda, maoDireita)
     {
         return new FrameBuilder()
-            .withLeftHand(leftHand)
-            .withRightHand(rightHand)
-            .build();
+            .comMaoEsquerda(maoEsquerda)
+            .comMaoDireita(maoDireita)
+            .construir();
     }
 
-    function mustReturnSignDataWithHandData(signDataHand, hand)
+    function deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra, mao)
     {
-        expect(signDataHand).not.toBeNull();
-        expect(signDataHand.palmNormal).toBe(hand.palmNormal);
-        expect(signDataHand.handDirection).toBe(hand.direction);
+        expect(frameDaAmostra).not.toBeNull();
+        expect(frameDaAmostra.vetorNormalDaPalma).toBe(mao.palmNormal);
+        expect(frameDaAmostra.direcao).toBe(mao.direction);
         
-        var fingers = signDataHand.fingers;        
-        for (var i = 0; i < fingers.length; i++)
+        var dedos = frameDaAmostra.dedos;        
+        for (var i = 0; i < dedos.length; i++)
         {
-            expect(fingers[i].type).toBe(hand.fingers[i].type);
-            expect(fingers[i].direction).toBe(hand.fingers[i].direction);
+            expect(dedos[i].tipo).toBe(mao.fingers[i].type);
+            expect(dedos[i].direcao).toBe(mao.fingers[i].direction);
         }
     }
 });

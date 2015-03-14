@@ -32,8 +32,8 @@ namespace Signa
 
         private void ConfigurarSequenciaDeSinais()
         {
-            container.Register(typeof(Hubs.SequenciaDeSinais),
-                () => new Hubs.SequenciaDeSinais(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos()));
+            container.Register(typeof(Hubs.Sinais),
+                () => new Hubs.Sinais(repositorioFactory.CriarECarregarRepositorioDeSinais()));
         }
 
         private void ConfigurarReconhecedorDeSinaisEstaticos()
@@ -43,8 +43,8 @@ namespace Signa
                     new SinaisEstaticosController(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(),
                         algoritmoFactory.CriarReconhecedorDeSinaisEstaticos()));
 
-            container.Register(typeof(Hubs.ReconhecedorDeSinaisEstaticos),
-                () => new Hubs.ReconhecedorDeSinaisEstaticos(container.Resolve<SinaisEstaticosController>()));
+            container.Register(typeof(Hubs.SinaisEstaticos),
+                () => new Hubs.SinaisEstaticos(container.Resolve<SinaisEstaticosController>()));
         }
 
         private void ConfigurarReconhecedorDeSinaisDinamicos()
@@ -56,16 +56,17 @@ namespace Signa
                         algoritmoFactory.CriarReconhecedorDeSinaisDinamicos(),
                         algoritmoFactory.CriarReconhecedorDeSinaisEstaticos()));
 
-            container.Register(typeof(Hubs.ReconhecedorDeSinaisDinamicos),
-                () => new Hubs.ReconhecedorDeSinaisDinamicos(container.Resolve<SinaisDinamicosController>()));
+            container.Register(typeof(Hubs.SinaisDinamicos),
+                () => new Hubs.SinaisDinamicos(container.Resolve<SinaisDinamicosController>()));
         }
 
         private void ConfigurarJsonSerializerSettings()
         {
-            GlobalHost.DependencyResolver.Register(typeof(JsonSerializerSettings), () => new JsonSerializerSettings
+            var configuracoes = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            };
+            //container.Register(typeof(JsonSerializer), () => JsonSerializer.Create(configuracoes));
         }
     }
 }

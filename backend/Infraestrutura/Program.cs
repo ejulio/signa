@@ -13,7 +13,7 @@ namespace Infraestrutura
         {
             StartServer();
 
-            InitializeAlgorithms();
+            TreinarAlgoritmos();
 
             Console.ReadKey();
         }
@@ -25,14 +25,15 @@ namespace Infraestrutura
             Console.WriteLine("Aplicação iniciada em {0}", serverAddress);
         }
 
-        private static void InitializeAlgorithms()
+        private static void TreinarAlgoritmos()
         {
             Console.WriteLine("Treinando algoritmos");
-            var repositoryFactory = new RepositorioFactory(SinaisController.CaminhoDoArquivoDoRepositorio);
-            var signRecognitionAlgorithmFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(new GeradorDeCaracteristicasFactory());
-            var algorithmInitializerFacade = new InicializadorDeAlgoritmoFacade(signRecognitionAlgorithmFactory, repositoryFactory);
+            var repositorioFactory = new RepositorioFactory(SinaisController.CaminhoDoArquivoDoRepositorio);
+            var algoritmosFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(new GeradorDeCaracteristicasFactory());
+            var inicializadorDeAlgoritmosFacade = new InicializadorDeAlgoritmoFacade(algoritmosFactory, repositorioFactory);
 
-            algorithmInitializerFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
+            inicializadorDeAlgoritmosFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
+            inicializadorDeAlgoritmosFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
 
             Console.WriteLine("Algoritmos treinados");
         }

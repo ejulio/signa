@@ -75,7 +75,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Caracteristicas
             }).Concatenar();
 
             return mao.VetorNormalDaPalma
-                    .Concat(mao.DirecaoDaMao)
+                    .Concat(mao.Direcao)
                     .Concat(dadosDosDedos)
                     .ToArray();
         }

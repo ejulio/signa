@@ -4,68 +4,68 @@
 
     function FrameSignDataProcessor(){}
     FrameSignDataProcessor.prototype = {
-        process: function(frame)
+        extrairFrameDaAmostra: function(frame)
         {
             return {
-                LeftHand: this._getLeftHandFromFrame(frame.hands),
-                RightHand: this._getRightHandFromFrame(frame.hands)
+                MaoEsquerda: this._extrairDadosDaMaoEsquerda(frame.hands),
+                MaoDireita: this._extrairDadosDaMaoDireita(frame.hands)
             };
         },
 
-        _getLeftHandFromFrame: function(hands)
+        _extrairDadosDaMaoEsquerda: function(maos)
         {
-            if (this._isLeftHand(hands[0]))
-                return this._getHandData(hands[0]);
+            if (this._ehMaoEsquerda(maos[0]))
+                return this._extrairDadosDaMao(maos[0]);
 
-            if (this._isLeftHand(hands[1]))
-                return this._getHandData(hands[1]);
+            if (this._ehMaoEsquerda(maos[1]))
+                return this._extrairDadosDaMao(maos[1]);
 
             return null;
         },
 
-        _isLeftHand: function(hand)
+        _ehMaoEsquerda: function(hand)
         {
             return hand && hand.type.toUpperCase() === 'LEFT';
         },
 
-        _getRightHandFromFrame: function(hands)
+        _extrairDadosDaMaoDireita: function(maos)
         {
-            if (this._isRightHand(hands[0]))
-                return this._getHandData(hands[0]);
+            if (this._ehMaoDireita(maos[0]))
+                return this._extrairDadosDaMao(maos[0]);
 
-            if (this._isRightHand(hands[1]))
-                return this._getHandData(hands[1]);
+            if (this._ehMaoDireita(maos[1]))
+                return this._extrairDadosDaMao(maos[1]);
 
             return null;
         },
 
-        _isRightHand: function(hand)
+        _ehMaoDireita: function(hand)
         {
             return hand && hand.type.toUpperCase() === 'RIGHT';
         },
 
-        _getHandData: function(leapHand)
+        _extrairDadosDaMao: function(leapHand)
         {
             return {
-                palmNormal: leapHand.palmNormal,
-                handDirection: leapHand.direction,
-                fingers: this._getHandFingersData(leapHand.fingers)
+                VetorNormalDaPalma: leapHand.palmNormal,
+                Direcao: leapHand.direction,
+                Dedos: this._extrairDadosDosDedos(leapHand.fingers)
             };
         },
 
-        _getHandFingersData: function(leapFingers)
+        _extrairDadosDosDedos: function(leapFingers)
         {
-            var fingers = new Array(leapFingers.length);
+            var dedos = new Array(leapFingers.length);
 
-            for (var i = 0; i < fingers.length; i++)
+            for (var i = 0; i < dedos.length; i++)
             {
-                fingers[i] = {
-                    type: leapFingers[i].type,
-                    direction: leapFingers[i].direction
+                dedos[i] = {
+                    tipo: leapFingers[i].type,
+                    direcao: leapFingers[i].direction
                 };
             }
 
-            return fingers;
+            return dedos;
         }
     };
 
