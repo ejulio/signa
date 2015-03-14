@@ -40,6 +40,10 @@
         setSignToRecognizeId: function(id)
         {
             this._signToReconizeId = id;
+        },
+
+        setTipoDoSinal: function(tipoDoSinal) {
+
         }
     };
 

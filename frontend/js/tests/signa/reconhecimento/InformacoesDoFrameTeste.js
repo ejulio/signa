@@ -4,11 +4,9 @@ var FrameBuilder = require('../../builders/FrameBuilder.js'),
 
 global.THREE = require('three');
 require('../../../src/signa/Signa.js');
-require('../../../src/signa/recognizer/FrameSignDataProcessor.js');
+require('../../../src/signa/reconhecimento/InformacoesDoFrame.js');
 
-var FrameSignDataProcessor = global.Signa.recognizer.FrameSignDataProcessor;
-
-describe('FrameSignDataProcessor', function()
+describe('InformacoesDoFrame', function()
 {
     var DIRECAO_MAO_ESQUERDA = [1, 2, 3],
         VETOR_NORMAL_PALMA_MAO_ESQUERDA = [0, 0, 1],
@@ -18,41 +16,41 @@ describe('FrameSignDataProcessor', function()
     var frameSignDataProcessor;
     beforeEach(function()
     {
-        frameSignDataProcessor = new FrameSignDataProcessor();
+        informacoesDoFrame = new global.Signa.reconhecimento.InformacoesDoFrame();
     });
 
-    it('is getting sign data from a frame with left hand', function()
+    it('retornando dados do frame apenas com a mão esquerda', function()
     {
         var maoEsquerda = dadaUmaMaoEsquerda();
         var frame = dadoUmFrameComMaos(maoEsquerda, null);
 
-        var frameDaAmostra = frameSignDataProcessor.extrairFrameDaAmostra(frame);
+        var frameDaAmostra = informacoesDoFrame.extrairParaAmostra(frame);
 
-        expect(frameDaAmostra.maoDireita).toBeNull();
-        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoEsquerda, maoEsquerda);
+        expect(frameDaAmostra.MaoDireita).toBeNull();
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.MaoEsquerda, maoEsquerda);
     });
 
-    it('is getting sign data from a frame with right hand', function()
+    it('retornando dados do frame apenas com a mão direita', function()
     {
         var maoDireita = dadaUmaMaoDireita();
         var frame = dadoUmFrameComMaos(null, maoDireita);
 
-        var frameDaAmostra = frameSignDataProcessor.extrairFrameDaAmostra(frame);
+        var frameDaAmostra = informacoesDoFrame.extrairParaAmostra(frame);
 
-        expect(frameDaAmostra.maoEsquerda).toBeNull();
-        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoDireita, maoDireita);
+        expect(frameDaAmostra.MaoEsquerda).toBeNull();
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.MaoDireita, maoDireita);
     });
 
-    it('is getting sign data from a frame with two hands', function()
+    it('retornando dados do frame apenas com as duas mãos', function()
     {
         var maoEsquerda = dadaUmaMaoEsquerda();
         var maoDireita = dadaUmaMaoDireita();
         var frame = dadoUmFrameComMaos(maoEsquerda, maoDireita);
 
-        var frameDaAmostra = frameSignDataProcessor.extrairFrameDaAmostra(frame);
+        var frameDaAmostra = informacoesDoFrame.extrairParaAmostra(frame);
 
-        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoEsquerda, maoEsquerda);
-        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.maoDireita, maoDireita);
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.MaoEsquerda, maoEsquerda);
+        deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra.MaoDireita, maoDireita);
     });
 
     function dadaUmaMaoEsquerda()
@@ -100,14 +98,14 @@ describe('FrameSignDataProcessor', function()
     function deveRetornarUmFrameDaAmostraComDadosDoLeapFrame(frameDaAmostra, mao)
     {
         expect(frameDaAmostra).not.toBeNull();
-        expect(frameDaAmostra.vetorNormalDaPalma).toBe(mao.palmNormal);
-        expect(frameDaAmostra.direcao).toBe(mao.direction);
+        expect(frameDaAmostra.VetorNormalDaPalma).toBe(mao.palmNormal);
+        expect(frameDaAmostra.Direcao).toBe(mao.direction);
         
-        var dedos = frameDaAmostra.dedos;        
+        var dedos = frameDaAmostra.Dedos;        
         for (var i = 0; i < dedos.length; i++)
         {
-            expect(dedos[i].tipo).toBe(mao.fingers[i].type);
-            expect(dedos[i].direcao).toBe(mao.fingers[i].direction);
+            expect(dedos[i].Tipo).toBe(mao.fingers[i].type);
+            expect(dedos[i].Direcao).toBe(mao.fingers[i].direction);
         }
     }
 });

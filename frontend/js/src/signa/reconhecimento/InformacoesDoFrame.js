@@ -2,9 +2,9 @@
 {
     'use strict';
 
-    function FrameSignDataProcessor(){}
-    FrameSignDataProcessor.prototype = {
-        extrairFrameDaAmostra: function(frame)
+    function InformacoesDoFrame(){}
+    InformacoesDoFrame.prototype = {
+        extrairParaAmostra: function(frame)
         {
             return {
                 MaoEsquerda: this._extrairDadosDaMaoEsquerda(frame.hands),
@@ -60,8 +60,8 @@
             for (var i = 0; i < dedos.length; i++)
             {
                 dedos[i] = {
-                    tipo: leapFingers[i].type,
-                    direcao: leapFingers[i].direction
+                    Tipo: leapFingers[i].type,
+                    Direcao: leapFingers[i].direction
                 };
             }
 
@@ -69,5 +69,5 @@
         }
     };
 
-    Signa.recognizer.FrameSignDataProcessor = FrameSignDataProcessor;
+    Signa.reconhecimento.InformacoesDoFrame = InformacoesDoFrame;
 })(global = typeof global === 'undefined' ? window : global, global.Signa);

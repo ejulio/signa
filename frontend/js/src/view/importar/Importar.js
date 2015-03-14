@@ -2,15 +2,15 @@
 {
     'use strict';
 
-    function Load(){}
+    function Importar(){}
 
-    Load.prototype = {
+    Importar.prototype = {
         _leapRecordingPlayer: undefined,
         _framesCarregados: undefined,
         _frameSignDataProcessor: undefined,
         _framesCarregadosEmFormatoJson: undefined,
 
-        init: function()
+        iniciar: function()
         {
             var leapController = new Leap.Controller();
 
@@ -99,5 +99,5 @@
     };
 
 
-    View.load.Load = Load;
+    View.importar.Importar = Importar;
 })(window, window.View, window.Signa);

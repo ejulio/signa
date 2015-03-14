@@ -4,6 +4,6 @@
 
     window.View = {
         index: {},
-        load: {}
+        importar: {}
     };
 })(window);

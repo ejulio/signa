@@ -6,6 +6,7 @@
 
         camera: {},
         recognizer: {},
+        reconhecimento: {},
         scene: {},
 
         signalrHub: function()
