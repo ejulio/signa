@@ -8,7 +8,6 @@
         leapController.on('frame', this._onLeapFrame.bind(this));
         me._eventEmitter = new EventEmitter();
         me.OFFLINE = new Signa.recognizer.OfflineSignRecognizer(this._eventEmitter);
-        me.ONLINE = new Signa.recognizer.OnlineSignRecognizer(this, this._eventEmitter);
         me.TRAINED = new Signa.recognizer.TrainedSignRecognizer(this._eventEmitter);
 
         me._estado = me.OFFLINE;
@@ -22,7 +21,6 @@
     SignRecognizer.prototype = {
         RECOGNIZE_EVENT_ID: 'recognize',
         OFFLINE: undefined,
-        ONLINE: undefined,
         TRAINED: undefined,
 
         _eventEmitter: undefined,

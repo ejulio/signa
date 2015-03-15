@@ -15,13 +15,11 @@
         },
 
         reconhecer: function(frame) {
-            this._hub
+            return this._hub
                 .reconhecer([frame])
                 .then(function(sinalReconhecidoId) {
-                    console.log('SINAL RECONHECIDO ' + sinalReconhecidoId);
-                    if (sinalReconhecidoId == this._sinalId) {
-                        console.log('SUCESSO');
-                    }
+                    //return false;
+                    return sinalReconhecidoId === this._sinalId;
                 }.bind(this));
         }
     };

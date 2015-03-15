@@ -4,16 +4,16 @@
 
     function SignDescription(textContainer)
     {
-        this._textContainer = textContainer;
+        this._container = textContainer;
     }
 
     SignDescription.prototype = {
-        _textContainer: undefined,
+        _container: undefined,
 
-        onNewSign: function(signInfo)
+        onNewSign: function(informacoesDoSinal)
         {
-            this._textContainer
-                .text(signInfo.Description);
+            this._container
+                .text(informacoesDoSinal.Descricao);
         },
 
         onRecognize: function()

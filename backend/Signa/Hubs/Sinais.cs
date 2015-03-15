@@ -19,10 +19,10 @@ namespace Signa.Hubs
             var random = new Random();
             int indice = random.Next(repositorio.Quantidade);
             var sinal = repositorio.BuscarPorIndice(indice);
-
+            
             var informadoesDoSinal = new InformacoesDoSinal
             {
-                Id = indice,
+                Id = sinal.Id,
                 Descricao = sinal.Descricao,
                 CaminhoParaArquivoDeExemplo = sinal.CaminhoParaArquivoDeExemplo,
                 Tipo = sinal.Tipo
