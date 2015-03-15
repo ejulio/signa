@@ -27,7 +27,10 @@ namespace Signa.Dominio.Algoritmos.Estatico
             double p;
             int r = svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), out p);
             Console.WriteLine("{0} - {1}", r, p);
-            return r;
+            if (p > 0.4)
+                return r;
+
+            return -1;
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)
@@ -35,8 +38,13 @@ namespace Signa.Dominio.Algoritmos.Estatico
             svm = new MulticlassSupportVectorMachine(0, dados.QuantidadeDeClasses);
 
             var teacher = new MulticlassSupportVectorLearning(svm, dados.Entradas, dados.Saidas);
-            teacher.Algorithm = (machine, classInputs, classOutputs, j, k) => 
-                                    new SequentialMinimalOptimization(machine, classInputs, classOutputs);
+            teacher.Algorithm = (machine, classInputs, classOutputs, j, k) =>
+            {
+                var smo = new SequentialMinimalOptimization(machine, classInputs, classOutputs);
+                smo.Run();
+                return new ProbabilisticOutputCalibration(machine, classInputs, classOutputs);
+            };
+                                    
 
             teacher.Run();
         }
