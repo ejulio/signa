@@ -42,6 +42,10 @@
             this._idDoSinalParaReconhecer = signalToRecognizeId;
         },
 
+        setTipoDoSinal: function(tipoDoSinal) {
+            this._estado.setTipoDoSinal(tipoDoSinal);
+        },
+
         _reconhecer: function(frame)
         {
             this._estado.recognize(frame);

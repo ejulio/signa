@@ -63,6 +63,7 @@
         {
             this._descricaoDoSinal.onNewSign(this._informacoesDoSinal);
             this._maosDoUsuario.onNewSign();
+            this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
             this._reconhecedorDeSinais.setSignToRecognizeId(this._informacoesDoSinal.Id);
             this._hideRecognizeMessage();
         },

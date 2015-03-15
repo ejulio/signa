@@ -13,10 +13,10 @@ describe('InformacoesDoFrame', function()
         DIRECAO_MAO_DIREITA = [4, 5, 6],
         VETOR_NORMAL_PALMA_MAO_DIREITA = [1, 1, 0];
 
-    var frameSignDataProcessor;
+    var informacoesDoFrame;
     beforeEach(function()
     {
-        informacoesDoFrame = new global.Signa.reconhecimento.InformacoesDoFrame();
+        informacoesDoFrame = new Signa.reconhecimento.InformacoesDoFrame();
     });
 
     it('retornando dados do frame apenas com a mão esquerda', function()

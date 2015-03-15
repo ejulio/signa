@@ -162,7 +162,7 @@ namespace Testes.Unidade.Dominio
 
         private bool VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(IGeradorDeDadosDeSinaisEstaticos dados)
         {
-            dados.QuantidadeDeClasses.Should().Be(4);
+            dados.QuantidadeDeClasses.Should().Be(2);
             dados.Saidas.Should().HaveCount(8);
             dados.Entradas.Should().HaveCount(8);
             return true;

@@ -9,13 +9,15 @@ using Signa.Dominio.Algoritmos.Dados;
 using Signa.Dominio.Sinais;
 using System;
 using System.Collections.Generic;
+using Accord.Statistics.Models.Fields;
+using Accord.Statistics.Models.Fields.Functions;
 
 namespace Signa.Dominio.Algoritmos.Dinamico
 {
     public class Hcrf : IAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {
         private readonly IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas;
-        private HiddenMarkovClassifier<Independent<NormalDistribution>> classificador;
+        private HiddenConditionalRandomField<double[]> classificador;
 
         public Hcrf(IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas)
         {
@@ -26,8 +28,10 @@ namespace Signa.Dominio.Algoritmos.Dinamico
         {
             if (classificador == null)
                 throw new InvalidOperationException();
-
-            return classificador.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra));
+            double p;
+            int r = classificador.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra), out p);
+            Console.WriteLine("{0} - {1}", r, p);
+            return r;
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
@@ -37,7 +41,7 @@ namespace Signa.Dominio.Algoritmos.Dinamico
 
             int numberOfStates = 5; // this value can be found by trial-and-error
 
-            classificador = new HiddenMarkovClassifier<Independent<NormalDistribution>>
+            var classifier = new HiddenMarkovClassifier<Independent<NormalDistribution>>
             (
                classes: geradorDeDados.QuantidadeDeClasses,
                topology: new Forward(numberOfStates), // word classifiers should use a forward topology
@@ -45,10 +49,10 @@ namespace Signa.Dominio.Algoritmos.Dinamico
             );
 
             // Create a new learning algorithm to train the sequence classifier
-            var teacher = new HiddenMarkovClassifierLearning<Independent<NormalDistribution>>(classificador,
+            var teacher = new HiddenMarkovClassifierLearning<Independent<NormalDistribution>>(classifier,
 
                 // Train each model until the log-likelihood changes less than 0.001
-                modelIndex => new BaumWelchLearning<Independent<NormalDistribution>>(classificador.Models[modelIndex])
+                modelIndex => new BaumWelchLearning<Independent<NormalDistribution>>(classifier.Models[modelIndex])
                 {
                     Tolerance = 0.001,
                     Iterations = 100,
@@ -66,6 +70,9 @@ namespace Signa.Dominio.Algoritmos.Dinamico
 
             // Finally, we can run the learning algorithm!
             teacher.Run(geradorDeDados.Entradas, geradorDeDados.Saidas);
+
+            var function = new MarkovMultivariateFunction(classifier);
+            classificador = new HiddenConditionalRandomField<double[]>(function);
         }
 
         private Independent<NormalDistribution> CriarDistribuicao(double[][][] entradas)

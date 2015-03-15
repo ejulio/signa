@@ -18,7 +18,7 @@
             this._iniciarCena(leapController);
 
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
-            this._frameSignDataProcessor = new Signa.recognizer.FrameSignDataProcessor();
+            this._frameSignDataProcessor = new Signa.reconhecimento.InformacoesDoFrame();
 
             $('#sign-file').change(this._onArquivoDoSinalChange.bind(this));
             $('#save').click(this._onSalvarClick.bind(this));
@@ -91,7 +91,7 @@
 
             for (var i = 0; i < amostra.length; i++) {
                 var frame = new Leap.Frame(this._framesCarregados[0]);
-                amostra[i] = this._frameSignDataProcessor.extrairFrameDaAmostra(frame);
+                amostra[i] = this._frameSignDataProcessor.extrairParaAmostra(frame);
             }
             
             return amostra;

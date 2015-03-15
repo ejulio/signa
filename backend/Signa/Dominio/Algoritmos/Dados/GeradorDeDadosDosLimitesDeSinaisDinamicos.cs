@@ -50,7 +50,7 @@ namespace Signa.Dominio.Algoritmos.Dados
                 }
                 
                 identificadorDoSinal++;
-                QuantidadeDeClasses += 2;
+                QuantidadeDeClasses++;
             }
 
             Entradas = entradas.ToArray();

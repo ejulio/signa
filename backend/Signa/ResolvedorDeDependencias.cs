@@ -54,7 +54,7 @@ namespace Signa
                     new SinaisDinamicosController(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos(),
                         geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(),
                         algoritmoFactory.CriarReconhecedorDeSinaisDinamicos(),
-                        algoritmoFactory.CriarReconhecedorDeSinaisEstaticos()));
+                        algoritmoFactory.CriarReconhecedorDeFramesDeSinaisDinamicos()));
 
             container.Register(typeof(Hubs.SinaisDinamicos),
                 () => new Hubs.SinaisDinamicos(container.Resolve<SinaisDinamicosController>()));

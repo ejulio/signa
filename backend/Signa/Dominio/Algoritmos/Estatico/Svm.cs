@@ -24,7 +24,10 @@ namespace Signa.Dominio.Algoritmos.Estatico
             {
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
-            return svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame));
+            double p;
+            int r = svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), out p);
+            Console.WriteLine("{0} - {1}", r, p);
+            return r;
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)

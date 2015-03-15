@@ -17,7 +17,9 @@
 
         recognize: function(){},
 
-        setSignToRecognizeId: function(){}
+        setSignToRecognizeId: function(){},
+
+        setTipoDoSinal: function(){}
     };
 
     Signa.recognizer.OfflineSignRecognizer = OfflineSignRecognizer;

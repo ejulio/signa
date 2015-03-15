@@ -6,6 +6,7 @@
 
         camera: {},
         recognizer: {},
+        reconhecimento: {},
         scene: {},
 
         signalrHub: function()
@@ -315,7 +316,7 @@
             this._iniciarCena(leapController);
 
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
-            this._frameSignDataProcessor = new Signa.recognizer.FrameSignDataProcessor();
+            this._frameSignDataProcessor = new Signa.reconhecimento.InformacoesDoFrame();
 
             $('#sign-file').change(this._onArquivoDoSinalChange.bind(this));
             $('#save').click(this._onSalvarClick.bind(this));
@@ -388,7 +389,7 @@
 
             for (var i = 0; i < amostra.length; i++) {
                 var frame = new Leap.Frame(this._framesCarregados[0]);
-                amostra[i] = this._frameSignDataProcessor.extrairFrameDaAmostra(frame);
+                amostra[i] = this._frameSignDataProcessor.extrairParaAmostra(frame);
             }
             
             return amostra;
@@ -464,6 +465,7 @@
         {
             this._descricaoDoSinal.onNewSign(this._informacoesDoSinal);
             this._maosDoUsuario.onNewSign();
+            this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
             this._reconhecedorDeSinais.setSignToRecognizeId(this._informacoesDoSinal.Id);
             this._hideRecognizeMessage();
         },
@@ -605,13 +607,111 @@
     View.index.UserHands = UserHands;
 })(window, window.View, window.Signa);
 
+;(function(window, Signa, undefined) {
+    'use strict';
+
+    function AlgoritmoDeSinalDinamico() {
+
+    }
+
+    AlgoritmoDeSinalDinamico.prototype = {
+        _reconheceuPrimeiroFrame: false,
+        _reconheceuUltimoFrame: false,
+        _frames: undefined,
+        _sinalId: -1,
+
+        setSinalId: function(sinalId) {
+            this._sinalId = sinalId;
+        },
+
+        reconhecer: function(frame) {
+            if (!this._reconheceuPrimeiroFrame) {
+                this._frames = [];
+                this._reconhecerPrimeiroFrame(frame);
+            } else if (!this._reconheceuUltimoFrame) {
+                this._frames.push(frame);
+                this._reconhecerUltimoFrame(frame);
+            }
+        },
+
+        _reconhecerPrimeiroFrame: function(frame) {
+            Signa.Hubs
+                .sinaisDinamicos()
+                .reconhecerPrimeiroFrame([frame])
+                .then(function(sinalReconhecidoId) {
+                    if (sinalReconhecidoId == this._sinalId) {
+                        console.log('RECONHECEU PRIMEIRO FRAME');
+                        this._reconheceuPrimeiroFrame = true;
+                        this._frames.push(frame);
+                    }
+                }.bind(this));
+        },
+
+        _reconhecerUltimoFrame: function(frame) {
+            Signa.Hubs
+                .sinaisDinamicos()
+                .reconhecerUltimoFrame([frame])
+                .then(function(sinalReconhecidoId) {
+                    if (sinalReconhecidoId == this._sinalId) {
+                        console.log('RECONHECEU ÚLTIMO FRAME');
+                        this._reconheceuUltimoFrame = true;
+                        this._reconhecerSinal();
+                    }
+                }.bind(this));
+        },
+
+        _reconhecerSinal: function() {
+            Signa.Hubs
+                .sinaisDinamicos()
+                .reconhecer(this._frames)
+                .then(function(sinalReconhecidoId) {
+                    if (sinalReconhecidoId == this._sinalId) {
+                        console.log('SUCESSO');
+                    }
+                }.bind(this));
+        }
+    };
+
+    Signa.reconhecimento.AlgoritmoDeSinalDinamico = AlgoritmoDeSinalDinamico;
+})(window, window.Signa);
+
+;(function(window, Signa, undefined) {
+    'use strict';
+
+    function AlgoritmoDeSinalEstatico() {
+        this._hub = Signa.Hubs.sinaisEstaticos();
+    }
+
+    AlgoritmoDeSinalEstatico.prototype = {
+        _hub: undefined,
+        _sinalId: -1,
+
+        setSinalId: function(sinalId) {
+            this._sinalId = sinalId;
+        },
+
+        reconhecer: function(frame) {
+            this._hub
+                .reconhecer([frame])
+                .then(function(sinalReconhecidoId) {
+                    if (sinalReconhecidoId == this._sinalId) {
+                        console.log('SUCESSO');
+                    }
+                }.bind(this))
+
+        }
+    };
+
+    Signa.reconhecimento.AlgoritmoDeSinalEstatico = AlgoritmoDeSinalEstatico;
+})(window, window.Signa);
+
 ;(function(global, Signa, undefined)
 {
     'use strict';
 
-    function FrameSignDataProcessor(){}
-    FrameSignDataProcessor.prototype = {
-        extrairFrameDaAmostra: function(frame)
+    function InformacoesDoFrame(){}
+    InformacoesDoFrame.prototype = {
+        extrairParaAmostra: function(frame)
         {
             return {
                 MaoEsquerda: this._extrairDadosDaMaoEsquerda(frame.hands),
@@ -667,8 +767,8 @@
             for (var i = 0; i < dedos.length; i++)
             {
                 dedos[i] = {
-                    tipo: leapFingers[i].type,
-                    direcao: leapFingers[i].direction
+                    Tipo: leapFingers[i].type,
+                    Direcao: leapFingers[i].direction
                 };
             }
 
@@ -676,7 +776,7 @@
         }
     };
 
-    Signa.recognizer.FrameSignDataProcessor = FrameSignDataProcessor;
+    Signa.reconhecimento.InformacoesDoFrame = InformacoesDoFrame;
 })(global = typeof global === 'undefined' ? window : global, global.Signa);
 
 ;(function(window, Signa, undefined)
@@ -698,7 +798,9 @@
 
         recognize: function(){},
 
-        setSignToRecognizeId: function(){}
+        setSignToRecognizeId: function(){},
+
+        setTipoDoSinal: function(){}
     };
 
     Signa.recognizer.OfflineSignRecognizer = OfflineSignRecognizer;
@@ -725,7 +827,9 @@
 
         recognize: function(){},
 
-        setSignToRecognizeId: function(){}
+        setSignToRecognizeId: function(){},
+
+        setTipoDoSinal: function(){}
     };
 
     Signa.recognizer.OnlineSignRecognizer = OnlineSignRecognizer;
@@ -775,6 +879,10 @@
             this._idDoSinalParaReconhecer = signalToRecognizeId;
         },
 
+        setTipoDoSinal: function(tipoDoSinal) {
+            this._estado.setTipoDoSinal(tipoDoSinal);
+        },
+
         _reconhecer: function(frame)
         {
             this._estado.recognize(frame);
@@ -796,52 +904,48 @@
     Signa.recognizer.SignRecognizer = SignRecognizer;
 })(window, window.Signa);
 
-;(function(window, Signa, undefined)
-{
+;(function(window, Signa, undefined) {
     'use strict';
 
-    function TrainedSignRecognizer(eventEmitter)
-    {
+    function TrainedSignRecognizer(eventEmitter) {
         this._eventEmitter = eventEmitter;
-        this._frameSignDataProcessor = new Signa.recognizer.FrameSignDataProcessor();
+        this._informacoesDoFrame = new Signa.reconhecimento.InformacoesDoFrame();
     }
 
     TrainedSignRecognizer.prototype = {
         _eventEmitter: undefined,
-        _frameSignDataProcessor: undefined,
+        _informacoesDoFrame: undefined,
         _signToReconizeId: -1,
+        _algoritmo: undefined,
 
-        addRecognizeEventListener: function(listener)
-        {
+        addRecognizeEventListener: function(listener) {
             this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
         },
 
-        recognize: function(frame)
-        {
+        recognize: function(frame) {
             if (!frame.hands.length)
                 return;
                 
-            var data = this._frameSignDataProcessor.extrairFrameDaAmostra(frame);
-
-            Signa.Hubs
-                .staticSignRecognizer()
-                .recognize(data)
-                .then(function(signalRecognizedId)
-                {
-                    if (signalRecognizedId === this._signToReconizeId)
-                    {
-                        this._eventEmitter.trigger(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID);
-                    }
-                }.bind(this));
+            var dados = this._informacoesDoFrame.extrairParaAmostra(frame);
+            this._algoritmo.reconhecer(dados);
         },
 
-        setSignToRecognizeId: function(id)
-        {
+        setSignToRecognizeId: function(id) {
             this._signToReconizeId = id;
+            this._algoritmo.setSinalId(id);
         },
 
         setTipoDoSinal: function(tipoDoSinal) {
+            if (this._ehSinalEstatico(tipoDoSinal)) {
+                this._algoritmo = new Signa.reconhecimento.AlgoritmoDeSinalEstatico();
+            } else {
+                console.log('SINAL DINÂMICO');
+                this._algoritmo = new Signa.reconhecimento.AlgoritmoDeSinalDinamico();
+            }
+        },
 
+        _ehSinalEstatico: function(tipoDoSinal) {
+            return tipoDoSinal === 0;
         }
     };
 

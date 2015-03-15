@@ -19,7 +19,9 @@
 
         recognize: function(){},
 
-        setSignToRecognizeId: function(){}
+        setSignToRecognizeId: function(){},
+
+        setTipoDoSinal: function(){}
     };
 
     Signa.recognizer.OnlineSignRecognizer = OnlineSignRecognizer;
