@@ -8,6 +8,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
         private string descricao;
         private string caminhoParaArquivoDeExemplo;
         private IList<IList<Frame>> amostras;
+        private int id;
 
         public SinalBuilder()
         {
@@ -32,10 +33,17 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
+        public SinalBuilder ComId(int id)
+        {
+            this.id = id;
+            return this;
+        }
+
         public Sinal Construir()
         {
             return new Sinal
             {
+                Id = id,
                 Descricao = descricao,
                 CaminhoParaArquivoDeExemplo = caminhoParaArquivoDeExemplo,
                 Amostras = amostras

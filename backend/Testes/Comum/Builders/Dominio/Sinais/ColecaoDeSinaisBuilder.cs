@@ -11,10 +11,12 @@ namespace Testes.Comum.Builders.Dominio.Sinais
         private string templateDaDescricao = "{0}";
         private string templateDoCaminhoDoArquivoDeExemplo = "{0}";
         private Func<int, IList<Frame>> geradorDeAmostras;
+        private Func<int, int> geradorDeId;
 
 
         public ColecaoDeSinaisBuilder()
         {
+            geradorDeId = i => i;
             geradorDeAmostras = index => new ColecaoDeFramesBuilder().Construir();
         }
 
@@ -65,6 +67,12 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             return this;
         }
 
+        public ColecaoDeSinaisBuilder ComGeradorDeId(Func<int, int> geradorDeId)
+        {
+            this.geradorDeId = geradorDeId;
+            return this;
+        }
+
         public ICollection<Sinal> Construir()
         {
             var sinais = new List<Sinal>();
@@ -72,6 +80,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
             for (int i = 0; i < quantidadeDeSinais; i++)
             {
                 var sinalBuilder = new SinalBuilder()
+                    .ComId(geradorDeId(i))
                     .ComDescricao(String.Format(templateDaDescricao, i))
                     .ComCaminhoParaArquivoDeExemplo(String.Format(templateDoCaminhoDoArquivoDeExemplo, i));
 

@@ -28,7 +28,6 @@ namespace Signa.Dominio.Algoritmos.Dados
         private void ExtrairDadosDasAmostras()
         {
             QuantidadeDeClasses = 0;
-            int identificadorDoSinal = 0;
             var geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalEstatico();
             var geradorDeCaracteristicasComTipoFrame = new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
             Frame[] amostraDoFrame = new Frame[1];
@@ -45,11 +44,10 @@ namespace Signa.Dominio.Algoritmos.Dados
                     geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Ultimo;
                     entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
 
-                    saidas.AddLast(identificadorDoSinal);
-                    saidas.AddLast(identificadorDoSinal);
+                    saidas.AddLast(sinal.Id);
+                    saidas.AddLast(sinal.Id);
                 }
                 
-                identificadorDoSinal++;
                 QuantidadeDeClasses++;
             }
 

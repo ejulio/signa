@@ -34,9 +34,24 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             var dados = new GeradorDeDadosDosLimitesDeSinaisDinamicos(colecaoDeSinais);
             
             var amostrasEsperadas = ConcatenarAmostrasDosSinais(colecaoDeSinais);
-            var saidasEsperadas = new[] { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3 };
+            var saidasEsperadas = DadasAsSaidasEsperadosParaAColecaoDeSinais(colecaoDeSinais);
 
             DeveTerExtraidoOsDadosDasAmostras(dados, quantidadeDeSinais, quantidadeDeAmostras, saidasEsperadas, amostrasEsperadas);
+        }
+
+        private int[] DadasAsSaidasEsperadosParaAColecaoDeSinais(ICollection<Sinal> colecaoDeSinais)
+        {
+            var saidasEsperadas = new List<int>();
+            foreach (var sinal in colecaoDeSinais)
+            {
+                foreach (var amostra in sinal.Amostras)
+                {
+                    saidasEsperadas.Add(sinal.Id);
+                    saidasEsperadas.Add(sinal.Id);
+                }
+            }
+
+            return saidasEsperadas.ToArray();
         }
 
         private static Sinal[] DadaUmaColecaoComUmaAmostraDeCincoFrames()
@@ -57,6 +72,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
         private static ICollection<Sinal> DadaUmaColecaoDeSinaisComAmostras(int quantidadeDeAmostras, int quantidadeDeSinais)
         {
             var colecaoDeSinais = new ColecaoDeSinaisBuilder()
+                .ComGeradorDeId(i => i + 2)
                 .ComTemplateDeDescricao("Sinal dinâmico {0}")
                 .ComTemplateDoCaminhoDoArquivoDeExemplo("sinal-dinamico-{0}.json")
                 .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostras)
