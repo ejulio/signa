@@ -53,6 +53,8 @@ namespace Testes.Integracao.Dados.Repositorio
             
             repositorioDeSinais.Carregar();
 
+            var idEsperadoDoSinal = repositorioDeSinais.Quantidade;
+
             var conteudoDoArquivoDeSinais = RecuperarConteudoDoArquivoDeSinais();
             
             var sinal = DadoUmNovoSinal("New sign");
@@ -62,6 +64,7 @@ namespace Testes.Integracao.Dados.Repositorio
 
             repositorioDeSinais.SalvarAlteracoes();
 
+            sinal.Id.Should().Be(idEsperadoDoSinal);
             RecuperarConteudoDoArquivoDeSinais().Should().NotBe(conteudoDoArquivoDeSinais);
             RecuperarConteudoDoArquivoDeSinais().Length.Should().BeGreaterThan(conteudoDoArquivoDeSinais.Length);
         }

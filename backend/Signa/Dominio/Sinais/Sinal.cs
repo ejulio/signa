@@ -8,6 +8,8 @@ namespace Signa.Dominio.Sinais
         public string CaminhoParaArquivoDeExemplo { get; set; }
 
         public TipoSinal Tipo { get; set; }
+
+        public int Id { get; set; }
         
         private IList<IList<Frame>> amostras;
 

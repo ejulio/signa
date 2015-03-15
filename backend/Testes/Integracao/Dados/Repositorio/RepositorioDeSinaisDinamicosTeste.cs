@@ -15,7 +15,8 @@ namespace Testes.Integracao.Dados.Repositorio
     public class RepositorioDeSinaisDinamicosTeste
     {
         private RepositorioDeSinaisDinamicos repositorioDeSinaisDinamicos;
-        private const string CaminhoDoArquivoDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
+        private RepositorioDeSinais repositorioDeSinais;
+        private const string CaminhoDoArquivoDeAmostras = "Integracao/JsonTestData/repositorio-sinais-dinamicos-teste.json";
         private const string TemplateDaDescricaoDeSinalEstatico = "sinal estático {0}";
         private const string TemplateDaDescricaoDeSinalDinamico = "sinal dinâmico {0}";
         private const string TemplateDoCaminhoDoArquivoDeExemplo = "sample-{0}.json";
@@ -23,7 +24,8 @@ namespace Testes.Integracao.Dados.Repositorio
         [TestInitialize]
         public void Setup()
         {
-            repositorioDeSinaisDinamicos = new RepositorioDeSinaisDinamicos(new RepositorioDeSinais(CaminhoDoArquivoDeAmostras));
+            repositorioDeSinais = new RepositorioDeSinais(CaminhoDoArquivoDeAmostras);
+            repositorioDeSinaisDinamicos = new RepositorioDeSinaisDinamicos(repositorioDeSinais);
         }
 
         [TestMethod]
@@ -49,9 +51,11 @@ namespace Testes.Integracao.Dados.Repositorio
         [TestMethod]
         public void adicionando_um_sinal()
         {
-            DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
+            var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
             repositorioDeSinaisDinamicos.Carregar();
+
+            var idEsperadoDoSinal = repositorioDeSinais.Quantidade;
 
             var conteudoDoArquivoDeSinais = RecuperarConteudoDoArquivoDeSinais();
             
@@ -62,6 +66,7 @@ namespace Testes.Integracao.Dados.Repositorio
 
             repositorioDeSinaisDinamicos.SalvarAlteracoes();
 
+            sinal.Id.Should().Be(idEsperadoDoSinal);
             RecuperarConteudoDoArquivoDeSinais().Should().NotBe(conteudoDoArquivoDeSinais);
             RecuperarConteudoDoArquivoDeSinais().Length.Should().BeGreaterThan(conteudoDoArquivoDeSinais.Length);
         }

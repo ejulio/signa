@@ -27,6 +27,7 @@ namespace Signa.Dados.Repositorio
 
         public void Adicionar(Sinal sinal)
         {
+            sinal.Id = Quantidade;
             sinaisPorId.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
         }
