@@ -688,17 +688,18 @@
 
         setSinalId: function(sinalId) {
             this._sinalId = sinalId;
+            console.log('SINAL ID ' + sinalId);
         },
 
         reconhecer: function(frame) {
             this._hub
                 .reconhecer([frame])
                 .then(function(sinalReconhecidoId) {
+                    console.log('SINAL RECONHECIDO ' + sinalReconhecidoId);
                     if (sinalReconhecidoId == this._sinalId) {
                         console.log('SUCESSO');
                     }
-                }.bind(this))
-
+                }.bind(this));
         }
     };
 
@@ -937,6 +938,7 @@
 
         setTipoDoSinal: function(tipoDoSinal) {
             if (this._ehSinalEstatico(tipoDoSinal)) {
+                console.log('SINAL ESTÁTICO');
                 this._algoritmo = new Signa.reconhecimento.AlgoritmoDeSinalEstatico();
             } else {
                 console.log('SINAL DINÂMICO');

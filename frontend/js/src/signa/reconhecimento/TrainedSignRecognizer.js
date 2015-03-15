@@ -31,6 +31,7 @@
 
         setTipoDoSinal: function(tipoDoSinal) {
             if (this._ehSinalEstatico(tipoDoSinal)) {
+                console.log('SINAL ESTÁTICO');
                 this._algoritmo = new Signa.reconhecimento.AlgoritmoDeSinalEstatico();
             } else {
                 console.log('SINAL DINÂMICO');
