@@ -25,7 +25,6 @@ namespace Signa.Dominio.Algoritmos.Dados
 
         public void ExtrairInformacoesDosSinais()
         {
-            int indiceDoSinal = 0;
             QuantidadeDeClasses = 0;
             saidas = new LinkedList<int>();
 
@@ -33,11 +32,10 @@ namespace Signa.Dominio.Algoritmos.Dados
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    saidas.AddLast(indiceDoSinal);
+                    saidas.AddLast(sinal.Id);
                     GerarEntradaParaAAmostra(amostra);
                 }
                 QuantidadeDeClasses++;
-                indiceDoSinal++;
             }
 
             Saidas = saidas.ToArray();

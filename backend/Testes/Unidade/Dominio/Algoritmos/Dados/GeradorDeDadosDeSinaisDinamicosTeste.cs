@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signa.Dominio.Algoritmos.Dados;
 using Signa.Dominio.Sinais;
@@ -19,7 +20,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             var sinal = sinais[0];
 
             var dados = new GeradorDeDadosDeSinaisDinamicos(sinais);
-            var saidasEsperadas = new [] { 0 };
+            var saidasEsperadas = DadasAsSaidasEsperadasParaAColecaoDeSinais(sinais);
 
             DeveTerExtraidoOsDadosDasAmostras(dados, 1, 1, saidasEsperadas, sinal.Amostras);
         }
@@ -35,7 +36,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
                 new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir()
             };
 
-            var sinais = new[] { new SinalBuilder().ComAmostra(frames).Construir() };
+            var sinais = new[] { new SinalBuilder().ComId(2).ComAmostra(frames).Construir() };
             return sinais;
         }
 
@@ -49,7 +50,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             var dados = new GeradorDeDadosDeSinaisDinamicos(colecaoDeSinais);
             
             var amostrasEsperadas = ConcatenarAmostrasDosSinais(colecaoDeSinais);
-            var saidasEsperadas = new[] { 0, 0, 1, 1, 2, 2, 3, 3 };
+            var saidasEsperadas = DadasAsSaidasEsperadasParaAColecaoDeSinais(colecaoDeSinais);
 
             DeveTerExtraidoOsDadosDasAmostras(dados, quantidadeDeSinais, quantidadeDeAmostras, saidasEsperadas, amostrasEsperadas);
         }
@@ -57,6 +58,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
         private static ICollection<Sinal> DadaUmaColecaoDeSinaisComAmostras(int quantidadeDeAmostras, int quantidadeDeSinais)
         {
             var colecaoDeSinais = new ColecaoDeSinaisBuilder()
+                .ComGeradorDeId(i => i * 2)
                 .ComTemplateDeDescricao("Sinal dinâmico {0}")
                 .ComTemplateDoCaminhoDoArquivoDeExemplo("sinal-dinamico-{0}.json")
                 .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostras)
@@ -64,6 +66,21 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
                 .Construir();
 
             return colecaoDeSinais;
+        }
+
+        private int[] DadasAsSaidasEsperadasParaAColecaoDeSinais(ICollection<Sinal> sinais)
+        {
+            var saidasEsperadas = new List<int>();
+
+            foreach (var sinal in sinais)
+            {
+                foreach (var amostra in sinal.Amostras)
+                {
+                    saidasEsperadas.Add(sinal.Id);
+                }
+            }
+
+            return saidasEsperadas.ToArray();
         }
 
         private IList<IList<Frame>> ConcatenarAmostrasDosSinais(ICollection<Sinal> colecaoDeSinais)

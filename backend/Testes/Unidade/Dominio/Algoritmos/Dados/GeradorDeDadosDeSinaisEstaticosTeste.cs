@@ -49,6 +49,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             Func<int, IList<Frame>> geradorDeAmostras = index => amostraPadrao;
 
             var sinais = new ColecaoDeSinaisBuilder()
+                        .ComGeradorDeId(i => 1)
                         .ComQuantidadeDeAmostrasPorSinal(1)
                         .ComGeradorDeAmostras(geradorDeAmostras)
                         .ComQuantidadeDeSinais(1)
@@ -60,6 +61,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
         private static ICollection<Sinal> DadaUmaColecaoDeSinais(int quantidadeDeAmostrasPorSinal, int quantidadeDeSinais)
         {
             var sinais = new ColecaoDeSinaisBuilder()
+                        .ComGeradorDeId(i => i + 7)
                         .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
                         .ComQuantidadeDeSinais(quantidadeDeSinais)
                         .ComGeradorDeAmostrasEstaticas()
@@ -73,7 +75,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             geradorDeDadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(sinais.Count);
             geradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
             geradorDeDadosDoAlgoritmo.Entradas.Should().HaveSameCount(geradorDeDadosDoAlgoritmo.Saidas);
-            geradorDeDadosDoAlgoritmo.Saidas.Should().ContainInOrder(SaidasEsperadas(sinais.Count, quantidadeDeAmostrasPorSinal));
+            geradorDeDadosDoAlgoritmo.Saidas.Should().ContainInOrder(SaidasEsperadas(sinais));
 
             int indiceDaEntrada = 0;
             var entradasEsperadas = EntradasEsperadasParaOsSinais(sinais);
@@ -91,7 +93,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             geradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(1);
             geradorDeDadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
             geradorDeDadosDoAlgoritmo.Saidas.Should().HaveCount(1);
-            geradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(0);
+            geradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(1);
         }
 
         private double[][] EntradasEsperadasParaOsSinais(ICollection<Sinal> sinais)
@@ -109,25 +111,19 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             return entradasEsperadas.ToArray();
         }
 
-        private IEnumerable SaidasEsperadas(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
+        private int[] SaidasEsperadas(ICollection<Sinal> sinais)
         {
-            int[] saidas = new int[quantidadeDeSinais * quantidadeDeAmostrasPorSinal];
-            int indiceDoSinal = 0;
+            var saidasEsperadas = new List<int>();
 
-            int i = 0;
-            while (i < saidas.Length)
+            foreach (var sinal in sinais)
             {
-                saidas[i] = indiceDoSinal;
-
-                i++;
-
-                if (i % quantidadeDeAmostrasPorSinal == 0)
+                foreach (var amostra in sinal.Amostras)
                 {
-                    indiceDoSinal++;
+                    saidasEsperadas.Add(sinal.Id);
                 }
             }
 
-            return saidas;
+            return saidasEsperadas.ToArray();
         }
     }
 }

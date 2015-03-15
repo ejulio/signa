@@ -19,7 +19,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
             var sinal = sinais[0];
 
             var dados = new GeradorDeDadosDosLimitesDeSinaisDinamicos(sinais);
-            var saidasEsperadas = new [] { 0, 0 };
+            var saidasEsperadas = DadasAsSaidasEsperadosParaAColecaoDeSinais(sinais);
 
             DeveTerExtraidoOsDadosDasAmostras(dados, 1, 1, saidasEsperadas, sinal.Amostras);
         }
@@ -65,7 +65,7 @@ namespace Testes.Unidade.Dominio.Algoritmos.Dados
                 new FrameBuilder().ComMaosEsquerdaEDireitaPadroes().Construir()
             };
 
-            var sinais = new[] { new SinalBuilder().ComAmostra(frames).Construir() };
+            var sinais = new[] { new SinalBuilder().ComId(1).ComAmostra(frames).Construir() };
             return sinais;
         }
 
