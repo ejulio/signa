@@ -56,8 +56,10 @@ namespace Aplicacao
         {
             var resolvedorDeDependencias = new ConfiguradorDeDependencias(container);
             resolvedorDeDependencias.Configurar();
-            var configuracao = new HttpConfiguration();
-            configuracao.DependencyResolver = container;
+            var configuracao = new HttpConfiguration
+            {
+                DependencyResolver = container
+            };
             configuracao.Routes.Add("default", new HttpRoute("{controller}/{action}"));
             app.UseWebApi(configuracao);
         }
