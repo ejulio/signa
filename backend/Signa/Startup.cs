@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System.Web.Http;
+using System.Web.Http.Routing;
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.StaticFiles;
 using Owin;
@@ -14,6 +16,10 @@ namespace Signa
             ConfigurarCors(app);
             ConfigurarServidorDeArquivos(app);
             ConfigurarSignalR(app);
+
+            var configuracao = new HttpConfiguration();
+            configuracao.Routes.Add("default", new HttpRoute("{controller}/{action}"));
+            app.UseWebApi(configuracao);
         }
 
         private void ConfigurarResolvedorDeDependencias()

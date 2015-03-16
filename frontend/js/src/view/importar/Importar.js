@@ -73,15 +73,19 @@
         {
             var descricaoDoSinal = $('#description').val(),
                 amostra = this._gerarAmostra(),
-                hub;
+                acao;
 
             if (amostra.length === 1) {
-                hub = Signa.Hubs.sinaisEstaticos();
+                acao = 'SalvarAmostraDeSinalEstatico';
             } else {
-                hub = Signa.Hubs.sinaisDinamicos();
+                acao = 'SalvarAmostraDeSinalDinamico';
             }
-
-            hub.salvarAmostraDoSinal(descricaoDoSinal, '', amostra);
+            
+            $.post('http://localhost:9000/sinais/' + acao, {
+                descricao: descricaoDoSinal,
+                conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,
+                amostra: amostra
+            });
         },
 
         _gerarAmostra: function()
