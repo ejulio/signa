@@ -10,16 +10,17 @@ namespace Signa
 {
     public class Startup
     {
+        private IAppBuilder app;
+
         public void Configuration(IAppBuilder app)
         {
-            ConfigurarResolvedorDeDependencias();
-            ConfigurarCors(app);
-            ConfigurarServidorDeArquivos(app);
-            ConfigurarSignalR(app);
+            this.app = app;
 
-            var configuracao = new HttpConfiguration();
-            configuracao.Routes.Add("default", new HttpRoute("{controller}/{action}"));
-            app.UseWebApi(configuracao);
+            ConfigurarResolvedorDeDependencias();
+            UsarCors();
+            UsarServidorDeArquivos();
+            UsarSignalR();
+            UsarWebApi();
         }
 
         private void ConfigurarResolvedorDeDependencias()
@@ -29,12 +30,12 @@ namespace Signa
             resolvedorDeDependencias.Configurar();
         }
 
-        private void ConfigurarCors(IAppBuilder app)
+        private void UsarCors()
         {
             app.UseCors(CorsOptions.AllowAll);
         }
 
-        private void ConfigurarServidorDeArquivos(IAppBuilder app)
+        private void UsarServidorDeArquivos()
         {
             app.UseFileServer();
             var options = new StaticFileOptions
@@ -44,9 +45,16 @@ namespace Signa
             app.UseStaticFiles(options);
         }
 
-        private void ConfigurarSignalR(IAppBuilder app)
+        private void UsarSignalR()
         {
             app.MapSignalR();
+        }
+
+        private void UsarWebApi()
+        {
+            var configuracao = new HttpConfiguration();
+            configuracao.Routes.Add("default", new HttpRoute("{controller}/{action}"));
+            app.UseWebApi(configuracao);
         }
     }
 }
