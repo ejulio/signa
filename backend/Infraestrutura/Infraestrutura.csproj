@@ -68,7 +68,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Aplicacao\Aplicacao.csproj">
       <Project>{b73a5508-76e4-4a0d-ad09-f436a851b558}</Project>
-      <Name>Signa</Name>
+      <Name>Aplicacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{899aace8-1d02-43d9-9021-aa7e0f506386}</Project>
+      <Name>Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

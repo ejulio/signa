@@ -146,57 +146,20 @@
     <Compile Include="ResolvedorDeDependenciasUnity.cs" />
     <Compile Include="ContentTypeProviders\JsonContentTypeProvider.cs" />
     <Compile Include="Controller\SinaisController.cs" />
-    <Compile Include="Dados\Repositorio\IRepositorio.cs" />
-    <Compile Include="Dados\Repositorio\IRepositorioFactory.cs" />
-    <Compile Include="Dados\Repositorio\RepositorioDeSinais.cs" />
-    <Compile Include="Dados\Repositorio\RepositorioFactory.cs" />
-    <Compile Include="Dados\Repositorio\RepositorioDeSinaisEstaticos.cs" />
-    <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
-    <Compile Include="Dados\SinaisController.cs" />
-    <Compile Include="Dados\SinaisDinamicosController.cs" />
-    <Compile Include="Dominio\Algoritmos\Dados\DadosParaAlgoritmoDeReconhecimentoDeSinais.cs" />
-    <Compile Include="Dominio\Algoritmos\Dados\GeradorDeDadosDosLimitesDeSinaisDinamicos.cs" />
-    <Compile Include="Dominio\Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalDinamico.cs" />
-    <Compile Include="Dominio\Algoritmos\Dados\IGeradorDeDadosDeSinaisDinamicos.cs" />
-    <Compile Include="Dominio\Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeSinalDinamico.cs" />
-    <Compile Include="Dominio\Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
-    <Compile Include="Dominio\Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalEstatico.cs" />
-    <Compile Include="Dominio\Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
-    <Compile Include="Dominio\Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeFrame.cs" />
-    <Compile Include="Dominio\Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeSinalEstatico.cs" />
-    <Compile Include="Dominio\Algoritmos\Estatico\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
-    <Compile Include="Dominio\Algoritmos\Factories\GeradorDeCaracteristicasFactory.cs" />
-    <Compile Include="Dominio\Algoritmos\IAlgoritmoDeReconhecimentoDeSinais.cs" />
-    <Compile Include="Dominio\Algoritmos\Factories\IGeradorDeCaracteristicasFactory.cs" />
-    <Compile Include="Dominio\InicializadorDeAlgoritmoFacade.cs" />
-    <Compile Include="Dominio\Algoritmos\Dados\GeradorDeDadosDeSinaisDinamicos.cs" />
-    <Compile Include="Dominio\Algoritmos\Dinamico\Hcrf.cs" />
-    <Compile Include="Dominio\Algoritmos\Factories\IAlgoritmoDeReconhecimentoDeSinalFactory.cs" />
-    <Compile Include="Dominio\Algoritmos\Dinamico\IAlgoritmoDeReconhecimentoDeSinaisDinamicos.cs" />
-    <Compile Include="Dominio\Algoritmos\Factories\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
-    <Compile Include="Dominio\Sinais\TipoFrame.cs" />
-    <Compile Include="Dominio\Sinais\TipoSinal.cs" />
     <Compile Include="Hubs\SinaisDinamicos.cs" />
     <Compile Include="Hubs\Sinais.cs" />
     <Compile Include="Hubs\SinaisEstaticos.cs" />
-    <Compile Include="Dominio\Sinais\Caracteristicas\Dedo.cs" />
-    <Compile Include="Dominio\Sinais\Caracteristicas\TipoDeDedo.cs" />
-    <Compile Include="Dominio\Sinais\Caracteristicas\Mao.cs" />
-    <Compile Include="Dominio\Sinais\Sinal.cs" />
-    <Compile Include="Dominio\Sinais\Frame.cs" />
-    <Compile Include="Dominio\Sinais\InformacoesDoSinal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Dados\SinaisEstaticosController.cs" />
-    <Compile Include="Dominio\Algoritmos\Dados\IGeradorDeDadosDeSinaisEstaticos.cs" />
     <Compile Include="ConfiguradorDeDependencias.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Dominio\Algoritmos\Estatico\Svm.cs" />
-    <Compile Include="Dominio\Algoritmos\Dados\GeradorDeDadosDeSinaisEstaticos.cs" />
-    <Compile Include="Util\IEnumerableExtensions.cs" />
-    <Compile Include="Util\StringExtensions.cs" />
     <Compile Include="ViewModel\SalvarAmostraRequestModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{899aace8-1d02-43d9-9021-aa7e0f506386}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

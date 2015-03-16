@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{899AACE8-1D02-43D9-9021-AA7E0F506386}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dominio</RootNamespace>
+    <AssemblyName>Dominio</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accord">
+      <HintPath>..\packages\Accord.2.14.0\lib\net40\Accord.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.MachineLearning">
+      <HintPath>..\packages\Accord.MachineLearning.2.14.0\lib\net40\Accord.MachineLearning.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Math">
+      <HintPath>..\packages\Accord.Math.2.14.0\lib\net40\Accord.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Statistics">
+      <HintPath>..\packages\Accord.Statistics.2.14.0\lib\net40\Accord.Statistics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AForge">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeFrame.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeSinalDinamico.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeSinalEstatico.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalDinamico.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalEstatico.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
+    <Compile Include="Algoritmos\Dados\DadosParaAlgoritmoDeReconhecimentoDeSinais.cs" />
+    <Compile Include="Algoritmos\Dados\GeradorDeDadosDeSinaisDinamicos.cs" />
+    <Compile Include="Algoritmos\Dados\GeradorDeDadosDeSinaisEstaticos.cs" />
+    <Compile Include="Algoritmos\Dados\GeradorDeDadosDosLimitesDeSinaisDinamicos.cs" />
+    <Compile Include="Algoritmos\Dados\IGeradorDeDadosDeSinaisDinamicos.cs" />
+    <Compile Include="Algoritmos\Dados\IGeradorDeDadosDeSinaisEstaticos.cs" />
+    <Compile Include="Algoritmos\Dinamico\Hcrf.cs" />
+    <Compile Include="Algoritmos\Dinamico\IAlgoritmoDeReconhecimentoDeSinaisDinamicos.cs" />
+    <Compile Include="Algoritmos\Estatico\IAlgoritmoDeReconhecimentoDeSinaisEstaticos.cs" />
+    <Compile Include="Algoritmos\Estatico\Svm.cs" />
+    <Compile Include="Algoritmos\Factories\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
+    <Compile Include="Algoritmos\Factories\GeradorDeCaracteristicasFactory.cs" />
+    <Compile Include="Algoritmos\Factories\IAlgoritmoDeReconhecimentoDeSinalFactory.cs" />
+    <Compile Include="Algoritmos\Factories\IGeradorDeCaracteristicasFactory.cs" />
+    <Compile Include="Algoritmos\IAlgoritmoDeReconhecimentoDeSinais.cs" />
+    <Compile Include="Dados\Repositorio\IRepositorio.cs" />
+    <Compile Include="Dados\Repositorio\IRepositorioFactory.cs" />
+    <Compile Include="Dados\Repositorio\RepositorioDeSinais.cs" />
+    <Compile Include="Dados\Repositorio\RepositorioDeSinaisDinamicos.cs" />
+    <Compile Include="Dados\Repositorio\RepositorioDeSinaisEstaticos.cs" />
+    <Compile Include="Dados\Repositorio\RepositorioFactory.cs" />
+    <Compile Include="Dados\SinaisController.cs" />
+    <Compile Include="Dados\SinaisDinamicosController.cs" />
+    <Compile Include="Dados\SinaisEstaticosController.cs" />
+    <Compile Include="InicializadorDeAlgoritmoFacade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sinais\Caracteristicas\Dedo.cs" />
+    <Compile Include="Sinais\Caracteristicas\Mao.cs" />
+    <Compile Include="Sinais\Caracteristicas\TipoDeDedo.cs" />
+    <Compile Include="Sinais\Frame.cs" />
+    <Compile Include="Sinais\InformacoesDoSinal.cs" />
+    <Compile Include="Sinais\Sinal.cs" />
+    <Compile Include="Sinais\TipoFrame.cs" />
+    <Compile Include="Sinais\TipoSinal.cs" />
+    <Compile Include="Util\IEnumerableExtensions.cs" />
+    <Compile Include="Util\StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
