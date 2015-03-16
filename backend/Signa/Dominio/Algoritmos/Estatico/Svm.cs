@@ -25,9 +25,9 @@ namespace Signa.Dominio.Algoritmos.Estatico
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
             double p;
-            int r = svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), out p);
+            int r = svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), MulticlassComputeMethod.Voting, out p);
             Console.WriteLine("{0} - {1}", r, p);
-            if (p > 0.4)
+            if (p > 0.6)
                 return r;
 
             return -1;
