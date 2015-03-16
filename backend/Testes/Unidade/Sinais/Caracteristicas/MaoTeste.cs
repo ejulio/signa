@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Testes.Unidade.Dominio.Sinais.Caracteristicas
+namespace Testes.Unidade.Sinais.Caracteristicas
 {
     [TestClass]
     public class MaoTeste

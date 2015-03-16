@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Testes.Unidade.Dominio.Algoritmos.Factories
+namespace Testes.Unidade.Algoritmos.Factories
 {
     [TestClass]
     public class AlgoritmoDeReconhecimentoDeSinalFactoryTeste

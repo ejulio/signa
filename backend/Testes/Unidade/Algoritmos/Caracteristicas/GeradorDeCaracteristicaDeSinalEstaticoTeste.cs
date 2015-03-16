@@ -1,14 +1,14 @@
-﻿using Dominio.Algoritmos.Caracteristicas;
+﻿using System.Linq;
+using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Sinais;
 using Dominio.Sinais.Caracteristicas;
 using Dominio.Util;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 
-namespace Testes.Unidade.Dominio.Algoritmos.Caracteristicas
+namespace Testes.Unidade.Algoritmos.Caracteristicas
 {
     [TestClass]
     public class GeradorDeCaracteristicaDeSinalEstaticoTeste

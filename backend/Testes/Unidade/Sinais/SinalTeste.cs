@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Testes.Comum.Builders.Dominio.Sinais;
 
-namespace Testes.Unidade.Dominio.Sinais
+namespace Testes.Unidade.Sinais
 {
     [TestClass]
     public class SinalTeste

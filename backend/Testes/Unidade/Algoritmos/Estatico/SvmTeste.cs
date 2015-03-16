@@ -1,14 +1,14 @@
-﻿using Dominio.Algoritmos.Caracteristicas;
+﻿using System;
+using System.Collections.Generic;
+using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Estatico;
 using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using Testes.Comum.Builders.Dominio.Sinais;
 
-namespace Testes.Unidade.Dominio.Algoritmos.Estatico
+namespace Testes.Unidade.Algoritmos.Estatico
 {
     [TestClass]
     public class SvmTeste

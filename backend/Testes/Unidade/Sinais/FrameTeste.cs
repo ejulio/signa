@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Testes.Unidade.Dominio.Sinais
+namespace Testes.Unidade.Sinais
 {
     [TestClass]
     public class FrameTeste
