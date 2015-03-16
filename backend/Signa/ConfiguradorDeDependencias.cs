@@ -7,14 +7,14 @@ using Signa.Dominio.Algoritmos.Factories;
 
 namespace Signa
 {
-    public class ResolvedorDeDependencias
+    public class ConfiguradorDeDependencias
     {
         private readonly IDependencyResolver container;
         private static AlgoritmoDeReconhecimentoDeSinalFactory algoritmoFactory;
         private static IRepositorioFactory repositorioFactory;
         private static GeradorDeCaracteristicasFactory geradorDeCaracteristicasFactory;
 
-        public ResolvedorDeDependencias(IDependencyResolver container)
+        public ConfiguradorDeDependencias(IDependencyResolver container)
         {
             this.container = container;
             repositorioFactory = new RepositorioFactory(SinaisController.CaminhoDoArquivoDoRepositorio);

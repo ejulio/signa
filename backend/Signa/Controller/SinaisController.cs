@@ -10,26 +10,25 @@ namespace Signa.Controller
 {
     public class SinaisController : ApiController
     {
+        private readonly SinaisDinamicosController sinaisDinamicosController;
+        private readonly SinaisEstaticosController sinaisEstaticosController;
+
+        public SinaisController(SinaisDinamicosController sinaisDinamicosController, SinaisEstaticosController sinaisEstaticosController)
+        {
+            this.sinaisDinamicosController = sinaisDinamicosController;
+            this.sinaisEstaticosController = sinaisEstaticosController;
+        }
+
         [HttpPost]
         public void SalvarAmostraDeSinalDinamico(SalvarAmostraRequestModel modelo)
         {
-            var controller = new SinaisDinamicosController(
-                new RepositorioFactory(Dados.SinaisController.CaminhoDoArquivoDoRepositorio).CriarECarregarRepositorioDeSinaisDinamicos(), 
-                null, 
-                null,
-                null);
-
-            controller.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
+            sinaisDinamicosController.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
         }
 
         [HttpPost]
         public void SalvarAmostraDeSinalEstatico(SalvarAmostraRequestModel modelo)
         {
-            var controller = new SinaisEstaticosController(
-                new RepositorioFactory(Dados.SinaisController.CaminhoDoArquivoDoRepositorio).CriarECarregarRepositorioDeSinaisEstaticos(),
-                null);
-
-            controller.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
+            sinaisEstaticosController.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
         }
     }
     

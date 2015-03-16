@@ -10,7 +10,7 @@ namespace Signa.Dominio.Sinais
             get { return maoEsquerda; }
             set
             {
-                maoEsquerda = value ?? Mao.Vazia();
+                maoEsquerda = value ?? new Mao();
             }
         }
 
@@ -20,8 +20,14 @@ namespace Signa.Dominio.Sinais
             get { return maoDireita; }
             set
             {
-                maoDireita = value ?? Mao.Vazia();
+                maoDireita = value ?? new Mao();
             }
+        }
+
+        public Frame()
+        {
+            MaoEsquerda = new Mao();
+            MaoDireita = new Mao();
         }
     }
 }

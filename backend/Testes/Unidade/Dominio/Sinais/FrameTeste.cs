@@ -8,6 +8,15 @@ namespace Testes.Unidade.Dominio.Sinais
     public class FrameTeste
     {
         [TestMethod]
+        public void criando_um_frame()
+        {
+            var frame = new Frame();
+
+            frame.MaoEsquerda.Should().NotBeNull();
+            frame.MaoDireita.Should().NotBeNull();
+        }
+
+        [TestMethod]
         public void criando_um_frame_sem_maos()
         {
             var frame = new Frame

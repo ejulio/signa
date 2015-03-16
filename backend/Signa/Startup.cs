@@ -3,6 +3,7 @@ using System.Web.Http.Routing;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.StaticFiles;
+using Microsoft.Practices.Unity;
 using Owin;
 using Signa.ContentTypeProviders;
 
@@ -11,6 +12,7 @@ namespace Signa
     public class Startup
     {
         private IAppBuilder app;
+        private ResolvedorDeDependenciasUnity container;
 
         public void Configuration(IAppBuilder app)
         {
@@ -25,8 +27,8 @@ namespace Signa
 
         private void ConfigurarResolvedorDeDependencias()
         {
-            var container = GlobalHost.DependencyResolver;
-            var resolvedorDeDependencias = new ResolvedorDeDependencias(container);
+            container = new ResolvedorDeDependenciasUnity(new UnityContainer());
+            var resolvedorDeDependencias = new ConfiguradorDeDependencias(GlobalHost.DependencyResolver);
             resolvedorDeDependencias.Configurar();
         }
 
@@ -52,7 +54,10 @@ namespace Signa
 
         private void UsarWebApi()
         {
+            var resolvedorDeDependencias = new ConfiguradorDeDependencias(container);
+            resolvedorDeDependencias.Configurar();
             var configuracao = new HttpConfiguration();
+            configuracao.DependencyResolver = container;
             configuracao.Routes.Add("default", new HttpRoute("{controller}/{action}"));
             app.UseWebApi(configuracao);
         }

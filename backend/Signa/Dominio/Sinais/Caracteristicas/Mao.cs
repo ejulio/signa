@@ -3,20 +3,32 @@ namespace Signa.Dominio.Sinais.Caracteristicas
 {
     public class Mao
     {
-        public double[] VetorNormalDaPalma { get; set; }
-        public double[] Direcao { get; set; }
-
-        public Dedo[] Dedos { get; set; }
-
-        public static Mao Vazia()
+        private double[] vetorNormalDaPalma;
+        public double[] VetorNormalDaPalma
         {
-            return new Mao
-            {
-                Dedos = new [] { Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty() },
-                Direcao = new[] { 0.0, 0.0, 0.0 },
-                VetorNormalDaPalma = new[] { 0.0, 0.0, 0.0 }
-            };
+            get { return vetorNormalDaPalma; }
+            set { vetorNormalDaPalma = value ?? new[] {0.0, 0.0, 0.0}; }
         }
 
+        private double[] direcao;
+        public double[] Direcao
+        {
+            get { return direcao; }
+            set { direcao = value ?? new[] { 0.0, 0.0, 0.0 }; }
+        }
+
+        private Dedo[] dedos;
+        public Dedo[] Dedos
+        {
+            get { return dedos; }
+            set { dedos = value ?? new[] { Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty() }; }
+        }
+
+        public Mao()
+        {
+            Dedos = new[] {Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty()};
+            Direcao = new[] {0.0, 0.0, 0.0};
+            VetorNormalDaPalma = new[] {0.0, 0.0, 0.0};
+        }
     }
 }
