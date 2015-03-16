@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Dominio.Sinais;
+using System.Collections.Generic;
 using System.Linq;
-using Dominio.Sinais;
 
 namespace Dominio.Algoritmos.Dados
 {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
-using Microsoft.Practices.Unity;
 using IDependencyResolver = Microsoft.AspNet.SignalR.IDependencyResolver;
 
 namespace Aplicacao

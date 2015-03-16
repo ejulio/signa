@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Dominio.Algoritmos;
+﻿using Dominio.Algoritmos;
 using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
+using System.Collections.Generic;
 
 namespace Dominio.Dados
 {

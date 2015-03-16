@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using Dominio.Sinais;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Sinais;
 
 namespace Dominio.Dados.Repositorio
 {

@@ -1,11 +1,11 @@
-﻿using System.Web.Http;
-using System.Web.Http.Routing;
-using Aplicacao.ContentTypeProviders;
+﻿using Aplicacao.ContentTypeProviders;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.StaticFiles;
 using Microsoft.Practices.Unity;
 using Owin;
+using System.Web.Http;
+using System.Web.Http.Routing;
 
 namespace Aplicacao
 {

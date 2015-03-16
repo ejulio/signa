@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Accord.Statistics.Distributions.Fitting;
+﻿using Accord.Statistics.Distributions.Fitting;
 using Accord.Statistics.Distributions.Multivariate;
 using Accord.Statistics.Distributions.Univariate;
 using Accord.Statistics.Models.Fields;
@@ -11,6 +9,8 @@ using Accord.Statistics.Models.Markov.Topology;
 using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Algoritmos.Dados;
 using Dominio.Sinais;
+using System;
+using System.Collections.Generic;
 
 namespace Dominio.Algoritmos.Dinamico
 {

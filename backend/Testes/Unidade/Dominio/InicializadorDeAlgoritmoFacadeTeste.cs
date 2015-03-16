@@ -1,15 +1,15 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
-using Dominio;
+﻿using Dominio;
 using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Dinamico;
 using Dominio.Algoritmos.Estatico;
 using Dominio.Algoritmos.Factories;
 using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
+using System.Collections.Generic;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio

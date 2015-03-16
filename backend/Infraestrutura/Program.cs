@@ -1,10 +1,10 @@
-﻿using Microsoft.Owin.Hosting;
-using System;
-using Aplicacao;
+﻿using Aplicacao;
 using Dominio;
 using Dominio.Algoritmos.Factories;
 using Dominio.Dados;
 using Dominio.Dados.Repositorio;
+using Microsoft.Owin.Hosting;
+using System;
 
 namespace Infraestrutura
 {

@@ -1,14 +1,14 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.IO;
-using Dominio.Algoritmos.Caracteristicas;
+﻿using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Algoritmos.Dinamico;
 using Dominio.Algoritmos.Estatico;
 using Dominio.Dados;
 using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
 using Dominio.Util;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.IO;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados

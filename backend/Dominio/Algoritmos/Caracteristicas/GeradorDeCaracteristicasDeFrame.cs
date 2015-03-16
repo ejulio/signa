@@ -1,7 +1,7 @@
-using System.Linq;
 using Dominio.Sinais;
 using Dominio.Sinais.Caracteristicas;
 using Dominio.Util;
+using System.Linq;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {

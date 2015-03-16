@@ -1,7 +1,7 @@
-﻿using FluentAssertions;
+﻿using Dominio.Util;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using Dominio.Util;
 
 namespace Testes.Unidade.Util
 {

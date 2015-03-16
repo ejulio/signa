@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Dominio.Algoritmos;
+﻿using Dominio.Algoritmos;
 using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
 using Dominio.Util;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Dominio.Dados
 {

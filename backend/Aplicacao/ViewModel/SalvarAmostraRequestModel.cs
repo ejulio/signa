@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Dominio.Sinais;
+﻿using Dominio.Sinais;
+using System.Collections.Generic;
 
 namespace Aplicacao.ViewModel
 {

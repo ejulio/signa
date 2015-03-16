@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Dominio.Dados;
+﻿using Dominio.Dados;
 using Dominio.Sinais;
 using Microsoft.AspNet.SignalR;
+using System.Collections.Generic;
 
 namespace Aplicacao.Hubs
 {

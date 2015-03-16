@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using Dominio.Algoritmos.Dados;
+﻿using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Factories;
 using Dominio.Dados.Repositorio;
+using System.Linq;
 
 namespace Dominio
 {

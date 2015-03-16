@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Dominio.Algoritmos.Caracteristicas;
+﻿using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Sinais;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio.Algoritmos.Dados
 {

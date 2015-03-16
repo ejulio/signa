@@ -1,11 +1,11 @@
-﻿using FluentAssertions;
+﻿using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Dominio.Dados.Repositorio;
-using Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados.Repositorio
