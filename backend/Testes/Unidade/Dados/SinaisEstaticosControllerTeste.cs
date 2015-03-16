@@ -1,7 +1,7 @@
-﻿using Aplicacao.Dados;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Algoritmos.Estatico;
-using Aplicacao.Dominio.Sinais;
+﻿using Dominio.Algoritmos.Estatico;
+using Dominio.Dados;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dominio.Algoritmos
+namespace Dominio.Algoritmos
 {
     public interface IAlgoritmoDeReconhecimentoDeSinais
     {

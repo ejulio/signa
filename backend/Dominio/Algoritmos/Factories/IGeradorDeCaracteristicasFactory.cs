@@ -1,6 +1,6 @@
-﻿using Aplicacao.Dominio.Algoritmos.Caracteristicas;
+﻿using Dominio.Algoritmos.Caracteristicas;
 
-namespace Aplicacao.Dominio.Algoritmos.Factories
+namespace Dominio.Algoritmos.Factories
 {
     public interface IGeradorDeCaracteristicasFactory
     {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Sinais;
 
 namespace Testes.Comum.Builders.Dominio.Sinais
 {

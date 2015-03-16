@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dominio.Algoritmos.Caracteristicas
+namespace Dominio.Algoritmos.Caracteristicas
 {
     public class GeradorDeCaracteristicasDeSinalDinamico : GeradorDeCaracteristicasDeFrame, IGeradorDeCaracteristicasDeSinalDinamico
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dominio.Algoritmos.Dados
+namespace Dominio.Algoritmos.Dados
 {
     public abstract class DadosParaAlgoritmoDeReconhecimentoDeSinais
     {

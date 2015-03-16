@@ -3,8 +3,8 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using Aplicacao.Dominio.Algoritmos.Dados;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Algoritmos.Dados;
+using Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Util;
 

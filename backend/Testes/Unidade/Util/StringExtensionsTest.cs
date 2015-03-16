@@ -1,4 +1,4 @@
-﻿using Aplicacao.Util;
+﻿using Dominio.Util;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,9 +1,9 @@
 using System.Linq;
-using Aplicacao.Dominio.Sinais;
-using Aplicacao.Dominio.Sinais.Caracteristicas;
-using Aplicacao.Util;
+using Dominio.Sinais;
+using Dominio.Sinais.Caracteristicas;
+using Dominio.Util;
 
-namespace Aplicacao.Dominio.Algoritmos.Caracteristicas
+namespace Dominio.Algoritmos.Caracteristicas
 {
     public abstract class GeradorDeCaracteristicasDeFrame
     {

@@ -8,11 +8,11 @@ using Accord.Statistics.Models.Fields.Functions;
 using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
-using Aplicacao.Dominio.Algoritmos.Caracteristicas;
-using Aplicacao.Dominio.Algoritmos.Dados;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Algoritmos.Caracteristicas;
+using Dominio.Algoritmos.Dados;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dominio.Algoritmos.Dinamico
+namespace Dominio.Algoritmos.Dinamico
 {
     public class Hcrf : IAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {

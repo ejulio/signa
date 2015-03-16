@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dominio.Algoritmos.Factories;
+﻿using Dominio.Algoritmos.Factories;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using Aplicacao.Util;
+using Dominio.Util;
 
 namespace Testes.Unidade.Util
 {

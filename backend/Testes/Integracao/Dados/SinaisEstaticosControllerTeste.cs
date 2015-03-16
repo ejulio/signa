@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using Aplicacao.Dados;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Sinais;
-using Aplicacao.Util;
+using Dominio.Dados;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
+using Dominio.Util;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados

@@ -1,5 +1,5 @@
 ﻿
-namespace Aplicacao.Util
+namespace Dominio.Util
 {
     public static class StringExtensions
     {

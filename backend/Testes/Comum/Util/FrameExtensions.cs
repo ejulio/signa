@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Aplicacao.Dominio.Sinais;
-using Aplicacao.Dominio.Sinais.Caracteristicas;
-using Aplicacao.Util;
+using Dominio.Sinais;
+using Dominio.Sinais.Caracteristicas;
+using Dominio.Util;
 
 namespace Testes.Comum.Util
 {

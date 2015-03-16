@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Algoritmos;
-using Aplicacao.Dominio.Algoritmos.Caracteristicas;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Algoritmos;
+using Dominio.Algoritmos.Caracteristicas;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dados
+namespace Dominio.Dados
 {
     public class SinaisDinamicosController : SinaisController
     {

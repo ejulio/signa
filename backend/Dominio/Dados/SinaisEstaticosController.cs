@@ -1,8 +1,8 @@
-﻿using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Algoritmos;
-using Aplicacao.Dominio.Sinais;
+﻿using Dominio.Algoritmos;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dados
+namespace Dominio.Dados
 {
     public class SinaisEstaticosController : SinaisController
     {

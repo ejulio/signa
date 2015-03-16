@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Aplicacao.Util
+namespace Dominio.Util
 {
     public static class IEnumerableExtensions
     {

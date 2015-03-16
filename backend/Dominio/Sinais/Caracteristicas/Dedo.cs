@@ -1,5 +1,5 @@
 ﻿
-namespace Aplicacao.Dominio.Sinais.Caracteristicas
+namespace Dominio.Sinais.Caracteristicas
 {
     public class Dedo
     {

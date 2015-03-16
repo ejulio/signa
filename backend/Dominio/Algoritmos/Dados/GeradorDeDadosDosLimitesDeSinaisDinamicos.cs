@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Aplicacao.Dominio.Algoritmos.Caracteristicas;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Algoritmos.Caracteristicas;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dominio.Algoritmos.Dados
+namespace Dominio.Algoritmos.Dados
 {
     public class GeradorDeDadosDosLimitesDeSinaisDinamicos : IGeradorDeDadosDeSinaisEstaticos
     {

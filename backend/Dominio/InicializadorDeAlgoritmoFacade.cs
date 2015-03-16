@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Algoritmos.Dados;
-using Aplicacao.Dominio.Algoritmos.Factories;
+using Dominio.Algoritmos.Dados;
+using Dominio.Algoritmos.Factories;
+using Dominio.Dados.Repositorio;
 
-namespace Aplicacao.Dominio
+namespace Dominio
 {
     public class InicializadorDeAlgoritmoFacade
     {

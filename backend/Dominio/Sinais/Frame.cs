@@ -1,6 +1,6 @@
-﻿using Aplicacao.Dominio.Sinais.Caracteristicas;
+﻿using Dominio.Sinais.Caracteristicas;
 
-namespace Aplicacao.Dominio.Sinais
+namespace Dominio.Sinais
 {
     public class Frame
     {

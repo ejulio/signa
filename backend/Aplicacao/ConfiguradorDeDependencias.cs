@@ -1,6 +1,6 @@
-﻿using Aplicacao.Dados;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Algoritmos.Factories;
+﻿using Dominio.Algoritmos.Factories;
+using Dominio.Dados;
+using Dominio.Dados.Repositorio;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

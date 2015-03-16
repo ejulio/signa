@@ -2,13 +2,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO;
-using Aplicacao.Dados;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Algoritmos.Caracteristicas;
-using Aplicacao.Dominio.Algoritmos.Dinamico;
-using Aplicacao.Dominio.Algoritmos.Estatico;
-using Aplicacao.Dominio.Sinais;
-using Aplicacao.Util;
+using Dominio.Algoritmos.Caracteristicas;
+using Dominio.Algoritmos.Dinamico;
+using Dominio.Algoritmos.Estatico;
+using Dominio.Dados;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
+using Dominio.Util;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados

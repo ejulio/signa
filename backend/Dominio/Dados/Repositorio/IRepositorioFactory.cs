@@ -1,6 +1,6 @@
-using Aplicacao.Dominio.Sinais;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dados.Repositorio
+namespace Dominio.Dados.Repositorio
 {
     public interface IRepositorioFactory
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dados.Repositorio
+namespace Dominio.Dados.Repositorio
 {
     public class RepositorioDeSinaisDinamicos : IRepositorio<Sinal>
     {

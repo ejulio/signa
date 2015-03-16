@@ -1,6 +1,6 @@
 ﻿using System;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
 using Microsoft.AspNet.SignalR;
 
 namespace Aplicacao.Hubs

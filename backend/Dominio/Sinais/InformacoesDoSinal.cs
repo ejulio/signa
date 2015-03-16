@@ -1,5 +1,5 @@
 ﻿
-namespace Aplicacao.Dominio.Sinais
+namespace Dominio.Sinais
 {
     public class InformacoesDoSinal
     {

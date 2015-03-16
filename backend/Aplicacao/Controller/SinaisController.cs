@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
-using Aplicacao.Dados;
 using Aplicacao.ViewModel;
+using Dominio.Dados;
 
 namespace Aplicacao.Controller
 {

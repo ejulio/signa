@@ -1,4 +1,4 @@
-﻿namespace Aplicacao.Dominio.Sinais
+﻿namespace Dominio.Sinais
 {
     public enum TipoSinal
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Algoritmos;
-using Aplicacao.Dominio.Sinais;
-using Aplicacao.Util;
+using Dominio.Algoritmos;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
+using Dominio.Util;
 
-namespace Aplicacao.Dados
+namespace Dominio.Dados
 {
     public abstract class SinaisController
     {

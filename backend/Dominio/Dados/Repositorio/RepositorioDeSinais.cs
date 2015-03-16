@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Sinais;
 using Newtonsoft.Json;
 
-namespace Aplicacao.Dados.Repositorio
+namespace Dominio.Dados.Repositorio
 {
     public class RepositorioDeSinais : IRepositorio<Sinal>
     {

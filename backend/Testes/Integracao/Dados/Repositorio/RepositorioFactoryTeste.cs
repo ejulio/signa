@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Aplicacao.Dados.Repositorio;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Dados.Repositorio;
+using Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados.Repositorio

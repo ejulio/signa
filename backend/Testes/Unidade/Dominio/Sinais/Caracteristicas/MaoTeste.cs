@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dominio.Sinais.Caracteristicas;
+﻿using Dominio.Sinais.Caracteristicas;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

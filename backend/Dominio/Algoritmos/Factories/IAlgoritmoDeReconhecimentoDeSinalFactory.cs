@@ -1,7 +1,7 @@
-using Aplicacao.Dominio.Algoritmos.Dinamico;
-using Aplicacao.Dominio.Algoritmos.Estatico;
+using Dominio.Algoritmos.Dinamico;
+using Dominio.Algoritmos.Estatico;
 
-namespace Aplicacao.Dominio.Algoritmos.Factories
+namespace Dominio.Algoritmos.Factories
 {
     public interface IAlgoritmoDeReconhecimentoDeSinalFactory
     {

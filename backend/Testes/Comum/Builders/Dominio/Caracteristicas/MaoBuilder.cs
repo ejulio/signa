@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dominio.Sinais.Caracteristicas;
+﻿using Dominio.Sinais.Caracteristicas;
 
 namespace Testes.Comum.Builders.Dominio.Caracteristicas
 {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
-using Aplicacao.Dominio.Algoritmos.Caracteristicas;
-using Aplicacao.Dominio.Algoritmos.Dados;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Algoritmos.Caracteristicas;
+using Dominio.Algoritmos.Dados;
+using Dominio.Sinais;
 
-namespace Aplicacao.Dominio.Algoritmos.Estatico
+namespace Dominio.Algoritmos.Estatico
 {
     public class Svm : IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {

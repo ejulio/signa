@@ -2,10 +2,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using Aplicacao.Dominio.Algoritmos.Caracteristicas;
-using Aplicacao.Dominio.Algoritmos.Dados;
-using Aplicacao.Dominio.Algoritmos.Estatico;
-using Aplicacao.Dominio.Sinais;
+using Dominio.Algoritmos.Caracteristicas;
+using Dominio.Algoritmos.Dados;
+using Dominio.Algoritmos.Estatico;
+using Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Estatico
