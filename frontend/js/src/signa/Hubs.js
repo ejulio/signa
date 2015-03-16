@@ -3,7 +3,7 @@
     'use strict';
     
     var conexao = $.connection;
-    conexao.hub.url = 'http://localhost:9000/signalr';
+    conexao.hub.url = Signa.montarUrlDoServidor('signalr');
 
     Signa.Hubs = {
         iniciar: function()

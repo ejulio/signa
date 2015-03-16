@@ -4,19 +4,15 @@
 
     global.Signa = {
 
+        URL: '',
+
         camera: {},
         recognizer: {},
         reconhecimento: {},
         scene: {},
 
-        signalrHub: function()
-        {
-            return getConnection().signSequence.server;
-        },
-
-        initHubs: function()
-        {
-            return getConnection().hub.start();
+        montarUrlDoServidor: function(caminho) {
+            return 'http://localhost:9000/' + caminho;
         }
     };
 })(typeof global === 'undefined' ? window : global);
@@ -36,7 +32,7 @@
     'use strict';
     
     var conexao = $.connection;
-    conexao.hub.url = 'http://localhost:9000/signalr';
+    conexao.hub.url = Signa.montarUrlDoServidor('signalr');
 
     Signa.Hubs = {
         iniciar: function()
@@ -364,26 +360,15 @@
 
         _onSalvarClick: function()
         {
-            this._saveSignSample();
+            this._salvarAmostraDoSinal();
         },
 
-        _saveSignSample: function()
+        _salvarAmostraDoSinal: function()
         {
             var descricaoDoSinal = $('#description').val(),
-                amostra = this._gerarAmostra(),
-                acao;
+                amostra = this._gerarAmostra();
 
-            if (amostra.length === 1) {
-                acao = 'SalvarAmostraDeSinalEstatico';
-            } else {
-                acao = 'SalvarAmostraDeSinalDinamico';
-            }
-            
-            $.post('http://localhost:9000/sinais/' + acao, {
-                descricao: descricaoDoSinal,
-                conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,
-                amostra: amostra
-            });
+            this._enviarInformacoesParaOServidor(descricaoDoSinal, amostra);
         },
 
         _gerarAmostra: function()
@@ -397,6 +382,27 @@
             }
             
             return amostra;
+        },
+
+        _enviarInformacoesParaOServidor: function(descricaoDoSinal, amostra) {
+            var url = this._montarUrlParaSalvarOSinal(amostra);
+            $.post(url, {
+                descricao: descricaoDoSinal,
+                conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,
+                amostra: amostra
+            });
+        },
+
+        _montarUrlParaSalvarOSinal: function(amostra) {
+            if (this._ehAmostraDeSinalEstatico(amostra)) {
+                return Signa.montarUrlDoServidor('sinais/SalvarAmostraDeSinalEstatico');
+            } else {
+                return Signa.montarUrlDoServidor('sinais/SalvarAmostraDeSinalDinamico');
+            }
+        },
+
+        _ehAmostraDeSinalEstatico: function(amostra) {
+            return amostra.length === 1;
         }
     };
 

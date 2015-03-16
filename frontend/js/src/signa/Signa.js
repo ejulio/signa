@@ -4,19 +4,15 @@
 
     global.Signa = {
 
+        URL: '',
+
         camera: {},
         recognizer: {},
         reconhecimento: {},
         scene: {},
 
-        signalrHub: function()
-        {
-            return getConnection().signSequence.server;
-        },
-
-        initHubs: function()
-        {
-            return getConnection().hub.start();
+        montarUrlDoServidor: function(caminho) {
+            return 'http://localhost:9000/' + caminho;
         }
     };
 })(typeof global === 'undefined' ? window : global);
