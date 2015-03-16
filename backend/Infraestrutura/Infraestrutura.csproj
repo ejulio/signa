@@ -66,7 +66,7 @@
     <None Include="samples\tres.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Signa\Signa.csproj">
+    <ProjectReference Include="..\Aplicacao\Aplicacao.csproj">
       <Project>{b73a5508-76e4-4a0d-ad09-f436a851b558}</Project>
       <Name>Signa</Name>
     </ProjectReference>
