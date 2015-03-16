@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Algoritmos.Caracteristicas;
-using Signa.Dominio.Algoritmos.Dados;
-using Signa.Dominio.Algoritmos.Dinamico;
-using Signa.Dominio.Sinais;
 using System;
+using Aplicacao.Dominio.Algoritmos.Caracteristicas;
+using Aplicacao.Dominio.Algoritmos.Dados;
+using Aplicacao.Dominio.Algoritmos.Dinamico;
+using Aplicacao.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Dinamico

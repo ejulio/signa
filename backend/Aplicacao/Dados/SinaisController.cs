@@ -1,11 +1,11 @@
-﻿using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos;
-using Signa.Dominio.Sinais;
-using Signa.Util;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Algoritmos;
+using Aplicacao.Dominio.Sinais;
+using Aplicacao.Util;
 
-namespace Signa.Dados
+namespace Aplicacao.Dados
 {
     public abstract class SinaisController
     {

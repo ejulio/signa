@@ -1,6 +1,6 @@
 ﻿using Microsoft.Owin.StaticFiles.ContentTypes;
 
-namespace Signa.ContentTypeProviders
+namespace Aplicacao.ContentTypeProviders
 {
     public class JsonContentTypeProvider : FileExtensionContentTypeProvider
     {

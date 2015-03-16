@@ -1,7 +1,7 @@
 ﻿
-using Signa.Dominio.Algoritmos.Dados;
+using Aplicacao.Dominio.Algoritmos.Dados;
 
-namespace Signa.Dominio.Algoritmos.Dinamico
+namespace Aplicacao.Dominio.Algoritmos.Dinamico
 {
     public interface IAlgoritmoDeReconhecimentoDeSinaisDinamicos : IAlgoritmoDeReconhecimentoDeSinais
     {

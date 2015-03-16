@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using Aplicacao.Dados;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Algoritmos.Factories;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Signa.Dados;
-using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos.Factories;
 
-namespace Signa
+namespace Aplicacao
 {
     public class ConfiguradorDeDependencias
     {

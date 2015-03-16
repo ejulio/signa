@@ -1,9 +1,9 @@
-﻿using Signa.Dominio.Algoritmos.Caracteristicas;
-using Signa.Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Aplicacao.Dominio.Algoritmos.Caracteristicas;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dominio.Algoritmos.Dados
+namespace Aplicacao.Dominio.Algoritmos.Dados
 {
     public class GeradorDeDadosDosLimitesDeSinaisDinamicos : IGeradorDeDadosDeSinaisEstaticos
     {

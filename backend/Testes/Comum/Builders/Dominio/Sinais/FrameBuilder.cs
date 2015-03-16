@@ -1,5 +1,5 @@
-﻿using Signa.Dominio.Sinais;
-using Signa.Dominio.Sinais.Caracteristicas;
+﻿using Aplicacao.Dominio.Sinais;
+using Aplicacao.Dominio.Sinais.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 
 namespace Testes.Comum.Builders.Dominio.Sinais

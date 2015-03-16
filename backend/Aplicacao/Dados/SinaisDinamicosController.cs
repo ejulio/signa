@@ -1,10 +1,10 @@
-﻿using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos;
-using Signa.Dominio.Algoritmos.Caracteristicas;
-using Signa.Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Algoritmos;
+using Aplicacao.Dominio.Algoritmos.Caracteristicas;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dados
+namespace Aplicacao.Dados
 {
     public class SinaisDinamicosController : SinaisController
     {

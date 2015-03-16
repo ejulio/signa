@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Signa.Dados.Repositorio;
-using Signa.Dominio.Sinais;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Integracao.Dados.Repositorio

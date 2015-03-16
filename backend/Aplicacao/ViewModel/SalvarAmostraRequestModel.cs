@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Signa.Dominio.Sinais;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.ViewModel
+namespace Aplicacao.ViewModel
 {
     public class SalvarAmostraRequestModel
     {

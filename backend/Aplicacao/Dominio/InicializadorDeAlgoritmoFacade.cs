@@ -1,9 +1,9 @@
-﻿using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos.Dados;
-using Signa.Dominio.Algoritmos.Factories;
-using System.Linq;
+﻿using System.Linq;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Algoritmos.Dados;
+using Aplicacao.Dominio.Algoritmos.Factories;
 
-namespace Signa.Dominio
+namespace Aplicacao.Dominio
 {
     public class InicializadorDeAlgoritmoFacade
     {

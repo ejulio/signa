@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+﻿using Aplicacao.Dominio.Algoritmos.Factories;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Algoritmos.Factories;
 
 namespace Testes.Unidade.Dominio.Algoritmos.Factories
 {

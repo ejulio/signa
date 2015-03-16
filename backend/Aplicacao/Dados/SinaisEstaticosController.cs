@@ -1,8 +1,8 @@
-﻿using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos;
-using Signa.Dominio.Sinais;
+﻿using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Algoritmos;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dados
+namespace Aplicacao.Dados
 {
     public class SinaisEstaticosController : SinaisController
     {

@@ -1,9 +1,9 @@
-﻿using Signa.Dominio.Sinais;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dados.Repositorio
+namespace Aplicacao.Dados.Repositorio
 {
     public class RepositorioDeSinaisEstaticos : IRepositorio<Sinal>
     {

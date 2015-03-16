@@ -1,6 +1,6 @@
-﻿using Signa.Dominio.Sinais.Caracteristicas;
+﻿using Aplicacao.Dominio.Sinais.Caracteristicas;
 
-namespace Signa.Dominio.Sinais
+namespace Aplicacao.Dominio.Sinais
 {
     public class Frame
     {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
-using Microsoft.Owin.Security.Provider;
 using Microsoft.Practices.Unity;
 using IDependencyResolver = Microsoft.AspNet.SignalR.IDependencyResolver;
 
-namespace Signa
+namespace Aplicacao
 {
     public class ResolvedorDeDependenciasUnity : IDependencyResolver, System.Web.Http.Dependencies.IDependencyResolver
     {

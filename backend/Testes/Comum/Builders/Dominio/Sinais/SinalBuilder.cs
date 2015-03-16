@@ -1,5 +1,5 @@
-﻿using Signa.Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Aplicacao.Dominio.Sinais;
 
 namespace Testes.Comum.Builders.Dominio.Sinais
 {

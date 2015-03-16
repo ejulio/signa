@@ -1,9 +1,10 @@
 ﻿using Microsoft.Owin.Hosting;
-using Signa.Dados;
-using Signa.Dados.Repositorio;
-using Signa.Dominio;
-using Signa.Dominio.Algoritmos.Factories;
 using System;
+using Aplicacao;
+using Aplicacao.Dados;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio;
+using Aplicacao.Dominio.Algoritmos.Factories;
 
 namespace Infraestrutura
 {
@@ -21,7 +22,7 @@ namespace Infraestrutura
         private static void StartServer()
         {
             const string serverAddress = "http://localhost:9000";
-            WebApp.Start<Signa.Startup>(serverAddress);
+            WebApp.Start<Startup>(serverAddress);
             Console.WriteLine("Aplicação iniciada em {0}", serverAddress);
         }
 

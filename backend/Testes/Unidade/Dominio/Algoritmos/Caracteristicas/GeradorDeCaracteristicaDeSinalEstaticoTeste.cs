@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Algoritmos.Caracteristicas;
-using Signa.Dominio.Sinais;
-using Signa.Dominio.Sinais.Caracteristicas;
-using Signa.Util;
 using System.Linq;
+using Aplicacao.Dominio.Algoritmos.Caracteristicas;
+using Aplicacao.Dominio.Sinais;
+using Aplicacao.Dominio.Sinais.Caracteristicas;
+using Aplicacao.Util;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
 

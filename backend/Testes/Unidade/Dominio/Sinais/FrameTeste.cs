@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+﻿using Aplicacao.Dominio.Sinais;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio.Sinais
 {

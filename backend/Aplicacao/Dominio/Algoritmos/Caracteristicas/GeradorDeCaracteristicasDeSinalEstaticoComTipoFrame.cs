@@ -1,8 +1,8 @@
-﻿using Signa.Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dominio.Algoritmos.Caracteristicas
+namespace Aplicacao.Dominio.Algoritmos.Caracteristicas
 {
     public class GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame
     {

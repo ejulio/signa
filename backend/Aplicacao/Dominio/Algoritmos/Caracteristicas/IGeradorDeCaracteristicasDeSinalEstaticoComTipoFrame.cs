@@ -1,6 +1,6 @@
-﻿using Signa.Dominio.Sinais;
+﻿using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dominio.Algoritmos.Caracteristicas
+namespace Aplicacao.Dominio.Algoritmos.Caracteristicas
 {
     public interface IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstatico
     {

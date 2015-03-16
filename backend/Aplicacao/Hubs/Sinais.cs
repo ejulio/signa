@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNet.SignalR;
-using Signa.Dados.Repositorio;
-using Signa.Dominio.Sinais;
-using System;
+﻿using System;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Sinais;
+using Microsoft.AspNet.SignalR;
 
-namespace Signa.Hubs
+namespace Aplicacao.Hubs
 {
     public class Sinais : Hub
     {

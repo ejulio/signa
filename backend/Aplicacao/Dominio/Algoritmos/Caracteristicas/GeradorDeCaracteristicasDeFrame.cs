@@ -1,9 +1,9 @@
-using Signa.Dominio.Sinais;
-using Signa.Dominio.Sinais.Caracteristicas;
-using Signa.Util;
 using System.Linq;
+using Aplicacao.Dominio.Sinais;
+using Aplicacao.Dominio.Sinais.Caracteristicas;
+using Aplicacao.Util;
 
-namespace Signa.Dominio.Algoritmos.Caracteristicas
+namespace Aplicacao.Dominio.Algoritmos.Caracteristicas
 {
     public abstract class GeradorDeCaracteristicasDeFrame
     {

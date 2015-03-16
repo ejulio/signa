@@ -1,6 +1,6 @@
-﻿using Signa.Dominio.Sinais;
+﻿using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dados.Repositorio
+namespace Aplicacao.Dados.Repositorio
 {
     public class RepositorioFactory : IRepositorioFactory
     {

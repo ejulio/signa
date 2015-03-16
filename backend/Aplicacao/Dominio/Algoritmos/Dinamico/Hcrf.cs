@@ -1,18 +1,18 @@
-﻿using Accord.Statistics.Distributions.Fitting;
+﻿using System;
+using System.Collections.Generic;
+using Accord.Statistics.Distributions.Fitting;
 using Accord.Statistics.Distributions.Multivariate;
 using Accord.Statistics.Distributions.Univariate;
+using Accord.Statistics.Models.Fields;
+using Accord.Statistics.Models.Fields.Functions;
 using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
-using Signa.Dominio.Algoritmos.Caracteristicas;
-using Signa.Dominio.Algoritmos.Dados;
-using Signa.Dominio.Sinais;
-using System;
-using System.Collections.Generic;
-using Accord.Statistics.Models.Fields;
-using Accord.Statistics.Models.Fields.Functions;
+using Aplicacao.Dominio.Algoritmos.Caracteristicas;
+using Aplicacao.Dominio.Algoritmos.Dados;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dominio.Algoritmos.Dinamico
+namespace Aplicacao.Dominio.Algoritmos.Dinamico
 {
     public class Hcrf : IAlgoritmoDeReconhecimentoDeSinaisDinamicos
     {

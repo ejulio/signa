@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+﻿using Aplicacao.Util;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Signa.Util;
 
 namespace Testes.Unidade.Util
 {

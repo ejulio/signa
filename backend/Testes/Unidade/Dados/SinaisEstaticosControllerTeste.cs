@@ -1,10 +1,10 @@
-﻿using FluentAssertions;
+﻿using Aplicacao.Dados;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio.Algoritmos.Estatico;
+using Aplicacao.Dominio.Sinais;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Signa.Dados;
-using Signa.Dados.Repositorio;
-using Signa.Dominio.Algoritmos.Estatico;
-using Signa.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dados

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Signa.Util
+namespace Aplicacao.Util
 {
     public static class IEnumerableExtensions
     {

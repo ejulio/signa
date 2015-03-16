@@ -1,15 +1,15 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Signa.Dados.Repositorio;
-using Signa.Dominio;
-using Signa.Dominio.Algoritmos.Dados;
-using Signa.Dominio.Algoritmos.Dinamico;
-using Signa.Dominio.Algoritmos.Estatico;
-using Signa.Dominio.Algoritmos.Factories;
-using Signa.Dominio.Sinais;
 using System;
 using System.Collections.Generic;
+using Aplicacao.Dados.Repositorio;
+using Aplicacao.Dominio;
+using Aplicacao.Dominio.Algoritmos.Dados;
+using Aplicacao.Dominio.Algoritmos.Dinamico;
+using Aplicacao.Dominio.Algoritmos.Estatico;
+using Aplicacao.Dominio.Algoritmos.Factories;
+using Aplicacao.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais;
 
 namespace Testes.Unidade.Dominio

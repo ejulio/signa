@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
-using Signa.Dados;
-using Signa.Dados.Repositorio;
-using Signa.Dominio.Sinais;
-using Signa.ViewModel;
+﻿using System.Web.Http;
+using Aplicacao.Dados;
+using Aplicacao.ViewModel;
 
-namespace Signa.Controller
+namespace Aplicacao.Controller
 {
     public class SinaisController : ApiController
     {

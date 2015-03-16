@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace Signa.Dados.Repositorio
+namespace Aplicacao.Dados.Repositorio
 {
     public interface IRepositorio<TEntidade> : IEnumerable<TEntidade>
     {

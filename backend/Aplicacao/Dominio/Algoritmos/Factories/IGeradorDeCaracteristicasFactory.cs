@@ -1,6 +1,6 @@
-﻿using Signa.Dominio.Algoritmos.Caracteristicas;
+﻿using Aplicacao.Dominio.Algoritmos.Caracteristicas;
 
-namespace Signa.Dominio.Algoritmos.Factories
+namespace Aplicacao.Dominio.Algoritmos.Factories
 {
     public interface IGeradorDeCaracteristicasFactory
     {

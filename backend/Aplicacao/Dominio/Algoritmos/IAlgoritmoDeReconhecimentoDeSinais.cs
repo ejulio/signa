@@ -1,7 +1,7 @@
-﻿using Signa.Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Aplicacao.Dominio.Sinais;
 
-namespace Signa.Dominio.Algoritmos
+namespace Aplicacao.Dominio.Algoritmos
 {
     public interface IAlgoritmoDeReconhecimentoDeSinais
     {

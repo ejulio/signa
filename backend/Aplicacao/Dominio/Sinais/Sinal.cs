@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Signa.Dominio.Sinais
+namespace Aplicacao.Dominio.Sinais
 {
     public class Sinal
     {

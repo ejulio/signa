@@ -1,13 +1,13 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Routing;
+using Aplicacao.ContentTypeProviders;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.StaticFiles;
 using Microsoft.Practices.Unity;
 using Owin;
-using Signa.ContentTypeProviders;
 
-namespace Signa
+namespace Aplicacao
 {
     public class Startup
     {

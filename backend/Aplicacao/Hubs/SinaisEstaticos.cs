@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNet.SignalR;
-using Signa.Dados;
-using Signa.Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Aplicacao.Dados;
+using Aplicacao.Dominio.Sinais;
+using Microsoft.AspNet.SignalR;
 
-namespace Signa.Hubs
+namespace Aplicacao.Hubs
 {
     public class SinaisEstaticos : Hub
     {
