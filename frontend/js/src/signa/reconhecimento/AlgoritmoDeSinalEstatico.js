@@ -19,6 +19,7 @@
                 .reconhecer([frame])
                 .then(function(sinalReconhecidoId) {
                     //return false;
+                    console.log('RECONHECEU:' + sinalReconhecidoId);
                     return sinalReconhecidoId === this._sinalId;
                 }.bind(this));
         }

@@ -5,6 +5,7 @@ using Dominio.Algoritmos.Dados;
 using Dominio.Sinais;
 using System;
 using System.Collections.Generic;
+using Accord.Statistics.Kernels;
 
 namespace Dominio.Algoritmos.Estatico
 {
@@ -24,29 +25,22 @@ namespace Dominio.Algoritmos.Estatico
             {
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
-            double p;
-            int r = svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), MulticlassComputeMethod.Voting, out p);
-            Console.WriteLine("{0} - {1}", r, p);
-            if (p > 0.6)
-                return r;
-
-            return -1;
+            return svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), MulticlassComputeMethod.Elimination);
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)
         {
-            svm = new MulticlassSupportVectorMachine(0, dados.QuantidadeDeClasses);
+            svm = new MulticlassSupportVectorMachine(0, new Gaussian(), dados.QuantidadeDeClasses);
 
-            var teacher = new MulticlassSupportVectorLearning(svm, dados.Entradas, dados.Saidas);
-            teacher.Algorithm = (machine, classInputs, classOutputs, j, k) =>
+            var teacher = new MulticlassSupportVectorLearning(svm, dados.Entradas, dados.Saidas)
             {
-                var smo = new SequentialMinimalOptimization(machine, classInputs, classOutputs);
-                smo.Run();
-                return new ProbabilisticOutputCalibration(machine, classInputs, classOutputs);
+                Algorithm =
+                    (machine, classInputs, classOutputs, j, k) =>
+                        new SequentialMinimalOptimization(machine, classInputs, classOutputs)
             };
-                                    
 
-            teacher.Run();
+
+            var e = teacher.Run();
         }
     }
 }

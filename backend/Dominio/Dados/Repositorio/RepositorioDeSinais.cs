@@ -1,4 +1,5 @@
-﻿using Dominio.Sinais;
+﻿using System;
+using Dominio.Sinais;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -68,6 +69,7 @@ namespace Dominio.Dados.Repositorio
             sinaisPorId = new Dictionary<string, Sinal>();
             foreach (var sinal in sinaisPorIndice)
             {
+                Console.WriteLine("{0}:{1}", sinal.Id, sinal.Descricao);
                 sinaisPorId.Add(sinal.Descricao, sinal);
             }
         }
