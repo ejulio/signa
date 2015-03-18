@@ -30,7 +30,9 @@ namespace Dominio.Algoritmos.Estatico
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)
         {
-            svm = new MulticlassSupportVectorMachine(0, new Gaussian(), dados.QuantidadeDeClasses);
+            var kernel = new Gaussian();
+            
+            svm = new MulticlassSupportVectorMachine(0, kernel, dados.QuantidadeDeClasses);
 
             var teacher = new MulticlassSupportVectorLearning(svm, dados.Entradas, dados.Saidas)
             {
