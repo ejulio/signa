@@ -461,8 +461,8 @@
             
             userHandsLeapController.connect();
             
-            this._reconhecedorDeSinais = new Signa.recognizer.SignRecognizer(userHandsLeapController);
-            this._reconhecedorDeSinais.addRecognizeEventListener(this._onRecognize.bind(this));
+            this._reconhecedorDeSinais = new Signa.reconhecimento.ReconhecedorDeSinais(userHandsLeapController);
+            this._reconhecedorDeSinais.adicionarListenerDeReconhecimento(this._onRecognize.bind(this));
         },
 
         _onNewSign: function(informacoesDoSinal)
@@ -476,7 +476,7 @@
             this._descricaoDoSinal.onNewSign(this._informacoesDoSinal);
             this._maosDoUsuario.onNewSign();
             this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
-            this._reconhecedorDeSinais.setSignToRecognizeId(this._informacoesDoSinal.Id);
+            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.Id);
             this._hideRecognizeMessage();
         },
 
@@ -491,7 +491,7 @@
             this._descricaoDoSinal.onRecognize();
             this._exemploDoSinal.onRecognize();
             this._maosDoUsuario.onRecognize();
-            this._reconhecedorDeSinais.setSignToRecognizeId(-1);
+            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(-1);
             window.setTimeout(this._carregarProximoSinal.bind(this), 1000);
         },
 
@@ -801,68 +801,36 @@
 {
     'use strict';
 
-    function OfflineSignRecognizer(eventEmitter)
-    {
-        this._eventEmitter = eventEmitter;
-    }
-
-    OfflineSignRecognizer.prototype = {
-        _eventEmitter: undefined,
-
-        addRecognizeEventListener: function(listener)
-        {
-            this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
-        },
-
-        recognize: function(){},
-
-        setSignToRecognizeId: function(){},
-
-        setTipoDoSinal: function(){}
-    };
-
-    Signa.recognizer.OfflineSignRecognizer = OfflineSignRecognizer;
-})(window, window.Signa);
-
-;(function(window, Signa, undefined)
-{
-    'use strict';
-
-    function SignRecognizer(leapController)
+    function ReconhecedorDeSinais(leapController)
     {
         var me = this;
         leapController.on('frame', this._onLeapFrame.bind(this));
         me._eventEmitter = new EventEmitter();
-        me.OFFLINE = new Signa.recognizer.OfflineSignRecognizer(this._eventEmitter);
-        me.TRAINED = new Signa.recognizer.TrainedSignRecognizer(this._eventEmitter);
+        me.OFFLINE = new Signa.reconhecimento.ReconhecedorDeSinaisOffline(this._eventEmitter);
+        me.ONLINE = new Signa.reconhecimento.ReconhecedorDeSinaisOnline(this._eventEmitter);
 
         me._estado = me.OFFLINE;
 
-        Signa.Hubs.iniciar().done(function()
-        {
-            me._estado = me.TRAINED;
-        });
+        Signa.Hubs.iniciar()
+            .done(function()
+            {
+                me._estado = me.ONLINE;
+            });
     }
 
-    SignRecognizer.prototype = {
+    ReconhecedorDeSinais.prototype = {
         RECOGNIZE_EVENT_ID: 'recognize',
         OFFLINE: undefined,
-        TRAINED: undefined,
+        ONLINE: undefined,
 
         _eventEmitter: undefined,
         _estado: undefined,
         _frame: undefined,
         _idDoSinalParaReconhecer: -1,
 
-        setState: function(state)
+        setIdDoSinalParaReconhecer: function(signalToRecognizeId)
         {
-            this._estado = state;
-            state.setSignalToRecognizeId(this._idDoSinalParaReconhecer);
-        },
-
-        setSignToRecognizeId: function(signalToRecognizeId)
-        {
-            this._estado.setSignToRecognizeId(signalToRecognizeId);
+            this._estado.setIdDoSinalParaReconhecer(signalToRecognizeId);
             this._idDoSinalParaReconhecer = signalToRecognizeId;
         },
 
@@ -870,47 +838,73 @@
             this._estado.setTipoDoSinal(tipoDoSinal);
         },
 
-        _reconhecer: function(frame)
+        _reconhecer: function()
         {
-            this._estado.recognize(frame);
+            this._estado.reconhecer(this._frame);
         },
 
         _onLeapFrame: function(frame)
         {
-            // pegar os dados necessários do frame
             this._frame = frame;
-            this._reconhecer(frame);
+            this._reconhecer();
         },
 
-        addRecognizeEventListener: function(listener)
+        adicionarListenerDeReconhecimento: function(listener)
         {
-            this._estado.addRecognizeEventListener(listener);
+            this._estado.adicionarListenerDeReconhecimento(listener);
         }
     };
 
-    Signa.recognizer.SignRecognizer = SignRecognizer;
+    Signa.reconhecimento.ReconhecedorDeSinais = ReconhecedorDeSinais;
+})(window, window.Signa);
+
+;(function(window, Signa, undefined)
+{
+    'use strict';
+
+    function ReconhecedorDeSinaisOffline(eventEmitter)
+    {
+        this._eventEmitter = eventEmitter;
+    }
+
+    ReconhecedorDeSinaisOffline.prototype = {
+        _eventEmitter: undefined,
+
+        adicionarListenerDeReconhecimento: function(listener)
+        {
+            this._eventEmitter.addListener(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID, listener);
+        },
+
+        reconhecer: function(){},
+
+        setIdDoSinalParaReconhecer: function(){},
+
+        setTipoDoSinal: function(){}
+    };
+
+    Signa.reconhecimento.ReconhecedorDeSinaisOffline = ReconhecedorDeSinaisOffline;
 })(window, window.Signa);
 
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function TrainedSignRecognizer(eventEmitter) {
+    function ReconhecedorDeSinaisOnline(eventEmitter) {
         this._eventEmitter = eventEmitter;
         this._informacoesDoFrame = new Signa.reconhecimento.InformacoesDoFrame();
     }
 
-    TrainedSignRecognizer.prototype = {
+    ReconhecedorDeSinaisOnline.prototype = {
         _eventEmitter: undefined,
         _informacoesDoFrame: undefined,
         _idDoSinalParaReconhecer: -1,
         _algoritmo: undefined,
         _idDoDelayDeReconhecimento: -1,
 
-        addRecognizeEventListener: function(listener) {
-            this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
+        adicionarListenerDeReconhecimento: function(listener) {
+            this._eventEmitter.addListener(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID, listener);
         },
 
-        recognize: function(frame) {
+        reconhecer: function(frame) {
             if (!frame.hands.length)
                 return;
             
@@ -926,7 +920,7 @@
                             .then(function(sinalFoiReconhecido) {
                                 if (sinalFoiReconhecido) {
                                     this._idDoSinalParaReconhecer = -1;
-                                    this._eventEmitter.trigger(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID);
+                                    this._eventEmitter.trigger(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID);
                                 }
                                 this._idDoDelayDeReconhecimento = -1;
                             }.bind(this));
@@ -935,7 +929,7 @@
             }
         },
 
-        setSignToRecognizeId: function(id) {
+        setIdDoSinalParaReconhecer: function(id) {
             this._idDoSinalParaReconhecer = id;
             this._algoritmo.setSinalId(id);
         },
@@ -955,5 +949,5 @@
         }
     };
 
-    Signa.recognizer.TrainedSignRecognizer = TrainedSignRecognizer;
+    Signa.reconhecimento.ReconhecedorDeSinaisOnline = ReconhecedorDeSinaisOnline;
 })(window, window.Signa);

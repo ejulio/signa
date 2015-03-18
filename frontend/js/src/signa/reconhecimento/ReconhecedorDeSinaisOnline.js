@@ -1,23 +1,23 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function TrainedSignRecognizer(eventEmitter) {
+    function ReconhecedorDeSinaisOnline(eventEmitter) {
         this._eventEmitter = eventEmitter;
         this._informacoesDoFrame = new Signa.reconhecimento.InformacoesDoFrame();
     }
 
-    TrainedSignRecognizer.prototype = {
+    ReconhecedorDeSinaisOnline.prototype = {
         _eventEmitter: undefined,
         _informacoesDoFrame: undefined,
         _idDoSinalParaReconhecer: -1,
         _algoritmo: undefined,
         _idDoDelayDeReconhecimento: -1,
 
-        addRecognizeEventListener: function(listener) {
-            this._eventEmitter.addListener(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID, listener);
+        adicionarListenerDeReconhecimento: function(listener) {
+            this._eventEmitter.addListener(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID, listener);
         },
 
-        recognize: function(frame) {
+        reconhecer: function(frame) {
             if (!frame.hands.length)
                 return;
             
@@ -33,7 +33,7 @@
                             .then(function(sinalFoiReconhecido) {
                                 if (sinalFoiReconhecido) {
                                     this._idDoSinalParaReconhecer = -1;
-                                    this._eventEmitter.trigger(Signa.recognizer.SignRecognizer.RECOGNIZE_EVENT_ID);
+                                    this._eventEmitter.trigger(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID);
                                 }
                                 this._idDoDelayDeReconhecimento = -1;
                             }.bind(this));
@@ -42,7 +42,7 @@
             }
         },
 
-        setSignToRecognizeId: function(id) {
+        setIdDoSinalParaReconhecer: function(id) {
             this._idDoSinalParaReconhecer = id;
             this._algoritmo.setSinalId(id);
         },
@@ -62,5 +62,5 @@
         }
     };
 
-    Signa.recognizer.TrainedSignRecognizer = TrainedSignRecognizer;
+    Signa.reconhecimento.ReconhecedorDeSinaisOnline = ReconhecedorDeSinaisOnline;
 })(window, window.Signa);

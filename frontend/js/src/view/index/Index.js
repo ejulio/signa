@@ -49,8 +49,8 @@
             
             userHandsLeapController.connect();
             
-            this._reconhecedorDeSinais = new Signa.recognizer.SignRecognizer(userHandsLeapController);
-            this._reconhecedorDeSinais.addRecognizeEventListener(this._onRecognize.bind(this));
+            this._reconhecedorDeSinais = new Signa.reconhecimento.ReconhecedorDeSinais(userHandsLeapController);
+            this._reconhecedorDeSinais.adicionarListenerDeReconhecimento(this._onRecognize.bind(this));
         },
 
         _onNewSign: function(informacoesDoSinal)
@@ -64,7 +64,7 @@
             this._descricaoDoSinal.onNewSign(this._informacoesDoSinal);
             this._maosDoUsuario.onNewSign();
             this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
-            this._reconhecedorDeSinais.setSignToRecognizeId(this._informacoesDoSinal.Id);
+            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.Id);
             this._hideRecognizeMessage();
         },
 
@@ -79,7 +79,7 @@
             this._descricaoDoSinal.onRecognize();
             this._exemploDoSinal.onRecognize();
             this._maosDoUsuario.onRecognize();
-            this._reconhecedorDeSinais.setSignToRecognizeId(-1);
+            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(-1);
             window.setTimeout(this._carregarProximoSinal.bind(this), 1000);
         },
 
