@@ -2,6 +2,7 @@
 using Dominio.Sinais;
 using Microsoft.AspNet.SignalR;
 using System;
+using Aplicacao.ViewModel;
 
 namespace Aplicacao.Hubs
 {
@@ -14,13 +15,13 @@ namespace Aplicacao.Hubs
             this.repositorio = repositorio;
         }
 
-        public InformacoesDoSinal ProximoSinal(int previousSignIndex)
+        public ProximoSinalResponseModel ProximoSinal(int previousSignIndex)
         {
             var random = new Random();
             int indice = random.Next(repositorio.Quantidade);
             var sinal = repositorio.BuscarPorIndice(indice);
             
-            var informadoesDoSinal = new InformacoesDoSinal
+            var informadoesDoSinal = new ProximoSinalResponseModel
             {
                 Id = sinal.Id,
                 Descricao = sinal.Descricao,

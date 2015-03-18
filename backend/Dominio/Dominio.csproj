@@ -94,7 +94,6 @@
     <Compile Include="Sinais\Caracteristicas\Mao.cs" />
     <Compile Include="Sinais\Caracteristicas\TipoDeDedo.cs" />
     <Compile Include="Sinais\Frame.cs" />
-    <Compile Include="Sinais\InformacoesDoSinal.cs" />
     <Compile Include="Sinais\Sinal.cs" />
     <Compile Include="Sinais\TipoFrame.cs" />
     <Compile Include="Sinais\TipoSinal.cs" />

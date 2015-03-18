@@ -1,7 +1,9 @@
 ﻿
-namespace Dominio.Sinais
+using Dominio.Sinais;
+
+namespace Aplicacao.ViewModel
 {
-    public class InformacoesDoSinal
+    public class ProximoSinalResponseModel
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
