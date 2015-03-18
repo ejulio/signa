@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Dominio.Sinais;
 using Dominio.Sinais.Caracteristicas;
-using Dominio.Util;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {

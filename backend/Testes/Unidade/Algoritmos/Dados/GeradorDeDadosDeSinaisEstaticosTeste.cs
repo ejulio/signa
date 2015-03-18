@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dominio.Algoritmos.Dados;
+﻿using Dominio.Algoritmos.Dados;
 using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Util;
 

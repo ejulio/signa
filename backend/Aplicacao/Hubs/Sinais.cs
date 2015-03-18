@@ -1,8 +1,8 @@
-﻿using Dominio.Dados.Repositorio;
+﻿using Aplicacao.ViewModel;
+using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
 using Microsoft.AspNet.SignalR;
 using System;
-using Aplicacao.ViewModel;
 
 namespace Aplicacao.Hubs
 {

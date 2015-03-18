@@ -1,11 +1,11 @@
 ﻿using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
+using Accord.Statistics.Kernels;
 using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Algoritmos.Dados;
 using Dominio.Sinais;
 using System;
 using System.Collections.Generic;
-using Accord.Statistics.Kernels;
 
 namespace Dominio.Algoritmos.Estatico
 {
