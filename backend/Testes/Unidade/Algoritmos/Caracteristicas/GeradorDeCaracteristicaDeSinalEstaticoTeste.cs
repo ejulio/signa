@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using Testes.Comum.Builders.Dominio.Caracteristicas;
 using Testes.Comum.Builders.Dominio.Sinais;
+using Testes.Comum.Util;
 
 namespace Testes.Unidade.Algoritmos.Caracteristicas
 {
@@ -23,7 +24,7 @@ namespace Testes.Unidade.Algoritmos.Caracteristicas
             var geradorDeAmostraDeSinalEstatico = new GeradorDeCaracteristicasDeSinalEstatico();
             var frameArray = geradorDeAmostraDeSinalEstatico.ExtrairCaracteristicasDaAmostra(new[] { frame });
 
-            DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(maoEsquerda, maoDireita, frameArray);
+            DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(frame, frameArray);
         }
 
         private Frame DadoUmFrameComMaos(Mao maoEsquerda, Mao maoDireita)
@@ -56,28 +57,12 @@ namespace Testes.Unidade.Algoritmos.Caracteristicas
             return maoEsquerda;
         }
 
-        private void DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(Mao maoEsquerda, Mao maoDireita, double[] frameArray)
+        private void DeveRetornarUmArrayComDadosDasMaosEsquerdaEDireita(Frame frame, double[] frameArray)
         {
-            var dadosDoFrameEsperados = MontarArrayEsperadoParaAMao(maoEsquerda)
-                .Concat(MontarArrayEsperadoParaAMao(maoDireita))
-                .ToArray();
+            var dadosDoFrameEsperados = frame.MontarArrayEsperado();
 
             frameArray.Should().HaveCount(dadosDoFrameEsperados.Count());
             frameArray.Should().ContainInOrder(dadosDoFrameEsperados);
-        }
-
-        private double[] MontarArrayEsperadoParaAMao(Mao mao)
-        {
-            var dadosDosDedos = mao.Dedos.Select(d =>
-            {
-                var tipo = new double[] { (int)d.Tipo };
-                return tipo.Concat(d.Direcao).ToArray();
-            }).Concatenar();
-
-            return mao.VetorNormalDaPalma
-                    .Concat(mao.Direcao)
-                    .Concat(dadosDosDedos)
-                    .ToArray();
         }
     }
 }

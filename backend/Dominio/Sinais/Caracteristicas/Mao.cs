@@ -3,19 +3,25 @@ namespace Dominio.Sinais.Caracteristicas
 {
     public class Mao
     {
+        public double RaioDaEsfera { get; set; }
+        public double Pitch { get; set; }
+        public double Roll { get; set; }
+        public double Yaw { get; set; }
+
         private double[] posicaoDaPalma;
         public double[] PosicaoDaPalma
         {
             get { return posicaoDaPalma; }
             set { posicaoDaPalma = value ?? new[] { 0.0, 0.0, 0.0 }; }
         }
-        public double[] VelocidadeDaPalma { get; set; }
-        public double RaioDaEsfera { get; set; }
-        public double Pitch { get; set; }
-        public double Roll { get; set; }
-        public double Yaw { get; set; }
 
+        private double[] velocidadeDaPalma;
 
+        public double[] VelocidadeDaPalma
+        {
+            get { return velocidadeDaPalma; }
+            set { velocidadeDaPalma = value ?? new[] {0.0, 0.0, 0.0}; }
+        }
 
         private double[] vetorNormalDaPalma;
         public double[] VetorNormalDaPalma
@@ -35,15 +41,16 @@ namespace Dominio.Sinais.Caracteristicas
         public Dedo[] Dedos
         {
             get { return dedos; }
-            set { dedos = value ?? new[] { Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty() }; }
+            set { dedos = value ?? new[] { new Dedo(), new Dedo(), new Dedo(), new Dedo(), new Dedo() }; }
         }
 
         public Mao()
         {
-            Dedos = new[] {Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty(), Dedo.Empty()};
+            Dedos = new[] { new Dedo(), new Dedo(), new Dedo(), new Dedo(), new Dedo() };
             Direcao = new[] {0.0, 0.0, 0.0};
             VetorNormalDaPalma = new[] {0.0, 0.0, 0.0};
             PosicaoDaPalma = new[] {0.0, 0.0, 0.0};
+            VelocidadeDaPalma = new[] {0.0, 0.0, 0.0};
         }
     }
 }

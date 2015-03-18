@@ -2,6 +2,7 @@
 using Dominio.Sinais.Caracteristicas;
 using Dominio.Util;
 using System.Linq;
+using Dominio.Matematica;
 
 namespace Testes.Comum.Util
 {
@@ -33,9 +34,20 @@ namespace Testes.Comum.Util
                 return tipo.Concat(d.Direcao).ToArray();
             }).Concatenar();
 
+            double[] angulo = new double[5];
+
+            for (int i = 0; i < angulo.Length; i++)
+            {
+                var p1 = mao.Dedos[i].PosicaoDaPonta;
+                var p2 = mao.PosicaoDaPalma;
+
+                angulo[i] = p1.AnguloAte(p2);
+            }
+
             return mao.VetorNormalDaPalma
                     .Concat(mao.Direcao)
-                    .Concat(dadosDosDedos)
+                    .Concat(angulo)
+                    //.Concat(dadosDosDedos)
                     .ToArray();
         } 
     }

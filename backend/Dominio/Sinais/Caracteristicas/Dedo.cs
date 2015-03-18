@@ -3,25 +3,36 @@ namespace Dominio.Sinais.Caracteristicas
 {
     public class Dedo
     {
+        public bool Apontando { get; set; }
+        public TipoDeDedo Tipo { get; set; }
+
         private double[] posicaoDaPonta;
         public double[] PosicaoDaPonta
         {
             get { return posicaoDaPonta; }
             set { posicaoDaPonta = value ?? new[] { 0.0, 0.0, 0.0 }; }
         }
-        public double[] VelocidadeDaPonta { get; set; }
-        public bool Apontando { get; set; }
-        public double[] Direcao { get; set; }
-        public TipoDeDedo Tipo { get; set; }
 
-        public static Dedo Empty()
+        private double[] velocidadeDaPonta;
+        public double[] VelocidadeDaPonta
         {
-            return new Dedo
-            {
-                Tipo = TipoDeDedo.Dedao,
-                Direcao = new[] { 0.0, 0.0, 0.0 },
-                PosicaoDaPonta = new[] { 0.0, 0.0, 0.0 }
-            };
+            get { return velocidadeDaPonta; }
+            set { velocidadeDaPonta = value ?? new[] { 0.0, 0.0, 0.0 }; }
+        }
+
+        private double[] direcao;
+        public double[] Direcao
+        {
+            get { return direcao; }
+            set { direcao = value ?? new[] { 0.0, 0.0, 0.0 }; }
+        }
+
+        public Dedo()
+        {
+            Tipo = TipoDeDedo.Dedao;
+            Direcao = new[] {0.0, 0.0, 0.0};
+            PosicaoDaPonta = new[] {0.0, 0.0, 0.0};
+            VelocidadeDaPonta = new[] {0.0, 0.0, 0.0};
         }
     }
 }
