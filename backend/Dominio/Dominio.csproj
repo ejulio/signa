@@ -89,6 +89,7 @@
     <Compile Include="Dados\SinaisDinamicosController.cs" />
     <Compile Include="Dados\SinaisEstaticosController.cs" />
     <Compile Include="InicializadorDeAlgoritmoFacade.cs" />
+    <Compile Include="Matematica\DoubleArrayExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sinais\Caracteristicas\Dedo.cs" />
     <Compile Include="Sinais\Caracteristicas\Mao.cs" />

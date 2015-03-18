@@ -94,6 +94,7 @@
     <Compile Include="Unidade\Algoritmos\Dados\GeradorDeDadosDeSinaisEstaticosTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Estatico\SvmTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Factories\AlgoritmoDeReconhecimentoDeSinalFactoryTeste.cs" />
+    <Compile Include="Unidade\Matematica\Vetor3DTeste.cs" />
     <Compile Include="Unidade\Sinais\Caracteristicas\MaoTeste.cs" />
     <Compile Include="Unidade\Sinais\FrameTeste.cs" />
     <Compile Include="Unidade\Sinais\SinalTeste.cs" />
