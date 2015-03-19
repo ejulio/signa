@@ -33,7 +33,7 @@ namespace Aplicacao
         private void ConfigurarSequenciaDeSinais()
         {
             container.Register(typeof(Hubs.Sinais),
-                () => new Hubs.Sinais(repositorioFactory.CriarECarregarRepositorioDeSinais()));
+                () => new Hubs.Sinais(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos()));
         }
 
         private void ConfigurarReconhecedorDeSinaisEstaticos()
