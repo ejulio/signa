@@ -314,6 +314,7 @@
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
             this._frameSignDataProcessor = new Signa.reconhecimento.InformacoesDoFrame();
 
+            $('#message').hide();
             $('#sign-file').change(this._onArquivoDoSinalChange.bind(this));
             $('#save').click(this._onSalvarClick.bind(this));
         },
@@ -386,10 +387,16 @@
 
         _enviarInformacoesParaOServidor: function(descricaoDoSinal, amostra) {
             var url = this._montarUrlParaSalvarOSinal(amostra);
+            $('#message').text('Salvando informações do sinal...').show();
             $.post(url, {
                 descricao: descricaoDoSinal,
                 conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,
                 amostra: amostra
+            }).done(function() {
+                $('#message').text('Informações salvas com sucesso!');
+                setTimeout(function() {
+                    $('#message').hide();
+                }, 2000);
             });
         },
 
