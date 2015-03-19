@@ -10,6 +10,7 @@ namespace Dominio.Sinais
         public TipoSinal Tipo { get; set; }
 
         public int Id { get; set; }
+        public int IndiceNoAlgoritmo { get; set; }
         
         private IList<IList<Frame>> amostras;
 

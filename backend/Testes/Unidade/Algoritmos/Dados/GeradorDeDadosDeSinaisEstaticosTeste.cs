@@ -27,7 +27,7 @@ namespace Testes.Unidade.Algoritmos.Dados
 
             var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(sinais);
 
-            DeveTerUmDadoDeTreinamento(dadosDoAlgoritmo);
+            DeveTerUmDadoDeTreinamento(sinais.First(), dadosDoAlgoritmo);
         }
 
         [TestMethod]
@@ -85,14 +85,14 @@ namespace Testes.Unidade.Algoritmos.Dados
             }
         }
 
-        private void DeveTerUmDadoDeTreinamento(GeradorDeDadosDeSinaisEstaticos geradorDeDadosDoAlgoritmo)
+        private void DeveTerUmDadoDeTreinamento(Sinal sinal, GeradorDeDadosDeSinaisEstaticos geradorDeDadosDoAlgoritmo)
         {
             var arrayDaAmostra = amostraPadrao[0].MontarArrayEsperado();
             geradorDeDadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
             geradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(1);
             geradorDeDadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
             geradorDeDadosDoAlgoritmo.Saidas.Should().HaveCount(1);
-            geradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(1);
+            geradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(sinal.IndiceNoAlgoritmo);
         }
 
         private double[][] EntradasEsperadasParaOsSinais(ICollection<Sinal> sinais)
@@ -118,7 +118,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    saidasEsperadas.Add(sinal.Id);
+                    saidasEsperadas.Add(sinal.IndiceNoAlgoritmo);
                 }
             }
 

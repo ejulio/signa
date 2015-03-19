@@ -31,6 +31,7 @@ namespace Dominio.Algoritmos.Dados
             var geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalEstatico();
             var geradorDeCaracteristicasComTipoFrame = new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
             Frame[] amostraDoFrame = new Frame[1];
+            int indice = 0;
 
             foreach (var sinal in sinais)
             {
@@ -44,10 +45,11 @@ namespace Dominio.Algoritmos.Dados
                     geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Ultimo;
                     entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
 
-                    saidas.AddLast(sinal.Id);
-                    saidas.AddLast(sinal.Id);
+                    saidas.AddLast(indice);
+                    saidas.AddLast(indice);
                 }
-                
+                sinal.IndiceNoAlgoritmo = indice;
+                indice++;
                 QuantidadeDeClasses++;
             }
 

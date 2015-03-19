@@ -9,7 +9,7 @@ namespace Dominio.Dados
 {
     public abstract class SinaisController
     {
-         public const string CaminhoDoArquivoDoRepositorio = "./data/repositorio-sinais.json";
+        public const string CaminhoDoArquivoDoRepositorio = "./data/repositorio-sinais.json";
         public const string DiretorioDeExemplos = "exemplos/"; 
 
         private readonly IRepositorio<Sinal> repositorio;

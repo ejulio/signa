@@ -25,6 +25,7 @@ namespace Dominio.Algoritmos.Dados
 
         public void ExtrairInformacoesDosSinais()
         {
+            int indice = 0;
             QuantidadeDeClasses = 0;
             saidas = new LinkedList<int>();
 
@@ -32,9 +33,11 @@ namespace Dominio.Algoritmos.Dados
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    saidas.AddLast(sinal.Id);
+                    saidas.AddLast(indice);
                     GerarEntradaParaAAmostra(amostra);
                 }
+                sinal.IndiceNoAlgoritmo = indice;
+                indice++;
                 QuantidadeDeClasses++;
             }
 
