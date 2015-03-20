@@ -636,6 +636,8 @@
         _reconheceuUltimoFrame: false,
         _frames: undefined,
         _sinalId: -1,
+        _promiseReconhecerPrimeiroFrame: undefined,
+        _framesIgnorados: 0,
 
         setSinalId: function(sinalId) {
             this._sinalId = sinalId;
@@ -644,25 +646,31 @@
         reconhecer: function(frame) {
             if (!this._reconheceuPrimeiroFrame) {
                 this._frames = [];
-                return this._reconhecerPrimeiroFrame(frame);
-            } else if (!this._reconheceuUltimoFrame) {
-                this._frames.push(frame);
-                return this._reconhecerUltimoFrame(frame);
+                return this._reconhecerPrimeiroFrame(frame);    
             }
+            
+            return this._reconhecerUltimoFrame(frame);
         },
 
         _reconhecerPrimeiroFrame: function(frame) {
-            return Signa.Hubs
+            if (this._promiseReconhecerPrimeiroFrame) {
+                this._framesIgnorados++;
+            }
+
+            this._promiseReconhecerPrimeiroFrame = Signa.Hubs
                 .sinaisDinamicos()
                 .reconhecerPrimeiroFrame([frame])
                 .then(function(sinalReconhecidoId) {
-                    if (sinalReconhecidoId == this._sinalId) {
-                        console.log('RECONHECEU PRIMEIRO FRAME');
+                    this._promiseReconhecerPrimeiroFrame = undefined;
+                    this._framesIgnorados = 0;
+                    if (sinalReconhecidoId === this._sinalId) {
                         this._reconheceuPrimeiroFrame = true;
                         this._frames.push(frame);
                     }
                     return false;
                 }.bind(this));
+
+            return this._promiseReconhecerPrimeiroFrame;
         },
 
         _reconhecerUltimoFrame: function(frame) {
@@ -670,9 +678,11 @@
                 .sinaisDinamicos()
                 .reconhecerUltimoFrame([frame])
                 .then(function(sinalReconhecidoId) {
+                    this._frames.push(frame);
                     if (sinalReconhecidoId == this._sinalId) {
-                        console.log('RECONHECEU ÚLTIMO FRAME');
                         this._reconheceuUltimoFrame = true;
+                        this._reconhecerSinal();
+                    } else if (this._frames.length == 50) {
                         this._reconhecerSinal();
                     }
                     return false;
@@ -684,6 +694,7 @@
                 .sinaisDinamicos()
                 .reconhecer(this._frames)
                 .then(function(sinalReconhecidoId) {
+                    this._reconheceuPrimeiroFrame = false;
                     if (sinalReconhecidoId == this._sinalId) {
                         console.log('SUCESSO');
                         return true;
@@ -767,7 +778,7 @@
 
         _extrairDadosDaMao: function(leapHand) {
             if (leapHand.confidence < 0.5) {
-                console.log('HAND CONFIDENCE: ' + leapHand.confidence);
+                //console.log('HAND CONFIDENCE: ' + leapHand.confidence);
                 //return null;
             }
 
@@ -905,7 +916,6 @@
         _informacoesDoFrame: undefined,
         _idDoSinalParaReconhecer: -1,
         _algoritmo: undefined,
-        _idDoDelayDeReconhecimento: -1,
 
         adicionarListenerDeReconhecimento: function(listener) {
             this._eventEmitter.addListener(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID, listener);
@@ -918,22 +928,15 @@
             if (this._idDoSinalParaReconhecer === -1)
                 return;
 
-            if (this._idDoDelayDeReconhecimento === -1) {
-                this._idDoDelayDeReconhecimento = window.setTimeout((function(frame) {
-                    return function() {
-                        var dados = this._informacoesDoFrame.extrairParaAmostra(frame);
-                        this._algoritmo
-                            .reconhecer(dados)
-                            .then(function(sinalFoiReconhecido) {
-                                if (sinalFoiReconhecido) {
-                                    this._idDoSinalParaReconhecer = -1;
-                                    this._eventEmitter.trigger(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID);
-                                }
-                                this._idDoDelayDeReconhecimento = -1;
-                            }.bind(this));
-                        }.bind(this);
-                }.bind(this))(frame), 500);
-            }
+            var dados = this._informacoesDoFrame.extrairParaAmostra(frame);
+            this._algoritmo
+                .reconhecer(dados)
+                .then(function(sinalFoiReconhecido) {
+                    if (sinalFoiReconhecido) {
+                        this._idDoSinalParaReconhecer = -1;
+                        this._eventEmitter.trigger(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID);
+                    }
+                }.bind(this));
         },
 
         setIdDoSinalParaReconhecer: function(id) {

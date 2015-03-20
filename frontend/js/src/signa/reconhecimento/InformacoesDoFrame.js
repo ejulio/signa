@@ -40,7 +40,7 @@
 
         _extrairDadosDaMao: function(leapHand) {
             if (leapHand.confidence < 0.5) {
-                console.log('HAND CONFIDENCE: ' + leapHand.confidence);
+                //console.log('HAND CONFIDENCE: ' + leapHand.confidence);
                 //return null;
             }
 
