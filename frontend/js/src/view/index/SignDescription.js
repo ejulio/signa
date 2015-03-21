@@ -2,12 +2,12 @@
 {
     'use strict';
 
-    function SignDescription(textContainer)
+    function ContainerComDescricaoDoSinal(textContainer)
     {
         this._container = textContainer;
     }
 
-    SignDescription.prototype = {
+    ContainerComDescricaoDoSinal.prototype = {
         _container: undefined,
 
         onNewSign: function(informacoesDoSinal)
@@ -21,5 +21,5 @@
         }
     };
 
-    View.index.SignDescription = SignDescription;
+    View.index.ContainerComDescricaoDoSinal = ContainerComDescricaoDoSinal;
 })(window, window.View, window.Signa);

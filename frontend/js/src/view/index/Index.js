@@ -23,7 +23,7 @@
 
             this._messageBox = $('#recognized-sign-message');
 
-            this._descricaoDoSinal = new View.index.SignDescription($('#sign-description'));
+            this._descricaoDoSinal = new View.index.ContainerComDescricaoDoSinal($('#sign-description'));
             this._iniciarExemploDoSinal(cameraFactory, width, height);
             this._iniciarMaosDoUsuario(cameraFactory, width, height);
 
@@ -35,7 +35,7 @@
             var signExampleLeapController = new Leap.Controller(),
                 container = $("#handmodel-example");
 
-            this._exemploDoSinal = new View.index.SignExample(cameraFactory, container, signExampleLeapController, width, height);
+            this._exemploDoSinal = new View.index.ContainerComExemploDoSinal(cameraFactory, container, signExampleLeapController, width, height);
 
             signExampleLeapController.on('playback.recordingSet', this._onNewSignLoad.bind(this));
         },
@@ -45,7 +45,7 @@
             var userHandsLeapController = new Leap.Controller(),
                 container = $("#handmodel-user");
 
-            this._maosDoUsuario = new View.index.UserHands(cameraFactory, container, userHandsLeapController, width, height);
+            this._maosDoUsuario = new View.index.ContainerComMaosDoUsuario(cameraFactory, container, userHandsLeapController, width, height);
             
             userHandsLeapController.connect();
             

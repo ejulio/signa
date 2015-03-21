@@ -2,17 +2,14 @@
 {
     'use strict';
     
-    function UserHands(cameraFactory, container, leapController, width, height)
+    function ContainerComMaosDoUsuario(cameraFactory, container, leapController, largura, altura)
     {
-        var userHandmodelScene = new Signa.cena.Cena(cameraFactory, container, width, height);
-
-        this._userRiggedHand = new Signa.cena.CenaComLeapRiggedHand(leapController, userHandmodelScene);
-
         this._container = container;
+
+        Signa.cenas.CenaFactory.criarCenaComLeapRiggedHand(largura, altura, container, cameraFactory, leapController);
     }
 
-    UserHands.prototype = {
-        _userRiggedHand: undefined,
+    ContainerComMaosDoUsuario.prototype = {
         _container: undefined,
 
         onNewSign: function(signInfo)
@@ -30,5 +27,5 @@
         }
     };
 
-    View.index.UserHands = UserHands;
+    View.index.ContainerComMaosDoUsuario = ContainerComMaosDoUsuario;
 })(window, window.View, window.Signa);
