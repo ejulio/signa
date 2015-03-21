@@ -4,9 +4,9 @@
     
     function UserHands(cameraFactory, container, leapController, width, height)
     {
-        var userHandmodelScene = new Signa.scene.Scene(cameraFactory, container, width, height);
+        var userHandmodelScene = new Signa.cena.Cena(cameraFactory, container, width, height);
 
-        this._userRiggedHand = new Signa.scene.RiggedHandScene(leapController, userHandmodelScene);
+        this._userRiggedHand = new Signa.cena.CenaComLeapRiggedHand(leapController, userHandmodelScene);
 
         this._container = container;
     }

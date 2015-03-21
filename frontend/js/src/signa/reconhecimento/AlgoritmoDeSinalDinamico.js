@@ -55,9 +55,11 @@
                     this._frames.push(frame);
                     if (sinalReconhecidoId == this._sinalId) {
                         this._reconheceuUltimoFrame = true;
-                        this._reconhecerSinal();
+                        console.log('RECONHECEU ÚLTIMO FRAME');
+                        return this._reconhecerSinal();
                     } else if (this._frames.length == 50) {
-                        this._reconhecerSinal();
+                        console.log('ALCANÇOU 50 FRAMES');
+                        return this._reconhecerSinal();
                     }
                     return false;
                 }.bind(this));
@@ -71,6 +73,7 @@
                     this._reconheceuPrimeiroFrame = false;
                     if (sinalReconhecidoId == this._sinalId) {
                         console.log('SUCESSO');
+                        this._sinalId = -1;
                         return true;
                     }
                 }.bind(this));

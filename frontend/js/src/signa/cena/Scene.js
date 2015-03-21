@@ -2,11 +2,16 @@
 {
     'use strict';
     
-    var globalSceneId = 0;
-    function Scene(cameraFactory, container, width, height)
+    var idGlobalDeCenas = 0;
+
+    function proximoIdGlobalDeCenas() {
+        idGlobalDeCenas++;
+        return idGlobalDeCenas;
+    }
+
+    function Cena(cameraFactory, container, largura, altura)
     {
-        this._id = globalSceneId;
-        globalSceneId++;
+        this._id = proximoIdGlobalDeCenas();
         this._scene = new THREE.Scene();
         this._renderer = new THREE.WebGLRenderer();
         this._container = container[0];
@@ -16,11 +21,11 @@
 
         this._drawUrs();
 
-        this._renderer.setSize(width, height);
+        this._renderer.setSize(largura, altura);
         container.append(this._renderer.domElement);
     }
 
-    Scene.prototype = {
+    Cena.prototype = {
         _scene: undefined,
         _camera: undefined,
         _renderer: undefined,
@@ -75,5 +80,5 @@
         }
     };
 
-    Signa.scene.Scene = Scene;
+    Signa.cena.Cena = Cena;
 })(window, window.Signa);

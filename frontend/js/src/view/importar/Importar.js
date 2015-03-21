@@ -35,8 +35,8 @@
 
             cameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory);
 
-            cenaDaMaoDoUsuario = new Signa.scene.Scene(cameraFactory, container, largura, altura);
-            cenaDaMaoDoUsuario = new Signa.scene.RiggedHandScene(leapController, cenaDaMaoDoUsuario);
+            cenaDaMaoDoUsuario = new Signa.cena.Cena(cameraFactory, container, largura, altura);
+            cenaDaMaoDoUsuario = new Signa.cena.CenaComLeapRiggedHand(leapController, cenaDaMaoDoUsuario);
             
             cenaDaMaoDoUsuario.render();
         },

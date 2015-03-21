@@ -2,7 +2,7 @@
 {
     'use strict';
     
-    function RiggedHandScene(leapController, signaScene)
+    function CenaComLeapRiggedHand(leapController, signaScene)
     {
         this._signaScene = signaScene;
 
@@ -16,7 +16,7 @@
         });
     }
 
-    RiggedHandScene.prototype = {
+    CenaComLeapRiggedHand.prototype = {
         _signaScene: undefined,
 
         getId: function()
@@ -40,5 +40,5 @@
         }
     };
 
-    Signa.scene.RiggedHandScene = RiggedHandScene;
+    Signa.cena.CenaComLeapRiggedHand = CenaComLeapRiggedHand;
 })(window, window.Signa);

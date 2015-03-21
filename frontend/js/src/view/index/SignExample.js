@@ -5,9 +5,9 @@
     function SignExample(cameraFactory, container, leapController, width, height)
     {
         var orbitConstrolsCameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory),
-            exampleHandmodelScene = new Signa.scene.Scene(orbitConstrolsCameraFactory, container, width, height);
+            exampleHandmodelScene = new Signa.cena.Cena(orbitConstrolsCameraFactory, container, width, height);
 
-        exampleHandmodelScene = new Signa.scene.RiggedHandScene(leapController, exampleHandmodelScene);
+        exampleHandmodelScene = new Signa.cena.CenaComLeapRiggedHand(leapController, exampleHandmodelScene);
 
         this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
 

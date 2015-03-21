@@ -7,9 +7,8 @@
         URL: '',
 
         camera: {},
-        recognizer: {},
         reconhecimento: {},
-        scene: {},
+        cena: {},
 
         montarUrlDoServidor: function(caminho) {
             return 'http://localhost:9000/' + caminho;
@@ -171,7 +170,7 @@
 {
     'use strict';
     
-    function RiggedHandScene(leapController, signaScene)
+    function CenaComLeapRiggedHand(leapController, signaScene)
     {
         this._signaScene = signaScene;
 
@@ -185,7 +184,7 @@
         });
     }
 
-    RiggedHandScene.prototype = {
+    CenaComLeapRiggedHand.prototype = {
         _signaScene: undefined,
 
         getId: function()
@@ -209,18 +208,23 @@
         }
     };
 
-    Signa.scene.RiggedHandScene = RiggedHandScene;
+    Signa.cena.CenaComLeapRiggedHand = CenaComLeapRiggedHand;
 })(window, window.Signa);
 
 ;(function(window, Signa, undefined)
 {
     'use strict';
     
-    var globalSceneId = 0;
-    function Scene(cameraFactory, container, width, height)
+    var idGlobalDeCenas = 0;
+
+    function proximoIdGlobalDeCenas() {
+        idGlobalDeCenas++;
+        return idGlobalDeCenas;
+    }
+
+    function Cena(cameraFactory, container, largura, altura)
     {
-        this._id = globalSceneId;
-        globalSceneId++;
+        this._id = proximoIdGlobalDeCenas();
         this._scene = new THREE.Scene();
         this._renderer = new THREE.WebGLRenderer();
         this._container = container[0];
@@ -230,11 +234,11 @@
 
         this._drawUrs();
 
-        this._renderer.setSize(width, height);
+        this._renderer.setSize(largura, altura);
         container.append(this._renderer.domElement);
     }
 
-    Scene.prototype = {
+    Cena.prototype = {
         _scene: undefined,
         _camera: undefined,
         _renderer: undefined,
@@ -289,7 +293,7 @@
         }
     };
 
-    Signa.scene.Scene = Scene;
+    Signa.cena.Cena = Cena;
 })(window, window.Signa);
 
 ;(function(window, View, Signa, undefined)
@@ -329,8 +333,8 @@
 
             cameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory);
 
-            cenaDaMaoDoUsuario = new Signa.scene.Scene(cameraFactory, container, largura, altura);
-            cenaDaMaoDoUsuario = new Signa.scene.RiggedHandScene(leapController, cenaDaMaoDoUsuario);
+            cenaDaMaoDoUsuario = new Signa.cena.Cena(cameraFactory, container, largura, altura);
+            cenaDaMaoDoUsuario = new Signa.cena.CenaComLeapRiggedHand(leapController, cenaDaMaoDoUsuario);
             
             cenaDaMaoDoUsuario.render();
         },
@@ -558,9 +562,9 @@
     function SignExample(cameraFactory, container, leapController, width, height)
     {
         var orbitConstrolsCameraFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory),
-            exampleHandmodelScene = new Signa.scene.Scene(orbitConstrolsCameraFactory, container, width, height);
+            exampleHandmodelScene = new Signa.cena.Cena(orbitConstrolsCameraFactory, container, width, height);
 
-        exampleHandmodelScene = new Signa.scene.RiggedHandScene(leapController, exampleHandmodelScene);
+        exampleHandmodelScene = new Signa.cena.CenaComLeapRiggedHand(leapController, exampleHandmodelScene);
 
         this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
 
@@ -595,9 +599,9 @@
     
     function UserHands(cameraFactory, container, leapController, width, height)
     {
-        var userHandmodelScene = new Signa.scene.Scene(cameraFactory, container, width, height);
+        var userHandmodelScene = new Signa.cena.Cena(cameraFactory, container, width, height);
 
-        this._userRiggedHand = new Signa.scene.RiggedHandScene(leapController, userHandmodelScene);
+        this._userRiggedHand = new Signa.cena.CenaComLeapRiggedHand(leapController, userHandmodelScene);
 
         this._container = container;
     }
@@ -681,9 +685,11 @@
                     this._frames.push(frame);
                     if (sinalReconhecidoId == this._sinalId) {
                         this._reconheceuUltimoFrame = true;
-                        this._reconhecerSinal();
+                        console.log('RECONHECEU ÚLTIMO FRAME');
+                        return this._reconhecerSinal();
                     } else if (this._frames.length == 50) {
-                        this._reconhecerSinal();
+                        console.log('ALCANÇOU 50 FRAMES');
+                        return this._reconhecerSinal();
                     }
                     return false;
                 }.bind(this));
@@ -697,6 +703,7 @@
                     this._reconheceuPrimeiroFrame = false;
                     if (sinalReconhecidoId == this._sinalId) {
                         console.log('SUCESSO');
+                        this._sinalId = -1;
                         return true;
                     }
                 }.bind(this));
