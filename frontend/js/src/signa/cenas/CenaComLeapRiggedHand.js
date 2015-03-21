@@ -40,5 +40,5 @@
         }
     };
 
-    Signa.cena.CenaComLeapRiggedHand = CenaComLeapRiggedHand;
+    Signa.cenas.CenaComLeapRiggedHand = CenaComLeapRiggedHand;
 })(window, window.Signa);

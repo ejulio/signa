@@ -80,5 +80,5 @@
         }
     };
 
-    Signa.cena.Cena = Cena;
+    Signa.cenas.Cena = Cena;
 })(window, window.Signa);

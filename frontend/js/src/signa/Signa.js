@@ -8,7 +8,7 @@
 
         camera: {},
         reconhecimento: {},
-        cena: {},
+        cenas: {},
 
         montarUrlDoServidor: function(caminho) {
             return 'http://localhost:9000/' + caminho;
