@@ -1,35 +1,37 @@
-function FrameBuilder(){}
+var MaoBuilder = require('./MaoBuilder.js');
+
+function FrameBuilder() {
+    this._maoEsquerda = new MaoBuilder().construir();
+    this._maoDireita = new MaoBuilder().construir();
+}
+
 FrameBuilder.prototype = {
     _maoEsquerda: undefined,
     _maoDireita: undefined,
 
-    comMaoEsquerda: function(maoEsquerda)
-    {
+    comMaoEsquerda: function(maoEsquerda) {
         this._maoEsquerda = maoEsquerda;
         return this;
     },
 
-    comMaoDireita: function(maoDireita)
-    {
+    comMaoDireita: function(maoDireita) {
         this._maoDireita = maoDireita;
         return this;
     },
 
-    construir: function()
-    {
+    construir: function() {
         var maos = [];
         
-        if (this._maoEsquerda)
-        {
+        if (this._maoEsquerda) {
             this._maoEsquerda.type = 'left';
             maos.push(this._maoEsquerda);
         }
 
-        if (this._maoDireita)
-        {
+        if (this._maoDireita) {
             this._maoDireita.type = 'right';
             maos.push(this._maoDireita);
         }
+
         return {
             hands: maos
         };

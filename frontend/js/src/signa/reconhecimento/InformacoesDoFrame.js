@@ -47,7 +47,7 @@
             return {
                 VetorNormalDaPalma: leapHand.palmNormal,
                 PosicaoDaPalma: leapHand.stabilizedPalmPosition,
-                VelocidadeDePalma: leapHand.palmVelocity,
+                VelocidadeDaPalma: leapHand.palmVelocity,
                 Direcao: leapHand.direction,
                 Dedos: this._extrairDadosDosDedos(leapHand.fingers),
                 RaioDaEsfera: leapHand.sphereRadius,

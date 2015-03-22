@@ -1,5 +1,5 @@
-var FrameBuilder = require('../../builders/FrameBuilder.js'),
-    MaoBuilder = require('../../builders/MaoBuilder.js'),
+var MaoBuilder = require('../../builders/MaoBuilder.js'),
+    FrameBuilder = require('../../builders/FrameBuilder.js'),
     DedoBuilder = require('../../builders/DedoBuilder.js');
 
 global.THREE = require('three');
@@ -100,12 +100,21 @@ describe('InformacoesDoFrame', function()
         expect(frameDaAmostra).not.toBeNull();
         expect(frameDaAmostra.VetorNormalDaPalma).toBe(mao.palmNormal);
         expect(frameDaAmostra.Direcao).toBe(mao.direction);
+        expect(frameDaAmostra.PosicaoDaPalma).toBe(mao.palmPosition);
+        expect(frameDaAmostra.VelocidadeDaPalma).toBe(mao.palmVelocity);
+        expect(frameDaAmostra.RaioDaEsfera).toBe(mao.sphereRadius);
+        expect(frameDaAmostra.Pitch).toBe(mao.pitch());
+        expect(frameDaAmostra.Yaw).toBe(mao.yaw());
+        expect(frameDaAmostra.Roll).toBe(mao.roll());
         
         var dedos = frameDaAmostra.Dedos;        
         for (var i = 0; i < dedos.length; i++)
         {
             expect(dedos[i].Tipo).toBe(mao.fingers[i].type);
             expect(dedos[i].Direcao).toBe(mao.fingers[i].direction);
+            expect(dedos[i].PosicaoDaPonta).toBe(mao.fingers[i].tipPosition);
+            expect(dedos[i].VelocidadeDaPonta).toBe(mao.fingers[i].tipVelocity);
+            expect(dedos[i].Apontando).toBe(mao.fingers[i].extended);
         }
     }
 });
