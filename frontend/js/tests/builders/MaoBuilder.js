@@ -1,13 +1,22 @@
-function MaoBuilder(){
+var DedoBuilder = require('./DedoBuilder.js');
+
+function MaoBuilder() {
     this._direcao = [0.0, 0.0, 0.0];
     this._vetorNormalDaPalma = [0.0, 0.0, 0.0];
-    this._dedos = [];
     this._posicaoDaPalma = [0.0, 0.0, 0.0];
     this._velocidadeDaPalma = [0.0, 0.0, 0.0];
     this._raioDaEsfera = 0;
     this._pitch = function(){ return 0; };
     this._yaw = function(){ return 0; };
     this._roll = function(){ return 0; };
+    
+    this._dedos = [
+        new DedoBuilder().construir(),
+        new DedoBuilder().construir(),
+        new DedoBuilder().construir(),
+        new DedoBuilder().construir(),
+        new DedoBuilder().construir()
+    ];
 }
 MaoBuilder.prototype = {
     _direcao: undefined,

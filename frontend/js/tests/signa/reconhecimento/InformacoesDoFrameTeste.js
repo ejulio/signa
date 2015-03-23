@@ -2,7 +2,6 @@ var MaoBuilder = require('../../builders/MaoBuilder.js'),
     FrameBuilder = require('../../builders/FrameBuilder.js'),
     DedoBuilder = require('../../builders/DedoBuilder.js');
 
-global.THREE = require('three');
 require('../../../src/signa/Signa.js');
 require('../../../src/signa/reconhecimento/InformacoesDoFrame.js');
 
