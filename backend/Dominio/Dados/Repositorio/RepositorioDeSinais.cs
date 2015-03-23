@@ -9,6 +9,7 @@ namespace Dominio.Dados.Repositorio
 {
     public class RepositorioDeSinais : IRepositorio<Sinal>
     {
+        private bool carregado;
         private IList<Sinal> sinaisPorIndice;
         private IDictionary<string, Sinal> sinaisPorId;
 
@@ -24,6 +25,7 @@ namespace Dominio.Dados.Repositorio
             this.caminhoDoArquivoDeDados = caminhoDoArquivoDeDados;
             sinaisPorIndice = new List<Sinal>();
             sinaisPorId = new Dictionary<string, Sinal>();
+            carregado = false;
         }
 
         public void Adicionar(Sinal sinal)
@@ -52,7 +54,7 @@ namespace Dominio.Dados.Repositorio
 
         public void Carregar()
         {
-            if (!File.Exists(caminhoDoArquivoDeDados))
+            if (!File.Exists(caminhoDoArquivoDeDados) || carregado)
                 return;
 
             using (var reader = new StreamReader(caminhoDoArquivoDeDados))
@@ -61,6 +63,7 @@ namespace Dominio.Dados.Repositorio
                 var sinais = JsonConvert.DeserializeObject<List<Sinal>>(sinaisEmFormatoJson);
                 sinaisPorIndice = sinais ?? sinaisPorIndice;
                 CarregarSinaisPorId();
+                carregado = true;
             }
         }
 

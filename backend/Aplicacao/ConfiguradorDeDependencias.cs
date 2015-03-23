@@ -25,15 +25,15 @@ namespace Aplicacao
         public void Configurar()
         {
             ConfigurarJsonSerializerSettings();
-            ConfigurarSequenciaDeSinais();
+            ConfigurarSinais();
             ConfigurarReconhecedorDeSinaisEstaticos();
             ConfigurarReconhecedorDeSinaisDinamicos();
         }
 
-        private void ConfigurarSequenciaDeSinais()
+        private void ConfigurarSinais()
         {
             container.Register(typeof(Hubs.Sinais),
-                () => new Hubs.Sinais(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos()));
+                () => new Hubs.Sinais(repositorioFactory.CriarECarregarRepositorioDeSinais()));
         }
 
         private void ConfigurarReconhecedorDeSinaisEstaticos()

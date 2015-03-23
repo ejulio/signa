@@ -1,17 +1,14 @@
-;(function(window, Signa, undefined)
-{
+;(function(window, Signa, undefined) {
     'use strict';
 
-    function ReconhecedorDeSinaisOffline(eventEmitter)
-    {
+    function ReconhecedorDeSinaisOffline(eventEmitter) {
         this._eventEmitter = eventEmitter;
     }
 
     ReconhecedorDeSinaisOffline.prototype = {
         _eventEmitter: undefined,
 
-        adicionarListenerDeReconhecimento: function(listener)
-        {
+        adicionarListenerDeReconhecimento: function(listener) {
             this._eventEmitter.addListener(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID, listener);
         },
 

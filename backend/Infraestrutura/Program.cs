@@ -12,14 +12,14 @@ namespace Infraestrutura
     {
         static void Main(string[] args)
         {
-            StartServer();
+            IniciarServidor();
 
             TreinarAlgoritmos();
 
             Console.ReadKey();
         }
 
-        private static void StartServer()
+        private static void IniciarServidor()
         {
             const string serverAddress = "http://localhost:9000";
             WebApp.Start<Startup>(serverAddress);

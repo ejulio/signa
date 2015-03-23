@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Dominio.Sinais
 {
@@ -10,6 +11,8 @@ namespace Dominio.Sinais
         public TipoSinal Tipo { get; set; }
 
         public int Id { get; set; }
+        
+        [JsonIgnore]
         public int IndiceNoAlgoritmo { get; set; }
         
         private IList<IList<Frame>> amostras;

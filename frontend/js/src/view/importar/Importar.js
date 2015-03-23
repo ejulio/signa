@@ -1,5 +1,4 @@
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
 
     function Importar(){}
@@ -10,8 +9,7 @@
         _frameSignDataProcessor: undefined,
         _framesCarregadosEmFormatoJson: undefined,
 
-        iniciar: function()
-        {
+        iniciar: function() {
             var leapController = new Leap.Controller();
 
             Signa.Hubs.iniciar();
@@ -25,8 +23,7 @@
             $('#save').click(this._onSalvarClick.bind(this));
         },
 
-        _iniciarCena: function(leapController)
-        {
+        _iniciarCena: function(leapController) {
             var largura = $("#handmodel-user").width(),
                 altura = $("#handmodel-user").height(),
                 container = $("#handmodel-user"),
@@ -41,23 +38,19 @@
             cenaDaMaoDoUsuario.render();
         },
 
-        _onArquivoDoSinalChange: function(event)
-        {
+        _onArquivoDoSinalChange: function(event) {
             var arquivo = event.target.files[0];
             this._lerArquivoDoSinal(arquivo);  
         },
 
-        _lerArquivoDoSinal: function(arquivo)
-        {
+        _lerArquivoDoSinal: function(arquivo) {
             var leitorDeArquivo = new FileReader();
 
-            leitorDeArquivo.onload = function(event)
-            {
+            leitorDeArquivo.onload = function(event) {
                 this._framesCarregadosEmFormatoJson = event.target.result;
                 var framesCarregados = JSON.parse(this._framesCarregadosEmFormatoJson);
                 
-                this._leapRecordingPlayer.loadFrames(framesCarregados, function(frames)
-                {
+                this._leapRecordingPlayer.loadFrames(framesCarregados, function(frames) {
                     this._framesCarregados = frames;
                 }.bind(this));
             }.bind(this);
@@ -65,21 +58,18 @@
             leitorDeArquivo.readAsText(arquivo);
         },
 
-        _onSalvarClick: function()
-        {
+        _onSalvarClick: function() {
             this._salvarAmostraDoSinal();
         },
 
-        _salvarAmostraDoSinal: function()
-        {
+        _salvarAmostraDoSinal: function() {
             var descricaoDoSinal = $('#description').val(),
                 amostra = this._gerarAmostra();
 
             this._enviarInformacoesParaOServidor(descricaoDoSinal, amostra);
         },
 
-        _gerarAmostra: function()
-        {
+        _gerarAmostra: function() {
             if (this._framesCarregados.length === 1) {
                 return this._gerarAmostraEstatica();
             }
@@ -101,9 +91,9 @@
 
             frameBuffer.adicionarListenerDeFrame(function(frame) {
                 var leapFrame = new Leap.Frame(frame),
-                    frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(frame);
-                    
-                amostra.push(leapFrame);
+                    frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(leapFrame);
+
+                amostra.push(frameDaAmostra);
             }.bind(this));
 
             framesCarregados.forEach(function(frame) {

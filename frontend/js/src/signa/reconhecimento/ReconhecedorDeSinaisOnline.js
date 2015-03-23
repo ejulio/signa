@@ -17,9 +17,6 @@
         },
 
         reconhecer: function(frame) {
-            if (!frame.hands.length)
-                return;
-            
             if (this._idDoSinalParaReconhecer === -1)
                 return;
 

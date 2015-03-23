@@ -5,8 +5,8 @@
         var me = this,
             eventEmitter = new EventEmitter();
         
-        me.OFFLINE = new Signa.reconhecimento.ReconhecedorDeSinaisOffline(this._eventEmitter);
-        me.ONLINE = new Signa.reconhecimento.ReconhecedorDeSinaisOnline(this._eventEmitter);
+        me.OFFLINE = new Signa.reconhecimento.ReconhecedorDeSinaisOffline(eventEmitter);
+        me.ONLINE = new Signa.reconhecimento.ReconhecedorDeSinaisOnline(eventEmitter);
         me._estado = me.OFFLINE;
 
         frameBuffer.adicionarListenerDeFrame(this._onFrame.bind(this));
