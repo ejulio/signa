@@ -42,14 +42,15 @@
 
         _iniciarMaosDoUsuario: function(cameraFactory, width, height)
         {
-            var userHandsLeapController = new Leap.Controller(),
-                container = $("#handmodel-user");
+            var leapController = new Leap.Controller(),
+                container = $("#handmodel-user"),
+                frameBuffer = Signa.frames.FrameBuffer.doLeapController(leapController);
 
-            this._maosDoUsuario = new View.index.ContainerComMaosDoUsuario(cameraFactory, container, userHandsLeapController, width, height);
+            this._maosDoUsuario = new View.index.ContainerComMaosDoUsuario(cameraFactory, container, leapController, width, height);
             
-            userHandsLeapController.connect();
-            
-            this._reconhecedorDeSinais = new Signa.reconhecimento.ReconhecedorDeSinais(userHandsLeapController);
+            leapController.connect();
+
+            this._reconhecedorDeSinais = new Signa.reconhecimento.ReconhecedorDeSinais(frameBuffer);
             this._reconhecedorDeSinais.adicionarListenerDeReconhecimento(this._onRecognize.bind(this));
         },
 

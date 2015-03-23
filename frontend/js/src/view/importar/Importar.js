@@ -80,14 +80,37 @@
 
         _gerarAmostra: function()
         {
-            var framesCarregados = this._framesCarregados,
-                amostra = new Array(framesCarregados.length);
-
-            for (var i = 0; i < amostra.length; i++) {
-                var frame = new Leap.Frame(this._framesCarregados[0]);
-                amostra[i] = this._frameSignDataProcessor.extrairParaAmostra(frame);
+            if (this._framesCarregados.length === 1) {
+                return this._gerarAmostraEstatica();
             }
-            
+
+            return this._gerarAmostraDinamica();
+        },
+
+        _gerarAmostraEstatica: function() {
+            var frame = new Leap.Frame(this._framesCarregados[0]),
+                frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(frame);
+
+            return [frameDaAmostra];
+        },
+
+        _gerarAmostraDinamica: function() {
+            var framesCarregados = this._framesCarregados,
+                amostra = [],
+                frameBuffer = new Signa.frames.FrameBuffer();
+
+            frameBuffer.adicionarListenerDeFrame(function(frame) {
+                var leapFrame = new Leap.Frame(frame),
+                    frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(frame);
+                    
+                amostra.push(leapFrame);
+            }.bind(this));
+
+            framesCarregados.forEach(function(frame) {
+                frameBuffer.onFrame(frame);
+            });
+
+            console.log(amostra.length);
             return amostra;
         },
 
