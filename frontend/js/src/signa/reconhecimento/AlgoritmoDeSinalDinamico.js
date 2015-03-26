@@ -2,81 +2,70 @@
     'use strict';
 
     function AlgoritmoDeSinalDinamico() {
+        this.RECONHECENDO = new Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconhecendo(this);
+        
+        this.NAO_RECONHECEU_FRAME = 
+            new Signa.reconhecimento.AlgoritmoDeSinalDinamicoNaoReconheceuFrame(this);
+        
+        this.RECONHECEU_PRIMEIRO_FRAME = 
+            new Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconheceuPrimeiroFrame(this);
+        
+        this.RECONHECEU_ULTIMO_FRAME = 
+            new Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconheceuUltimoFrame(this, this.RECONHECENDO);
 
+        this._estado = this.NAO_RECONHECEU_FRAME;
+        this._buffer = this.RECONHECENDO;
     }
 
     AlgoritmoDeSinalDinamico.prototype = {
-        _reconheceuPrimeiroFrame: false,
-        _reconheceuUltimoFrame: false,
-        _frames: undefined,
+        _estado: undefined,
+        _buffer: undefined,
         _sinalId: -1,
-        _promiseReconhecerPrimeiroFrame: undefined,
-        _framesIgnorados: 0,
 
         setSinalId: function(sinalId) {
             this._sinalId = sinalId;
         },
 
+        getSinalId: function() {
+            return this._sinalId;
+        },
+
         reconhecer: function(frame) {
-            if (!this._reconheceuPrimeiroFrame) {
-                this._frames = [];
-                return this._reconhecerPrimeiroFrame(frame);    
-            }
-            
-            return this._reconhecerUltimoFrame(frame);
+            var estado = this._estado,
+                amostra = [frame];
+
+            this.reconhecendo(amostra);
+
+            return estado.reconhecer(amostra);
         },
 
-        _reconhecerPrimeiroFrame: function(frame) {
-            if (this._promiseReconhecerPrimeiroFrame) {
-                this._framesIgnorados++;
-            }
-
-            this._promiseReconhecerPrimeiroFrame = Signa.Hubs
-                .sinaisDinamicos()
-                .reconhecerPrimeiroFrame([frame])
-                .then(function(sinalReconhecidoId) {
-                    this._promiseReconhecerPrimeiroFrame = undefined;
-                    this._framesIgnorados = 0;
-                    if (sinalReconhecidoId === this._sinalId) {
-                        this._reconheceuPrimeiroFrame = true;
-                        this._frames.push(frame);
-                    }
-                    return false;
-                }.bind(this));
-
-            return this._promiseReconhecerPrimeiroFrame;
+        reconhecendo: function(amostra) {
+            console.log('RECONHECENDO');
+            this._estado = this.RECONHECENDO;
+            this._salvarAmostraNoBuffer(amostra);
         },
 
-        _reconhecerUltimoFrame: function(frame) {
-            return Signa.Hubs
-                .sinaisDinamicos()
-                .reconhecerUltimoFrame([frame])
-                .then(function(sinalReconhecidoId) {
-                    this._frames.push(frame);
-                    if (sinalReconhecidoId == this._sinalId) {
-                        this._reconheceuUltimoFrame = true;
-                        console.log('RECONHECEU ÚLTIMO FRAME');
-                        return this._reconhecerSinal();
-                    } else if (this._frames.length == 50) {
-                        console.log('ALCANÇOU 50 FRAMES');
-                        return this._reconhecerSinal();
-                    }
-                    return false;
-                }.bind(this));
+        _salvarAmostraNoBuffer: function(amostra) {
+            this._estado.reconhecer(amostra);
         },
 
-        _reconhecerSinal: function() {
-            return Signa.Hubs
-                .sinaisDinamicos()
-                .reconhecer(this._frames)
-                .then(function(sinalReconhecidoId) {
-                    this._reconheceuPrimeiroFrame = false;
-                    if (sinalReconhecidoId == this._sinalId) {
-                        console.log('SUCESSO');
-                        this._sinalId = -1;
-                        return true;
-                    }
-                }.bind(this));
+        naoReconheceuFrame: function() {
+            console.log('NÃO RECONHECEU');
+            this._buffer.limpar();
+            this._buffer.desativar();
+            this._estado = this.NAO_RECONHECEU_FRAME;
+        },
+
+        reconheceuPrimeiroFrame: function() {
+            console.log('RECONHECEU');
+            this._buffer.ativar();
+            this._estado = this.RECONHECEU_PRIMEIRO_FRAME;
+        },
+
+        reconheceuUltimoFrame: function() {
+            console.log('HORA DE RECONHECER O SINAL');
+            this._buffer.desativar();
+            this._estado = this.RECONHECEU_ULTIMO_FRAME;
         }
     };
 
