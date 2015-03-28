@@ -74,5 +74,5 @@
         }
     };
 
-    Signa.reconhecimento.InformacoesDoFrame = InformacoesDoFrame;
-})(global = typeof global === 'undefined' ? window : global, global.Signa);
+    Signa.frames.InformacoesDoFrame = InformacoesDoFrame;
+})(window, window.Signa);

@@ -1,33 +1,36 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function ReconhecedorDeSinaisOnline(eventEmitter) {
-        this._eventEmitter = eventEmitter;
-        this._informacoesDoFrame = new Signa.reconhecimento.InformacoesDoFrame();
+    function ReconhecedorDeSinaisOnline() {
+        this._informacoesDoFrame = new Signa.frames.InformacoesDoFrame();
     }
 
     ReconhecedorDeSinaisOnline.prototype = {
-        _eventEmitter: undefined,
         _informacoesDoFrame: undefined,
         _idDoSinalParaReconhecer: -1,
         _algoritmo: undefined,
+        _tipoDoSinal: -1,
 
-        adicionarListenerDeReconhecimento: function(listener) {
-            this._eventEmitter.addListener(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID, listener);
+        getIdDoSinal: function() {
+            return this._idDoSinalParaReconhecer;
+        },
+
+        getTipoDoSinal: function() {
+            return this._tipoDoSinal;
         },
 
         reconhecer: function(frame) {
             if (this._idDoSinalParaReconhecer === -1)
-                return;
+                return Promise.resolve(false);
 
             var dados = this._informacoesDoFrame.extrairParaAmostra(frame);
-            this._algoritmo
+            return this._algoritmo
                 .reconhecer(dados)
                 .then(function(sinalFoiReconhecido) {
                     if (sinalFoiReconhecido) {
                         this._idDoSinalParaReconhecer = -1;
-                        this._eventEmitter.trigger(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID);
                     }
+                    return sinalFoiReconhecido;
                 }.bind(this));
         },
 
@@ -37,12 +40,13 @@
         },
 
         setTipoDoSinal: function(tipoDoSinal) {
+            this._tipoDoSinal = tipoDoSinal;
             if (this._ehSinalEstatico(tipoDoSinal)) {
                 console.log('SINAL ESTÁTICO');
-                this._algoritmo = new Signa.reconhecimento.AlgoritmoDeSinalEstatico();
+                this._algoritmo = new Signa.reconhecimento.SinalEstatico();
             } else {
                 console.log('SINAL DINÂMICO');
-                this._algoritmo = new Signa.reconhecimento.AlgoritmoDeSinalDinamico();
+                this._algoritmo = new Signa.reconhecimento.SinalDinamico();
             }
         },
 

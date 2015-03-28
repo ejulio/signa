@@ -1,12 +1,12 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function AlgoritmoDeSinalDinamicoReconheceuUltimoFrame(algoritmoDeSinalDinamico, buffer) {
+    function SinalDinamicoReconheceuUltimoFrame(algoritmoDeSinalDinamico, buffer) {
         this._algoritmoDeSinalDinamico = algoritmoDeSinalDinamico;
         this._buffer = buffer;
     }
 
-    AlgoritmoDeSinalDinamicoReconheceuUltimoFrame.prototype = {
+    SinalDinamicoReconheceuUltimoFrame.prototype = {
         _algoritmoDeSinalDinamico: undefined,
         
         reconhecer: function() {
@@ -22,5 +22,5 @@
         }
     };
 
-    Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconheceuUltimoFrame = AlgoritmoDeSinalDinamicoReconheceuUltimoFrame;
+    Signa.reconhecimento.SinalDinamicoReconheceuUltimoFrame = SinalDinamicoReconheceuUltimoFrame;
 })(window, window.Signa);

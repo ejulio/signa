@@ -1,11 +1,11 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function AlgoritmoDeSinalEstatico() {
+    function SinalEstatico() {
         this._hub = Signa.Hubs.sinaisEstaticos();
     }
 
-    AlgoritmoDeSinalEstatico.prototype = {
+    SinalEstatico.prototype = {
         _hub: undefined,
         _sinalId: -1,
 
@@ -25,5 +25,5 @@
         }
     };
 
-    Signa.reconhecimento.AlgoritmoDeSinalEstatico = AlgoritmoDeSinalEstatico;
+    Signa.reconhecimento.SinalEstatico = SinalEstatico;
 })(window, window.Signa);

@@ -16,7 +16,7 @@
             this._iniciarCena(leapController);
 
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
-            this._frameSignDataProcessor = new Signa.reconhecimento.InformacoesDoFrame();
+            this._frameSignDataProcessor = new Signa.frames.InformacoesDoFrame();
 
             $('#message').hide();
             $('#sign-file').change(this._onArquivoDoSinalChange.bind(this));

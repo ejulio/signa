@@ -1,23 +1,23 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function AlgoritmoDeSinalDinamico() {
-        this.RECONHECENDO = new Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconhecendo(this);
+    function SinalDinamico() {
+        this.RECONHECENDO = new Signa.reconhecimento.SinalDinamicoReconhecendo(this);
         
         this.NAO_RECONHECEU_FRAME = 
-            new Signa.reconhecimento.AlgoritmoDeSinalDinamicoNaoReconheceuFrame(this);
+            new Signa.reconhecimento.SinalDinamicoNaoReconheceuFrame(this);
         
         this.RECONHECEU_PRIMEIRO_FRAME = 
-            new Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconheceuPrimeiroFrame(this);
+            new Signa.reconhecimento.SinalDinamicoReconheceuPrimeiroFrame(this);
         
         this.RECONHECEU_ULTIMO_FRAME = 
-            new Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconheceuUltimoFrame(this, this.RECONHECENDO);
+            new Signa.reconhecimento.SinalDinamicoReconheceuUltimoFrame(this, this.RECONHECENDO);
 
         this._estado = this.NAO_RECONHECEU_FRAME;
         this._buffer = this.RECONHECENDO;
     }
 
-    AlgoritmoDeSinalDinamico.prototype = {
+    SinalDinamico.prototype = {
         _estado: undefined,
         _buffer: undefined,
         _sinalId: -1,
@@ -69,5 +69,5 @@
         }
     };
 
-    Signa.reconhecimento.AlgoritmoDeSinalDinamico = AlgoritmoDeSinalDinamico;
+    Signa.reconhecimento.SinalDinamico = SinalDinamico;
 })(window, window.Signa);

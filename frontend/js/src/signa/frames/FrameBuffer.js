@@ -36,6 +36,8 @@
             return frame.hands.length > 0;
         },
 
+        
+
         _deveArmazenarFrameDoIndice: function() {
             return this._indice === INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO;
         },
@@ -53,4 +55,4 @@
 
 
     Signa.frames.FrameBuffer = FrameBuffer;
-})(global = typeof global === 'undefined' ? window : global, global.Signa);
+})(window, window.Signa);

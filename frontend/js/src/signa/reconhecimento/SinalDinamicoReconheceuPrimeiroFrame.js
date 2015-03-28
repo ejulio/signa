@@ -1,11 +1,11 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function AlgoritmoDeSinalDinamicoReconheceuPrimeiroFrame(algoritmoDeSinalDinamico) {
+    function SinalDinamicoReconheceuPrimeiroFrame(algoritmoDeSinalDinamico) {
         this._algoritmoDeSinalDinamico = algoritmoDeSinalDinamico;
     }
 
-    AlgoritmoDeSinalDinamicoReconheceuPrimeiroFrame.prototype = {
+    SinalDinamicoReconheceuPrimeiroFrame.prototype = {
         _algoritmoDeSinalDinamico: undefined,
 
         reconhecer: function(amostra) {
@@ -24,5 +24,5 @@
         }
     };
 
-    Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconheceuPrimeiroFrame = AlgoritmoDeSinalDinamicoReconheceuPrimeiroFrame;
+    Signa.reconhecimento.SinalDinamicoReconheceuPrimeiroFrame = SinalDinamicoReconheceuPrimeiroFrame;
 })(window, window.Signa);

@@ -1,22 +1,31 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function ReconhecedorDeSinaisOffline(eventEmitter) {
-        this._eventEmitter = eventEmitter;
-    }
+    function ReconhecedorDeSinaisOffline() {}
 
     ReconhecedorDeSinaisOffline.prototype = {
-        _eventEmitter: undefined,
+        _idDoSinalParaReconhecer: -1,
+        _tipoDoSinal: -1,
 
-        adicionarListenerDeReconhecimento: function(listener) {
-            this._eventEmitter.addListener(Signa.reconhecimento.ReconhecedorDeSinais.RECOGNIZE_EVENT_ID, listener);
+        reconhecer: function() {
+            return Promise.resolve(false);
         },
 
-        reconhecer: function(){},
+        setIdDoSinalParaReconhecer: function(idDoSinalParaReconhecer) {
+            this._idDoSinalParaReconhecer = idDoSinalParaReconhecer;
+        },
 
-        setIdDoSinalParaReconhecer: function(){},
+        setTipoDoSinal: function(tipoDoSinal) {
+            this._tipoDoSinal = tipoDoSinal;
+        },
 
-        setTipoDoSinal: function(){}
+        getIdDoSinal: function() {
+            return this._idDoSinalParaReconhecer;
+        },
+
+        getTipoDoSinal: function() {
+            return this._tipoDoSinal;
+        }
     };
 
     Signa.reconhecimento.ReconhecedorDeSinaisOffline = ReconhecedorDeSinaisOffline;

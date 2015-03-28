@@ -1,12 +1,12 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function AlgoritmoDeSinalDinamicoReconhecendo() {
+    function SinalDinamicoReconhecendo() {
         this._frames = [];
         this._deveArmazenarOsFrames = false;
     }
 
-    AlgoritmoDeSinalDinamicoReconhecendo.prototype = {
+    SinalDinamicoReconhecendo.prototype = {
         _frames: undefined,
         _deveArmazenarOsFrames: false,
 
@@ -35,5 +35,5 @@
         }
     };
 
-    Signa.reconhecimento.AlgoritmoDeSinalDinamicoReconhecendo = AlgoritmoDeSinalDinamicoReconhecendo;
+    Signa.reconhecimento.SinalDinamicoReconhecendo = SinalDinamicoReconhecendo;
 })(window, window.Signa);
