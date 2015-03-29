@@ -2,8 +2,8 @@
     'use strict';
     
     var ID_EVENTO_FRAME = 'frame';
-    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 3;
-    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 5;
+    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 8;
+    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 15;
 
     function FrameBuffer() {
         this._eventEmitter = new EventEmitter();
@@ -27,7 +27,6 @@
                 } else if (this._alcancouMaximoDeFrames()) {
                     this._eventEmitter.trigger(ID_EVENTO_FRAME, [this._frame]);
                     this._indice = 0;
-                    this._frame = undefined;
                 }
             }
         },
@@ -35,8 +34,6 @@
         _frameEhValido: function(frame) {
             return frame.hands.length > 0;
         },
-
-        
 
         _deveArmazenarFrameDoIndice: function() {
             return this._indice === INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO;

@@ -15,11 +15,14 @@
 
         this._estado = this.NAO_RECONHECEU_FRAME;
         this._buffer = this.RECONHECENDO;
+        this._comparador = new Signa.frames.Comparador();
     }
 
     SinalDinamico.prototype = {
         _estado: undefined,
         _buffer: undefined,
+        _comparador: undefined,
+        _ultimoFrame: undefined,
         _sinalId: -1,
 
         setSinalId: function(sinalId) {
@@ -31,9 +34,15 @@
         },
 
         reconhecer: function(frame) {
+            if (this._comparador.framesSaoIguais(frame, this._ultimoFrame)) {
+                console.log('MESMO FRAME');
+                return Promise.resolve(false);
+            }
+
             var estado = this._estado,
                 amostra = [frame];
 
+            this._ultimoFrame = frame;
             this.reconhecendo(amostra);
 
             return estado.reconhecer(amostra);
