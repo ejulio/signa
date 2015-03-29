@@ -18,26 +18,38 @@ namespace Dominio.Algoritmos.Caracteristicas
 
         private IEnumerable<double> ExtrairCaracteristicasDaMao(Mao mao)
         {
-            double[] angulo = new double[5];
-
-            for (int i = 0; i < angulo.Length; i++)
-            {
-                var p1 = mao.Dedos[i].PosicaoDaPonta;
-                var p2 = mao.PosicaoDaPalma;
-
-                angulo[i] = p1.AnguloAte(p2);
-            }
-
             return mao.VetorNormalDaPalma
                 .Concat(mao.Direcao)
-                //.Concat(mao.Dedos.Select(ExtrairCaracteristicasDoDedo).Concatenar())
-                .Concat(angulo);
+                .Concat(AngulosEntreDedosEPalmaDaMao(mao))
+                .Concat(AngulosEntreDedos(mao));
         }
 
-        private IEnumerable<double> ExtrairCaracteristicasDoDedo(Dedo dedo)
+        private double[] AngulosEntreDedosEPalmaDaMao(Mao mao)
         {
-            var tipo = new double[] { (int)dedo.Tipo, dedo.Apontando ? 1.0 : 0.0 };
-            return tipo.Concat(dedo.Direcao);
+            double[] angulos = new double[mao.Dedos.Length];
+
+            for (int i = 0; i < angulos.Length; i++)
+            {
+                var posicaoDaPontaDoDedo = mao.Dedos[i].PosicaoDaPonta;
+                var posicaoDaPalma = mao.PosicaoDaPalma;
+
+                angulos[i] = posicaoDaPontaDoDedo.AnguloAte(posicaoDaPalma);
+            }
+            return angulos;
+        }
+
+        private double[] AngulosEntreDedos(Mao mao)
+        {
+            double[] angulos = new double[mao.Dedos.Length - 1];
+
+            for (int i = 0; i < angulos.Length; i++)
+            {
+                var posicaoDaPontaDoDedo1 = mao.Dedos[i].PosicaoDaPonta;
+                var posicaoDaPontaDoDedo2 = mao.Dedos[i + 1].PosicaoDaPonta;
+
+                angulos[i] = posicaoDaPontaDoDedo1.AnguloAte(posicaoDaPontaDoDedo2);
+            }
+            return angulos;
         }
     }
 }

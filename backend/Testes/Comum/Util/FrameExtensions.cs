@@ -28,27 +28,41 @@ namespace Testes.Comum.Util
 
         private static double[] MontarArrayEsperadoParaAMao(Mao mao)
         {
-            var dadosDosDedos = mao.Dedos.Select(d =>
-            {
-                var tipo = new double[] { (int)d.Tipo };
-                return tipo.Concat(d.Direcao).ToArray();
-            }).Concatenar();
-
-            double[] angulo = new double[5];
-
-            for (int i = 0; i < angulo.Length; i++)
-            {
-                var p1 = mao.Dedos[i].PosicaoDaPonta;
-                var p2 = mao.PosicaoDaPalma;
-
-                angulo[i] = p1.AnguloAte(p2);
-            }
-
             return mao.VetorNormalDaPalma
                     .Concat(mao.Direcao)
-                    .Concat(angulo)
-                    //.Concat(dadosDosDedos)
+                    .Concat(AngulosEntreDedosEPalmaDaMao(mao))
+                    .Concat(AngulosEntreDedos(mao))
                     .ToArray();
-        } 
+        }
+
+        private static double[] AngulosEntreDedosEPalmaDaMao(Mao mao)
+        {
+            double[] angulos = new double[mao.Dedos.Length];
+
+            for (int i = 0; i < angulos.Length; i++)
+            {
+                var posicaoDaPontaDoDedo = mao.Dedos[i].PosicaoDaPonta;
+                var posicaoDaPalma = mao.PosicaoDaPalma;
+
+                angulos[i] = posicaoDaPontaDoDedo.AnguloAte(posicaoDaPalma);
+            }
+
+            return angulos;
+        }
+
+        private static double[] AngulosEntreDedos(Mao mao)
+        {
+            double[] angulos = new double[mao.Dedos.Length - 1];
+
+            for (int i = 0; i < angulos.Length; i++)
+            {
+                var posicaoDaPontaDoDedo1 = mao.Dedos[i].PosicaoDaPonta;
+                var posicaoDaPontaDoDedo2 = mao.Dedos[i + 1].PosicaoDaPonta;
+
+                angulos[i] = posicaoDaPontaDoDedo1.AnguloAte(posicaoDaPontaDoDedo2);
+            }
+
+            return angulos;
+        }
     }
 }
