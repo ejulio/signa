@@ -11,15 +11,12 @@
 
         setSinalId: function(sinalId) {
             this._sinalId = sinalId;
-            console.log('SINAL ID ' + sinalId);
         },
 
         reconhecer: function(frame) {
             return this._hub
                 .reconhecer([frame])
                 .then(function(sinalReconhecidoId) {
-                    //return false;
-                    console.log('RECONHECEU:' + sinalReconhecidoId);
                     return sinalReconhecidoId === this._sinalId;
                 }.bind(this));
         }

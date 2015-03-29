@@ -100,7 +100,6 @@
                 frameBuffer.onFrame(frame);
             });
 
-            console.log(amostra.length);
             return amostra;
         },
 

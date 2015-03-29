@@ -39,11 +39,6 @@
         },
 
         _extrairDadosDaMao: function(leapHand) {
-            if (leapHand.confidence < 0.5) {
-                //console.log('HAND CONFIDENCE: ' + leapHand.confidence);
-                //return null;
-            }
-
             return {
                 VetorNormalDaPalma: leapHand.palmNormal,
                 PosicaoDaPalma: leapHand.stabilizedPalmPosition,

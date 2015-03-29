@@ -1,25 +1,7 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
-    function arraysSaoIguais(arrayA, arrayB) {
-        for (var i = 0; i < arrayA.length; i++) {
-            if (!numerosSaoIguais(arrayA[i], arrayB[i])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function numerosSaoIguais(numeroA, numeroB) {
-        var diferenca = Math.abs(numeroA - numeroB);
-        //console.log(diferenca);
-        return diferenca < 50;
-    }
-
-    function resultadosDasFuncoesSaoIguais(funcaoA, funcaoB) {
-        //return funcaoA() === funcaoB();
-        return true;
-    }
+    var LIMITE_DIFERENCA_ENTRE_NUMEROS = 10;
 
     function Comparador() {}
 
@@ -40,23 +22,42 @@
                 return false;
             }
 
-            var propriedadesArray = ['VetorNormalDaPalma', 'PosicaoDaPalma', 'VelocidadeDaPalma', 'Direcao'];
-            var propriedadesNumericas = ['RaioDaEsfera', 'Pitch', 'Roll', 'Yaw'];
+            var dedosMaoA = maoA.Dedos;
+            var dedosMaoB = maoB.Dedos;
 
-            return this._propriedadesSaoIguais(maoA, maoB, propriedadesArray, arraysSaoIguais) &&
-                this._propriedadesSaoIguais(maoA, maoB, propriedadesNumericas, numerosSaoIguais);
+            return this._dedosEstaoNaMesmaPosicao(dedosMaoA, dedosMaoB);
         },
 
-        _propriedadesSaoIguais: function(maoA, maoB, propriedades, igual) {
-            for (var i = 0; i < propriedades.length; i++) {
-                var propriedade = propriedades[i];
-                if (!igual(maoA[propriedade], maoB[propriedade])) {
+        _dedosEstaoNaMesmaPosicao: function(dedosMaoA, dedosMaoB) {
+            for (var i = 0; i < dedosMaoA.length; i++) {
+                var posicaoDedoMaoA = dedosMaoA[i].PosicaoDaPonta;
+                var posicaoDedoMaoB = dedosMaoB[i].PosicaoDaPonta;
+
+                if (dedosMaoA[i].Tipo !== dedosMaoB[i].Tipo) {
+                    console.log('DEDOS DE TIPOS DIFERENTES: ' + dedosMaoA[i].Tipo + ', ' + dedosMaoB[i].Tipo);
+                }
+
+                if (!arraysSaoIguais(posicaoDedoMaoA, posicaoDedoMaoB)) {
                     return false;
                 }
             }
             return true;
         }
     };
+
+    function arraysSaoIguais(arrayA, arrayB) {
+        for (var i = 0; i < arrayA.length; i++) {
+            if (!numerosSaoIguais(arrayA[i], arrayB[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function numerosSaoIguais(numeroA, numeroB) {
+        var diferenca = Math.abs(numeroA - numeroB);
+        return diferenca < LIMITE_DIFERENCA_ENTRE_NUMEROS;
+    }
 
     Signa.frames.Comparador = Comparador;
 })(window, window.Signa);

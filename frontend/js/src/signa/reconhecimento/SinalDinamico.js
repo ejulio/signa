@@ -35,7 +35,6 @@
 
         reconhecer: function(frame) {
             if (this._comparador.framesSaoIguais(frame, this._ultimoFrame)) {
-                console.log('MESMO FRAME');
                 return Promise.resolve(false);
             }
 
@@ -49,7 +48,6 @@
         },
 
         reconhecendo: function(amostra) {
-            console.log('RECONHECENDO');
             this._estado = this.RECONHECENDO;
             this._salvarAmostraNoBuffer(amostra);
         },
@@ -59,20 +57,17 @@
         },
 
         naoReconheceuFrame: function() {
-            console.log('NÃO RECONHECEU');
             this._buffer.limpar();
             this._buffer.desativar();
             this._estado = this.NAO_RECONHECEU_FRAME;
         },
 
         reconheceuPrimeiroFrame: function() {
-            console.log('RECONHECEU');
             this._buffer.ativar();
             this._estado = this.RECONHECEU_PRIMEIRO_FRAME;
         },
 
         reconheceuUltimoFrame: function() {
-            console.log('HORA DE RECONHECER O SINAL');
             this._buffer.desativar();
             this._estado = this.RECONHECEU_ULTIMO_FRAME;
         }
