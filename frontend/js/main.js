@@ -311,10 +311,74 @@
 
 ;(function(window, Signa, undefined) {
     'use strict';
+
+    var LIMITE_DIFERENCA_ENTRE_NUMEROS = 10;
+
+    function Comparador() {}
+
+    Comparador.prototype = {
+        framesSaoIguais: function(frameA, frameB) {
+            if (!frameA || !frameB) {
+                return false;
+            }
+
+            return this._maosSaoIguais(frameA.MaoEsquerda, frameB.MaoEsquerda) &&
+                this._maosSaoIguais(frameA.MaoDireita, frameB.MaoDireita);
+        },
+
+        _maosSaoIguais: function(maoA, maoB) {
+            if (maoA === maoB) {
+                return true;
+            } else if (!maoA || !maoB) {
+                return false;
+            }
+
+            var dedosMaoA = maoA.Dedos;
+            var dedosMaoB = maoB.Dedos;
+
+            return this._dedosEstaoNaMesmaPosicao(dedosMaoA, dedosMaoB);
+        },
+
+        _dedosEstaoNaMesmaPosicao: function(dedosMaoA, dedosMaoB) {
+            for (var i = 0; i < dedosMaoA.length; i++) {
+                var posicaoDedoMaoA = dedosMaoA[i].PosicaoDaPonta;
+                var posicaoDedoMaoB = dedosMaoB[i].PosicaoDaPonta;
+
+                if (dedosMaoA[i].Tipo !== dedosMaoB[i].Tipo) {
+                    console.log('DEDOS DE TIPOS DIFERENTES: ' + dedosMaoA[i].Tipo + ', ' + dedosMaoB[i].Tipo);
+                }
+
+                if (!arraysSaoIguais(posicaoDedoMaoA, posicaoDedoMaoB)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    };
+
+    function arraysSaoIguais(arrayA, arrayB) {
+        for (var i = 0; i < arrayA.length; i++) {
+            if (!numerosSaoIguais(arrayA[i], arrayB[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function numerosSaoIguais(numeroA, numeroB) {
+        var diferenca = Math.abs(numeroA - numeroB);
+        return diferenca < LIMITE_DIFERENCA_ENTRE_NUMEROS;
+    }
+
+    Signa.frames.Comparador = Comparador;
+})(window, window.Signa);
+
+;(function(window, Signa, undefined) {
+    'use strict';
     
     var ID_EVENTO_FRAME = 'frame';
-    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 3;
-    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 5;
+    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 5;
+    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 10;
 
     function FrameBuffer() {
         this._eventEmitter = new EventEmitter();
@@ -338,7 +402,6 @@
                 } else if (this._alcancouMaximoDeFrames()) {
                     this._eventEmitter.trigger(ID_EVENTO_FRAME, [this._frame]);
                     this._indice = 0;
-                    this._frame = undefined;
                 }
             }
         },
@@ -346,8 +409,6 @@
         _frameEhValido: function(frame) {
             return frame.hands.length > 0;
         },
-
-        
 
         _deveArmazenarFrameDoIndice: function() {
             return this._indice === INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO;
@@ -409,11 +470,6 @@
         },
 
         _extrairDadosDaMao: function(leapHand) {
-            if (leapHand.confidence < 0.5) {
-                //console.log('HAND CONFIDENCE: ' + leapHand.confidence);
-                //return null;
-            }
-
             return {
                 VetorNormalDaPalma: leapHand.palmNormal,
                 PosicaoDaPalma: leapHand.stabilizedPalmPosition,
@@ -549,7 +605,6 @@
                 frameBuffer.onFrame(frame);
             });
 
-            console.log(amostra.length);
             return amostra;
         },
 
@@ -920,10 +975,8 @@
         setTipoDoSinal: function(tipoDoSinal) {
             this._tipoDoSinal = tipoDoSinal;
             if (this._ehSinalEstatico(tipoDoSinal)) {
-                console.log('SINAL ESTÁTICO');
                 this._algoritmo = new Signa.reconhecimento.SinalEstatico();
             } else {
-                console.log('SINAL DINÂMICO');
                 this._algoritmo = new Signa.reconhecimento.SinalDinamico();
             }
         },
@@ -953,11 +1006,14 @@
 
         this._estado = this.NAO_RECONHECEU_FRAME;
         this._buffer = this.RECONHECENDO;
+        this._comparador = new Signa.frames.Comparador();
     }
 
     SinalDinamico.prototype = {
         _estado: undefined,
         _buffer: undefined,
+        _comparador: undefined,
+        _ultimoFrame: undefined,
         _sinalId: -1,
 
         setSinalId: function(sinalId) {
@@ -969,16 +1025,20 @@
         },
 
         reconhecer: function(frame) {
+            if (this._comparador.framesSaoIguais(frame, this._ultimoFrame)) {
+                return Promise.resolve(false);
+            }
+
             var estado = this._estado,
                 amostra = [frame];
 
+            this._ultimoFrame = frame;
             this.reconhecendo(amostra);
 
             return estado.reconhecer(amostra);
         },
 
         reconhecendo: function(amostra) {
-            console.log('RECONHECENDO');
             this._estado = this.RECONHECENDO;
             this._salvarAmostraNoBuffer(amostra);
         },
@@ -988,20 +1048,17 @@
         },
 
         naoReconheceuFrame: function() {
-            console.log('NÃO RECONHECEU');
             this._buffer.limpar();
             this._buffer.desativar();
             this._estado = this.NAO_RECONHECEU_FRAME;
         },
 
         reconheceuPrimeiroFrame: function() {
-            console.log('RECONHECEU');
             this._buffer.ativar();
             this._estado = this.RECONHECEU_PRIMEIRO_FRAME;
         },
 
         reconheceuUltimoFrame: function() {
-            console.log('HORA DE RECONHECER O SINAL');
             this._buffer.desativar();
             this._estado = this.RECONHECEU_ULTIMO_FRAME;
         }
@@ -1148,15 +1205,12 @@
 
         setSinalId: function(sinalId) {
             this._sinalId = sinalId;
-            console.log('SINAL ID ' + sinalId);
         },
 
         reconhecer: function(frame) {
             return this._hub
                 .reconhecer([frame])
                 .then(function(sinalReconhecidoId) {
-                    //return false;
-                    console.log('RECONHECEU:' + sinalReconhecidoId);
                     return sinalReconhecidoId === this._sinalId;
                 }.bind(this));
         }
