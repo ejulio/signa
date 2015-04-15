@@ -80,6 +80,7 @@
     <Compile Include="Integracao\Dados\Repositorio\RepositorioDeSinaisDinamicosTeste.cs" />
     <Compile Include="Integracao\Dados\Repositorio\RepositorioSinaisEstaticosTeste.cs" />
     <Compile Include="Integracao\Dados\SinaisEstaticosControllerTeste.cs" />
+    <Compile Include="Integracao\Dominio\Algoritmos\AlgoritmosTeste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Integracao\Dados\SinaisDinamicosControllerTeste.cs" />
     <Compile Include="Unidade\Dados\SinaisEstaticosControllerTeste.cs" />
@@ -109,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Integracao\JsonTestData\repositorio-sinais-teste-reconhecimento.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Integracao\JsonTestData\repositorio-sinais-treinamento-reconhecimento.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Integracao\JsonTestData\sign-samples.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
