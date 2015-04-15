@@ -28,10 +28,8 @@ namespace Dominio.Algoritmos.Dinamico
         {
             if (classificador == null)
                 throw new InvalidOperationException();
-            double p;
-            int r = classificador.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra), out p);
-            Console.WriteLine("{0} - {1}", r, p);
-            return r;
+
+            return classificador.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra)); ;
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
