@@ -8,29 +8,20 @@
 
     SinalDinamicoReconhecendo.prototype = {
         _frames: undefined,
-        _deveArmazenarOsFrames: false,
 
         getFrames: function() {
             return this._frames;
         },  
 
         reconhecer: function(amostra) {
-            if (this._deveArmazenarOsFrames) {
-                this._frames.push(amostra[0]);
-            }
+            console.log('guardando sinal');
+            this._frames.push(amostra[0]);
 
             return Promise.resolve(false);
         },
 
-        ativar: function() {
-            this._deveArmazenarOsFrames = true;
-        },
-
-        desativar: function() {
-            this._deveArmazenarOsFrames = false;
-        },
-
         limpar: function() {
+            console.log('limpando sinais');
             this._frames = [];
         }
     };

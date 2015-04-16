@@ -1017,6 +1017,7 @@
         _sinalId: -1,
 
         setSinalId: function(sinalId) {
+            console.log('SINAL ' + sinalId);
             this._sinalId = sinalId;
         },
 
@@ -1049,17 +1050,14 @@
 
         naoReconheceuFrame: function() {
             this._buffer.limpar();
-            this._buffer.desativar();
             this._estado = this.NAO_RECONHECEU_FRAME;
         },
 
         reconheceuPrimeiroFrame: function() {
-            this._buffer.ativar();
             this._estado = this.RECONHECEU_PRIMEIRO_FRAME;
         },
 
         reconheceuUltimoFrame: function() {
-            this._buffer.desativar();
             this._estado = this.RECONHECEU_ULTIMO_FRAME;
         }
     };
@@ -1106,29 +1104,20 @@
 
     SinalDinamicoReconhecendo.prototype = {
         _frames: undefined,
-        _deveArmazenarOsFrames: false,
 
         getFrames: function() {
             return this._frames;
         },  
 
         reconhecer: function(amostra) {
-            if (this._deveArmazenarOsFrames) {
-                this._frames.push(amostra[0]);
-            }
+            console.log('guardando sinal');
+            this._frames.push(amostra[0]);
 
             return Promise.resolve(false);
         },
 
-        ativar: function() {
-            this._deveArmazenarOsFrames = true;
-        },
-
-        desativar: function() {
-            this._deveArmazenarOsFrames = false;
-        },
-
         limpar: function() {
+            console.log('limpando sinais');
             this._frames = [];
         }
     };

@@ -26,6 +26,7 @@
         _sinalId: -1,
 
         setSinalId: function(sinalId) {
+            console.log('SINAL ' + sinalId);
             this._sinalId = sinalId;
         },
 
@@ -58,17 +59,14 @@
 
         naoReconheceuFrame: function() {
             this._buffer.limpar();
-            this._buffer.desativar();
             this._estado = this.NAO_RECONHECEU_FRAME;
         },
 
         reconheceuPrimeiroFrame: function() {
-            this._buffer.ativar();
             this._estado = this.RECONHECEU_PRIMEIRO_FRAME;
         },
 
         reconheceuUltimoFrame: function() {
-            this._buffer.desativar();
             this._estado = this.RECONHECEU_ULTIMO_FRAME;
         }
     };
