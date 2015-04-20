@@ -75,6 +75,8 @@ namespace Testes.Integracao.Dominio.Algoritmos
         {
             int totalAcertos = 0;
             int totalErros = 0;
+            StringBuilder acertos = new StringBuilder();
+            StringBuilder erros = new StringBuilder();
             for (var i = 0; i < repositorioTestes.Quantidade; i++)
             {
                 var sinal = repositorioTestes.BuscarPorIndice(i);
@@ -87,25 +89,31 @@ namespace Testes.Integracao.Dominio.Algoritmos
                 {
                     var resultado = algoritmo.Reconhecer(sinal.Amostras[j]);
 
-                    Console.WriteLine(
-                        "Índice da amostra: {2}{0}Esperado: {3} - {1}{0}Reconhecido: {4} - {6}{0}{5}",
-                        resultado == indiceDoSinalParaOAlgoritmo ? Environment.NewLine : Environment.NewLine.PadRight(5),
-                        sinal.Descricao,
-                        j,
-                        indiceDoSinalParaOAlgoritmo,
-                        resultado,
-                        String.Empty.PadRight(20, '-'),
-                        repositorioTreinamento.BuscarPorIndice(resultado).Descricao);
-
                     if (resultado == indiceDoSinalParaOAlgoritmo)
+                    {
+                        acertos.AppendFormat("{0}, ", sinal.Descricao);
                         totalAcertos++;
+                    }
                     else
+                    {
+                        erros.AppendFormat(
+                            "Índice da amostra: {2}{0}Esperado: {3} - {1}{0}Reconhecido: {4} - {6}{0}{5}",
+                            Environment.NewLine,
+                            sinal.Descricao,
+                            j,
+                            indiceDoSinalParaOAlgoritmo,
+                            resultado,
+                            String.Empty.PadRight(20, '-'),
+                            repositorioTreinamento.BuscarPorIndice(resultado).Descricao);
                         totalErros++;
+                    }
                 }
             }
 
             Console.WriteLine("Total acertos: {0}", totalAcertos);
             Console.WriteLine("Total erros: {0}", totalErros);
+            Console.WriteLine("Sinais corretos: {0}{1}", acertos.ToString(), Environment.NewLine);
+            Console.WriteLine("Sinais errados: {0}{1}", Environment.NewLine, erros.ToString());
         }
     }
 }

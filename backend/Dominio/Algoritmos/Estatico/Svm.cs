@@ -1,4 +1,5 @@
-﻿using Accord.MachineLearning.VectorMachines;
+﻿using Accord.Controls;
+using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.Statistics.Kernels;
 using Dominio.Algoritmos.Caracteristicas;
@@ -30,17 +31,19 @@ namespace Dominio.Algoritmos.Estatico
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)
         {
-            var kernel = new Gaussian();
-            
+            var kernel = new Gaussian(1);
             svm = new MulticlassSupportVectorMachine(0, kernel, dados.QuantidadeDeClasses);
-
+            
             var teacher = new MulticlassSupportVectorLearning(svm, dados.Entradas, dados.Saidas)
             {
-                Algorithm =
-                    (machine, classInputs, classOutputs, j, k) =>
-                        new SequentialMinimalOptimization(machine, classInputs, classOutputs)
+                Algorithm = (machine, classInputs, classOutputs, j, k) => 
+                {
+                    var smo = new SequentialMinimalOptimization(machine, classInputs, classOutputs);
+                    smo.Complexity = 10;
+                    return smo;
+                }
             };
-
+            
 
             var e = teacher.Run();
         }

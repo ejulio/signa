@@ -377,8 +377,8 @@
     'use strict';
     
     var ID_EVENTO_FRAME = 'frame';
-    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 5;
-    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 10;
+    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 2;
+    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 4;
 
     function FrameBuffer() {
         this._eventEmitter = new EventEmitter();
@@ -611,6 +611,7 @@
         _enviarInformacoesParaOServidor: function(descricaoDoSinal, amostra) {
             var url = this._montarUrlParaSalvarOSinal(amostra);
             $('#message').text('Salvando informações do sinal...').show();
+            debugger;
             $.post(url, {
                 descricao: descricaoDoSinal,
                 conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,

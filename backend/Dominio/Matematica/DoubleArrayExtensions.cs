@@ -30,5 +30,16 @@ namespace Dominio.Matematica
 
             return Math.Acos(vetor1.ProdutoCom(vetor2) / magnitude);
         }
+
+        public static double[] Normalizado(this double[] vetor)
+        {
+            var magnitude = vetor.Magnitude();
+            return new[]
+            {
+                vetor[0] == 0 ? 0 : vetor[0] / magnitude,
+                vetor[1] == 0 ? 0 : vetor[1] / magnitude,
+                vetor[2] == 0 ? 0 : vetor[2] / magnitude
+            };
+        }
     }
 }

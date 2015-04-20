@@ -1,4 +1,5 @@
 ﻿using Dominio.Sinais;
+using System;
 using System.Collections.Generic;
 
 namespace Dominio.Algoritmos.Caracteristicas
@@ -11,6 +12,9 @@ namespace Dominio.Algoritmos.Caracteristicas
             for (int i = 0; i < frames.Count; i++)
             {
                 caracteristicasDosFrames[i] = ExtrairCaracteristicasDoFrame(frames[i]);
+                foreach (var v in caracteristicasDosFrames[i])
+                    if (v > 1)
+                        Console.WriteLine("NORM");
             }
             return caracteristicasDosFrames;
         }

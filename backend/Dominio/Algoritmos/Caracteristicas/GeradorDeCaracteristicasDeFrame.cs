@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dominio.Matematica;
+using Dominio.Util;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
@@ -18,10 +19,12 @@ namespace Dominio.Algoritmos.Caracteristicas
 
         private IEnumerable<double> ExtrairCaracteristicasDaMao(Mao mao)
         {
-            return mao.VetorNormalDaPalma
-                .Concat(mao.Direcao)
-                .Concat(AngulosEntreDedosEPalmaDaMao(mao))
-                .Concat(AngulosEntreDedos(mao));
+            var direcaoDosDedos = mao.Dedos.Select(d => d.Direcao.Normalizado()).ToArray().Concatenar();
+            return mao.VetorNormalDaPalma.Normalizado()
+                .Concat(mao.Direcao.Normalizado())
+                .Concat(AngulosEntreDedosEPalmaDaMao(mao).Normalizado())
+                .Concat(AngulosEntreDedos(mao).Normalizado())
+                .Concat(direcaoDosDedos);
         }
 
         private double[] AngulosEntreDedosEPalmaDaMao(Mao mao)
@@ -44,8 +47,8 @@ namespace Dominio.Algoritmos.Caracteristicas
 
             for (int i = 0; i < angulos.Length; i++)
             {
-                var posicaoDaPontaDoDedo1 = mao.Dedos[i].PosicaoDaPonta;
-                var posicaoDaPontaDoDedo2 = mao.Dedos[i + 1].PosicaoDaPonta;
+                var posicaoDaPontaDoDedo1 = mao.Dedos[i].Direcao;
+                var posicaoDaPontaDoDedo2 = mao.Dedos[i + 1].Direcao;
 
                 angulos[i] = posicaoDaPontaDoDedo1.AnguloAte(posicaoDaPontaDoDedo2);
             }

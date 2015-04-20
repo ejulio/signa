@@ -106,6 +106,7 @@
         _enviarInformacoesParaOServidor: function(descricaoDoSinal, amostra) {
             var url = this._montarUrlParaSalvarOSinal(amostra);
             $('#message').text('Salvando informações do sinal...').show();
+            debugger;
             $.post(url, {
                 descricao: descricaoDoSinal,
                 conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,
