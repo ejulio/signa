@@ -1,26 +1,10 @@
 ﻿using System;
+using System.Linq;
 
 namespace Dominio.Matematica
 {
     public static class DoubleArrayExtensions
     {
-        public static double Magnitude(this double[] vetor)
-        {
-            var xAoQuadrado = vetor[0] * vetor[0];
-            var yAoQuadrado = vetor[1] * vetor[1];
-            var zAoQuadrado = vetor[2] * vetor[2];
-            return Math.Sqrt(xAoQuadrado + yAoQuadrado + zAoQuadrado);
-        }
-
-        public static double ProdutoCom(this double[] vetor1, double[] vetor2)
-        {
-            var produtoDeX = vetor1[0] * vetor2[0];
-            var produtoDeY = vetor1[1] * vetor2[1];
-            var produtoDeZ = vetor1[2] * vetor2[2];
-
-            return produtoDeX + produtoDeY + produtoDeZ;
-        }
-
         public static double AnguloAte(this double[] vetor1, double[] vetor2)
         {
             var magnitude = vetor1.Magnitude() * vetor2.Magnitude();
@@ -33,13 +17,60 @@ namespace Dominio.Matematica
 
         public static double[] Normalizado(this double[] vetor)
         {
+            var vetorNormalizado = new double[vetor.Length];
             var magnitude = vetor.Magnitude();
-            return new[]
+
+            if (magnitude != 0)
             {
-                vetor[0] == 0 ? 0 : vetor[0] / magnitude,
-                vetor[1] == 0 ? 0 : vetor[1] / magnitude,
-                vetor[2] == 0 ? 0 : vetor[2] / magnitude
-            };
+                for (var i = 0; i < vetorNormalizado.Length; i++)
+                {
+                    vetorNormalizado[i] = vetor[i] / magnitude;
+                }
+            }
+
+            return vetorNormalizado;
+        }
+
+        public static double Magnitude(this double[] vetor)
+        {
+            var produtoDoVetor = vetor.ProdutoCom(vetor);
+            return Math.Sqrt(produtoDoVetor);
+        }
+
+        public static double ProdutoCom(this double[] vetor1, double[] vetor2)
+        {
+            double total = 0;
+            for (int i = 0; i < vetor1.Length; i++)
+            {
+                total += vetor1[i] * vetor2[i];
+            }
+
+            return total;
+        }
+
+        public static double[] MultiplicarPor(this double[] vetor, double escalar)
+        {
+            return vetor.Select(valor => valor * escalar).ToArray();
+        }
+
+        public static double[] SomarCom(this double[] vetor1, double[] vetor2)
+        {
+            return vetor1.Select((valor, indice) => valor + vetor2[indice]).ToArray();
+        }
+
+        public static double[] ProjetadoEmXY(this double[] vetor)
+        {
+            return new[] { vetor[0], vetor[1] };
+        }
+
+        public static double[] ProjetadoEmXZ(this double[] vetor)
+        {
+            return new[] { vetor[0], vetor[2] };
+        }
+
+        public static double[] ProjetadoEmYZ(this double[] vetor)
+        {
+            return new[] { vetor[1], vetor[2] };
         }
     }
 }

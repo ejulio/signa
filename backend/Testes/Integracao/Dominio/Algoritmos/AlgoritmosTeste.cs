@@ -91,7 +91,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
 
                     if (resultado == indiceDoSinalParaOAlgoritmo)
                     {
-                        acertos.AppendFormat("{0}, ", sinal.Descricao);
+                        acertos.AppendFormat("{0}({1}), ", sinal.Descricao, indiceDoSinalParaOAlgoritmo);
                         totalAcertos++;
                     }
                     else
