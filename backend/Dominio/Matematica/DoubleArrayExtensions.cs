@@ -58,6 +58,19 @@ namespace Dominio.Matematica
             return vetor1.Select((valor, indice) => valor + vetor2[indice]).ToArray();
         }
 
+        public static double[] Subtrair(this double[] vetor1, double[] vetor2)
+        {
+            return vetor1.Select((valor, indice) => valor - vetor2[indice]).ToArray();
+        }
+
+        public static double[] ProjetadoNoPlano(this double[] vetor, double[] vetorNormalDoPlano)
+        {
+            var vetorNormalDoPlanoNormalizado = vetorNormalDoPlano.Normalizado();
+            var produto = vetor.ProdutoCom(vetorNormalDoPlanoNormalizado);
+            var vetorNoPlano = vetorNormalDoPlanoNormalizado.MultiplicarPor(produto);
+            return vetor.Subtrair(vetorNoPlano);
+        }
+
         public static double[] ProjetadoEmXY(this double[] vetor)
         {
             return new[] { vetor[0], vetor[1] };

@@ -171,5 +171,31 @@ namespace Testes.Unidade.Matematica
             var vetoresSomadosEsperado = vetor1.Select((valor, indice) => valor + vetor2[indice]);
             vetoresSomados.Should().ContainInOrder(vetoresSomadosEsperado);
         }
+
+        [TestMethod]
+        public void subtraindo_dois_vetores()
+        {
+            var vetor1 = new[] { 10.3, 4.6, 7.8 };
+            var vetor2 = new[] { 5.0, -2.0, 1.6 };
+
+            var vetoresSubtraidos = vetor1.Subtrair(vetor2);
+
+            vetoresSubtraidos[0].Should().Be(vetor1[0] - vetor2[0]);
+            vetoresSubtraidos[1].Should().Be(vetor1[1] - vetor2[1]);
+            vetoresSubtraidos[2].Should().Be(vetor1[2] - vetor2[2]);
+        }
+
+        [TestMethod]
+        public void projetando_um_vetor_em_um_plano()
+        {
+            var vetorNormalDoPlano = new[] { 1.0, 1.0, 0.0 };
+            var vetor = new[] { 15.6, 8.9, 2.3 };
+
+            var vetorProjetadoNoPlano = vetor.ProjetadoNoPlano(vetorNormalDoPlano);
+
+            vetorProjetadoNoPlano[0].Should().BeApproximately(3.35, 2);
+            vetorProjetadoNoPlano[1].Should().BeApproximately(-3.349, 3);
+            vetorProjetadoNoPlano[2].Should().Be(2.3);
+        }
     }
 }

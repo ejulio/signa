@@ -575,6 +575,7 @@
         },
 
         _gerarAmostra: function() {
+            debugger;
             if (this._framesCarregados.length === 1) {
                 return this._gerarAmostraEstatica();
             }

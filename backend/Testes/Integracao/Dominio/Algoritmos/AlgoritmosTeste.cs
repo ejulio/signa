@@ -96,6 +96,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
                     }
                     else
                     {
+                        Console.WriteLine("ERRO");
                         erros.AppendFormat(
                             "Índice da amostra: {2}{0}Esperado: {3} - {1}{0}Reconhecido: {4} - {6}{0}{5}",
                             Environment.NewLine,
@@ -114,6 +115,11 @@ namespace Testes.Integracao.Dominio.Algoritmos
             Console.WriteLine("Total erros: {0}", totalErros);
             Console.WriteLine("Sinais corretos: {0}{1}", acertos.ToString(), Environment.NewLine);
             Console.WriteLine("Sinais errados: {0}{1}", Environment.NewLine, erros.ToString());
+
+            if (totalErros > 0)
+            {
+                Assert.Fail("{0}{1}-----{1}{2}", acertos.ToString(), Environment.NewLine, erros.ToString());
+            }
         }
     }
 }
