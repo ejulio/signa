@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Dominio.Dados.Repositorio
 {
@@ -64,6 +65,14 @@ namespace Dominio.Dados.Repositorio
                 sinaisPorIndice = sinais ?? sinaisPorIndice;
                 CarregarSinaisPorId();
                 carregado = true;
+                string str = "";
+                foreach (var sinal in this)
+                {
+                    str += string.Format("{0}: {1}{2}", sinal.Descricao, sinal.Amostras.Count, Environment.NewLine);
+                }
+                str += string.Format("Total amostras: {0}{1}", this.Sum(s => s.Amostras.Count), Environment.NewLine);
+                str += string.Format("Dinâmicos: {0}{1}", this.Where(s => s.Tipo == TipoSinal.Dinamico).Sum(s => s.Amostras.Count), Environment.NewLine);
+                str += string.Format("Estáticos: {0}{1}", this.Where(s => s.Tipo == TipoSinal.Estatico).Sum(s => s.Amostras.Count), Environment.NewLine);
             }
         }
 

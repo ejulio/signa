@@ -118,7 +118,13 @@ namespace Testes.Integracao.Dominio.Algoritmos
 
             if (totalErros > 0)
             {
-                Assert.Fail("{0}{1}-----{1}{2}", acertos.ToString(), Environment.NewLine, erros.ToString());
+                Assert.Inconclusive(
+                    "{0}Total acertos: {3}{0}Total erros:{4}{0}{1}{0}-----{0}{2}", 
+                    Environment.NewLine,
+                    acertos.ToString(), 
+                    erros.ToString(),
+                    totalAcertos,
+                    totalErros);
             }
         }
     }
