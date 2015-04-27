@@ -24,6 +24,15 @@
         _comparador: undefined,
         _ultimoFrame: undefined,
         _sinalId: -1,
+        _amostraPrimeiroFrame: undefined,
+
+        setAmostraPrimeiroFrame: function(amostra) {
+            this._amostraPrimeiroFrame = amostra;
+        },
+
+        getAmostraPrimeiroFrame: function() {
+            return this._amostraPrimeiroFrame;
+        },
 
         setSinalId: function(sinalId) {
             console.log('SINAL ' + sinalId);

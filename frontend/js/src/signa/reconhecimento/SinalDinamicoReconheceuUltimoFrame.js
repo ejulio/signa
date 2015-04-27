@@ -15,9 +15,10 @@
             return Signa.Hubs.sinaisDinamicos()
                 .reconhecer(this._buffer.getFrames())
                 .then(function(id) {
+                    console.log('RECONHECEU O SINAL: ' + id);
                     algoritmoDeSinalDinamico.naoReconheceuFrame();
                     
-                    return algoritmoDeSinalDinamico.getSinalId() === id;
+                    return algoritmoDeSinalDinamico.getSinalId() === (id * 2);
                 });
         }
     };

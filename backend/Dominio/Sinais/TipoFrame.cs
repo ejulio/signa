@@ -2,7 +2,7 @@
 {
     public enum TipoFrame
     {
-        Primeiro = 0,
+        Primeiro = -1,
         Ultimo = 1
     }
 }

@@ -37,20 +37,27 @@ namespace Dominio.Algoritmos.Dados
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Primeiro;
-                    amostraDoFrame[0] = amostra.First();
-                    entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
+                    geradorDeCaracteristicasComTipoFrame.PrimeiroFrame = amostra.First();
+                    int framesAmostraPrimeiroFrame = amostra.Count / 2;
+                    for (int i = 0; i < framesAmostraPrimeiroFrame; i++)
+                    {
+                        geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Primeiro;
+                        amostraDoFrame[0] = amostra[i];
+                        entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
+                        saidas.AddLast(indice);
+                    }
 
-                    amostraDoFrame[0] = amostra.Last();
-                    geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Ultimo;
-                    entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
-
-                    saidas.AddLast(indice);
-                    saidas.AddLast(indice);
+                    for (int i = framesAmostraPrimeiroFrame; i < amostra.Count; i++)
+                    {
+                        amostraDoFrame[0] = amostra[i];
+                        geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Ultimo;
+                        entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
+                        saidas.AddLast(indice + 1);
+                    }
                 }
                 sinal.IndiceNoAlgoritmo = indice;
-                indice++;
-                QuantidadeDeClasses++;
+                indice += 2;
+                QuantidadeDeClasses += 2;
             }
 
             Entradas = entradas.ToArray();

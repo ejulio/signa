@@ -344,10 +344,6 @@
                 var posicaoDedoMaoA = dedosMaoA[i].PosicaoDaPonta;
                 var posicaoDedoMaoB = dedosMaoB[i].PosicaoDaPonta;
 
-                if (dedosMaoA[i].Tipo !== dedosMaoB[i].Tipo) {
-                    console.log('DEDOS DE TIPOS DIFERENTES: ' + dedosMaoA[i].Tipo + ', ' + dedosMaoB[i].Tipo);
-                }
-
                 if (!arraysSaoIguais(posicaoDedoMaoA, posicaoDedoMaoB)) {
                     return false;
                 }
@@ -1017,6 +1013,15 @@
         _comparador: undefined,
         _ultimoFrame: undefined,
         _sinalId: -1,
+        _amostraPrimeiroFrame: undefined,
+
+        setAmostraPrimeiroFrame: function(amostra) {
+            this._amostraPrimeiroFrame = amostra;
+        },
+
+        getAmostraPrimeiroFrame: function() {
+            return this._amostraPrimeiroFrame;
+        },
 
         setSinalId: function(sinalId) {
             console.log('SINAL ' + sinalId);
@@ -1083,7 +1088,9 @@
             return Signa.Hubs.sinaisDinamicos()
                 .reconhecerPrimeiroFrame(amostra)
                 .then(function(id) {
+                    console.log('ID PRIMEIRO FRAME: ' + id);
                     if (algoritmoDeSinalDinamico.getSinalId() === id) {
+                        algoritmoDeSinalDinamico.setAmostraPrimeiroFrame(amostra);
                         algoritmoDeSinalDinamico.reconheceuPrimeiroFrame();
                         return false;
                     }
@@ -1112,14 +1119,12 @@
         },  
 
         reconhecer: function(amostra) {
-            console.log('guardando sinal');
             this._frames.push(amostra[0]);
 
             return Promise.resolve(false);
         },
 
         limpar: function() {
-            console.log('limpando sinais');
             this._frames = [];
         }
     };
@@ -1141,9 +1146,10 @@
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
 
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecerUltimoFrame(amostra)
+                .reconhecerUltimoFrame(algoritmoDeSinalDinamico.getAmostraPrimeiroFrame(), amostra)
                 .then(function(id) {
-                    if (algoritmoDeSinalDinamico.getSinalId() === id) {
+                    console.log('ID ÚLTIMO FRAME: ' + id);
+                    if ((algoritmoDeSinalDinamico.getSinalId() + 1) === id) {
                         algoritmoDeSinalDinamico.reconheceuUltimoFrame();
                         return false;
                     }
@@ -1173,9 +1179,10 @@
             return Signa.Hubs.sinaisDinamicos()
                 .reconhecer(this._buffer.getFrames())
                 .then(function(id) {
+                    console.log('RECONHECEU O SINAL: ' + id);
                     algoritmoDeSinalDinamico.naoReconheceuFrame();
                     
-                    return algoritmoDeSinalDinamico.getSinalId() === id;
+                    return algoritmoDeSinalDinamico.getSinalId() === (id * 2);
                 });
         }
     };

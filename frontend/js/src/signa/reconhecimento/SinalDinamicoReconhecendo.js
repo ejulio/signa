@@ -14,14 +14,12 @@
         },  
 
         reconhecer: function(amostra) {
-            console.log('guardando sinal');
             this._frames.push(amostra[0]);
 
             return Promise.resolve(false);
         },
 
         limpar: function() {
-            console.log('limpando sinais');
             this._frames = [];
         }
     };

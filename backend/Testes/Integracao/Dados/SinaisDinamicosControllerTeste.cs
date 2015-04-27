@@ -112,14 +112,15 @@ namespace Testes.Integracao.Dados
         [TestMethod]
         public void reconhecendo_um_ultimo_frame()
         {
-            const int idDoSinal = 23;
-            var amostra = new ColecaoDeFramesBuilder().Construir();
-            algoritmoDeSinaisEstaticos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            //const int idDoSinal = 23;
+            //var amostra = new ColecaoDeFramesBuilder().Construir();
+            //algoritmoDeSinaisEstaticos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
 
-            var sinalReconhecido = sinaisDinamicosController.ReconhecerUltimoFrame(amostra);
+            //var sinalReconhecido = sinaisDinamicosController.ReconhecerUltimoFrame(amostra);
 
-            sinalReconhecido.Should().Be(idDoSinal);
-            geradorDeCaracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Ultimo);
+            //sinalReconhecido.Should().Be(idDoSinal);
+            //geradorDeCaracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Ultimo);
+            Assert.Fail("Arrumar interface");
         }
 
         private static void DeveTerCriadoOArquivoComConteudo(string caminhoDoArquivoCriado, string descricaoDoSinal, string conteudoDoArquivo)

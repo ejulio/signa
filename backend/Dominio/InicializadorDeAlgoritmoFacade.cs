@@ -37,11 +37,11 @@ namespace Dominio
 
             if (repositorio.Any())
             {
-                var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new GeradorDeDadosDosLimitesDeSinaisDinamicos(repositorio);
-                algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
-
                 var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisDinamicos(repositorio);
                 algoritmo.Treinar(dadosDoAlgoritmo);
+
+                var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new GeradorDeDadosDosLimitesDeSinaisDinamicos(repositorio);
+                algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
             }
         }
     }

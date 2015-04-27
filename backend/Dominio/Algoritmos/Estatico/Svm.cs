@@ -27,12 +27,7 @@ namespace Dominio.Algoritmos.Estatico
             {
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
-            Tuple<int, int>[] path;
-            double output;
-            //return svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), MulticlassComputeMethod.Elimination, out path);
-            var p = geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame).Select(v => v.ToString());
-            Console.WriteLine(string.Join("; ", p));
-            return svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), out output, out path);
+            return svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), MulticlassComputeMethod.Elimination);
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)

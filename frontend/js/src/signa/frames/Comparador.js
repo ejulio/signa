@@ -33,10 +33,6 @@
                 var posicaoDedoMaoA = dedosMaoA[i].PosicaoDaPonta;
                 var posicaoDedoMaoB = dedosMaoB[i].PosicaoDaPonta;
 
-                if (dedosMaoA[i].Tipo !== dedosMaoB[i].Tipo) {
-                    console.log('DEDOS DE TIPOS DIFERENTES: ' + dedosMaoA[i].Tipo + ', ' + dedosMaoB[i].Tipo);
-                }
-
                 if (!arraysSaoIguais(posicaoDedoMaoA, posicaoDedoMaoB)) {
                     return false;
                 }

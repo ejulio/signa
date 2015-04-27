@@ -23,14 +23,16 @@ namespace Dominio.Dados
 
         public int ReconhecerPrimeiroFrame(IList<Frame> amostra)
         {
+            geradorDeCaracteristicas.PrimeiroFrame = null;
             geradorDeCaracteristicas.TipoFrame = TipoFrame.Primeiro;
             return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
         }
 
-        public int ReconhecerUltimoFrame(IList<Frame> amostra)
+        public int ReconhecerUltimoFrame(IList<Frame> amostraPrimeiroFrame, IList<Frame> amostraUltimoFrame)
         {
+            geradorDeCaracteristicas.PrimeiroFrame = amostraPrimeiroFrame[0];
             geradorDeCaracteristicas.TipoFrame = TipoFrame.Ultimo;
-            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
+            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostraUltimoFrame);
         }
     }
 }

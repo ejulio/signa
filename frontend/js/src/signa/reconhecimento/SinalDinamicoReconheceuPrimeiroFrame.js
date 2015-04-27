@@ -12,9 +12,10 @@
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
 
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecerUltimoFrame(amostra)
+                .reconhecerUltimoFrame(algoritmoDeSinalDinamico.getAmostraPrimeiroFrame(), amostra)
                 .then(function(id) {
-                    if (algoritmoDeSinalDinamico.getSinalId() === id) {
+                    console.log('ID ÚLTIMO FRAME: ' + id);
+                    if ((algoritmoDeSinalDinamico.getSinalId() + 1) === id) {
                         algoritmoDeSinalDinamico.reconheceuUltimoFrame();
                         return false;
                     }

@@ -23,9 +23,9 @@ namespace Aplicacao.Hubs
             return sinaisDinamicosController.ReconhecerPrimeiroFrame(amostra);
         }
 
-        public int ReconhecerUltimoFrame(Frame[] amostra)
+        public int ReconhecerUltimoFrame(Frame[] amostraPrimeiroFrame, Frame[] amostraUltimoFrame)
         {
-            return sinaisDinamicosController.ReconhecerUltimoFrame(amostra);
+            return sinaisDinamicosController.ReconhecerUltimoFrame(amostraPrimeiroFrame, amostraUltimoFrame);
         }
 
         public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Frame[] amostra)

@@ -65,7 +65,6 @@ namespace Dominio.Dados.Repositorio
                 sinaisPorIndice = sinais ?? sinaisPorIndice;
                 CarregarSinaisPorId();
                 carregado = true;
-                string str = "";
             }
         }
 

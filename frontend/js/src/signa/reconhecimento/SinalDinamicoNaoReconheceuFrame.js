@@ -14,7 +14,9 @@
             return Signa.Hubs.sinaisDinamicos()
                 .reconhecerPrimeiroFrame(amostra)
                 .then(function(id) {
+                    console.log('ID PRIMEIRO FRAME: ' + id);
                     if (algoritmoDeSinalDinamico.getSinalId() === id) {
+                        algoritmoDeSinalDinamico.setAmostraPrimeiroFrame(amostra);
                         algoritmoDeSinalDinamico.reconheceuPrimeiroFrame();
                         return false;
                     }
