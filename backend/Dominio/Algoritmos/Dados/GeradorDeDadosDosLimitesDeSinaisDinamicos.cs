@@ -52,11 +52,11 @@ namespace Dominio.Algoritmos.Dados
                         amostraDoFrame[0] = amostra[i];
                         geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Ultimo;
                         entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
-                        saidas.AddLast(indice + 1);
+                        saidas.AddLast(indice + sinais.Count());
                     }
                 }
                 sinal.IndiceNoAlgoritmo = indice;
-                indice += 2;
+                indice++;
                 QuantidadeDeClasses += 2;
             }
 

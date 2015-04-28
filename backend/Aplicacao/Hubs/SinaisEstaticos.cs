@@ -14,9 +14,9 @@ namespace Aplicacao.Hubs
             this.sinaisEstaticosController = sinaisEstaticosController;
         }
 
-        public int Reconhecer(Frame[] amostra)
+        public bool Reconhecer(int idSinal, Frame[] amostra)
         {
-            return sinaisEstaticosController.Reconhecer(amostra);
+            return sinaisEstaticosController.Reconhecer(idSinal, amostra);
         }
 
         public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, IList<Frame> amostra)

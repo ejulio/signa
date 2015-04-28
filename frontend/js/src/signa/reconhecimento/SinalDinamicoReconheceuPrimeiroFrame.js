@@ -8,14 +8,15 @@
     SinalDinamicoReconheceuPrimeiroFrame.prototype = {
         _algoritmoDeSinalDinamico: undefined,
 
-        reconhecer: function(amostra) {
+        reconhecer: function(amostraUltimoFrame) {
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
+            var amostraPrimeiroFrame = algoritmoDeSinalDinamico.getAmostraPrimeiroFrame();
+            var idSinal = algoritmoDeSinalDinamico.getSinalId(); 
 
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecerUltimoFrame(algoritmoDeSinalDinamico.getAmostraPrimeiroFrame(), amostra)
-                .then(function(id) {
-                    console.log('ID ÚLTIMO FRAME: ' + id);
-                    if ((algoritmoDeSinalDinamico.getSinalId() + 1) === id) {
+                .reconhecerUltimoFrame(idSinal, amostraPrimeiroFrame, amostraUltimoFrame)
+                .then(function(reconheceuAmostraComoUltimoFrameDoSinal) {
+                    if (reconheceuAmostraComoUltimoFrameDoSinal) {
                         algoritmoDeSinalDinamico.reconheceuUltimoFrame();
                         return false;
                     }

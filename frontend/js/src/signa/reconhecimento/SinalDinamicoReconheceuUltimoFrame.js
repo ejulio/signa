@@ -11,14 +11,15 @@
         
         reconhecer: function() {
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
-            
+            var framesParaReconhecer = this._buffer.getFrames();
+            var idSinal = algoritmoDeSinalDinamico.getSinalId();
+
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecer(this._buffer.getFrames())
-                .then(function(id) {
-                    console.log('RECONHECEU O SINAL: ' + id);
+                .reconhecer(idSinal, framesParaReconhecer)
+                .then(function(sinalReconhecido) {
                     algoritmoDeSinalDinamico.naoReconheceuFrame();
                     
-                    return algoritmoDeSinalDinamico.getSinalId() === (id * 2);
+                    return sinalReconhecido;
                 });
         }
     };

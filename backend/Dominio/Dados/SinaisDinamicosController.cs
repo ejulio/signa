@@ -3,6 +3,7 @@ using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio.Dados
 {
@@ -10,6 +11,7 @@ namespace Dominio.Dados
     {
         private readonly IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas;
         private readonly IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisEstaticos;
+        private readonly IRepositorio<Sinal> repositorio;
 
         public SinaisDinamicosController(IRepositorio<Sinal> repositorio,
             IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicas,
@@ -19,20 +21,21 @@ namespace Dominio.Dados
         {
             this.geradorDeCaracteristicas = geradorDeCaracteristicas;
             this.algoritmoDeReconhecimentoDeSinaisEstaticos = algoritmoDeReconhecimentoDeSinaisEstaticos;
+            this.repositorio = repositorio;
         }
 
-        public int ReconhecerPrimeiroFrame(IList<Frame> amostra)
+        public bool ReconhecerPrimeiroFrame(int idSinal, IList<Frame> amostra)
         {
             geradorDeCaracteristicas.PrimeiroFrame = null;
             geradorDeCaracteristicas.TipoFrame = TipoFrame.Primeiro;
-            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
+            return idSinal == algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
         }
 
-        public int ReconhecerUltimoFrame(IList<Frame> amostraPrimeiroFrame, IList<Frame> amostraUltimoFrame)
+        public bool ReconhecerUltimoFrame(int idSinal, IList<Frame> amostraPrimeiroFrame, IList<Frame> amostraUltimoFrame)
         {
             geradorDeCaracteristicas.PrimeiroFrame = amostraPrimeiroFrame[0];
             geradorDeCaracteristicas.TipoFrame = TipoFrame.Ultimo;
-            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostraUltimoFrame);
+            return (idSinal + repositorio.Count(s => s.Tipo == TipoSinal.Dinamico)) == algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostraUltimoFrame);
         }
     }
 }

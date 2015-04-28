@@ -87,26 +87,28 @@ namespace Testes.Integracao.Dados
         [TestMethod]
         public void reconhecendo_um_sinal()
         {
-            const int idDoSinal = 23;
-            var amostra = new ColecaoDeFramesBuilder().Construir();
-            algoritmoDeSinaisDinamicos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            //const int idDoSinal = 23;
+            //var amostra = new ColecaoDeFramesBuilder().Construir();
+            //algoritmoDeSinaisDinamicos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
 
-            var sinalReconhecido = sinaisDinamicosController.Reconhecer(amostra);
+            //var sinalReconhecido = sinaisDinamicosController.Reconhecer(amostra);
 
-            sinalReconhecido.Should().Be(idDoSinal);
+            //sinalReconhecido.Should().Be(idDoSinal);
+            Assert.Fail("Corrigir interface");
         }
 
         [TestMethod]
         public void reconhecendo_um_primeiro_frame()
         {
-            const int idDoSinal = 23;
-            var amostra = new ColecaoDeFramesBuilder().Construir();
-            algoritmoDeSinaisEstaticos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            //const int idDoSinal = 23;
+            //var amostra = new ColecaoDeFramesBuilder().Construir();
+            //algoritmoDeSinaisEstaticos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
 
-            var sinalReconhecido = sinaisDinamicosController.ReconhecerPrimeiroFrame(amostra);
+            //var sinalReconhecido = sinaisDinamicosController.ReconhecerPrimeiroFrame(amostra);
 
-            sinalReconhecido.Should().Be(idDoSinal);
-            geradorDeCaracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Primeiro);
+            //sinalReconhecido.Should().Be(idDoSinal);
+            //geradorDeCaracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Primeiro);
+            Assert.Fail("Arrumar interface");
         }
 
         [TestMethod]

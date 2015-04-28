@@ -8,15 +8,15 @@
     SinalDinamicoNaoReconheceuFrame.prototype = {
         _algoritmoDeSinalDinamico: undefined,
         
-        reconhecer: function(amostra) {
+        reconhecer: function(amostraPrimeiroFrame) {
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
+            var idSinal = algoritmoDeSinalDinamico.getSinalId();
 
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecerPrimeiroFrame(amostra)
-                .then(function(id) {
-                    console.log('ID PRIMEIRO FRAME: ' + id);
-                    if (algoritmoDeSinalDinamico.getSinalId() === id) {
-                        algoritmoDeSinalDinamico.setAmostraPrimeiroFrame(amostra);
+                .reconhecerPrimeiroFrame(idSinal, amostraPrimeiroFrame)
+                .then(function(reconheceuAmostraComoPrimeiroFrameDoSinal) {
+                    if (reconheceuAmostraComoPrimeiroFrameDoSinal) {
+                        algoritmoDeSinalDinamico.setAmostraPrimeiroFrame(amostraPrimeiroFrame);
                         algoritmoDeSinalDinamico.reconheceuPrimeiroFrame();
                         return false;
                     }

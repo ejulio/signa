@@ -21,9 +21,9 @@ namespace Dominio.Dados
             this.algoritmoDeReconhecimentoDeSinaisEstaticos = algoritmoDeReconhecimentoDeSinaisEstaticos;
         }
 
-        public int Reconhecer(IList<Frame> amostra)
+        public bool Reconhecer(int idSinal, IList<Frame> amostra)
         {
-            return algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
+            return idSinal == algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
         }
 
         public void SalvarAmostraDoSinal(string descricaoDoSinal, string conteudoDoArquivoDeExemplo, IList<Frame> amostra)

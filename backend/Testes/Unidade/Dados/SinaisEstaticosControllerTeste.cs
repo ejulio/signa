@@ -27,13 +27,14 @@ namespace Testes.Unidade.Dados
         [TestMethod]
         public void reconhecendo_um_sinal()
         {
-            const int idDoSinal = 23;
-            var amostra = new ColecaoDeFramesBuilder().Construir();
-            algoritmo.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            //const int idDoSinal = 23;
+            //var amostra = new ColecaoDeFramesBuilder().Construir();
+            //algoritmo.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
 
-            var sinalReconhecido = sinaisEstaticosController.Reconhecer(amostra);
+            //var sinalReconhecido = sinaisEstaticosController.Reconhecer(amostra);
 
-            sinalReconhecido.Should().Be(idDoSinal);
+            //sinalReconhecido.Should().Be(idDoSinal);
+            Assert.Fail("Corrigir interface");
         }
 
         private Sinal DadoQueORepositorioRetorneUmSinalParaADescricao(string descricaoDoSinal)

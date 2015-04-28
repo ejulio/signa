@@ -14,11 +14,13 @@
         },
 
         reconhecer: function(frame) {
+            var amostra = [frame];
+
             return this._hub
-                .reconhecer([frame])
-                .then(function(sinalReconhecidoId) {
-                    return sinalReconhecidoId === this._sinalId;
-                }.bind(this));
+                .reconhecer(this._sinalId, amostra)
+                .then(function(reconheceuSinal) {
+                    return reconheceuSinal;
+                });
         }
     };
 

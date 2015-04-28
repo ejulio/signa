@@ -13,19 +13,19 @@ namespace Aplicacao.Hubs
             this.sinaisDinamicosController = sinaisDinamicosController;
         }
 
-        public int Reconhecer(Frame[] amostra)
+        public bool Reconhecer(int idSinal, Frame[] amostra)
         {
-            return sinaisDinamicosController.Reconhecer(amostra);
+            return sinaisDinamicosController.Reconhecer(idSinal, amostra);
         }
 
-        public int ReconhecerPrimeiroFrame(Frame[] amostra)
+        public bool ReconhecerPrimeiroFrame(int idSinal, Frame[] amostra)
         {
-            return sinaisDinamicosController.ReconhecerPrimeiroFrame(amostra);
+            return sinaisDinamicosController.ReconhecerPrimeiroFrame(idSinal, amostra);
         }
 
-        public int ReconhecerUltimoFrame(Frame[] amostraPrimeiroFrame, Frame[] amostraUltimoFrame)
+        public bool ReconhecerUltimoFrame(int idSinal, Frame[] amostraPrimeiroFrame, Frame[] amostraUltimoFrame)
         {
-            return sinaisDinamicosController.ReconhecerUltimoFrame(amostraPrimeiroFrame, amostraUltimoFrame);
+            return sinaisDinamicosController.ReconhecerUltimoFrame(idSinal, amostraPrimeiroFrame, amostraUltimoFrame);
         }
 
         public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Frame[] amostra)

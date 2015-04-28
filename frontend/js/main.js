@@ -1082,15 +1082,15 @@
     SinalDinamicoNaoReconheceuFrame.prototype = {
         _algoritmoDeSinalDinamico: undefined,
         
-        reconhecer: function(amostra) {
+        reconhecer: function(amostraPrimeiroFrame) {
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
+            var idSinal = algoritmoDeSinalDinamico.getSinalId();
 
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecerPrimeiroFrame(amostra)
-                .then(function(id) {
-                    console.log('ID PRIMEIRO FRAME: ' + id);
-                    if (algoritmoDeSinalDinamico.getSinalId() === id) {
-                        algoritmoDeSinalDinamico.setAmostraPrimeiroFrame(amostra);
+                .reconhecerPrimeiroFrame(idSinal, amostraPrimeiroFrame)
+                .then(function(reconheceuAmostraComoPrimeiroFrameDoSinal) {
+                    if (reconheceuAmostraComoPrimeiroFrameDoSinal) {
+                        algoritmoDeSinalDinamico.setAmostraPrimeiroFrame(amostraPrimeiroFrame);
                         algoritmoDeSinalDinamico.reconheceuPrimeiroFrame();
                         return false;
                     }
@@ -1142,14 +1142,15 @@
     SinalDinamicoReconheceuPrimeiroFrame.prototype = {
         _algoritmoDeSinalDinamico: undefined,
 
-        reconhecer: function(amostra) {
+        reconhecer: function(amostraUltimoFrame) {
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
+            var amostraPrimeiroFrame = algoritmoDeSinalDinamico.getAmostraPrimeiroFrame();
+            var idSinal = algoritmoDeSinalDinamico.getSinalId(); 
 
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecerUltimoFrame(algoritmoDeSinalDinamico.getAmostraPrimeiroFrame(), amostra)
-                .then(function(id) {
-                    console.log('ID ÚLTIMO FRAME: ' + id);
-                    if ((algoritmoDeSinalDinamico.getSinalId() + 1) === id) {
+                .reconhecerUltimoFrame(idSinal, amostraPrimeiroFrame, amostraUltimoFrame)
+                .then(function(reconheceuAmostraComoUltimoFrameDoSinal) {
+                    if (reconheceuAmostraComoUltimoFrameDoSinal) {
                         algoritmoDeSinalDinamico.reconheceuUltimoFrame();
                         return false;
                     }
@@ -1175,14 +1176,15 @@
         
         reconhecer: function() {
             var algoritmoDeSinalDinamico = this._algoritmoDeSinalDinamico;
-            
+            var framesParaReconhecer = this._buffer.getFrames();
+            var idSinal = algoritmoDeSinalDinamico.getSinalId();
+
             return Signa.Hubs.sinaisDinamicos()
-                .reconhecer(this._buffer.getFrames())
-                .then(function(id) {
-                    console.log('RECONHECEU O SINAL: ' + id);
+                .reconhecer(idSinal, framesParaReconhecer)
+                .then(function(sinalReconhecido) {
                     algoritmoDeSinalDinamico.naoReconheceuFrame();
                     
-                    return algoritmoDeSinalDinamico.getSinalId() === (id * 2);
+                    return sinalReconhecido;
                 });
         }
     };
@@ -1206,11 +1208,13 @@
         },
 
         reconhecer: function(frame) {
+            var amostra = [frame];
+
             return this._hub
-                .reconhecer([frame])
-                .then(function(sinalReconhecidoId) {
-                    return sinalReconhecidoId === this._sinalId;
-                }.bind(this));
+                .reconhecer(this._sinalId, amostra)
+                .then(function(reconheceuSinal) {
+                    return reconheceuSinal;
+                });
         }
     };
 
