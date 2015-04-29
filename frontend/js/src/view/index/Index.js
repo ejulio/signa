@@ -1,5 +1,4 @@
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
 
     function Index(){}
@@ -15,82 +14,75 @@
         _informacoesDoSinal: undefined,
         _messageBox: undefined,
 
-        init: function()
-        {
-            var width = $("#handmodel-user").width(),
-                height = $("#handmodel-user").height(),
-                cameraFactory = new Signa.camera.DefaultCameraFactory(width / height);
+        iniciar: function() {
+            var largura = $("#handmodel-user").width(),
+                altura = $("#handmodel-user").height(),
+                cameraFactory = new Signa.camera.DefaultCameraFactory(largura / altura);
 
             this._messageBox = $('#recognized-sign-message');
 
             this._descricaoDoSinal = new View.index.ContainerComDescricaoDoSinal($('#sign-description'));
-            this._iniciarExemploDoSinal(cameraFactory, width, height);
-            this._iniciarMaosDoUsuario(cameraFactory, width, height);
+            this._iniciarExemploDoSinal(cameraFactory, largura, altura);
+            this._iniciarMaosDoUsuario(cameraFactory, largura, altura);
 
             this._carregarProximoSinal();
+            $('#pular-sinal').click(this._carregarProximoSinal.bind(this));
+            $('#treinar-algoritmos').click(Signa.treinarAlgoritmos);
         },
 
-        _iniciarExemploDoSinal: function(cameraFactory, width, height)
-        {
-            var signExampleLeapController = new Leap.Controller(),
+        _iniciarExemploDoSinal: function(cameraFactory, largura, altura) {
+            var leapController = new Leap.Controller(),
                 container = $("#handmodel-example");
 
-            this._exemploDoSinal = new View.index.ContainerComExemploDoSinal(cameraFactory, container, signExampleLeapController, width, height);
+            this._exemploDoSinal = new View.index.ContainerComExemploDoSinal(cameraFactory, container, leapController, largura, altura);
 
-            signExampleLeapController.on('playback.recordingSet', this._onNewSignLoad.bind(this));
+            leapController.on('playback.recordingSet', this._onCarregarNovoSinal.bind(this));
         },
 
-        _iniciarMaosDoUsuario: function(cameraFactory, width, height)
-        {
+        _iniciarMaosDoUsuario: function(cameraFactory, largura, altura) {
             var leapController = new Leap.Controller(),
                 container = $("#handmodel-user"),
                 frameBuffer = Signa.frames.FrameBuffer.doLeapController(leapController);
 
-            this._maosDoUsuario = new View.index.ContainerComMaosDoUsuario(cameraFactory, container, leapController, width, height);
+            this._maosDoUsuario = new View.index.ContainerComMaosDoUsuario(cameraFactory, container, leapController, largura, altura);
             
             leapController.connect();
 
             this._reconhecedorDeSinais = new Signa.reconhecimento.ReconhecedorDeSinais(frameBuffer);
-            this._reconhecedorDeSinais.adicionarListenerDeReconhecimento(this._onRecognize.bind(this));
+            this._reconhecedorDeSinais.adicionarListenerDeReconhecimento(this._onReconhecer.bind(this));
         },
 
-        _onNewSign: function(informacoesDoSinal)
-        {
+        _onNovoSinal: function(informacoesDoSinal) {
             this._informacoesDoSinal = informacoesDoSinal;
-            this._exemploDoSinal.onNewSign(informacoesDoSinal);
+            this._exemploDoSinal.onNovoSinal(informacoesDoSinal);
         },
 
-        _onNewSignLoad: function()
-        {
-            this._descricaoDoSinal.onNewSign(this._informacoesDoSinal);
-            this._maosDoUsuario.onNewSign();
+        _onCarregarNovoSinal: function() {
+            this._descricaoDoSinal.onNovoSinal(this._informacoesDoSinal);
+            this._maosDoUsuario.onNovoSinal(this._informacoesDoSinal);
             this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
             this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.Id);
-            this._hideRecognizeMessage();
+            this._esconderCaixaDeMensagem();
         },
 
-        _hideRecognizeMessage: function()
-        {
+        _esconderCaixaDeMensagem: function() {
             this._messageBox.hide();
         },
 
-        _onRecognize: function()
-        {
-            this._showRecognizeMessage();
-            this._descricaoDoSinal.onRecognize();
-            this._exemploDoSinal.onRecognize();
-            this._maosDoUsuario.onRecognize();
+        _onReconhecer: function() {
+            this._mostrarCaixaDeMensagem();
+            this._descricaoDoSinal.onReconhecer();
+            this._exemploDoSinal.onReconhecer();
+            this._maosDoUsuario.onReconhecer();
             this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(-1);
             window.setTimeout(this._carregarProximoSinal.bind(this), 1000);
         },
 
-        _showRecognizeMessage: function()
-        {
+        _mostrarCaixaDeMensagem: function() {
             this._messageBox.show();
         },
 
-        _carregarProximoSinal: function()
-        {
+        _carregarProximoSinal: function() {
             Signa.Hubs
                 .iniciar()
                 .done(function() {
@@ -98,7 +90,7 @@
                     Signa.Hubs
                         .sinais()
                         .proximoSinal(id)
-                        .done(this._onNewSign.bind(this));
+                        .done(this._onNovoSinal.bind(this));
                 }.bind(this));
         }
     };

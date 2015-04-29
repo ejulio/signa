@@ -13,7 +13,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais
 
             for (int i = 0; i < frames.Count; i++)
             {
-                frames[i] = new FrameBuilder().ParaOIndice(indice).Construir();
+                frames[i] = new FrameBuilder().ParaOIndice((indice + frames.Count * frames.Count)).Construir();
             }
 
             return this;

@@ -1,9 +1,7 @@
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
     
-    function ContainerComExemploDoSinal(cameraFactory, container, leapController, largura, altura)
-    {
+    function ContainerComExemploDoSinal(cameraFactory, container, leapController, largura, altura) {
         var cameraComControlesFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory);
         Signa.cenas.CenaFactory.criarCenaComLeapRiggedHand(largura, altura, container, cameraComControlesFactory, leapController);
 
@@ -15,18 +13,13 @@
     ContainerComExemploDoSinal.prototype = {
         _leapRecordingPlayer: undefined,
 
-        onNewSign: function(informacoesDoSinal)
-        {
+        onNovoSinal: function(informacoesDoSinal) {
             this._leapRecordingPlayer.loadRecording('http://localhost:9000/' + informacoesDoSinal.CaminhoParaArquivoDeExemplo);
         },
 
-        onRecognize: function()
-        {
+        onReconhecer: function() { },
 
-        },
-
-        _onPlayPause: function()
-        {
+        _onPlayPause: function() {
             this._leapRecordingPlayer.toggle();
         }
     };

@@ -1,24 +1,19 @@
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
 
-    function ContainerComDescricaoDoSinal(textContainer)
-    {
+    function ContainerComDescricaoDoSinal(textContainer) {
         this._container = textContainer;
     }
 
     ContainerComDescricaoDoSinal.prototype = {
         _container: undefined,
 
-        onNewSign: function(informacoesDoSinal)
-        {
+        onNovoSinal: function(informacoesDoSinal) {
             this._container
                 .text(informacoesDoSinal.Descricao);
         },
 
-        onRecognize: function()
-        {
-        }
+        onReconhecer: function() { }
     };
 
     View.index.ContainerComDescricaoDoSinal = ContainerComDescricaoDoSinal;

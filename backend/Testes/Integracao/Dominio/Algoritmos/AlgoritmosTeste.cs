@@ -38,7 +38,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             repositorio = new RepositorioDeSinais(CaminhoDoArquivoDeDadosDeReconhecimento);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_estaticos()
         {
             var repositorioSinaisEstaticos = new RepositorioDeSinaisEstaticos(repositorio);
@@ -49,7 +49,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisEstaticos, repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos());
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioDeSinaisDinamicos(repositorio);
@@ -60,7 +60,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisDinamicos, repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos());
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_frames_de_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioDeSinaisDinamicos(repositorio);

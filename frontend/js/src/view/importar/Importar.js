@@ -6,7 +6,7 @@
     Importar.prototype = {
         _leapRecordingPlayer: undefined,
         _framesCarregados: undefined,
-        _frameSignDataProcessor: undefined,
+        _informacoesDoFrame: undefined,
         _framesCarregadosEmFormatoJson: undefined,
 
         iniciar: function() {
@@ -16,11 +16,12 @@
             this._iniciarCena(leapController);
 
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
-            this._frameSignDataProcessor = new Signa.frames.InformacoesDoFrame();
+            this._informacoesDoFrame = new Signa.frames.InformacoesDoFrame();
 
             $('#message').hide();
             $('#sign-file').change(this._onArquivoDoSinalChange.bind(this));
             $('#save').click(this._onSalvarClick.bind(this));
+            $('#treinar-algoritmos').click(Signa.treinarAlgoritmos);
         },
 
         _iniciarCena: function(leapController) {
@@ -70,7 +71,6 @@
         },
 
         _gerarAmostra: function() {
-            debugger;
             if (this._framesCarregados.length === 1) {
                 return this._gerarAmostraEstatica();
             }
@@ -80,7 +80,7 @@
 
         _gerarAmostraEstatica: function() {
             var frame = new Leap.Frame(this._framesCarregados[0]),
-                frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(frame);
+                frameDaAmostra = this._informacoesDoFrame.extrairParaAmostra(frame);
 
             return [frameDaAmostra];
         },
@@ -92,7 +92,7 @@
 
             frameBuffer.adicionarListenerDeFrame(function(frame) {
                 var leapFrame = new Leap.Frame(frame),
-                    frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(leapFrame);
+                    frameDaAmostra = this._informacoesDoFrame.extrairParaAmostra(leapFrame);
 
                 amostra.push(frameDaAmostra);
             }.bind(this));
@@ -107,7 +107,6 @@
         _enviarInformacoesParaOServidor: function(descricaoDoSinal, amostra) {
             var url = this._montarUrlParaSalvarOSinal(amostra);
             $('#message').text('Salvando informações do sinal...').show();
-            debugger;
             $.post(url, {
                 descricao: descricaoDoSinal,
                 conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,

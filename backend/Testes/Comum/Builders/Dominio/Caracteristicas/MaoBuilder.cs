@@ -7,12 +7,14 @@ namespace Testes.Comum.Builders.Dominio.Caracteristicas
         private Dedo[] dedos;
         private double[] vetorNormalDaPalma;
         private double[] direcaoDaMao;
+        private double[] posicaoDaPalma;
 
         public MaoBuilder()
         {
             dedos = DedoBuilder.DedosPadroes();
             vetorNormalDaPalma = new ArrayDeDouble().ComTamanho(3).Construir();
             direcaoDaMao = new ArrayDeDouble().ComTamanho(3).Construir();
+            posicaoDaPalma = new ArrayDeDouble().ComTamanho(3).Construir();
         }
 
         public MaoBuilder ComDedos(Dedo[] dedos)
@@ -35,17 +37,19 @@ namespace Testes.Comum.Builders.Dominio.Caracteristicas
 
         public MaoBuilder ParaOIndice(int indice)
         {
-            vetorNormalDaPalma = new double[] { indice, indice, indice };
-            direcaoDaMao = new double[] { indice, indice, indice };
-            var direcaoDosDedos = new double[] {indice, indice, indice};
+            vetorNormalDaPalma = new double[] { indice, indice + 1, indice + 1 };
+            direcaoDaMao = new double[] { indice + 1, indice, indice + 1 };
+            posicaoDaPalma = new double[] { indice, indice, indice };
+            var direcaoDosDedos = new double[] {indice + 1, indice, indice + 1};
+            var posicaoDasPontasDosDedos = new double[] { indice + 2, indice + 2, indice + 2 };
 
             dedos = new[]
             {
-                new DedoBuilder().DoTipo(TipoDeDedo.Dedao).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Indicador).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Meio).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Anelar).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Mindinho).ComDirecao(direcaoDosDedos).Construir()
+                new DedoBuilder().DoTipo(TipoDeDedo.Dedao).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Indicador).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Meio).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Anelar).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDeDedo.Mindinho).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir()
             };
 
             return this;
@@ -57,6 +61,7 @@ namespace Testes.Comum.Builders.Dominio.Caracteristicas
             {
                 Dedos = dedos,
                 VetorNormalDaPalma = vetorNormalDaPalma,
+                PosicaoDaPalma = posicaoDaPalma,
                 Direcao = direcaoDaMao
             };
         }

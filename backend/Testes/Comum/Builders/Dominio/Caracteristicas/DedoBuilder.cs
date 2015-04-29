@@ -5,11 +5,18 @@ namespace Testes.Comum.Builders.Dominio.Caracteristicas
     public class DedoBuilder
     {
         private double[] direcaoDaPonta;
+        private double[] posicaoDaPonta;
         private TipoDeDedo tipo;
 
         public DedoBuilder ComDirecao(double[] direcaoDaPonta)
         {
             this.direcaoDaPonta = direcaoDaPonta;
+            return this;
+        }
+
+        public DedoBuilder ComPosicaoDaPonta(double[] posicaoDaPonta)
+        {
+            this.posicaoDaPonta = posicaoDaPonta;
             return this;
         }
 
@@ -24,6 +31,7 @@ namespace Testes.Comum.Builders.Dominio.Caracteristicas
             return new Dedo
             {
                 Direcao = direcaoDaPonta,
+                PosicaoDaPonta = posicaoDaPonta,
                 Tipo = tipo
             };
         }

@@ -110,7 +110,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             {
                 for (var j = 0; j < entradas[i].Length; j++)
                 {
-                    entradas[i][j].Should().ContainInOrder(amostras[i][j].MontarArrayEsperado());
+                    entradas[i][j].Should().ContainInOrder(amostras[i][j].MontarArrayEsperadoParaSinaisEstaticos());
                 }
             }
         }

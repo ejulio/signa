@@ -13,6 +13,10 @@
 
         montarUrlDoServidor: function(caminho) {
             return 'http://localhost:9000/' + caminho;
+        },
+
+        treinarAlgoritmos: function() {
+            alert('TESTE');
         }
     };
 })(typeof global === 'undefined' ? window : global);
@@ -507,7 +511,7 @@
     Importar.prototype = {
         _leapRecordingPlayer: undefined,
         _framesCarregados: undefined,
-        _frameSignDataProcessor: undefined,
+        _informacoesDoFrame: undefined,
         _framesCarregadosEmFormatoJson: undefined,
 
         iniciar: function() {
@@ -517,11 +521,12 @@
             this._iniciarCena(leapController);
 
             this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
-            this._frameSignDataProcessor = new Signa.frames.InformacoesDoFrame();
+            this._informacoesDoFrame = new Signa.frames.InformacoesDoFrame();
 
             $('#message').hide();
             $('#sign-file').change(this._onArquivoDoSinalChange.bind(this));
             $('#save').click(this._onSalvarClick.bind(this));
+            $('#treinar-algoritmos').click(Signa.treinarAlgoritmos);
         },
 
         _iniciarCena: function(leapController) {
@@ -571,7 +576,6 @@
         },
 
         _gerarAmostra: function() {
-            debugger;
             if (this._framesCarregados.length === 1) {
                 return this._gerarAmostraEstatica();
             }
@@ -581,7 +585,7 @@
 
         _gerarAmostraEstatica: function() {
             var frame = new Leap.Frame(this._framesCarregados[0]),
-                frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(frame);
+                frameDaAmostra = this._informacoesDoFrame.extrairParaAmostra(frame);
 
             return [frameDaAmostra];
         },
@@ -593,7 +597,7 @@
 
             frameBuffer.adicionarListenerDeFrame(function(frame) {
                 var leapFrame = new Leap.Frame(frame),
-                    frameDaAmostra = this._frameSignDataProcessor.extrairParaAmostra(leapFrame);
+                    frameDaAmostra = this._informacoesDoFrame.extrairParaAmostra(leapFrame);
 
                 amostra.push(frameDaAmostra);
             }.bind(this));
@@ -608,7 +612,6 @@
         _enviarInformacoesParaOServidor: function(descricaoDoSinal, amostra) {
             var url = this._montarUrlParaSalvarOSinal(amostra);
             $('#message').text('Salvando informações do sinal...').show();
-            debugger;
             $.post(url, {
                 descricao: descricaoDoSinal,
                 conteudoDoArquivoDeExemplo: this._framesCarregadosEmFormatoJson,
@@ -638,38 +641,31 @@
     View.importar.Importar = Importar;
 })(window, window.View, window.Signa);
 
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
 
-    function ContainerComDescricaoDoSinal(textContainer)
-    {
+    function ContainerComDescricaoDoSinal(textContainer) {
         this._container = textContainer;
     }
 
     ContainerComDescricaoDoSinal.prototype = {
         _container: undefined,
 
-        onNewSign: function(informacoesDoSinal)
-        {
+        onNovoSinal: function(informacoesDoSinal) {
             this._container
                 .text(informacoesDoSinal.Descricao);
         },
 
-        onRecognize: function()
-        {
-        }
+        onReconhecer: function() { }
     };
 
     View.index.ContainerComDescricaoDoSinal = ContainerComDescricaoDoSinal;
 })(window, window.View, window.Signa);
 
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
     
-    function ContainerComExemploDoSinal(cameraFactory, container, leapController, largura, altura)
-    {
+    function ContainerComExemploDoSinal(cameraFactory, container, leapController, largura, altura) {
         var cameraComControlesFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory);
         Signa.cenas.CenaFactory.criarCenaComLeapRiggedHand(largura, altura, container, cameraComControlesFactory, leapController);
 
@@ -681,18 +677,13 @@
     ContainerComExemploDoSinal.prototype = {
         _leapRecordingPlayer: undefined,
 
-        onNewSign: function(informacoesDoSinal)
-        {
+        onNovoSinal: function(informacoesDoSinal) {
             this._leapRecordingPlayer.loadRecording('http://localhost:9000/' + informacoesDoSinal.CaminhoParaArquivoDeExemplo);
         },
 
-        onRecognize: function()
-        {
+        onReconhecer: function() { },
 
-        },
-
-        _onPlayPause: function()
-        {
+        _onPlayPause: function() {
             this._leapRecordingPlayer.toggle();
         }
     };
@@ -700,12 +691,10 @@
     View.index.ContainerComExemploDoSinal = ContainerComExemploDoSinal;
 })(window, window.View, window.Signa);
 
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
     
-    function ContainerComMaosDoUsuario(cameraFactory, container, leapController, largura, altura)
-    {
+    function ContainerComMaosDoUsuario(cameraFactory, container, leapController, largura, altura) {
         this._container = container;
 
         Signa.cenas.CenaFactory.criarCenaComLeapRiggedHand(largura, altura, container, cameraFactory, leapController);
@@ -714,15 +703,13 @@
     ContainerComMaosDoUsuario.prototype = {
         _container: undefined,
 
-        onNewSign: function(signInfo)
-        {
+        onNovoSinal: function(signInfo) {
             this._container
                 .addClass('signa-handmodel-user-error')
                 .removeClass('signa-handmodel-user-success');
         },
 
-        onRecognize: function()
-        {
+        onReconhecer: function() {
             this._container
                 .removeClass('signa-handmodel-user-error')
                 .addClass('signa-handmodel-user-success');
@@ -732,8 +719,7 @@
     View.index.ContainerComMaosDoUsuario = ContainerComMaosDoUsuario;
 })(window, window.View, window.Signa);
 
-;(function(window, View, Signa, undefined)
-{
+;(function(window, View, Signa, undefined) {
     'use strict';
 
     function Index(){}
@@ -749,82 +735,75 @@
         _informacoesDoSinal: undefined,
         _messageBox: undefined,
 
-        init: function()
-        {
-            var width = $("#handmodel-user").width(),
-                height = $("#handmodel-user").height(),
-                cameraFactory = new Signa.camera.DefaultCameraFactory(width / height);
+        iniciar: function() {
+            var largura = $("#handmodel-user").width(),
+                altura = $("#handmodel-user").height(),
+                cameraFactory = new Signa.camera.DefaultCameraFactory(largura / altura);
 
             this._messageBox = $('#recognized-sign-message');
 
             this._descricaoDoSinal = new View.index.ContainerComDescricaoDoSinal($('#sign-description'));
-            this._iniciarExemploDoSinal(cameraFactory, width, height);
-            this._iniciarMaosDoUsuario(cameraFactory, width, height);
+            this._iniciarExemploDoSinal(cameraFactory, largura, altura);
+            this._iniciarMaosDoUsuario(cameraFactory, largura, altura);
 
             this._carregarProximoSinal();
+            $('#pular-sinal').click(this._carregarProximoSinal.bind(this));
+            $('#treinar-algoritmos').click(Signa.treinarAlgoritmos);
         },
 
-        _iniciarExemploDoSinal: function(cameraFactory, width, height)
-        {
-            var signExampleLeapController = new Leap.Controller(),
+        _iniciarExemploDoSinal: function(cameraFactory, largura, altura) {
+            var leapController = new Leap.Controller(),
                 container = $("#handmodel-example");
 
-            this._exemploDoSinal = new View.index.ContainerComExemploDoSinal(cameraFactory, container, signExampleLeapController, width, height);
+            this._exemploDoSinal = new View.index.ContainerComExemploDoSinal(cameraFactory, container, leapController, largura, altura);
 
-            signExampleLeapController.on('playback.recordingSet', this._onNewSignLoad.bind(this));
+            leapController.on('playback.recordingSet', this._onCarregarNovoSinal.bind(this));
         },
 
-        _iniciarMaosDoUsuario: function(cameraFactory, width, height)
-        {
+        _iniciarMaosDoUsuario: function(cameraFactory, largura, altura) {
             var leapController = new Leap.Controller(),
                 container = $("#handmodel-user"),
                 frameBuffer = Signa.frames.FrameBuffer.doLeapController(leapController);
 
-            this._maosDoUsuario = new View.index.ContainerComMaosDoUsuario(cameraFactory, container, leapController, width, height);
+            this._maosDoUsuario = new View.index.ContainerComMaosDoUsuario(cameraFactory, container, leapController, largura, altura);
             
             leapController.connect();
 
             this._reconhecedorDeSinais = new Signa.reconhecimento.ReconhecedorDeSinais(frameBuffer);
-            this._reconhecedorDeSinais.adicionarListenerDeReconhecimento(this._onRecognize.bind(this));
+            this._reconhecedorDeSinais.adicionarListenerDeReconhecimento(this._onReconhecer.bind(this));
         },
 
-        _onNewSign: function(informacoesDoSinal)
-        {
+        _onNovoSinal: function(informacoesDoSinal) {
             this._informacoesDoSinal = informacoesDoSinal;
-            this._exemploDoSinal.onNewSign(informacoesDoSinal);
+            this._exemploDoSinal.onNovoSinal(informacoesDoSinal);
         },
 
-        _onNewSignLoad: function()
-        {
-            this._descricaoDoSinal.onNewSign(this._informacoesDoSinal);
-            this._maosDoUsuario.onNewSign();
+        _onCarregarNovoSinal: function() {
+            this._descricaoDoSinal.onNovoSinal(this._informacoesDoSinal);
+            this._maosDoUsuario.onNovoSinal(this._informacoesDoSinal);
             this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
             this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.Id);
-            this._hideRecognizeMessage();
+            this._esconderCaixaDeMensagem();
         },
 
-        _hideRecognizeMessage: function()
-        {
+        _esconderCaixaDeMensagem: function() {
             this._messageBox.hide();
         },
 
-        _onRecognize: function()
-        {
-            this._showRecognizeMessage();
-            this._descricaoDoSinal.onRecognize();
-            this._exemploDoSinal.onRecognize();
-            this._maosDoUsuario.onRecognize();
+        _onReconhecer: function() {
+            this._mostrarCaixaDeMensagem();
+            this._descricaoDoSinal.onReconhecer();
+            this._exemploDoSinal.onReconhecer();
+            this._maosDoUsuario.onReconhecer();
             this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(-1);
             window.setTimeout(this._carregarProximoSinal.bind(this), 1000);
         },
 
-        _showRecognizeMessage: function()
-        {
+        _mostrarCaixaDeMensagem: function() {
             this._messageBox.show();
         },
 
-        _carregarProximoSinal: function()
-        {
+        _carregarProximoSinal: function() {
             Signa.Hubs
                 .iniciar()
                 .done(function() {
@@ -832,7 +811,7 @@
                     Signa.Hubs
                         .sinais()
                         .proximoSinal(id)
-                        .done(this._onNewSign.bind(this));
+                        .done(this._onNovoSinal.bind(this));
                 }.bind(this));
         }
     };

@@ -46,8 +46,12 @@ namespace Testes.Unidade.Algoritmos.Dados
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    saidasEsperadas.Add(sinal.IndiceNoAlgoritmo);
-                    saidasEsperadas.Add(sinal.IndiceNoAlgoritmo);
+                    var metadeDosFrames = amostra.Count / 2;
+                    for (int i = 0; i < metadeDosFrames; i++)
+                        saidasEsperadas.Add(sinal.IndiceNoAlgoritmo);
+
+                    for (int i = metadeDosFrames; i < amostra.Count; i++)
+                        saidasEsperadas.Add(colecaoDeSinais.Count + sinal.IndiceNoAlgoritmo);
                 }
             }
 
@@ -97,22 +101,10 @@ namespace Testes.Unidade.Algoritmos.Dados
         private void DeveTerExtraidoOsDadosDasAmostras(GeradorDeDadosDosLimitesDeSinaisDinamicos geradorDeDados, int quantidadeDeSinais, 
             int quantidadeDeAmostras, int[] saidasEsperadas, IList<IList<Frame>> amostrasEsperadas)
         {
-            geradorDeDados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras * 2);
-            geradorDeDados.Saidas.Should().HaveSameCount(geradorDeDados.Entradas);
+            geradorDeDados.Entradas.Should().HaveSameCount(saidasEsperadas);
+            geradorDeDados.Saidas.Should().HaveSameCount(saidasEsperadas);
             geradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
-            geradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais);
-            DeveTerAsEntradasDasAmostras(geradorDeDados.Entradas, amostrasEsperadas);
-        }
-
-        private void DeveTerAsEntradasDasAmostras(double[][] entradas, IList<IList<Frame>> amostras)
-        {
-            int j = 0;
-            for (var i = 0; i < entradas.Length; i += 2)
-            {
-                entradas[i].Should().ContainInOrder(amostras[j].First().MontarArrayEsperado(TipoFrame.Primeiro));
-                entradas[i + 1].Should().ContainInOrder(amostras[j].Last().MontarArrayEsperado(TipoFrame.Ultimo));
-                j++;
-            }
+            geradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais * 2);
         }
     }
 }

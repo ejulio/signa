@@ -87,7 +87,7 @@ namespace Testes.Unidade.Algoritmos.Dados
 
         private void DeveTerUmDadoDeTreinamento(Sinal sinal, GeradorDeDadosDeSinaisEstaticos geradorDeDadosDoAlgoritmo)
         {
-            var arrayDaAmostra = amostraPadrao[0].MontarArrayEsperado();
+            var arrayDaAmostra = amostraPadrao[0].MontarArrayEsperadoParaSinaisEstaticos();
             geradorDeDadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
             geradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(1);
             geradorDeDadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
@@ -103,7 +103,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    entradasEsperadas.AddLast(amostra[0].MontarArrayEsperado());
+                    entradasEsperadas.AddLast(amostra[0].MontarArrayEsperadoParaSinaisEstaticos());
                 }
             }
 

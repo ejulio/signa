@@ -3,36 +3,43 @@ using Dominio.Sinais.Caracteristicas;
 using Dominio.Util;
 using System.Linq;
 using Dominio.Matematica;
+using System.Collections.Generic;
 
 namespace Testes.Comum.Util
 {
     public static class FrameExtensions
     {
-        public static double[] MontarArrayEsperado(this Frame frame, TipoFrame? tipoFrame = null)
+        public static double[] MontarArrayEsperadoParaSinaisEstaticos(this Frame frame, TipoFrame? tipoFrame = null)
         {
-            double[] arrayTipoFrame;
-
-            if (tipoFrame.HasValue)
-                arrayTipoFrame = new[] { (double)tipoFrame.Value };
-            else
-            {
-                arrayTipoFrame = new double[0];
-            }
-
-            return arrayTipoFrame
-                .Concat(MontarArrayEsperadoParaAMao(frame.MaoEsquerda))
+            return MontarArrayEsperadoParaAMao(frame.MaoEsquerda)
                 .Concat(MontarArrayEsperadoParaAMao(frame.MaoDireita))
-                .Concat(arrayTipoFrame)
                 .ToArray();
         }
 
         private static double[] MontarArrayEsperadoParaAMao(Mao mao)
         {
-            return mao.VetorNormalDaPalma
-                    .Concat(mao.Direcao)
-                    .Concat(AngulosEntreDedosEPalmaDaMao(mao))
-                    .Concat(AngulosEntreDedos(mao))
-                    .ToArray();
+            var direcaoDosDedos = mao.Dedos.Select(d => d.Direcao.Normalizado()).ToArray().Concatenar();
+            return mao.VetorNormalDaPalma.Normalizado()
+                .Concat(mao.Direcao.Normalizado())
+                .Concat(AngulosProjetados(mao))
+                .Concat(direcaoDosDedos)
+                .ToArray();
+        }
+
+        private static IEnumerable<double> AngulosProjetados(Mao mao)
+        {
+            var angulos = new double[mao.Dedos.Length];
+
+            for (int i = 0; i < angulos.Length; i++)
+            {
+                angulos[i] = mao.Dedos[i].PosicaoDaPonta
+                    .Subtrair(mao.PosicaoDaPalma)
+                    .ProjetadoNoPlano(mao.VetorNormalDaPalma)
+                    .AnguloAte(mao.Direcao);
+
+            }
+
+            return angulos.Normalizado();
         }
 
         private static double[] AngulosEntreDedosEPalmaDaMao(Mao mao)
