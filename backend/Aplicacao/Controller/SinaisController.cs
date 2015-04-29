@@ -1,5 +1,7 @@
 ﻿using Aplicacao.ViewModel;
+using Dominio;
 using Dominio.Dados;
+using System;
 using System.Web.Http;
 
 namespace Aplicacao.Controller
@@ -8,11 +10,16 @@ namespace Aplicacao.Controller
     {
         private readonly SinaisDinamicosController sinaisDinamicosController;
         private readonly SinaisEstaticosController sinaisEstaticosController;
+        private readonly InicializadorDeAlgoritmoFacade inicializadorDeAlgoritmo;
 
-        public SinaisController(SinaisDinamicosController sinaisDinamicosController, SinaisEstaticosController sinaisEstaticosController)
+        public SinaisController(
+            SinaisDinamicosController sinaisDinamicosController, 
+            SinaisEstaticosController sinaisEstaticosController,
+            InicializadorDeAlgoritmoFacade inicializadorDeAlgoritmo)
         {
             this.sinaisDinamicosController = sinaisDinamicosController;
             this.sinaisEstaticosController = sinaisEstaticosController;
+            this.inicializadorDeAlgoritmo = inicializadorDeAlgoritmo;
         }
 
         [HttpPost]
@@ -25,6 +32,15 @@ namespace Aplicacao.Controller
         public void SalvarAmostraDeSinalEstatico(SalvarAmostraRequestModel modelo)
         {
             sinaisEstaticosController.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
+        }
+
+        [HttpPost]
+        public void TreinarAlgoritmos()
+        {
+            Console.WriteLine("Treinando algoritmos...");
+            inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
+            inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+            Console.WriteLine("Fim do treinamento de algoritmos.");
         }
     }
     

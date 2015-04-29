@@ -4,7 +4,7 @@
 
     global.Signa = {
 
-        URL: '',
+        URL: 'http://localhost:9000/',
 
         camera: {},
         reconhecimento: {},
@@ -12,11 +12,11 @@
         frames: {},
 
         montarUrlDoServidor: function(caminho) {
-            return 'http://localhost:9000/' + caminho;
+            return this.URL + caminho;
         },
 
         treinarAlgoritmos: function() {
-            alert('TESTE');
+            return $.post(this.montarUrlDoServidor('sinais/TreinarAlgoritmos'));
         }
     };
 })(typeof global === 'undefined' ? window : global);

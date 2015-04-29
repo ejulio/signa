@@ -27,7 +27,13 @@
 
             this._carregarProximoSinal();
             $('#pular-sinal').click(this._carregarProximoSinal.bind(this));
-            $('#treinar-algoritmos').click(Signa.treinarAlgoritmos);
+            $('#treinar-algoritmos').click(function() {
+                this._mostrarCaixaDeMensagem('Treinando algoritmos...');
+                Signa.treinarAlgoritmos()
+                    .then(function() {
+                        this._esconderCaixaDeMensagem();
+                    }.bind(this));
+            }.bind(this));
         },
 
         _iniciarExemploDoSinal: function(cameraFactory, largura, altura) {
@@ -70,7 +76,7 @@
         },
 
         _onReconhecer: function() {
-            this._mostrarCaixaDeMensagem();
+            this._mostrarCaixaDeMensagem('Parabéns, o sinal foi reconhecido! Carregando próximo sinal...');
             this._descricaoDoSinal.onReconhecer();
             this._exemploDoSinal.onReconhecer();
             this._maosDoUsuario.onReconhecer();
@@ -78,8 +84,8 @@
             window.setTimeout(this._carregarProximoSinal.bind(this), 1000);
         },
 
-        _mostrarCaixaDeMensagem: function() {
-            this._messageBox.show();
+        _mostrarCaixaDeMensagem: function(texto) {
+            this._messageBox.text(texto).show();
         },
 
         _carregarProximoSinal: function() {

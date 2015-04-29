@@ -1,4 +1,5 @@
-﻿using Dominio.Algoritmos.Factories;
+﻿using Dominio;
+using Dominio.Algoritmos.Factories;
 using Dominio.Dados;
 using Dominio.Dados.Repositorio;
 using Microsoft.AspNet.SignalR;
@@ -28,6 +29,7 @@ namespace Aplicacao
             ConfigurarSinais();
             ConfigurarReconhecedorDeSinaisEstaticos();
             ConfigurarReconhecedorDeSinaisDinamicos();
+            ConfigurarInicializadorDeAlgoritmosFacade();
         }
 
         private void ConfigurarSinais()
@@ -67,6 +69,12 @@ namespace Aplicacao
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
             //container.Register(typeof(JsonSerializer), () => JsonSerializer.Create(configuracoes));
+        }
+
+        private void ConfigurarInicializadorDeAlgoritmosFacade()
+        {
+            container.Register(typeof(InicializadorDeAlgoritmoFacade),
+                () => new InicializadorDeAlgoritmoFacade(algoritmoFactory, repositorioFactory));
         }
     }
 }

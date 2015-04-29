@@ -28,8 +28,11 @@ namespace Aplicacao
         private void ConfigurarResolvedorDeDependencias()
         {
             container = new ResolvedorDeDependenciasUnity(new UnityContainer());
-            var resolvedorDeDependencias = new ConfiguradorDeDependencias(GlobalHost.DependencyResolver);
-            resolvedorDeDependencias.Configurar();
+            var resolvedorDeDependenciasAspNet = new ConfiguradorDeDependencias(container);
+            resolvedorDeDependenciasAspNet.Configurar();
+
+            var resolvedorDeDependenciasSignalR = new ConfiguradorDeDependencias(GlobalHost.DependencyResolver);
+            resolvedorDeDependenciasSignalR.Configurar();
         }
 
         private void UsarCors()
@@ -54,8 +57,6 @@ namespace Aplicacao
 
         private void UsarWebApi()
         {
-            var resolvedorDeDependencias = new ConfiguradorDeDependencias(container);
-            resolvedorDeDependencias.Configurar();
             var configuracao = new HttpConfiguration
             {
                 DependencyResolver = container
