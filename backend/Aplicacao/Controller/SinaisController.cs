@@ -37,10 +37,7 @@ namespace Aplicacao.Controller
         [HttpPost]
         public void TreinarAlgoritmos()
         {
-            Console.WriteLine("Treinando algoritmos...");
-            inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
-            inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
-            Console.WriteLine("Fim do treinamento de algoritmos.");
+            inicializadorDeAlgoritmo.TreinarAlgoritmosDeReconhecimentoDeSinais();
         }
     }
     

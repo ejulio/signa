@@ -1,7 +1,9 @@
 ﻿using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Factories;
 using Dominio.Dados.Repositorio;
+using System;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Dominio
 {
@@ -43,6 +45,28 @@ namespace Dominio
                 var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new GeradorDeDadosDosLimitesDeSinaisDinamicos(repositorio);
                 algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
             }
+        }
+
+        public void TreinarAlgoritmosDeReconhecimentoDeSinais()
+        {
+            Console.WriteLine("Treinando algoritmos...");
+            
+            var stopwatchTempoTotal = Stopwatch.StartNew();
+
+            var stopwatchSinaisEstaticos = Stopwatch.StartNew();
+            TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
+            stopwatchSinaisEstaticos.Stop();
+            Console.WriteLine("Tempo para treinar o reconhecimento de sinais estáticos foi {0}ms", stopwatchSinaisEstaticos.ElapsedMilliseconds);
+
+            var stopwatchSinaisDinamicos = Stopwatch.StartNew();
+            TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+            stopwatchSinaisDinamicos.Stop();
+            Console.WriteLine("Tempo para treinar o reconhecimento de sinais dinâmicos foi {0}ms", stopwatchSinaisDinamicos.ElapsedMilliseconds);
+
+            stopwatchTempoTotal.Stop();
+            
+            Console.WriteLine("Fim do treinamento de algoritmos.");
+            Console.WriteLine("Tempo total para treinar os algoritmos foi {0}ms", stopwatchTempoTotal.ElapsedMilliseconds);
         }
     }
 }

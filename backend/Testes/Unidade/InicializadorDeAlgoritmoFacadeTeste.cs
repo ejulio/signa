@@ -11,6 +11,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using Testes.Comum.Builders.Dominio.Sinais;
+using System.Linq;
 
 namespace Testes.Unidade
 {
@@ -122,6 +123,24 @@ namespace Testes.Unidade
                 .Verify(a => a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisDinamicos>()), Times.Never);
         }
 
+        [TestMethod]
+        public void treinando_os_algoritmos()
+        {
+            repositorio
+                .Setup(r => r.GetEnumerator())
+                .Returns(DadaUmaColecaoDeSinais().GetEnumerator);
+
+            inicializadorDeAlgoritmoFacade.TreinarAlgoritmosDeReconhecimentoDeSinais();
+
+            algoritmoDeReconhecimentoDeSinaisEstaticos
+                .Verify(a =>
+                    a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisEstaticos>()), Times.Exactly(2));
+
+            algoritmoDeReconhecimentoDeSinaisDinamicos
+                .Verify(a =>
+                    a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisDinamicos>()), Times.Once);
+        }
+
         private ICollection<Sinal> DadaUmaColecaoDeSinaisEstaticos()
         {
             var sinais = new ColecaoDeSinaisBuilder()
@@ -142,6 +161,25 @@ namespace Testes.Unidade
                 .Construir();
 
             return sinais;
+        }
+
+        private ICollection<Sinal> DadaUmaColecaoDeSinais()
+        {
+            var sinaisDinamicos = new ColecaoDeSinaisBuilder()
+                .ComQuantidadeDeAmostrasPorSinal(2)
+                .ComQuantidadeDeSinais(2)
+                .ComGeradorDeAmostrasDinamicas()
+                .Construir();
+
+            var sinaisEstaticos = new ColecaoDeSinaisBuilder()
+                .ComQuantidadeDeAmostrasPorSinal(2)
+                .ComQuantidadeDeSinais(2)
+                .ComGeradorDeAmostrasEstaticas()
+                .Construir();
+
+            return sinaisEstaticos
+                .Concat(sinaisDinamicos)
+                .ToArray();
         }
 
         private bool VerificarDadosDoAlgoritmoDeSinaisEstaticos(IGeradorDeDadosDeSinaisEstaticos dados)

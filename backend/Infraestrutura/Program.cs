@@ -28,15 +28,11 @@ namespace Infraestrutura
 
         private static void TreinarAlgoritmos()
         {
-            Console.WriteLine("Treinando algoritmos");
             var repositorioFactory = new RepositorioFactory(SinaisController.CaminhoDoArquivoDoRepositorio);
             var algoritmosFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(new GeradorDeCaracteristicasFactory());
             var inicializadorDeAlgoritmosFacade = new InicializadorDeAlgoritmoFacade(algoritmosFactory, repositorioFactory);
 
-            inicializadorDeAlgoritmosFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
-            inicializadorDeAlgoritmosFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
-
-            Console.WriteLine("Algoritmos treinados");
+            inicializadorDeAlgoritmosFacade.TreinarAlgoritmosDeReconhecimentoDeSinais();
         }
     }
 }
