@@ -85,6 +85,9 @@ namespace Testes.Integracao.Dominio.Algoritmos
                     .First(o => o.Descricao == sinal.Descricao)
                     .Indice;
 
+                Console.WriteLine("{0}({1})", sinal.Descricao, repositorioTreinamento
+                    .First(o => o.Descricao == sinal.Descricao).Amostras.Count);
+
                 for (var j = 0; j < sinal.Amostras.Count; j++)
                 {
                     var resultado = algoritmo.Reconhecer(sinal.Amostras[j]);
