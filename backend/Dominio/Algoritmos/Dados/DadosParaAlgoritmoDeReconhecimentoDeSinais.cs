@@ -25,7 +25,7 @@ namespace Dominio.Algoritmos.Dados
 
         public void ExtrairInformacoesDosSinais()
         {
-            int indice = 0;
+            var indice = 0;
             QuantidadeDeClasses = 0;
             saidas = new LinkedList<int>();
 

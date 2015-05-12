@@ -54,15 +54,11 @@ namespace Dominio.Dados
 
         private void Adicionar(Sinal sinal)
         {
-            Sinal sinalNoRepositorio = repositorio.BuscarPorDescricao(sinal.Descricao);
+            var sinalNoRepositorio = repositorio.BuscarPorDescricao(sinal.Descricao);
             if (sinalNoRepositorio == null)
-            {
                 repositorio.Adicionar(sinal);
-            }
             else
-            {
                 sinalNoRepositorio.AdicionarAmostra(sinal.Amostras[0]);
-            }
             repositorio.SalvarAlteracoes();
         }
     }

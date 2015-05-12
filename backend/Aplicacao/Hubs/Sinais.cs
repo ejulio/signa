@@ -15,7 +15,7 @@ namespace Aplicacao.Hubs
             this.repositorio = repositorio;
         }
 
-        public ProximoSinalResponseModel ProximoSinal(int previousSignIndex)
+        public ProximoSinalResponseModel ProximoSinal(int indiceDoSinalAnterior)
         {
             var random = new Random();
             int indice = random.Next(repositorio.Quantidade);
