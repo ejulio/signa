@@ -19,47 +19,48 @@ namespace Dominio.Algoritmos.Caracteristicas
 
         private IEnumerable<double> ExtrairCaracteristicasDaMao(Mao mao)
         {
-            var direcaoDosDedos = mao.Dedos.Select(d => d.Direcao.Normalizado()).ToArray().Concatenar();
             return mao.VetorNormalDaPalma.Normalizado()
                 .Concat(mao.Direcao.Normalizado())
-                .Concat(AngulosProjetados(mao))
-                //.Concat(ElevacaoDosDedos(mao))
-                //.Concat(AngulosEntreDedosEPalmaDaMao(mao))
-                //.Concat(AngulosEntreDedos(mao))
-                .Concat(direcaoDosDedos);
+                .Concat(AngulosEntreDedosEPalmaDaMao(mao))
+                .Concat(DirecaoDosDedos(mao));
         }
 
-        private IEnumerable<double> ElevacaoDosDedos(Mao mao)
-        {
-            var elevacoes = new double[mao.Dedos.Length];
-
-            for (int i = 0; i < elevacoes.Length; i++)
-            {
-                var posicaoDoDedoProjetada = mao.Dedos[i].PosicaoDaPonta.ProjetadoNoPlano(mao.VetorNormalDaPalma);
-                var diferencaNaPosicaoDeDedo = mao.Dedos[i].PosicaoDaPonta.Subtrair(posicaoDoDedoProjetada);
-                var sinal = Math.Sign(diferencaNaPosicaoDeDedo.ProdutoCom(mao.VetorNormalDaPalma));
-
-                elevacoes[i] = sinal * diferencaNaPosicaoDeDedo.Magnitude();
-            }
-
-            return elevacoes.Normalizado();
-        }
-
-        private IEnumerable<double> AngulosProjetados(Mao mao)
+        private IEnumerable<double> AngulosEntreDedosEPalmaDaMao(Mao mao)
         {
             var angulos = new double[mao.Dedos.Length];
             
             for (int i = 0; i < angulos.Length; i++)
-            {
                 angulos[i] = mao.Dedos[i].PosicaoDaPonta
                     .Subtrair(mao.PosicaoDaPalma)
                     .ProjetadoNoPlano(mao.VetorNormalDaPalma)
-                    .AnguloAte(mao.Direcao);
-
-            }
+                    .AnguloAte(mao.PosicaoDaPalma);
 
             return angulos.Normalizado();
         }
+
+        private IEnumerable<double> DirecaoDosDedos(Mao mao)
+        {
+            return mao.Dedos
+                .Select(d => d.Direcao.Normalizado())
+                .ToArray()
+                .Concatenar();
+        }
+
+        //private IEnumerable<double> ElevacaoDosDedos(Mao mao)
+        //{
+        //    var elevacoes = new double[mao.Dedos.Length];
+
+        //    for (int i = 0; i < elevacoes.Length; i++)
+        //    {
+        //        var posicaoDoDedoProjetada = mao.Dedos[i].PosicaoDaPonta.ProjetadoNoPlano(mao.VetorNormalDaPalma);
+        //        var diferencaNaPosicaoDeDedo = mao.Dedos[i].PosicaoDaPonta.Subtrair(posicaoDoDedoProjetada);
+        //        var sinal = Math.Sign(diferencaNaPosicaoDeDedo.ProdutoCom(mao.VetorNormalDaPalma));
+
+        //        elevacoes[i] = sinal * diferencaNaPosicaoDeDedo.Magnitude();
+        //    }
+
+        //    return elevacoes.Normalizado();
+        //}
 
         //private double[] AngulosEntreDedosEPalmaDaMao(Mao mao)
         //{
@@ -80,19 +81,19 @@ namespace Dominio.Algoritmos.Caracteristicas
         //    return angulos.Concatenar().ToArray();
         //}
 
-        private double[] AngulosEntreDedosEPalmaDaMao(Mao mao)
-        {
-            double[] angulos = new double[mao.Dedos.Length];
+        //private double[] AngulosEntreDedosEPalmaDaMao(Mao mao)
+        //{
+        //    double[] angulos = new double[mao.Dedos.Length];
 
-            for (int i = 0; i < angulos.Length; i++)
-            {
-                var posicaoDaPontaDoDedo = mao.Dedos[i].PosicaoDaPonta;
-                var posicaoDaPalma = mao.PosicaoDaPalma;
+        //    for (int i = 0; i < angulos.Length; i++)
+        //    {
+        //        var posicaoDaPontaDoDedo = mao.Dedos[i].PosicaoDaPonta;
+        //        var posicaoDaPalma = mao.PosicaoDaPalma;
 
-                angulos[i] = posicaoDaPalma.AnguloAte(posicaoDaPontaDoDedo);
-            }
-            return angulos.Normalizado();
-        }
+        //        angulos[i] = posicaoDaPalma.AnguloAte(posicaoDaPontaDoDedo);
+        //    }
+        //    return angulos.Normalizado();
+        //}
 
         //private double[] AngulosEntreDedos(Mao mao)
         //{
@@ -114,19 +115,19 @@ namespace Dominio.Algoritmos.Caracteristicas
         //    return angulos.Concatenar().ToArray();
         //}
 
-        private double[] AngulosEntreDedos(Mao mao)
-        {
-            double[] angulos = new double[mao.Dedos.Length - 1];
-            var posicaoPalma = mao.PosicaoDaPalma.MultiplicarPor(-1);
+        //private double[] AngulosEntreDedos(Mao mao)
+        //{
+        //    double[] angulos = new double[mao.Dedos.Length - 1];
+        //    var posicaoPalma = mao.PosicaoDaPalma.MultiplicarPor(-1);
 
-            for (int i = 0; i < angulos.Length; i++)
-            {
-                var posicaoDaPontaDoDedo1 = mao.Dedos[i].PosicaoDaPonta.SomarCom(posicaoPalma);
-                var posicaoDaPontaDoDedo2 = mao.Dedos[i + 1].PosicaoDaPonta.SomarCom(posicaoPalma);
+        //    for (int i = 0; i < angulos.Length; i++)
+        //    {
+        //        var posicaoDaPontaDoDedo1 = mao.Dedos[i].PosicaoDaPonta.SomarCom(posicaoPalma);
+        //        var posicaoDaPontaDoDedo2 = mao.Dedos[i + 1].PosicaoDaPonta.SomarCom(posicaoPalma);
 
-                angulos[i] = posicaoDaPontaDoDedo1.AnguloAte(posicaoDaPontaDoDedo2);
-            }
-            return angulos.Normalizado();
-        }
+        //        angulos[i] = posicaoDaPontaDoDedo1.AnguloAte(posicaoDaPontaDoDedo2);
+        //    }
+        //    return angulos.Normalizado();
+        //}
     }
 }

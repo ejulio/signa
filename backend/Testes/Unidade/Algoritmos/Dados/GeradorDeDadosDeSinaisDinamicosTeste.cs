@@ -94,14 +94,14 @@ namespace Testes.Unidade.Algoritmos.Dados
             return amostrasConcatenadas.ToArray();
         }
 
-        private void DeveTerExtraidoOsDadosDasAmostras(GeradorDeDadosDeSinaisDinamicos geradorDeDados, int quantidadeDeSinais, 
+        private void DeveTerExtraidoOsDadosDasAmostras(GeradorDeDadosDeSinaisDinamicos geradorDeGeradorDeDados, int quantidadeDeSinais, 
             int quantidadeDeAmostras, int[] saidasEsperadas, IList<IList<Frame>> amostrasEsperadas)
         {
-            geradorDeDados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
-            geradorDeDados.Saidas.Should().HaveSameCount(geradorDeDados.Entradas);
-            geradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
-            geradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais);
-            DeveTerAsEntradasDasAmostras(geradorDeDados.Entradas, amostrasEsperadas);
+            geradorDeGeradorDeDados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
+            geradorDeGeradorDeDados.Saidas.Should().HaveSameCount(geradorDeGeradorDeDados.Entradas);
+            geradorDeGeradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
+            geradorDeGeradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais);
+            DeveTerAsEntradasDasAmostras(geradorDeGeradorDeDados.Entradas, amostrasEsperadas);
         }
 
         private void DeveTerAsEntradasDasAmostras(double[][][] entradas, IList<IList<Frame>> amostras)

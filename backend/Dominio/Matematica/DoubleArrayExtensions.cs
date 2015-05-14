@@ -21,12 +21,8 @@ namespace Dominio.Matematica
             var magnitude = vetor.Magnitude();
 
             if (magnitude != 0)
-            {
                 for (var i = 0; i < vetorNormalizado.Length; i++)
-                {
-                    vetorNormalizado[i] = vetor[i] / magnitude;
-                }
-            }
+                    vetorNormalizado[i] = vetor[i]/magnitude;
 
             return vetorNormalizado;
         }

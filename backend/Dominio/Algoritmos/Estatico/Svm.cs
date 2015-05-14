@@ -13,6 +13,7 @@ namespace Dominio.Algoritmos.Estatico
 {
     public class Svm : IAlgoritmoDeReconhecimentoDeSinaisEstaticos
     {
+        private const int QuantidadeIndeterminadaDeCaracteristicas = 0;
         private readonly IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
         private MulticlassSupportVectorMachine svm;
 
@@ -32,21 +33,19 @@ namespace Dominio.Algoritmos.Estatico
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)
         {
-            var kernel = new Gaussian(1);
-            svm = new MulticlassSupportVectorMachine(0, kernel, dados.QuantidadeDeClasses);
+            var kernel = new Gaussian(sigma: 1);
+            svm = new MulticlassSupportVectorMachine(QuantidadeIndeterminadaDeCaracteristicas, kernel, dados.QuantidadeDeClasses);
             
             var teacher = new MulticlassSupportVectorLearning(svm, dados.Entradas, dados.Saidas)
             {
                 Algorithm = (machine, classInputs, classOutputs, j, k) => 
-                {
-                    var smo = new SequentialMinimalOptimization(machine, classInputs, classOutputs);
-                    smo.Complexity = 1;
-                    return smo;
-                }
+                    new SequentialMinimalOptimization(machine, classInputs, classOutputs)
+                    {
+                        Complexity = 1
+                    }
             };
             
-
-            var e = teacher.Run();
+            teacher.Run();
         }
     }
 }

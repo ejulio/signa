@@ -98,13 +98,13 @@ namespace Testes.Unidade.Algoritmos.Dados
             return amostrasConcatenadas.ToArray();
         }
 
-        private void DeveTerExtraidoOsDadosDasAmostras(GeradorDeDadosDosLimitesDeSinaisDinamicos geradorDeDados, int quantidadeDeSinais, 
+        private void DeveTerExtraidoOsDadosDasAmostras(GeradorDeDadosDosLimitesDeSinaisDinamicos geradorDeGeradorDeDados, int quantidadeDeSinais, 
             int quantidadeDeAmostras, int[] saidasEsperadas, IList<IList<Frame>> amostrasEsperadas)
         {
-            geradorDeDados.Entradas.Should().HaveSameCount(saidasEsperadas);
-            geradorDeDados.Saidas.Should().HaveSameCount(saidasEsperadas);
-            geradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
-            geradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais * 2);
+            geradorDeGeradorDeDados.Entradas.Should().HaveSameCount(saidasEsperadas);
+            geradorDeGeradorDeDados.Saidas.Should().HaveSameCount(saidasEsperadas);
+            geradorDeGeradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
+            geradorDeGeradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais * 2);
         }
     }
 }

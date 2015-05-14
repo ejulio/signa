@@ -5,63 +5,72 @@ using System.Linq;
 
 namespace Dominio.Algoritmos.Dados
 {
-    public class GeradorDeDadosDosLimitesDeSinaisDinamicos : IGeradorDeDadosDeSinaisEstaticos
+    public class GeradorDeDadosDosLimitesDeSinaisDinamicos : GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais,
+        IGeradorDeDadosDeSinaisEstaticos
     {
         public double[][] Entradas { get; private set; }
 
-        public int[] Saidas { get; private set; }
-
-        public int QuantidadeDeClasses { get; private set; }
-
-        private IEnumerable<Sinal> sinais;
         private LinkedList<double[]> entradas;
-        private LinkedList<int> saidas;
+        private GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicasComTipoFrame;
 
-        public GeradorDeDadosDosLimitesDeSinaisDinamicos(IEnumerable<Sinal> sinais)
+        private int quantidadeDeSinais;
+
+        public override int QuantidadeDeClassesPorSinal
         {
-            this.sinais = sinais;
-            entradas = new LinkedList<double[]>();
-            saidas = new LinkedList<int>();
-            ExtrairDadosDasAmostras();
+            get { return 2; }
         }
 
-        private void ExtrairDadosDasAmostras()
+        public GeradorDeDadosDosLimitesDeSinaisDinamicos(IEnumerable<Sinal> sinais)
+            : base(sinais)
         {
-            QuantidadeDeClasses = 0;
+        }
+
+        protected override void Inicializar(IEnumerable<Sinal> sinais)
+        {
+            quantidadeDeSinais = sinais.Count();
+            entradas = new LinkedList<double[]>();
             var geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalEstatico();
-            var geradorDeCaracteristicasComTipoFrame = new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
-            Frame[] amostraDoFrame = new Frame[1];
-            int indice = 0;
+            geradorDeCaracteristicasComTipoFrame = new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
+        }
 
-            foreach (var sinal in sinais)
+        protected override void GerarEntradasESaidasParaAmostra(IList<Frame> amostra, LinkedList<int> saidas, int identificadorDoSinal)
+        {
+            var quantidadeFramesQueRepresentamPrimeiroFrame = amostra.Count / 2;
+            geradorDeCaracteristicasComTipoFrame.PrimeiroFrame = amostra.First();
+            
+            GerarEntradasSaidasQueRepresentamPrimeiroFrame(amostra, saidas, identificadorDoSinal, quantidadeFramesQueRepresentamPrimeiroFrame);
+            GerarEntradasSaidasQueRepresentamUltimoFrame(amostra, saidas, identificadorDoSinal, quantidadeFramesQueRepresentamPrimeiroFrame);
+        }
+
+        private void GerarEntradasSaidasQueRepresentamPrimeiroFrame(IList<Frame> amostra, LinkedList<int> saidas, 
+            int indice, int quantidadeFramesQueRepresentamPrimeiroFrame)
+        {
+            var amostraDoFrame = new Frame[1];
+            geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Primeiro;
+            for (int i = 0; i < quantidadeFramesQueRepresentamPrimeiroFrame; i++)
             {
-                foreach (var amostra in sinal.Amostras)
-                {
-                    geradorDeCaracteristicasComTipoFrame.PrimeiroFrame = amostra.First();
-                    int framesAmostraPrimeiroFrame = amostra.Count / 2;
-                    for (int i = 0; i < framesAmostraPrimeiroFrame; i++)
-                    {
-                        geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Primeiro;
-                        amostraDoFrame[0] = amostra[i];
-                        entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
-                        saidas.AddLast(indice);
-                    }
-
-                    for (int i = framesAmostraPrimeiroFrame; i < amostra.Count; i++)
-                    {
-                        amostraDoFrame[0] = amostra[i];
-                        geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Ultimo;
-                        entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
-                        saidas.AddLast(indice + sinais.Count());
-                    }
-                }
-                sinal.IndiceNoAlgoritmo = indice;
-                indice++;
-                QuantidadeDeClasses += 2;
+                amostraDoFrame[0] = amostra[i];
+                entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
+                saidas.AddLast(indice);
             }
+        }
 
+        private void GerarEntradasSaidasQueRepresentamUltimoFrame(IList<Frame> amostra, LinkedList<int> saidas, 
+            int indice, int quantidadeFramesQueRepresentamPrimeiroFrame)
+        {
+            var amostraDoFrame = new Frame[1];
+            geradorDeCaracteristicasComTipoFrame.TipoFrame = TipoFrame.Ultimo;
+            for (int i = quantidadeFramesQueRepresentamPrimeiroFrame; i < amostra.Count; i++)
+            {
+                amostraDoFrame[0] = amostra[i];
+                entradas.AddLast(geradorDeCaracteristicasComTipoFrame.ExtrairCaracteristicasDaAmostra(amostraDoFrame));
+                saidas.AddLast(indice + quantidadeDeSinais);
+            }
+        }
+
+        protected override void Finalizar()
+        {
             Entradas = entradas.ToArray();
-            Saidas = saidas.ToArray();
         }
     }
 }

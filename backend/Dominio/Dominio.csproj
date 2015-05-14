@@ -74,7 +74,7 @@
     <Compile Include="Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalDinamico.cs" />
     <Compile Include="Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalEstatico.cs" />
     <Compile Include="Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame.cs" />
-    <Compile Include="Algoritmos\Dados\DadosParaAlgoritmoDeReconhecimentoDeSinais.cs" />
+    <Compile Include="Algoritmos\Dados\GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais.cs" />
     <Compile Include="Algoritmos\Dados\GeradorDeDadosDeSinaisDinamicos.cs" />
     <Compile Include="Algoritmos\Dados\GeradorDeDadosDeSinaisEstaticos.cs" />
     <Compile Include="Algoritmos\Dados\GeradorDeDadosDosLimitesDeSinaisDinamicos.cs" />

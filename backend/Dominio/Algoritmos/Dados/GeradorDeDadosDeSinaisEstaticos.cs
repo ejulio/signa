@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Dominio.Algoritmos.Dados
 {
-    public class GeradorDeDadosDeSinaisEstaticos : DadosParaAlgoritmoDeReconhecimentoDeSinais, 
+    public class GeradorDeDadosDeSinaisEstaticos : GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais, 
         IGeradorDeDadosDeSinaisEstaticos
     {
         public double[][] Entradas { get; private set; }
@@ -14,23 +14,30 @@ namespace Dominio.Algoritmos.Dados
 
         private GeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
 
+        public override int QuantidadeDeClassesPorSinal
+        {
+            get { return 1; }
+        }
+
         public GeradorDeDadosDeSinaisEstaticos(IEnumerable<Sinal> sinais)
             : base(sinais)
         {
         }
 
-        protected override void InicializarExtracaoDeInformacoesDosSinais()
+        protected override void Inicializar(IEnumerable<Sinal> sinais)
         {
             entradas = new LinkedList<double[]>();
             geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalEstatico();
         }
 
-        protected override void GerarEntradaParaAAmostra(IList<Frame> amostra)
+        protected override void GerarEntradasESaidasParaAmostra(IList<Frame> amostra, LinkedList<int> saidas, int identificadorDoSinal)
         {
-            entradas.AddLast(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra));
+            var caracteristicas = geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra);
+            entradas.AddLast(caracteristicas);
+            saidas.AddLast(identificadorDoSinal);
         }
 
-        protected override void FinalizarExtracaoDeInformacoesDosSinais()
+        protected override void Finalizar()
         {
             Entradas = entradas.ToArray();
         }
