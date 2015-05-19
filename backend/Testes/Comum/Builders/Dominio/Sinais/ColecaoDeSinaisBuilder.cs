@@ -1,6 +1,8 @@
 ﻿using Dominio.Sinais;
 using System;
 using System.Collections.Generic;
+using Dominio.Sinais.Frames;
+using Testes.Comum.Builders.Dominio.Sinais.Frames;
 
 namespace Testes.Comum.Builders.Dominio.Sinais
 {

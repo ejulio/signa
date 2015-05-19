@@ -1,5 +1,6 @@
 ﻿using Dominio.Sinais;
 using System.Collections.Generic;
+using Dominio.Sinais.Frames;
 
 namespace Aplicacao.ViewModel
 {

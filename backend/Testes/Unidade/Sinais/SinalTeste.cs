@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Testes.Comum.Builders.Dominio.Sinais;
+using Testes.Comum.Builders.Dominio.Sinais.Frames;
 
 namespace Testes.Unidade.Sinais
 {

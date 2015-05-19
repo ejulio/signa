@@ -11,6 +11,7 @@ using Dominio.Algoritmos.Dados;
 using Dominio.Sinais;
 using System;
 using System.Collections.Generic;
+using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Dinamico
 {

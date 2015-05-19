@@ -1,8 +1,8 @@
 ﻿using Aplicacao.ViewModel;
 using Dominio;
-using Dominio.Dados;
 using System;
 using System.Web.Http;
+using Dominio.Gerenciamento;
 
 namespace Aplicacao.Controller
 {

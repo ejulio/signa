@@ -1,5 +1,6 @@
-﻿using Dominio.Dados;
+﻿using Dominio.Gerenciamento;
 using Dominio.Sinais;
+using Dominio.Sinais.Frames;
 using Microsoft.AspNet.SignalR;
 
 namespace Aplicacao.Hubs

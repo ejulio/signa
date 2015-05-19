@@ -5,7 +5,9 @@ using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Dominio.Sinais.Frames;
 using Testes.Comum.Builders.Dominio.Sinais;
+using Testes.Comum.Builders.Dominio.Sinais.Frames;
 
 namespace Testes.Unidade.Algoritmos.Dinamico
 {

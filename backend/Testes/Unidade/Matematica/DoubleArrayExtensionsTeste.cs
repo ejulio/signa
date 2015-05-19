@@ -1,8 +1,8 @@
 ﻿using System;
-using Dominio.Matematica;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using Dominio.Util.Matematica;
 
 namespace Testes.Unidade.Matematica
 {

@@ -1,8 +1,8 @@
 ﻿using Aplicacao.ViewModel;
-using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
 using Microsoft.AspNet.SignalR;
 using System;
+using Dominio.Persistencia;
 
 namespace Aplicacao.Hubs
 {

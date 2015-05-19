@@ -3,7 +3,6 @@ using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Dinamico;
 using Dominio.Algoritmos.Estatico;
 using Dominio.Algoritmos.Factories;
-using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using Testes.Comum.Builders.Dominio.Sinais;
 using System.Linq;
+using Dominio.Persistencia;
 
 namespace Testes.Unidade
 {

@@ -1,10 +1,11 @@
 using Dominio.Sinais;
-using Dominio.Sinais.Caracteristicas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Matematica;
+using Dominio.Sinais.Frames;
+using Dominio.Sinais.Maos;
 using Dominio.Util;
+using Dominio.Util.Matematica;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {

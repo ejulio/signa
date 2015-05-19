@@ -67,23 +67,23 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Comum\Builders\ArrayDeDouble.cs" />
-    <Compile Include="Comum\Builders\Dominio\Caracteristicas\DedoBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Caracteristicas\MaoBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\FrameBuilder.cs" />
-    <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeFramesBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Maos\DedoBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Maos\MaoBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Frames\FrameBuilder.cs" />
+    <Compile Include="Comum\Builders\Dominio\Sinais\Frames\ColecaoDeFramesBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Sinais\SinalBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeSinaisBuilder.cs" />
     <Compile Include="Comum\Util\FrameExtensions.cs" />
     <Compile Include="Integracao\Caminhos.cs" />
-    <Compile Include="Integracao\Dados\Repositorio\RepositorioDeSinaisTeste.cs" />
-    <Compile Include="Integracao\Dados\Repositorio\RepositorioFactoryTeste.cs" />
-    <Compile Include="Integracao\Dados\Repositorio\RepositorioDeSinaisDinamicosTeste.cs" />
-    <Compile Include="Integracao\Dados\Repositorio\RepositorioSinaisEstaticosTeste.cs" />
-    <Compile Include="Integracao\Dados\SinaisEstaticosControllerTeste.cs" />
+    <Compile Include="Integracao\Persistencia\RepositorioDeSinaisTeste.cs" />
+    <Compile Include="Integracao\Persistencia\RepositorioFactoryTeste.cs" />
+    <Compile Include="Integracao\Persistencia\RepositorioDeSinaisDinamicosTeste.cs" />
+    <Compile Include="Integracao\Persistencia\RepositorioSinaisEstaticosTeste.cs" />
+    <Compile Include="Integracao\Gerenciamento\SinaisEstaticosControllerTeste.cs" />
     <Compile Include="Integracao\Dominio\Algoritmos\AlgoritmosTeste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Integracao\Dados\SinaisDinamicosControllerTeste.cs" />
-    <Compile Include="Unidade\Dados\SinaisEstaticosControllerTeste.cs" />
+    <Compile Include="Integracao\Gerenciamento\SinaisDinamicosControllerTeste.cs" />
+    <Compile Include="Unidade\Gerenciamento\SinaisEstaticosControllerTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Dados\GeradorDeDadosDosLimitiesDeSinaisDinamicosTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Factories\GeradorDeCaracteristicasFactoryTeste.cs" />
     <Compile Include="Unidade\InicializadorDeAlgoritmoFacadeTeste.cs" />
@@ -93,8 +93,8 @@
     <Compile Include="Unidade\Algoritmos\Estatico\SvmTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Factories\AlgoritmoDeReconhecimentoDeSinalFactoryTeste.cs" />
     <Compile Include="Unidade\Matematica\DoubleArrayExtensionsTeste.cs" />
-    <Compile Include="Unidade\Sinais\Caracteristicas\MaoTeste.cs" />
-    <Compile Include="Unidade\Sinais\FrameTeste.cs" />
+    <Compile Include="Unidade\Sinais\Maos\MaoTeste.cs" />
+    <Compile Include="Unidade\Sinais\Frames\FrameTeste.cs" />
     <Compile Include="Unidade\Sinais\SinalTeste.cs" />
     <Compile Include="Unidade\Util\IEnumerableExtensionsTest.cs" />
     <Compile Include="Unidade\Util\StringExtensionsTest.cs" />

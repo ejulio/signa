@@ -1,9 +1,9 @@
 ﻿using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Factories;
-using Dominio.Dados.Repositorio;
 using System;
 using System.Linq;
 using System.Diagnostics;
+using Dominio.Persistencia;
 
 namespace Dominio
 {

@@ -1,7 +1,7 @@
 ﻿using Dominio;
 using Dominio.Algoritmos.Factories;
-using Dominio.Dados;
-using Dominio.Dados.Repositorio;
+using Dominio.Gerenciamento;
+using Dominio.Persistencia;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

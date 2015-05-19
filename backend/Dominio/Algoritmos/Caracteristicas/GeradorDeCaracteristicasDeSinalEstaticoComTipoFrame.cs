@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Matematica;
+using Dominio.Sinais.Frames;
+using Dominio.Util.Matematica;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {

@@ -2,7 +2,6 @@
 using Dominio.Algoritmos;
 using Dominio.Algoritmos.Estatico;
 using Dominio.Algoritmos.Factories;
-using Dominio.Dados.Repositorio;
 using Dominio.Sinais;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -11,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Persistencia;
 
 namespace Testes.Integracao.Dominio.Algoritmos
 {

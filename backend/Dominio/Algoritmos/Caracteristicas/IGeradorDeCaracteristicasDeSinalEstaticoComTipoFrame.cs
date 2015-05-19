@@ -1,4 +1,5 @@
 ﻿using Dominio.Sinais;
+using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {

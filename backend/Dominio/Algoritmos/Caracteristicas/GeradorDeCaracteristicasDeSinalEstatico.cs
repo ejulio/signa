@@ -1,5 +1,6 @@
 ﻿using Dominio.Sinais;
 using System.Collections.Generic;
+using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
@@ -7,8 +8,8 @@ namespace Dominio.Algoritmos.Caracteristicas
     {
         public double[] ExtrairCaracteristicasDaAmostra(IList<Frame> frames)
         {
-            var frame = frames[0];
-            return ExtrairCaracteristicasDoFrame(frame);
+            var primeiroFrame = frames[0];
+            return ExtrairCaracteristicasDoFrame(primeiroFrame);
         }
     }
 }

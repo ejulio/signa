@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Dominio.Sinais.Frames;
 using Newtonsoft.Json;
 
 namespace Dominio.Sinais

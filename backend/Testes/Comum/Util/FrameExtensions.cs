@@ -1,9 +1,10 @@
 ﻿using Dominio.Sinais;
-using Dominio.Sinais.Caracteristicas;
 using Dominio.Util;
 using System.Linq;
-using Dominio.Matematica;
 using System.Collections.Generic;
+using Dominio.Sinais.Frames;
+using Dominio.Sinais.Maos;
+using Dominio.Util.Matematica;
 
 namespace Testes.Comum.Util
 {
