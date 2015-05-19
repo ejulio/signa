@@ -66,20 +66,5 @@ namespace Dominio.Util.Matematica
             var vetorNoPlano = vetorNormalDoPlanoNormalizado.MultiplicarPor(produto);
             return vetor.Subtrair(vetorNoPlano);
         }
-
-        public static double[] ProjetadoEmXY(this double[] vetor)
-        {
-            return new[] { vetor[0], vetor[1] };
-        }
-
-        public static double[] ProjetadoEmXZ(this double[] vetor)
-        {
-            return new[] { vetor[0], vetor[2] };
-        }
-
-        public static double[] ProjetadoEmYZ(this double[] vetor)
-        {
-            return new[] { vetor[1], vetor[2] };
-        }
     }
 }

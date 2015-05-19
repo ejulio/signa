@@ -113,39 +113,6 @@ namespace Testes.Unidade.Matematica
         }
 
         [TestMethod]
-        public void projetando_um_vetor_xyz_em_xy()
-        {
-            var vetor3d = new[] { 5.0, 5.9, 2.3 };
-
-            var vetorProjetadoXY = vetor3d.ProjetadoEmXY();
-
-            vetorProjetadoXY[0].Should().Be(vetor3d[0]);
-            vetorProjetadoXY[1].Should().Be(vetor3d[1]);
-        }
-
-        [TestMethod]
-        public void projetando_um_vetor_xyz_em_xz()
-        {
-            var vetor3d = new[] { 5.0, 5.9, 2.3 };
-
-            var vetorProjetadoXZ = vetor3d.ProjetadoEmXZ();
-
-            vetorProjetadoXZ[0].Should().Be(vetor3d[0]);
-            vetorProjetadoXZ[1].Should().Be(vetor3d[2]);
-        }
-
-        [TestMethod]
-        public void projetando_um_vetor_xyz_em_yz()
-        {
-            var vetor3d = new[] { 5.0, 5.9, 2.3 };
-
-            var vetorProjetadoYZ = vetor3d.ProjetadoEmYZ();
-
-            vetorProjetadoYZ[0].Should().Be(vetor3d[1]);
-            vetorProjetadoYZ[1].Should().Be(vetor3d[2]);
-        }
-
-        [TestMethod]
         public void multiplicando_por_um_valor_escalar()
         {
             var vetor = new[] { 0.0, 1.0, 2.9 };
