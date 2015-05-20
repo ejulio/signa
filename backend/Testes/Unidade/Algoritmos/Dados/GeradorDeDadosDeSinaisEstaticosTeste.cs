@@ -94,7 +94,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             geradorDeGeradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(1);
             geradorDeGeradorDeDadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
             geradorDeGeradorDeDadosDoAlgoritmo.Saidas.Should().HaveCount(1);
-            geradorDeGeradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(sinal.IndiceNoAlgoritmo);
+            geradorDeGeradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(sinal.IdNoAlgoritmo);
         }
 
         private double[][] EntradasEsperadasParaOsSinais(ICollection<Sinal> sinais)
@@ -120,7 +120,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             {
                 foreach (var amostra in sinal.Amostras)
                 {
-                    saidasEsperadas.Add(sinal.IndiceNoAlgoritmo);
+                    saidasEsperadas.Add(sinal.IdNoAlgoritmo);
                 }
             }
 

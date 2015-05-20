@@ -45,11 +45,11 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
 
             dedos = new[]
             {
-                new DedoBuilder().DoTipo(TipoDeDedo.Dedao).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Indicador).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Meio).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Anelar).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
-                new DedoBuilder().DoTipo(TipoDeDedo.Mindinho).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir()
+                new DedoBuilder().DoTipo(TipoDedo.Dedao).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDedo.Indicador).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDedo.Meio).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDedo.Anelar).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir(),
+                new DedoBuilder().DoTipo(TipoDedo.Mindinho).ComPosicaoDaPonta(posicaoDasPontasDosDedos).ComDirecao(direcaoDosDedos).Construir()
             };
 
             return this;

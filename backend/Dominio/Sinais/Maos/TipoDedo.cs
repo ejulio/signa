@@ -1,7 +1,7 @@
 ﻿
 namespace Dominio.Sinais.Maos
 {
-    public enum TipoDeDedo
+    public enum TipoDedo
     {
         Dedao = 0,
         Indicador = 1,

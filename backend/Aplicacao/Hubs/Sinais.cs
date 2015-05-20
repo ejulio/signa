@@ -23,7 +23,7 @@ namespace Aplicacao.Hubs
             
             var informadoesDoSinal = new ProximoSinalResponseModel
             {
-                Id = sinal.IndiceNoAlgoritmo,
+                Id = sinal.IdNoAlgoritmo,
                 Descricao = sinal.Descricao,
                 CaminhoParaArquivoDeExemplo = sinal.CaminhoParaArquivoDeExemplo,
                 Tipo = sinal.Tipo

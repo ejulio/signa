@@ -14,7 +14,7 @@ namespace Dominio.Sinais
         public int Id { get; set; }
         
         [JsonIgnore]
-        public int IndiceNoAlgoritmo { get; set; }
+        public int IdNoAlgoritmo { get; set; }
         
         private IList<IList<Frame>> amostras;
 

@@ -4,7 +4,7 @@ namespace Dominio.Sinais.Maos
     public class Dedo
     {
         public bool Apontando { get; set; }
-        public TipoDeDedo Tipo { get; set; }
+        public TipoDedo Tipo { get; set; }
 
         private double[] posicaoDaPonta;
         public double[] PosicaoDaPonta
@@ -29,7 +29,7 @@ namespace Dominio.Sinais.Maos
 
         public Dedo()
         {
-            Tipo = TipoDeDedo.Dedao;
+            Tipo = TipoDedo.Dedao;
             Direcao = new[] {0.0, 0.0, 0.0};
             PosicaoDaPonta = new[] {0.0, 0.0, 0.0};
             VelocidadeDaPonta = new[] {0.0, 0.0, 0.0};

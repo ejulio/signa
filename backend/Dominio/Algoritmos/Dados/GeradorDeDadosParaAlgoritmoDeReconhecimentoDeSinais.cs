@@ -34,7 +34,7 @@ namespace Dominio.Algoritmos.Dados
                 foreach (var amostra in sinal.Amostras)
                     GerarEntradasESaidasParaAmostra(amostra, saidas, identificadorDoSinal);
 
-                sinal.IndiceNoAlgoritmo = identificadorDoSinal;
+                sinal.IdNoAlgoritmo = identificadorDoSinal;
                 identificadorDoSinal++;
                 QuantidadeDeClasses += QuantidadeDeClassesPorSinal;
             }

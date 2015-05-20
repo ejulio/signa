@@ -6,7 +6,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
     {
         private double[] direcaoDaPonta;
         private double[] posicaoDaPonta;
-        private TipoDeDedo tipo;
+        private TipoDedo tipo;
 
         public DedoBuilder ComDirecao(double[] direcaoDaPonta)
         {
@@ -20,7 +20,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
             return this;
         }
 
-        public DedoBuilder DoTipo(TipoDeDedo tipo)
+        public DedoBuilder DoTipo(TipoDedo tipo)
         {
             this.tipo = tipo;
             return this;
@@ -40,7 +40,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
         {
             return new DedoBuilder()
                 .ComDirecao(DirecaoDaPonta())
-                .DoTipo(TipoDeDedo.Dedao)
+                .DoTipo(TipoDedo.Dedao)
                 .Construir();
         }
 
@@ -48,7 +48,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
         {
             return new DedoBuilder()
                 .ComDirecao(DirecaoDaPonta())
-                .DoTipo(TipoDeDedo.Indicador)
+                .DoTipo(TipoDedo.Indicador)
                 .Construir();
         }
 
@@ -56,7 +56,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
         {
             return new DedoBuilder()
                 .ComDirecao(DirecaoDaPonta())
-                .DoTipo(TipoDeDedo.Meio)
+                .DoTipo(TipoDedo.Meio)
                 .Construir();
         }
 
@@ -64,7 +64,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
         {
             return new DedoBuilder()
                 .ComDirecao(DirecaoDaPonta())
-                .DoTipo(TipoDeDedo.Anelar)
+                .DoTipo(TipoDedo.Anelar)
                 .Construir();
         }
 
@@ -72,7 +72,7 @@ namespace Testes.Comum.Builders.Dominio.Sinais.Maos
         {
             return new DedoBuilder()
                 .ComDirecao(DirecaoDaPonta())
-                .DoTipo(TipoDeDedo.Mindinho)
+                .DoTipo(TipoDedo.Mindinho)
                 .Construir();
         }
 

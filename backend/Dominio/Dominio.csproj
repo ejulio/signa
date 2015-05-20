@@ -103,7 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sinais\Maos\Dedo.cs" />
     <Compile Include="Sinais\Maos\Mao.cs" />
-    <Compile Include="Sinais\Maos\TipoDeDedo.cs" />
+    <Compile Include="Sinais\Maos\TipoDedo.cs" />
     <Compile Include="Sinais\Frames\Frame.cs" />
     <Compile Include="Sinais\Sinal.cs" />
     <Compile Include="Sinais\Frames\TipoFrame.cs" />

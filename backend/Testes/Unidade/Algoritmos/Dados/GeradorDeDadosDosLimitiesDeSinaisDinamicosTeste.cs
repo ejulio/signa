@@ -50,10 +50,10 @@ namespace Testes.Unidade.Algoritmos.Dados
                 {
                     var metadeDosFrames = amostra.Count / 2;
                     for (int i = 0; i < metadeDosFrames; i++)
-                        saidasEsperadas.Add(sinal.IndiceNoAlgoritmo);
+                        saidasEsperadas.Add(sinal.IdNoAlgoritmo);
 
                     for (int i = metadeDosFrames; i < amostra.Count; i++)
-                        saidasEsperadas.Add(colecaoDeSinais.Count + sinal.IndiceNoAlgoritmo);
+                        saidasEsperadas.Add(colecaoDeSinais.Count + sinal.IdNoAlgoritmo);
                 }
             }
 
