@@ -67,11 +67,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeFrame.cs" />
-    <Compile Include="Algoritmos\Caracteristicas\GeradorDeCaracteristicasDeSinalDinamico.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\CaracteristicasFrame.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\CaracteristicasSinalDinamico.cs" />
     <Compile Include="Algoritmos\Caracteristicas\CaracteristicasSinalEstatico.cs" />
     <Compile Include="Algoritmos\Caracteristicas\CaracteristicasSinalEstaticoComTipoFrame.cs" />
-    <Compile Include="Algoritmos\Caracteristicas\IGeradorDeCaracteristicasDeSinalDinamico.cs" />
+    <Compile Include="Algoritmos\Caracteristicas\ICaracteristicasSinalDinamico.cs" />
     <Compile Include="Algoritmos\Caracteristicas\ICaracteristicasSinalEstatico.cs" />
     <Compile Include="Algoritmos\Caracteristicas\ICaracteristicasSinalEstaticoComTipoFrame.cs" />
     <Compile Include="Algoritmos\Dados\GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais.cs" />

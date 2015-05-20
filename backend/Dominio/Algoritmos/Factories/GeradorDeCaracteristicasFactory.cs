@@ -4,20 +4,20 @@ namespace Dominio.Algoritmos.Factories
 {
     public class GeradorDeCaracteristicasFactory : IGeradorDeCaracteristicasFactory
     {
-        private static IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicasDeSinalDinamico;
+        private static ICaracteristicasSinalDinamico caracteristicasSinalDinamico;
         private static ICaracteristicasSinalEstatico caracteristicasSinalEstatico;
         private static ICaracteristicasSinalEstaticoComTipoFrame caracteristicasSinalEstaticoComTipoFrame;
 
         public GeradorDeCaracteristicasFactory()
         {
-            geradorDeCaracteristicasDeSinalDinamico = new GeradorDeCaracteristicasDeSinalDinamico();
+            caracteristicasSinalDinamico = new CaracteristicasSinalDinamico();
             caracteristicasSinalEstatico = new CaracteristicasSinalEstatico();
             caracteristicasSinalEstaticoComTipoFrame = new CaracteristicasSinalEstaticoComTipoFrame(caracteristicasSinalEstatico);
         }
 
-        public IGeradorDeCaracteristicasDeSinalDinamico CriarGeradorDeCaracteristicasDeSinalDinamico()
+        public ICaracteristicasSinalDinamico CriarGeradorDeCaracteristicasDeSinalDinamico()
         {
-            return geradorDeCaracteristicasDeSinalDinamico;
+            return caracteristicasSinalDinamico;
         }
 
         public ICaracteristicasSinalEstatico CriarGeradorDeCaracteristicasDeSinalEstatico()

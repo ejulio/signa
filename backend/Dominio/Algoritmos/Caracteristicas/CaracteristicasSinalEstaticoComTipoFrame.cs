@@ -1,9 +1,7 @@
-﻿using Dominio.Sinais;
-using System;
+﻿using Dominio.Sinais.Frames;
+using Dominio.Util.Matematica;
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Sinais.Frames;
-using Dominio.Util.Matematica;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
@@ -21,25 +19,47 @@ namespace Dominio.Algoritmos.Caracteristicas
         public TipoFrame TipoFrame { get; set; }
         public double[] DaAmostra(IList<Frame> amostra)
         {
-            double[] distanciaMaoDireita = {0.0, 0.0, 0.0};
-            double[] distanciaMaoEsquerda = {0.0, 0.0, 0.0};
             double[] tipo = {(double)TipoFrame};
 
-            if (PrimeiroFrame != null && amostra[0].MaoDireita != null && PrimeiroFrame.MaoDireita != null)
-            {
-                distanciaMaoDireita = PrimeiroFrame.MaoDireita.PosicaoDaPalma.Subtrair(amostra[0].MaoDireita.PosicaoDaPalma).Normalizado();
-            }
-
-            if (PrimeiroFrame != null && amostra[0].MaoEsquerda != null && PrimeiroFrame.MaoEsquerda != null)
-            {
-                distanciaMaoEsquerda = PrimeiroFrame.MaoEsquerda.PosicaoDaPalma.Subtrair(amostra[0].MaoEsquerda.PosicaoDaPalma).Normalizado();
-            }
-
             return tipo
-                .Concat(distanciaMaoDireita)
-                .Concat(distanciaMaoEsquerda)
+                .Concat(DistanciaMaoDireita(amostra[0]))
+                .Concat(DistanciaMaoEsquerda(amostra[0]))
                 .Concat(caracteristicas.DaAmostra(amostra))
                 .ToArray();
+        }
+
+        private IEnumerable<double> DistanciaMaoDireita(Frame frame)
+        {
+            if (MaoDireitaExisteNoFrame(frame) && MaoDireitaExisteNoFrame(PrimeiroFrame))
+            {
+                return PrimeiroFrame.MaoDireita.PosicaoDaPalma
+                    .Subtrair(frame.MaoDireita.PosicaoDaPalma)
+                    .Normalizado();
+            }
+
+            return new[] {0.0, 0.0, 0.0};
+        }
+
+        private bool MaoDireitaExisteNoFrame(Frame frame)
+        {
+            return frame != null && frame.MaoDireita != null;
+        }
+
+        private IEnumerable<double> DistanciaMaoEsquerda(Frame frame)
+        {
+            if (MaoEsquerdaExisteNoFrame(frame) && MaoEsquerdaExisteNoFrame(PrimeiroFrame))
+            {
+                return PrimeiroFrame.MaoEsquerda.PosicaoDaPalma
+                    .Subtrair(frame.MaoEsquerda.PosicaoDaPalma)
+                    .Normalizado();
+            }
+
+            return new[] {0.0, 0.0, 0.0};
+        }
+
+        private bool MaoEsquerdaExisteNoFrame(Frame frame)
+        {
+            return frame != null && frame.MaoEsquerda != null;
         }
     }
 }

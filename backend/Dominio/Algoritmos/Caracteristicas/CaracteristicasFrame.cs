@@ -1,5 +1,3 @@
-using Dominio.Sinais;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dominio.Sinais.Frames;
@@ -9,16 +7,16 @@ using Dominio.Util.Matematica;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
-    public abstract class GeradorDeCaracteristicasDeFrame
+    public abstract class CaracteristicasFrame
     {
-        protected double[] ExtrairCaracteristicasDoFrame(Frame frame)
+        protected double[] CaracteristicasDoFrame(Frame frame)
         {
-            return ExtrairCaracteristicasDaMao(frame.MaoEsquerda)
-                .Concat(ExtrairCaracteristicasDaMao(frame.MaoDireita))
+            return CaracteristicasDaMao(frame.MaoEsquerda)
+                .Concat(CaracteristicasDaMao(frame.MaoDireita))
                 .ToArray();    
         }
 
-        private IEnumerable<double> ExtrairCaracteristicasDaMao(Mao mao)
+        private IEnumerable<double> CaracteristicasDaMao(Mao mao)
         {
             return mao.VetorNormalDaPalma.Normalizado()
                 .Concat(mao.Direcao.Normalizado())

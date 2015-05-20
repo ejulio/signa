@@ -4,7 +4,7 @@ namespace Dominio.Algoritmos.Factories
 {
     public interface IGeradorDeCaracteristicasFactory
     {
-        IGeradorDeCaracteristicasDeSinalDinamico CriarGeradorDeCaracteristicasDeSinalDinamico();
+        ICaracteristicasSinalDinamico CriarGeradorDeCaracteristicasDeSinalDinamico();
         ICaracteristicasSinalEstatico CriarGeradorDeCaracteristicasDeSinalEstatico();
         ICaracteristicasSinalEstaticoComTipoFrame CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame();
     }

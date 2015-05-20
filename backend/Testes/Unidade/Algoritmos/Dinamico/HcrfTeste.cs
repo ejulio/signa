@@ -18,7 +18,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
         public void reconhecendo_sem_treinar_o_algoritmo()
         {
             var frames = new Frame[0];
-            Action acao = () => new Hcrf(new GeradorDeCaracteristicasDeSinalDinamico()).Classificar(frames);
+            Action acao = () => new Hcrf(new CaracteristicasSinalDinamico()).Classificar(frames);
 
             acao.ShouldThrow<InvalidOperationException>();
         }
@@ -48,7 +48,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
 
         private Hcrf DadoUmAlgoritmoTreinado(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
-            var hcrf = new Hcrf(new GeradorDeCaracteristicasDeSinalDinamico());
+            var hcrf = new Hcrf(new CaracteristicasSinalDinamico());
             var colecaoDeSinais = new ColecaoDeSinaisBuilder()
                 .ComQuantidadeDeSinais(quantidadeDeSinais)
                 .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)

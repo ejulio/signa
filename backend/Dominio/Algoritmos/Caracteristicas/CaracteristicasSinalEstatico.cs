@@ -1,15 +1,14 @@
-﻿using Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
-    public class CaracteristicasSinalEstatico : GeradorDeCaracteristicasDeFrame, ICaracteristicasSinalEstatico
+    public class CaracteristicasSinalEstatico : CaracteristicasFrame, ICaracteristicasSinalEstatico
     {
-        public double[] DaAmostra(IList<Frame> frames)
+        public double[] DaAmostra(IList<Frame> amostra)
         {
-            var primeiroFrame = frames[0];
-            return ExtrairCaracteristicasDoFrame(primeiroFrame);
+            var primeiroFrame = amostra[0];
+            return CaracteristicasDoFrame(primeiroFrame);
         }
     }
 }

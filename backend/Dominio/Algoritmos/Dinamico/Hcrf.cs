@@ -17,12 +17,12 @@ namespace Dominio.Algoritmos.Dinamico
 {
     public class Hcrf : IAlgoritmoClassificacaoSinaisDinamicos
     {
-        private readonly IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas;
+        private readonly ICaracteristicasSinalDinamico caracteristicas;
         private HiddenConditionalRandomField<double[]> classificador;
 
-        public Hcrf(IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas)
+        public Hcrf(ICaracteristicasSinalDinamico caracteristicas)
         {
-            this.geradorDeCaracteristicas = geradorDeCaracteristicas;
+            this.caracteristicas = caracteristicas;
         }
 
         public int Classificar(IList<Frame> amostra)
@@ -30,7 +30,7 @@ namespace Dominio.Algoritmos.Dinamico
             if (classificador == null)
                 throw new InvalidOperationException();
 
-            return classificador.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra)); ;
+            return classificador.Compute(caracteristicas.DaAmostra(amostra)); ;
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)

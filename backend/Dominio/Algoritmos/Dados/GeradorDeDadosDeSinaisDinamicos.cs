@@ -12,7 +12,7 @@ namespace Dominio.Algoritmos.Dados
         public double[][][] Entradas { get; private set; }
 
         private LinkedList<double[][]> entradas;
-        private GeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas;
+        private CaracteristicasSinalDinamico caracteristicas;
 
         public override int QuantidadeDeClassesPorSinal
         {
@@ -27,12 +27,12 @@ namespace Dominio.Algoritmos.Dados
         protected override void Inicializar(IEnumerable<Sinal> sinais)
         {
             entradas = new LinkedList<double[][]>();
-            geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalDinamico();
+            caracteristicas = new CaracteristicasSinalDinamico();
         }
 
         protected override void GerarEntradasESaidasParaAmostra(IList<Frame> amostra, LinkedList<int> saidas, int identificadorDoSinal)
         {
-            entradas.AddLast(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra));
+            entradas.AddLast(caracteristicas.DaAmostra(amostra));
             saidas.AddLast(identificadorDoSinal);
         }
 
