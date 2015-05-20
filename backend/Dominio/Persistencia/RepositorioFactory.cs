@@ -19,7 +19,7 @@ namespace Dominio.Persistencia
         {
             if (repositorioDeSinaisEstaticos == null)
             {
-                repositorioDeSinaisEstaticos = new RepositorioDeSinaisEstaticos(InstanciaUnicaDeReposiotioDeSinais());
+                repositorioDeSinaisEstaticos = new RepositorioSinaisEstaticos(InstanciaUnicaDeReposiotioDeSinais());
                 repositorioDeSinaisEstaticos.Carregar();    
             }
             
@@ -30,7 +30,7 @@ namespace Dominio.Persistencia
         {
             if (repositorioDeSinaisDinamicos == null)
             {
-                repositorioDeSinaisDinamicos = new RepositorioDeSinaisDinamicos(InstanciaUnicaDeReposiotioDeSinais());
+                repositorioDeSinaisDinamicos = new RepositorioSinaisDinamicos(InstanciaUnicaDeReposiotioDeSinais());
                 repositorioDeSinaisDinamicos.Carregar();
             }
 
@@ -49,7 +49,7 @@ namespace Dominio.Persistencia
         {
             if (repositorioDeSinais == null)
             {
-                repositorioDeSinais = new RepositorioDeSinais(caminhoDoArquivoDeDados);
+                repositorioDeSinais = new RepositorioSinais(caminhoDoArquivoDeDados);
             }
 
             return repositorioDeSinais;

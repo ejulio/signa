@@ -5,35 +5,35 @@ namespace Dominio.Algoritmos.Factories
 {
     public class AlgoritmoDeReconhecimentoDeSinalFactory : IAlgoritmoDeReconhecimentoDeSinalFactory
     {
-        private static IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeSinaisEstaticos;
-        private static IAlgoritmoDeReconhecimentoDeSinaisDinamicos algoritmoDeReconhecimentoDeSinaisDinamicos;
-        private static IAlgoritmoDeReconhecimentoDeSinaisEstaticos algoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
+        private static IAlgoritmoClassificacaoSinaisEstaticos algoritmoClassificacaoSinaisEstaticos;
+        private static IAlgoritmoClassificacaoSinaisDinamicos algoritmoClassificacaoSinaisDinamicos;
+        private static IAlgoritmoClassificacaoSinaisEstaticos algoritmoClassificacaoFramesSinaisDinamicos;
 
         public AlgoritmoDeReconhecimentoDeSinalFactory(IGeradorDeCaracteristicasFactory geradorDeCaracteristicasFactory)
         {
-            algoritmoDeReconhecimentoDeSinaisEstaticos 
+            algoritmoClassificacaoSinaisEstaticos 
                 = new Svm(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstatico());
 
-            algoritmoDeReconhecimentoDeFramesDeSinaisDinamicos 
+            algoritmoClassificacaoFramesSinaisDinamicos 
                 = new Svm(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame());
 
-            algoritmoDeReconhecimentoDeSinaisDinamicos 
+            algoritmoClassificacaoSinaisDinamicos 
                 = new Hcrf(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalDinamico());
         }
 
-        public IAlgoritmoDeReconhecimentoDeSinaisEstaticos CriarReconhecedorDeSinaisEstaticos()
+        public IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeSinaisEstaticos()
         {
-            return algoritmoDeReconhecimentoDeSinaisEstaticos;
+            return algoritmoClassificacaoSinaisEstaticos;
         }
 
-        public IAlgoritmoDeReconhecimentoDeSinaisDinamicos CriarReconhecedorDeSinaisDinamicos()
+        public IAlgoritmoClassificacaoSinaisDinamicos CriarReconhecedorDeSinaisDinamicos()
         {
-            return algoritmoDeReconhecimentoDeSinaisDinamicos;
+            return algoritmoClassificacaoSinaisDinamicos;
         }
 
-        public IAlgoritmoDeReconhecimentoDeSinaisEstaticos CriarReconhecedorDeFramesDeSinaisDinamicos()
+        public IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeFramesDeSinaisDinamicos()
         {
-            return algoritmoDeReconhecimentoDeFramesDeSinaisDinamicos;
+            return algoritmoClassificacaoFramesSinaisDinamicos;
         }
     }
 }

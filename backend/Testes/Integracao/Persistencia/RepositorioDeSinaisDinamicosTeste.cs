@@ -15,8 +15,8 @@ namespace Testes.Integracao.Persistencia
     [TestClass]
     public class RepositorioDeSinaisDinamicosTeste
     {
-        private RepositorioDeSinaisDinamicos repositorioDeSinaisDinamicos;
-        private RepositorioDeSinais repositorioDeSinais;
+        private RepositorioSinaisDinamicos repositorioSinaisDinamicos;
+        private RepositorioSinais repositorioSinais;
         private const string CaminhoDoArquivoDeAmostras = "Integracao/JsonTestData/repositorio-sinais-dinamicos-teste.json";
         private const string TemplateDaDescricaoDeSinalEstatico = "sinal estático {0}";
         private const string TemplateDaDescricaoDeSinalDinamico = "sinal dinâmico {0}";
@@ -25,8 +25,8 @@ namespace Testes.Integracao.Persistencia
         [TestInitialize]
         public void Setup()
         {
-            repositorioDeSinais = new RepositorioDeSinais(CaminhoDoArquivoDeAmostras);
-            repositorioDeSinaisDinamicos = new RepositorioDeSinaisDinamicos(repositorioDeSinais);
+            repositorioSinais = new RepositorioSinais(CaminhoDoArquivoDeAmostras);
+            repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorioSinais);
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace Testes.Integracao.Persistencia
         {
             var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
 
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioSinaisDinamicos.Carregar();
 
             DeveTerOsSinaisDoArquivo(sinais);
         }
@@ -44,7 +44,7 @@ namespace Testes.Integracao.Persistencia
         {
             var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioSinaisDinamicos.Carregar();
 
             DevePoderBuscarUmSinalPelaDescricao(sinais);
         }
@@ -54,18 +54,18 @@ namespace Testes.Integracao.Persistencia
         {
             var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioSinaisDinamicos.Carregar();
 
-            var idEsperadoDoSinal = repositorioDeSinais.Quantidade;
+            var idEsperadoDoSinal = repositorioSinais.Quantidade;
 
             var conteudoDoArquivoDeSinais = RecuperarConteudoDoArquivoDeSinais();
             
             var sinal = DadoUmNovoSinal("New sign");
-            repositorioDeSinaisDinamicos.Adicionar(sinal);
+            repositorioSinaisDinamicos.Adicionar(sinal);
 
             RecuperarConteudoDoArquivoDeSinais().Should().Be(conteudoDoArquivoDeSinais);
 
-            repositorioDeSinaisDinamicos.SalvarAlteracoes();
+            repositorioSinaisDinamicos.SalvarAlteracoes();
 
             sinal.Id.Should().Be(idEsperadoDoSinal);
             RecuperarConteudoDoArquivoDeSinais().Should().NotBe(conteudoDoArquivoDeSinais);
@@ -77,17 +77,17 @@ namespace Testes.Integracao.Persistencia
         {
             var sinais = DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioSinaisDinamicos.Carregar();
 
             var descricaoDoSinal = "New sign";
             var indiceDoSinal = sinais.Count;
 
             var sinal = DadoUmNovoSinal(descricaoDoSinal);
-            repositorioDeSinaisDinamicos.Adicionar(sinal);
+            repositorioSinaisDinamicos.Adicionar(sinal);
 
-            repositorioDeSinaisDinamicos.Quantidade.Should().Be(sinais.Count + 1);
-            repositorioDeSinaisDinamicos.BuscarPorDescricao(descricaoDoSinal).Descricao.Should().Be(descricaoDoSinal);
-            repositorioDeSinaisDinamicos.BuscarPorIndice(indiceDoSinal).Descricao.Should().Be(descricaoDoSinal);
+            repositorioSinaisDinamicos.Quantidade.Should().Be(sinais.Count + 1);
+            repositorioSinaisDinamicos.BuscarPorDescricao(descricaoDoSinal).Descricao.Should().Be(descricaoDoSinal);
+            repositorioSinaisDinamicos.BuscarPorIndice(indiceDoSinal).Descricao.Should().Be(descricaoDoSinal);
         }
 
         [TestMethod]
@@ -95,13 +95,13 @@ namespace Testes.Integracao.Persistencia
         {
             DadoQueExistamAlgunsSinaisNoArquivoDeExemplo();
             
-            repositorioDeSinaisDinamicos.Carregar();
+            repositorioSinaisDinamicos.Carregar();
 
             int indice = 0;
 
-            foreach (var sinal in repositorioDeSinaisDinamicos)
+            foreach (var sinal in repositorioSinaisDinamicos)
             {
-                sinal.Should().Be(repositorioDeSinaisDinamicos.BuscarPorIndice(indice));
+                sinal.Should().Be(repositorioSinaisDinamicos.BuscarPorIndice(indice));
                 indice++;
             }
         }
@@ -111,9 +111,9 @@ namespace Testes.Integracao.Persistencia
         {
             DadoQueOArquivoDeSinaisEstejaVazio();
 
-            Action acaoDeCarregar = () => repositorioDeSinaisDinamicos.Carregar();
-            Action acaoBuscarPorIndice = () => repositorioDeSinaisDinamicos.BuscarPorIndice(0);
-            Action acaoBuscarPorId = () => repositorioDeSinaisDinamicos.BuscarPorDescricao("");
+            Action acaoDeCarregar = () => repositorioSinaisDinamicos.Carregar();
+            Action acaoBuscarPorIndice = () => repositorioSinaisDinamicos.BuscarPorIndice(0);
+            Action acaoBuscarPorId = () => repositorioSinaisDinamicos.BuscarPorDescricao("");
 
             acaoDeCarregar.ShouldNotThrow();
             acaoBuscarPorIndice.ShouldNotThrow();
@@ -125,7 +125,7 @@ namespace Testes.Integracao.Persistencia
         {
             DadoQueOArquivoDeSinaisNaoExiste();
 
-            Action acao = () => repositorioDeSinaisDinamicos.Carregar();
+            Action acao = () => repositorioSinaisDinamicos.Carregar();
 
             acao.ShouldNotThrow();
         }
@@ -136,9 +136,9 @@ namespace Testes.Integracao.Persistencia
             DadoQueOArquivoDeSinaisNaoExiste();
 
             var sinal = DadoUmNovoSinal("saving sign");
-            repositorioDeSinaisDinamicos.Adicionar(sinal);
+            repositorioSinaisDinamicos.Adicionar(sinal);
 
-            Action acao = () => repositorioDeSinaisDinamicos.SalvarAlteracoes();
+            Action acao = () => repositorioSinaisDinamicos.SalvarAlteracoes();
 
             acao.ShouldNotThrow();
             File.Exists(CaminhoDoArquivoDeAmostras).Should().BeTrue();
@@ -203,16 +203,16 @@ namespace Testes.Integracao.Persistencia
             for (int i = 0; i < sinais.Count; i++)
             {
                 idSinal = String.Format(TemplateDaDescricaoDeSinalDinamico, i);
-                repositorioDeSinaisDinamicos.BuscarPorDescricao(idSinal).Descricao.Should().Be(idSinal);
+                repositorioSinaisDinamicos.BuscarPorDescricao(idSinal).Descricao.Should().Be(idSinal);
             }
         }
 
         private void DeveTerOsSinaisDoArquivo(ICollection<Sinal> sinais)
         {
-            repositorioDeSinaisDinamicos.Quantidade.Should().Be(sinais.Count);
+            repositorioSinaisDinamicos.Quantidade.Should().Be(sinais.Count);
             for (int i = 0; i < sinais.Count; i++)
             {
-                repositorioDeSinaisDinamicos
+                repositorioSinaisDinamicos
                     .BuscarPorIndice(i)
                     .Should()
                     .Match<Sinal>(sinal =>

@@ -7,19 +7,19 @@ using Dominio.Util.Matematica;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
-    public class GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame
+    public class CaracteristicasSinalEstaticoComTipoFrame : ICaracteristicasSinalEstaticoComTipoFrame
     {
-        private readonly IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
+        private readonly ICaracteristicasSinalEstatico caracteristicas;
 
-        public GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas)
+        public CaracteristicasSinalEstaticoComTipoFrame(ICaracteristicasSinalEstatico caracteristicas)
         {
-            this.geradorDeCaracteristicas = geradorDeCaracteristicas;
+            this.caracteristicas = caracteristicas;
         }
 
         public Frame PrimeiroFrame { get; set; }
 
         public TipoFrame TipoFrame { get; set; }
-        public double[] ExtrairCaracteristicasDaAmostra(IList<Frame> amostra)
+        public double[] DaAmostra(IList<Frame> amostra)
         {
             double[] distanciaMaoDireita = {0.0, 0.0, 0.0};
             double[] distanciaMaoEsquerda = {0.0, 0.0, 0.0};
@@ -38,7 +38,7 @@ namespace Dominio.Algoritmos.Caracteristicas
             return tipo
                 .Concat(distanciaMaoDireita)
                 .Concat(distanciaMaoEsquerda)
-                .Concat(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(amostra))
+                .Concat(caracteristicas.DaAmostra(amostra))
                 .ToArray();
         }
     }

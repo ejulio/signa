@@ -5,11 +5,11 @@ using Dominio.Sinais;
 
 namespace Dominio.Persistencia
 {
-    public class RepositorioDeSinaisDinamicos : IRepositorio<Sinal>
+    public class RepositorioSinaisDinamicos : IRepositorio<Sinal>
     {
         private readonly IRepositorio<Sinal> repositorioDeSinais;
         private IList<Sinal> sinaisPorIndice;
-        private readonly IDictionary<string, Sinal> sinaisPorId;
+        private readonly IDictionary<string, Sinal> sinaisPorDescricao;
 
 
         public int Quantidade
@@ -17,16 +17,16 @@ namespace Dominio.Persistencia
             get { return sinaisPorIndice.Count; }
         }
 
-        public RepositorioDeSinaisDinamicos(IRepositorio<Sinal> repositorioDeSinais)
+        public RepositorioSinaisDinamicos(IRepositorio<Sinal> repositorioDeSinais)
         {
             this.repositorioDeSinais = repositorioDeSinais;
             sinaisPorIndice = new List<Sinal>();
-            sinaisPorId = new Dictionary<string, Sinal>();
+            sinaisPorDescricao = new Dictionary<string, Sinal>();
         }
 
         public void Adicionar(Sinal sinal)
         {
-            sinaisPorId.Add(sinal.Descricao, sinal);
+            sinaisPorDescricao.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
             repositorioDeSinais.Adicionar(sinal);
         }
@@ -42,7 +42,7 @@ namespace Dominio.Persistencia
         public Sinal BuscarPorDescricao(string id)
         {
             Sinal sinalDinamico;
-            if (sinaisPorId.TryGetValue(id, out sinalDinamico))
+            if (sinaisPorDescricao.TryGetValue(id, out sinalDinamico))
                 return sinalDinamico;
 
             return null;
@@ -52,14 +52,14 @@ namespace Dominio.Persistencia
         {
             repositorioDeSinais.Carregar();
             sinaisPorIndice = repositorioDeSinais.Where(s => s.Tipo == TipoSinal.Dinamico).ToList();
-            CarregarSinaisPorId();
+            CarregarSinaisPorDescricao();
         }
 
-        private void CarregarSinaisPorId()
+        private void CarregarSinaisPorDescricao()
         {
             foreach (var sinal in sinaisPorIndice)
             {
-                sinaisPorId.Add(sinal.Descricao, sinal);
+                sinaisPorDescricao.Add(sinal.Descricao, sinal);
             }
         }
 

@@ -14,23 +14,23 @@ namespace Testes.Integracao.Gerenciamento
     {
         private const string CaminhoParaOArquivoDeAmostras = Caminhos.CaminhoDoArquivoDeAmostras;
         private IRepositorio<Sinal> repositorio;
-        private SinaisEstaticosController sinaisEstaticosController;
+        private GerenciadorSinaisEstaticos gerenciadorSinaisEstaticos;
 
         [TestInitialize]
         public void Setup()
         {
-            repositorio = new RepositorioDeSinaisEstaticos(new RepositorioDeSinais(CaminhoParaOArquivoDeAmostras));
-            sinaisEstaticosController = new SinaisEstaticosController(repositorio, null);
+            repositorio = new RepositorioSinaisEstaticos(new RepositorioSinais(CaminhoParaOArquivoDeAmostras));
+            gerenciadorSinaisEstaticos = new GerenciadorSinaisEstaticos(repositorio, null);
 
-            Directory.CreateDirectory(SinaisController.DiretorioDeExemplos);
+            Directory.CreateDirectory(GerenciadorSinais.DiretorioDeExemplos);
         }
 
         [TestCleanup]
         public void DeletarArquivos()
         {
-            if (Directory.Exists(SinaisController.DiretorioDeExemplos))
+            if (Directory.Exists(GerenciadorSinais.DiretorioDeExemplos))
             {
-                Directory.Delete(SinaisController.DiretorioDeExemplos, true);
+                Directory.Delete(GerenciadorSinais.DiretorioDeExemplos, true);
             }
         }
 
@@ -41,9 +41,9 @@ namespace Testes.Integracao.Gerenciamento
             const string descricaoDoSinal = "Novo sinal";
             const string conteudoDoArquivo = "conteúdo do arquivo do novo sinal";
 
-            sinaisEstaticosController.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
+            gerenciadorSinaisEstaticos.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
 
-            var caminhoDoArquivoCriado = SinaisController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriado = GerenciadorSinais.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             DeveTerCriadoOArquivoComConteudo(caminhoDoArquivoCriado, descricaoDoSinal, conteudoDoArquivo);
 
             var sinalAdicionadoNoRepositorio = repositorio.BuscarPorDescricao(descricaoDoSinal);
@@ -53,7 +53,7 @@ namespace Testes.Integracao.Gerenciamento
 
         private static void DeveTerCriadoOArquivoComConteudo(string caminhoDoArquivoCriado, string descricaoDoSinal, string conteudoDoArquivo)
         {
-            var caminhoDoArquivoCriadoEsperado = SinaisController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriadoEsperado = GerenciadorSinais.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             caminhoDoArquivoCriado.Should().Be(caminhoDoArquivoCriadoEsperado);
             File.Exists(caminhoDoArquivoCriadoEsperado).Should().BeTrue();
             using (StreamReader reader = new StreamReader(caminhoDoArquivoCriadoEsperado))
@@ -64,7 +64,7 @@ namespace Testes.Integracao.Gerenciamento
 
         private static void NaoDeveTerTrocadoOConteudoDoArquivo(string descricaoDoSinal, string conteudoAntigoDoArquivo)
         {
-            var file = SinaisController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
+            var file = GerenciadorSinais.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             using (StreamReader reader = new StreamReader(file))
             {
                 reader.ReadToEnd().Should().Be(conteudoAntigoDoArquivo);

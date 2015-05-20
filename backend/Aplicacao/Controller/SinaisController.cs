@@ -8,30 +8,30 @@ namespace Aplicacao.Controller
 {
     public class SinaisController : ApiController
     {
-        private readonly SinaisDinamicosController sinaisDinamicosController;
-        private readonly SinaisEstaticosController sinaisEstaticosController;
+        private readonly GerenciadorSinaisDinamicos gerenciadorSinaisDinamicos;
+        private readonly GerenciadorSinaisEstaticos gerenciadorSinaisEstaticos;
         private readonly InicializadorDeAlgoritmoFacade inicializadorDeAlgoritmo;
 
         public SinaisController(
-            SinaisDinamicosController sinaisDinamicosController, 
-            SinaisEstaticosController sinaisEstaticosController,
+            GerenciadorSinaisDinamicos gerenciadorSinaisDinamicos, 
+            GerenciadorSinaisEstaticos gerenciadorSinaisEstaticos,
             InicializadorDeAlgoritmoFacade inicializadorDeAlgoritmo)
         {
-            this.sinaisDinamicosController = sinaisDinamicosController;
-            this.sinaisEstaticosController = sinaisEstaticosController;
+            this.gerenciadorSinaisDinamicos = gerenciadorSinaisDinamicos;
+            this.gerenciadorSinaisEstaticos = gerenciadorSinaisEstaticos;
             this.inicializadorDeAlgoritmo = inicializadorDeAlgoritmo;
         }
 
         [HttpPost]
         public void SalvarAmostraDeSinalDinamico(SalvarAmostraRequestModel modelo)
         {
-            sinaisDinamicosController.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
+            gerenciadorSinaisDinamicos.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
         }
 
         [HttpPost]
         public void SalvarAmostraDeSinalEstatico(SalvarAmostraRequestModel modelo)
         {
-            sinaisEstaticosController.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
+            gerenciadorSinaisEstaticos.SalvarAmostraDoSinal(modelo.Descricao, modelo.ConteudoDoArquivoDeExemplo, modelo.Amostra);
         }
 
         [HttpPost]

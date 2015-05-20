@@ -3,7 +3,7 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
-    public interface IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame : IGeradorDeCaracteristicasDeSinalEstatico
+    public interface ICaracteristicasSinalEstaticoComTipoFrame : ICaracteristicasSinalEstatico
     {
         TipoFrame TipoFrame { get; set; }
         Frame PrimeiroFrame { get; set; }

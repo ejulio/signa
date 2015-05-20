@@ -4,9 +4,9 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
-    public class GeradorDeCaracteristicasDeSinalEstatico : GeradorDeCaracteristicasDeFrame, IGeradorDeCaracteristicasDeSinalEstatico
+    public class CaracteristicasSinalEstatico : GeradorDeCaracteristicasDeFrame, ICaracteristicasSinalEstatico
     {
-        public double[] ExtrairCaracteristicasDaAmostra(IList<Frame> frames)
+        public double[] DaAmostra(IList<Frame> frames)
         {
             var primeiroFrame = frames[0];
             return ExtrairCaracteristicasDoFrame(primeiroFrame);

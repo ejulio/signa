@@ -5,27 +5,27 @@ using Dominio.Sinais;
 
 namespace Dominio.Persistencia
 {
-    public class RepositorioDeSinaisEstaticos : IRepositorio<Sinal>
+    public class RepositorioSinaisEstaticos : IRepositorio<Sinal>
     {
         private readonly IRepositorio<Sinal> repositorioDeSinais;
         private IList<Sinal> sinaisPorIndice;
-        private IDictionary<string, Sinal> sinaisPorId;
+        private readonly IDictionary<string, Sinal> sinaisPorDescricao;
 
         public int Quantidade
         {
             get { return sinaisPorIndice.Count; }
         }
 
-        public RepositorioDeSinaisEstaticos(IRepositorio<Sinal> repositorioDeSinais)
+        public RepositorioSinaisEstaticos(IRepositorio<Sinal> repositorioDeSinais)
         {
             this.repositorioDeSinais = repositorioDeSinais;
             sinaisPorIndice = new List<Sinal>();
-            sinaisPorId = new Dictionary<string, Sinal>();
+            sinaisPorDescricao = new Dictionary<string, Sinal>();
         }
 
         public void Adicionar(Sinal sinal)
         {
-            sinaisPorId.Add(sinal.Descricao, sinal);
+            sinaisPorDescricao.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
             repositorioDeSinais.Adicionar(sinal);
         }
@@ -41,7 +41,7 @@ namespace Dominio.Persistencia
         public Sinal BuscarPorDescricao(string id)
         {
             Sinal sinal;
-            if (sinaisPorId.TryGetValue(id, out sinal))
+            if (sinaisPorDescricao.TryGetValue(id, out sinal))
                 return sinal;
 
             return null;
@@ -51,14 +51,14 @@ namespace Dominio.Persistencia
         {
             repositorioDeSinais.Carregar();
             sinaisPorIndice = repositorioDeSinais.Where(s => s.Tipo == TipoSinal.Estatico).ToList();
-            CarregarSinaisPorId();
+            CarregarSinaisPorDescricao();
         }
 
-        private void CarregarSinaisPorId()
+        private void CarregarSinaisPorDescricao()
         {
             foreach (var sinal in sinaisPorIndice)
             {
-                sinaisPorId.Add(sinal.Descricao, sinal);
+                sinaisPorDescricao.Add(sinal.Descricao, sinal);
             }
         }
 

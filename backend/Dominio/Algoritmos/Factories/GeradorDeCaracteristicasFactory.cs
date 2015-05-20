@@ -5,14 +5,14 @@ namespace Dominio.Algoritmos.Factories
     public class GeradorDeCaracteristicasFactory : IGeradorDeCaracteristicasFactory
     {
         private static IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicasDeSinalDinamico;
-        private static IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicasDeSinalEstatico;
-        private static IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicasDeSinalEstaticoComTipoFrame;
+        private static ICaracteristicasSinalEstatico caracteristicasSinalEstatico;
+        private static ICaracteristicasSinalEstaticoComTipoFrame caracteristicasSinalEstaticoComTipoFrame;
 
         public GeradorDeCaracteristicasFactory()
         {
             geradorDeCaracteristicasDeSinalDinamico = new GeradorDeCaracteristicasDeSinalDinamico();
-            geradorDeCaracteristicasDeSinalEstatico = new GeradorDeCaracteristicasDeSinalEstatico();
-            geradorDeCaracteristicasDeSinalEstaticoComTipoFrame = new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicasDeSinalEstatico);
+            caracteristicasSinalEstatico = new CaracteristicasSinalEstatico();
+            caracteristicasSinalEstaticoComTipoFrame = new CaracteristicasSinalEstaticoComTipoFrame(caracteristicasSinalEstatico);
         }
 
         public IGeradorDeCaracteristicasDeSinalDinamico CriarGeradorDeCaracteristicasDeSinalDinamico()
@@ -20,14 +20,14 @@ namespace Dominio.Algoritmos.Factories
             return geradorDeCaracteristicasDeSinalDinamico;
         }
 
-        public IGeradorDeCaracteristicasDeSinalEstatico CriarGeradorDeCaracteristicasDeSinalEstatico()
+        public ICaracteristicasSinalEstatico CriarGeradorDeCaracteristicasDeSinalEstatico()
         {
-            return geradorDeCaracteristicasDeSinalEstatico;
+            return caracteristicasSinalEstatico;
         }
 
-        public IGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame()
+        public ICaracteristicasSinalEstaticoComTipoFrame CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame()
         {
-            return geradorDeCaracteristicasDeSinalEstaticoComTipoFrame;
+            return caracteristicasSinalEstaticoComTipoFrame;
         }
     }
 }

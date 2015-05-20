@@ -18,7 +18,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
         public void reconhecendo_sem_treinar_o_algoritmo()
         {
             var frames = new Frame[0];
-            Action acao = () => new Hcrf(new GeradorDeCaracteristicasDeSinalDinamico()).Reconhecer(frames);
+            Action acao = () => new Hcrf(new GeradorDeCaracteristicasDeSinalDinamico()).Classificar(frames);
 
             acao.ShouldThrow<InvalidOperationException>();
         }
@@ -41,7 +41,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
                 new FrameBuilder().ParaOIndice(indiceDoSinalResultante).Construir()
             };
 
-            int sinalReconhecido = hcrf.Reconhecer(framesParaReconhecer);
+            int sinalReconhecido = hcrf.Classificar(framesParaReconhecer);
 
             sinalReconhecido.Should().Be(indiceDoSinalResultante);
         }

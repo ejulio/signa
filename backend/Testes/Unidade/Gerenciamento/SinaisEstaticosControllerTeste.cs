@@ -14,15 +14,15 @@ namespace Testes.Unidade.Gerenciamento
     public class SinaisEstaticosControllerTeste
     {
         private Mock<IRepositorio<Sinal>> repositorio;
-        private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmo;
-        private SinaisEstaticosController sinaisEstaticosController;
+        private Mock<IAlgoritmoClassificacaoSinaisEstaticos> algoritmo;
+        private GerenciadorSinaisEstaticos gerenciadorSinaisEstaticos;
 
         [TestInitialize]
         public void Setup()
         {
             repositorio = new Mock<IRepositorio<Sinal>>();
-            algoritmo = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
-            sinaisEstaticosController = new SinaisEstaticosController(repositorio.Object, algoritmo.Object);
+            algoritmo = new Mock<IAlgoritmoClassificacaoSinaisEstaticos>();
+            gerenciadorSinaisEstaticos = new GerenciadorSinaisEstaticos(repositorio.Object, algoritmo.Object);
         }
 
         [TestMethod]
@@ -30,9 +30,9 @@ namespace Testes.Unidade.Gerenciamento
         {
             const int idDoSinal = 23;
             var amostra = new ColecaoDeFramesBuilder().Construir();
-            algoritmo.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            algoritmo.Setup(a => a.Classificar(amostra)).Returns(idDoSinal);
 
-            var resultado = sinaisEstaticosController.Reconhecer(idDoSinal, amostra);
+            var resultado = gerenciadorSinaisEstaticos.Reconhecer(idDoSinal, amostra);
 
             resultado.Should().BeTrue();
         }

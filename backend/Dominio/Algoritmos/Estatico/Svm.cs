@@ -12,24 +12,24 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Estatico
 {
-    public class Svm : IAlgoritmoDeReconhecimentoDeSinaisEstaticos
+    public class Svm : IAlgoritmoClassificacaoSinaisEstaticos
     {
         private const int QuantidadeIndeterminadaDeCaracteristicas = 0;
-        private readonly IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas;
+        private readonly ICaracteristicasSinalEstatico caracteristicas;
         private MulticlassSupportVectorMachine svm;
 
-        public Svm(IGeradorDeCaracteristicasDeSinalEstatico geradorDeCaracteristicas)
+        public Svm(ICaracteristicasSinalEstatico caracteristicas)
         {
-            this.geradorDeCaracteristicas = geradorDeCaracteristicas;
+            this.caracteristicas = caracteristicas;
         }
 
-        public int Reconhecer(IList<Frame> frame)
+        public int Classificar(IList<Frame> frame)
         {
             if (svm == null)
             {
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
-            return svm.Compute(geradorDeCaracteristicas.ExtrairCaracteristicasDaAmostra(frame), MulticlassComputeMethod.Elimination);
+            return svm.Compute(caracteristicas.DaAmostra(frame), MulticlassComputeMethod.Elimination);
         }
 
         public void Treinar(IGeradorDeDadosDeSinaisEstaticos dados)

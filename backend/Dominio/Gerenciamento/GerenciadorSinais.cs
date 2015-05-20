@@ -8,23 +8,23 @@ using Dominio.Util;
 
 namespace Dominio.Gerenciamento
 {
-    public abstract class SinaisController
+    public abstract class GerenciadorSinais
     {
         public const string CaminhoDoArquivoDoRepositorio = "./data/repositorio-sinais.json";
         public const string DiretorioDeExemplos = "exemplos/"; 
 
         private readonly IRepositorio<Sinal> repositorio;
-        private readonly IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisEstaticos;
+        private readonly IAlgoritmoClassificacaoSinais algoritmoClassificacaoSinais;
 
-        protected SinaisController(IRepositorio<Sinal> repositorio, IAlgoritmoDeReconhecimentoDeSinais algoritmoDeReconhecimentoDeSinaisEstaticos)
+        protected GerenciadorSinais(IRepositorio<Sinal> repositorio, IAlgoritmoClassificacaoSinais algoritmoClassificacaoSinais)
         {
             this.repositorio = repositorio;
-            this.algoritmoDeReconhecimentoDeSinaisEstaticos = algoritmoDeReconhecimentoDeSinaisEstaticos;
+            this.algoritmoClassificacaoSinais = algoritmoClassificacaoSinais;
         }
 
         public bool Reconhecer(int idSinal, IList<Frame> amostra)
         {
-            return idSinal == algoritmoDeReconhecimentoDeSinaisEstaticos.Reconhecer(amostra);
+            return idSinal == algoritmoClassificacaoSinais.Classificar(amostra);
         }
 
         public void SalvarAmostraDoSinal(string descricaoDoSinal, string conteudoDoArquivoDeExemplo, IList<Frame> amostra)

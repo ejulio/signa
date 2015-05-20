@@ -35,13 +35,13 @@ namespace Testes.Integracao.Dominio.Algoritmos
             inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
             inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
 
-            repositorio = new RepositorioDeSinais(CaminhoDoArquivoDeDadosDeReconhecimento);
+            repositorio = new RepositorioSinais(CaminhoDoArquivoDeDadosDeReconhecimento);
         }
 
         [TestMethod, Ignore]
         public void reconhecendo_sinais_estaticos()
         {
-            var repositorioSinaisEstaticos = new RepositorioDeSinaisEstaticos(repositorio);
+            var repositorioSinaisEstaticos = new RepositorioSinaisEstaticos(repositorio);
             var algoritmo = algoritmoFactory.CriarReconhecedorDeSinaisEstaticos();
 
             repositorioSinaisEstaticos.Carregar();
@@ -52,7 +52,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
         [TestMethod, Ignore]
         public void reconhecendo_sinais_dinamicos()
         {
-            var repositorioSinaisDinamicos = new RepositorioDeSinaisDinamicos(repositorio);
+            var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
             var algoritmo = algoritmoFactory.CriarReconhecedorDeSinaisDinamicos();
 
             repositorioSinaisDinamicos.Carregar();
@@ -63,7 +63,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
         [TestMethod, Ignore]
         public void reconhecendo_sinais_frames_de_sinais_dinamicos()
         {
-            var repositorioSinaisDinamicos = new RepositorioDeSinaisDinamicos(repositorio);
+            var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
             var algoritmo = algoritmoFactory.CriarReconhecedorDeFramesDeSinaisDinamicos();
 
             repositorioSinaisDinamicos.Carregar();
@@ -71,7 +71,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisDinamicos, repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos());
         }
 
-        private void ExecutarTestesDeReconhecimentoComRelatorio(IAlgoritmoDeReconhecimentoDeSinais algoritmo, IRepositorio<Sinal> repositorioTestes, IRepositorio<Sinal> repositorioTreinamento)
+        private void ExecutarTestesDeReconhecimentoComRelatorio(IAlgoritmoClassificacaoSinais algoritmo, IRepositorio<Sinal> repositorioTestes, IRepositorio<Sinal> repositorioTreinamento)
         {
             int totalAcertos = 0;
             int totalErros = 0;
@@ -90,7 +90,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
 
                 for (var j = 0; j < sinal.Amostras.Count; j++)
                 {
-                    var resultado = algoritmo.Reconhecer(sinal.Amostras[j]);
+                    var resultado = algoritmo.Classificar(sinal.Amostras[j]);
 
                     if (resultado == indiceDoSinalParaOAlgoritmo)
                     {

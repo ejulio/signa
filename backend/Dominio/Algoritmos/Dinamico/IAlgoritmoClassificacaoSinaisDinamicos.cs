@@ -3,7 +3,7 @@ using Dominio.Algoritmos.Dados;
 
 namespace Dominio.Algoritmos.Dinamico
 {
-    public interface IAlgoritmoDeReconhecimentoDeSinaisDinamicos : IAlgoritmoDeReconhecimentoDeSinais
+    public interface IAlgoritmoClassificacaoSinaisDinamicos : IAlgoritmoClassificacaoSinais
     {
         void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados);
     }

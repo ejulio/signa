@@ -18,36 +18,36 @@ namespace Testes.Integracao.Gerenciamento
     public class SinaisDinamicosControllerTeste
     {
         private IRepositorio<Sinal> repositorio;
-        private Mock<IAlgoritmoDeReconhecimentoDeSinaisDinamicos> algoritmoDeSinaisDinamicos;
-        private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmoDeSinaisEstaticos;
-        private SinaisDinamicosController sinaisDinamicosController;
-        private GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame geradorDeCaracteristicasComTipoFrame;
+        private Mock<IAlgoritmoClassificacaoSinaisDinamicos> algoritmoDeSinaisDinamicos;
+        private Mock<IAlgoritmoClassificacaoSinaisEstaticos> algoritmoDeSinaisEstaticos;
+        private GerenciadorSinaisDinamicos gerenciadorSinaisDinamicos;
+        private CaracteristicasSinalEstaticoComTipoFrame caracteristicasComTipoFrame;
 
         [TestInitialize]
         public void Setup()
         {
-            repositorio = new RepositorioDeSinais(Caminhos.CaminhoDoArquivoDeAmostras);
-            algoritmoDeSinaisEstaticos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
-            algoritmoDeSinaisDinamicos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisDinamicos>();
+            repositorio = new RepositorioSinais(Caminhos.CaminhoDoArquivoDeAmostras);
+            algoritmoDeSinaisEstaticos = new Mock<IAlgoritmoClassificacaoSinaisEstaticos>();
+            algoritmoDeSinaisDinamicos = new Mock<IAlgoritmoClassificacaoSinaisDinamicos>();
 
-            var geradorDeCaracteristicas = new GeradorDeCaracteristicasDeSinalEstatico();
-            geradorDeCaracteristicasComTipoFrame =
-                new GeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
+            var geradorDeCaracteristicas = new CaracteristicasSinalEstatico();
+            caracteristicasComTipoFrame =
+                new CaracteristicasSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
 
-            sinaisDinamicosController = new SinaisDinamicosController(repositorio, 
-                geradorDeCaracteristicasComTipoFrame,
+            gerenciadorSinaisDinamicos = new GerenciadorSinaisDinamicos(repositorio, 
+                caracteristicasComTipoFrame,
                 algoritmoDeSinaisDinamicos.Object, 
                 algoritmoDeSinaisEstaticos.Object);
 
-            Directory.CreateDirectory(SinaisController.DiretorioDeExemplos);
+            Directory.CreateDirectory(GerenciadorSinais.DiretorioDeExemplos);
         }
 
         [TestCleanup]
         public void DeletarArquivos()
         {
-            if (Directory.Exists(SinaisController.DiretorioDeExemplos))
+            if (Directory.Exists(GerenciadorSinais.DiretorioDeExemplos))
             {
-                Directory.Delete(SinaisController.DiretorioDeExemplos, true);
+                Directory.Delete(GerenciadorSinais.DiretorioDeExemplos, true);
             }
         }
 
@@ -58,9 +58,9 @@ namespace Testes.Integracao.Gerenciamento
             const string descricaoDoSinal = "Novo sinal";
             const string conteudoDoArquivo = "conteúdo do arquivo do novo sinal";
 
-            sinaisDinamicosController.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
+            gerenciadorSinaisDinamicos.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
 
-            var caminhoDoArquivoCriado = SinaisEstaticosController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriado = GerenciadorSinaisEstaticos.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             DeveTerCriadoOArquivoComConteudo(caminhoDoArquivoCriado, descricaoDoSinal, conteudoDoArquivo);
 
             var sinalAdicionadoNoRepositorio = repositorio.BuscarPorDescricao(descricaoDoSinal);
@@ -77,7 +77,7 @@ namespace Testes.Integracao.Gerenciamento
             DadoQueExistaOSinalComConteudoNoArquivo(descricaoDoSinal, conteudoAntigoDoArquivo);
             var amostra = new ColecaoDeFramesBuilder().Construir();
             
-            sinaisDinamicosController.SalvarAmostraDoSinal(descricaoDoSinal, "conteúdo novo do arquivo", amostra);
+            gerenciadorSinaisDinamicos.SalvarAmostraDoSinal(descricaoDoSinal, "conteúdo novo do arquivo", amostra);
 
             NaoDeveTerAlteradoOConteudoDoArquivo(descricaoDoSinal, conteudoAntigoDoArquivo);
             var sinalAdicionadoNoRepositorio = repositorio.BuscarPorDescricao(descricaoDoSinal);
@@ -90,9 +90,9 @@ namespace Testes.Integracao.Gerenciamento
         {
             const int idDoSinal = 23;
             var amostra = new ColecaoDeFramesBuilder().Construir();
-            algoritmoDeSinaisDinamicos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            algoritmoDeSinaisDinamicos.Setup(a => a.Classificar(amostra)).Returns(idDoSinal);
 
-            var resultado = sinaisDinamicosController.Reconhecer(idDoSinal, amostra);
+            var resultado = gerenciadorSinaisDinamicos.Reconhecer(idDoSinal, amostra);
 
             resultado.Should().BeTrue();
         }
@@ -102,12 +102,12 @@ namespace Testes.Integracao.Gerenciamento
         {
             const int idDoSinal = 23;
             var amostra = new ColecaoDeFramesBuilder().Construir();
-            algoritmoDeSinaisEstaticos.Setup(a => a.Reconhecer(amostra)).Returns(idDoSinal);
+            algoritmoDeSinaisEstaticos.Setup(a => a.Classificar(amostra)).Returns(idDoSinal);
 
-            var resultado = sinaisDinamicosController.ReconhecerPrimeiroFrame(idDoSinal, amostra);
+            var resultado = gerenciadorSinaisDinamicos.ReconhecerPrimeiroFrame(idDoSinal, amostra);
 
             resultado.Should().BeTrue();
-            geradorDeCaracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Primeiro);
+            caracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Primeiro);
         }
 
         [TestMethod]
@@ -116,17 +116,17 @@ namespace Testes.Integracao.Gerenciamento
             const int idDoSinal = 23;
             var amostraPrimeiroFrame = new ColecaoDeFramesBuilder().Construir();
             var amostraUltimoFrame = new ColecaoDeFramesBuilder().Construir();
-            algoritmoDeSinaisEstaticos.Setup(a => a.Reconhecer(amostraUltimoFrame)).Returns(idDoSinal);
+            algoritmoDeSinaisEstaticos.Setup(a => a.Classificar(amostraUltimoFrame)).Returns(idDoSinal);
 
-            var resultado = sinaisDinamicosController.ReconhecerUltimoFrame(idDoSinal, amostraPrimeiroFrame, amostraUltimoFrame);
+            var resultado = gerenciadorSinaisDinamicos.ReconhecerUltimoFrame(idDoSinal, amostraPrimeiroFrame, amostraUltimoFrame);
 
             resultado.Should().BeTrue();
-            geradorDeCaracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Ultimo);
+            caracteristicasComTipoFrame.TipoFrame.Should().Be(TipoFrame.Ultimo);
         }
 
         private static void DeveTerCriadoOArquivoComConteudo(string caminhoDoArquivoCriado, string descricaoDoSinal, string conteudoDoArquivo)
         {
-            var caminhoDoArquivoCriadoEsperado = SinaisEstaticosController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriadoEsperado = GerenciadorSinaisEstaticos.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             caminhoDoArquivoCriado.Should().Be(caminhoDoArquivoCriadoEsperado);
             File.Exists(caminhoDoArquivoCriadoEsperado).Should().BeTrue();
             using (StreamReader reader = new StreamReader(caminhoDoArquivoCriadoEsperado))
@@ -137,7 +137,7 @@ namespace Testes.Integracao.Gerenciamento
 
         private static void NaoDeveTerAlteradoOConteudoDoArquivo(string descricaoDoSinal, string conteudoDoArquivo)
         {
-            var caminhoDoArquivoCriadoEsperado = SinaisEstaticosController.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
+            var caminhoDoArquivoCriadoEsperado = GerenciadorSinaisEstaticos.DiretorioDeExemplos + descricaoDoSinal.Underscore() + ".json";
             using (StreamReader reader = new StreamReader(caminhoDoArquivoCriadoEsperado))
             {
                 reader.ReadToEnd().Should().Be(conteudoDoArquivo);
@@ -147,7 +147,7 @@ namespace Testes.Integracao.Gerenciamento
         private void DadoQueExistaOSinalComConteudoNoArquivo(string descricaoDoSinal, string conteudoDoArquivo)
         {
             var amostra = new ColecaoDeFramesBuilder().Construir();
-            sinaisDinamicosController.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
+            gerenciadorSinaisDinamicos.SalvarAmostraDoSinal(descricaoDoSinal, conteudoDoArquivo, amostra);
         }
     }
 }

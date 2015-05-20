@@ -4,8 +4,8 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos
 {
-    public interface IAlgoritmoDeReconhecimentoDeSinais
+    public interface IAlgoritmoClassificacaoSinais
     {
-        int Reconhecer(IList<Frame> amostra);
+        int Classificar(IList<Frame> amostra);
     }
 }

@@ -7,31 +7,31 @@ namespace Aplicacao.Hubs
 {
     public class SinaisDinamicos : Hub
     {
-        private readonly SinaisDinamicosController sinaisDinamicosController;
+        private readonly GerenciadorSinaisDinamicos gerenciadorSinaisDinamicos;
 
-        public SinaisDinamicos(SinaisDinamicosController sinaisDinamicosController)
+        public SinaisDinamicos(GerenciadorSinaisDinamicos gerenciadorSinaisDinamicos)
         {
-            this.sinaisDinamicosController = sinaisDinamicosController;
+            this.gerenciadorSinaisDinamicos = gerenciadorSinaisDinamicos;
         }
 
         public bool Reconhecer(int idSinal, Frame[] amostra)
         {
-            return sinaisDinamicosController.Reconhecer(idSinal, amostra);
+            return gerenciadorSinaisDinamicos.Reconhecer(idSinal, amostra);
         }
 
         public bool ReconhecerPrimeiroFrame(int idSinal, Frame[] amostra)
         {
-            return sinaisDinamicosController.ReconhecerPrimeiroFrame(idSinal, amostra);
+            return gerenciadorSinaisDinamicos.ReconhecerPrimeiroFrame(idSinal, amostra);
         }
 
         public bool ReconhecerUltimoFrame(int idSinal, Frame[] amostraPrimeiroFrame, Frame[] amostraUltimoFrame)
         {
-            return sinaisDinamicosController.ReconhecerUltimoFrame(idSinal, amostraPrimeiroFrame, amostraUltimoFrame);
+            return gerenciadorSinaisDinamicos.ReconhecerUltimoFrame(idSinal, amostraPrimeiroFrame, amostraUltimoFrame);
         }
 
         public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, Frame[] amostra)
         {
-            sinaisDinamicosController.SalvarAmostraDoSinal(descricao, conteudoDoArquivoDeExemplo, amostra);
+            gerenciadorSinaisDinamicos.SalvarAmostraDoSinal(descricao, conteudoDoArquivoDeExemplo, amostra);
         }
     }
 }

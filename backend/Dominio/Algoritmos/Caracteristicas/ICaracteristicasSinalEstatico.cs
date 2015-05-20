@@ -4,8 +4,8 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
-    public interface IGeradorDeCaracteristicasDeSinalEstatico
+    public interface ICaracteristicasSinalEstatico
     {
-        double[] ExtrairCaracteristicasDaAmostra(IList<Frame> frames);
+        double[] DaAmostra(IList<Frame> frames);
     }
 }

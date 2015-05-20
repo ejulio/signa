@@ -18,7 +18,7 @@ namespace Aplicacao
         public ConfiguradorDeDependencias(IDependencyResolver container)
         {
             this.container = container;
-            repositorioFactory = new RepositorioFactory(SinaisController.CaminhoDoArquivoDoRepositorio);
+            repositorioFactory = new RepositorioFactory(GerenciadorSinais.CaminhoDoArquivoDoRepositorio);
             geradorDeCaracteristicasFactory = new GeradorDeCaracteristicasFactory();
             algoritmoFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(geradorDeCaracteristicasFactory);
         }
@@ -40,26 +40,26 @@ namespace Aplicacao
 
         private void ConfigurarReconhecedorDeSinaisEstaticos()
         {
-            container.Register(typeof(SinaisEstaticosController),
+            container.Register(typeof(GerenciadorSinaisEstaticos),
                 () =>
-                    new SinaisEstaticosController(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(),
+                    new GerenciadorSinaisEstaticos(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(),
                         algoritmoFactory.CriarReconhecedorDeSinaisEstaticos()));
 
             container.Register(typeof(Hubs.SinaisEstaticos),
-                () => new Hubs.SinaisEstaticos(container.Resolve<SinaisEstaticosController>()));
+                () => new Hubs.SinaisEstaticos(container.Resolve<GerenciadorSinaisEstaticos>()));
         }
 
         private void ConfigurarReconhecedorDeSinaisDinamicos()
         {
-            container.Register(typeof(SinaisDinamicosController),
+            container.Register(typeof(GerenciadorSinaisDinamicos),
                 () =>
-                    new SinaisDinamicosController(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos(),
+                    new GerenciadorSinaisDinamicos(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos(),
                         geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(),
                         algoritmoFactory.CriarReconhecedorDeSinaisDinamicos(),
                         algoritmoFactory.CriarReconhecedorDeFramesDeSinaisDinamicos()));
 
             container.Register(typeof(Hubs.SinaisDinamicos),
-                () => new Hubs.SinaisDinamicos(container.Resolve<SinaisDinamicosController>()));
+                () => new Hubs.SinaisDinamicos(container.Resolve<GerenciadorSinaisDinamicos>()));
         }
 
         private void ConfigurarJsonSerializerSettings()

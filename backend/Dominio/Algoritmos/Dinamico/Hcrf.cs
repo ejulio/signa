@@ -15,7 +15,7 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Dinamico
 {
-    public class Hcrf : IAlgoritmoDeReconhecimentoDeSinaisDinamicos
+    public class Hcrf : IAlgoritmoClassificacaoSinaisDinamicos
     {
         private readonly IGeradorDeCaracteristicasDeSinalDinamico geradorDeCaracteristicas;
         private HiddenConditionalRandomField<double[]> classificador;
@@ -25,7 +25,7 @@ namespace Dominio.Algoritmos.Dinamico
             this.geradorDeCaracteristicas = geradorDeCaracteristicas;
         }
 
-        public int Reconhecer(IList<Frame> amostra)
+        public int Classificar(IList<Frame> amostra)
         {
             if (classificador == null)
                 throw new InvalidOperationException();

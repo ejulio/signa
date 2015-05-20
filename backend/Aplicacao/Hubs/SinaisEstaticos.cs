@@ -8,21 +8,21 @@ namespace Aplicacao.Hubs
 {
     public class SinaisEstaticos : Hub
     {
-        private readonly SinaisEstaticosController sinaisEstaticosController;
+        private readonly GerenciadorSinaisEstaticos gerenciadorSinaisEstaticos;
 
-        public SinaisEstaticos(SinaisEstaticosController sinaisEstaticosController)
+        public SinaisEstaticos(GerenciadorSinaisEstaticos gerenciadorSinaisEstaticos)
         {
-            this.sinaisEstaticosController = sinaisEstaticosController;
+            this.gerenciadorSinaisEstaticos = gerenciadorSinaisEstaticos;
         }
 
         public bool Reconhecer(int idSinal, Frame[] amostra)
         {
-            return sinaisEstaticosController.Reconhecer(idSinal, amostra);
+            return gerenciadorSinaisEstaticos.Reconhecer(idSinal, amostra);
         }
 
         public void SalvarAmostraDoSinal(string descricao, string conteudoDoArquivoDeExemplo, IList<Frame> amostra)
         {
-            sinaisEstaticosController.SalvarAmostraDoSinal(descricao, conteudoDoArquivoDeExemplo, amostra);
+            gerenciadorSinaisEstaticos.SalvarAmostraDoSinal(descricao, conteudoDoArquivoDeExemplo, amostra);
         }
     }
 }

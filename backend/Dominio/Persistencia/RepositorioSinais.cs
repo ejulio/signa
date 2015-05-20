@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 
 namespace Dominio.Persistencia
 {
-    public class RepositorioDeSinais : IRepositorio<Sinal>
+    public class RepositorioSinais : IRepositorio<Sinal>
     {
         private bool carregado;
         private IList<Sinal> sinaisPorIndice;
-        private IDictionary<string, Sinal> sinaisPorId;
+        private IDictionary<string, Sinal> sinaisPorDescricao;
 
         private readonly string caminhoDoArquivoDeDados;
 
@@ -19,18 +19,18 @@ namespace Dominio.Persistencia
             get { return sinaisPorIndice.Count; }
         }
 
-        public RepositorioDeSinais(string caminhoDoArquivoDeDados)
+        public RepositorioSinais(string caminhoDoArquivoDeDados)
         {
             this.caminhoDoArquivoDeDados = caminhoDoArquivoDeDados;
             sinaisPorIndice = new List<Sinal>();
-            sinaisPorId = new Dictionary<string, Sinal>();
+            sinaisPorDescricao = new Dictionary<string, Sinal>();
             carregado = false;
         }
 
         public void Adicionar(Sinal sinal)
         {
             sinal.Id = Quantidade;
-            sinaisPorId.Add(sinal.Descricao, sinal);
+            sinaisPorDescricao.Add(sinal.Descricao, sinal);
             sinaisPorIndice.Add(sinal);
         }
 
@@ -45,7 +45,7 @@ namespace Dominio.Persistencia
         public Sinal BuscarPorDescricao(string id)
         {
             Sinal sinalDinamico;
-            if (sinaisPorId.TryGetValue(id, out sinalDinamico))
+            if (sinaisPorDescricao.TryGetValue(id, out sinalDinamico))
                 return sinalDinamico;
 
             return null;
@@ -61,17 +61,17 @@ namespace Dominio.Persistencia
                 var sinaisEmFormatoJson = reader.ReadToEnd();
                 var sinais = JsonConvert.DeserializeObject<List<Sinal>>(sinaisEmFormatoJson);
                 sinaisPorIndice = sinais ?? sinaisPorIndice;
-                CarregarSinaisPorId();
+                CarregarSinaisPorDescricao();
                 carregado = true;
             }
         }
 
-        private void CarregarSinaisPorId()
+        private void CarregarSinaisPorDescricao()
         {
-            sinaisPorId = new Dictionary<string, Sinal>();
+            sinaisPorDescricao = new Dictionary<string, Sinal>();
             foreach (var sinal in sinaisPorIndice)
             {
-                sinaisPorId.Add(sinal.Descricao, sinal);
+                sinaisPorDescricao.Add(sinal.Descricao, sinal);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Dominio.Persistencia
         {
             using (StreamWriter writer = new StreamWriter(caminhoDoArquivoDeDados))
             {
-                var sinaisEmFormatoJson = JsonConvert.SerializeObject(sinaisPorId.Values);
+                var sinaisEmFormatoJson = JsonConvert.SerializeObject(sinaisPorDescricao.Values);
                 writer.Write(sinaisEmFormatoJson);
             }
         }

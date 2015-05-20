@@ -20,9 +20,9 @@ namespace Testes.Unidade
     {
         private Mock<IAlgoritmoDeReconhecimentoDeSinalFactory> algoritmoDeReconhecimentoDeSinaisFactory;
         private Mock<IRepositorio<Sinal>> repositorio;
-        private Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos> algoritmoDeReconhecimentoDeSinaisEstaticos;
+        private Mock<IAlgoritmoClassificacaoSinaisEstaticos> algoritmoDeReconhecimentoDeSinaisEstaticos;
         private Mock<IRepositorioFactory> repositorioFactory;
-        private Mock<IAlgoritmoDeReconhecimentoDeSinaisDinamicos> algoritmoDeReconhecimentoDeSinaisDinamicos;
+        private Mock<IAlgoritmoClassificacaoSinaisDinamicos> algoritmoDeReconhecimentoDeSinaisDinamicos;
         private InicializadorDeAlgoritmoFacade inicializadorDeAlgoritmoFacade;
 
         [TestInitialize]
@@ -30,8 +30,8 @@ namespace Testes.Unidade
         {
             repositorio = new Mock<IRepositorio<Sinal>>();
             repositorioFactory = new Mock<IRepositorioFactory>();
-            algoritmoDeReconhecimentoDeSinaisEstaticos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisEstaticos>();
-            algoritmoDeReconhecimentoDeSinaisDinamicos = new Mock<IAlgoritmoDeReconhecimentoDeSinaisDinamicos>();
+            algoritmoDeReconhecimentoDeSinaisEstaticos = new Mock<IAlgoritmoClassificacaoSinaisEstaticos>();
+            algoritmoDeReconhecimentoDeSinaisDinamicos = new Mock<IAlgoritmoClassificacaoSinaisDinamicos>();
             algoritmoDeReconhecimentoDeSinaisFactory = new Mock<IAlgoritmoDeReconhecimentoDeSinalFactory>();
 
             inicializadorDeAlgoritmoFacade =
