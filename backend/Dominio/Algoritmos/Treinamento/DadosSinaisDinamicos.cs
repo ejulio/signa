@@ -6,7 +6,7 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Treinamento
 {
-    public class DadosSinaisDinamicos : DadosAlgoritmoReconhecimentoSinais, 
+    public class DadosSinaisDinamicos : DadosAlgoritmoClassificacaoSinais, 
         IDadosSinaisDinamicos
     {
         public double[][][] Entradas { get; private set; }

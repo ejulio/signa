@@ -1,11 +1,10 @@
 ﻿using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Algoritmos.Dinamico;
-using Dominio.Sinais;
+using Dominio.Algoritmos.Treinamento;
+using Dominio.Sinais.Frames;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Dominio.Algoritmos.Treinamento;
-using Dominio.Sinais.Frames;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Frames;
 
@@ -56,6 +55,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
                 .Construir();
 
             var dados = new DadosSinaisDinamicos(colecaoDeSinais);
+            dados.Processar();
             hcrf.Treinar(dados);
 
             return hcrf;

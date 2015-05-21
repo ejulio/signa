@@ -1,9 +1,9 @@
 ﻿using Dominio.Algoritmos.Factories;
-using System;
-using System.Linq;
-using System.Diagnostics;
 using Dominio.Algoritmos.Treinamento;
 using Dominio.Persistencia;
+using System;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Dominio
 {
@@ -25,8 +25,9 @@ namespace Dominio
 
             if (repositorio.Any())
             {
-                var dadosDoAlgoritmo = new DadosSinaisEstaticos(repositorio);
-                algoritmo.Treinar(dadosDoAlgoritmo);
+                var dadosSinaisEstaticos = new DadosSinaisEstaticos(repositorio);
+                dadosSinaisEstaticos.Processar();
+                algoritmo.Treinar(dadosSinaisEstaticos);
             }
         }
 
@@ -39,11 +40,13 @@ namespace Dominio
 
             if (repositorio.Any())
             {
-                var dadosDoAlgoritmo = new DadosSinaisDinamicos(repositorio);
-                algoritmo.Treinar(dadosDoAlgoritmo);
+                var dadosSinaisDinamicos = new DadosSinaisDinamicos(repositorio);
+                dadosSinaisDinamicos.Processar();
+                algoritmo.Treinar(dadosSinaisDinamicos);
 
-                var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new DadosFramesSinaisDinamicos(repositorio);
-                algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
+                var dadosFramesSinaisDinamicos = new DadosFramesSinaisDinamicos(repositorio);
+                dadosFramesSinaisDinamicos.Processar();
+                algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosFramesSinaisDinamicos);
             }
         }
 

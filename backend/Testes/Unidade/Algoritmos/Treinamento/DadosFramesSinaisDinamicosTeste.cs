@@ -20,6 +20,7 @@ namespace Testes.Unidade.Algoritmos.Treinamento
             var sinal = sinais[0];
 
             var dados = new DadosFramesSinaisDinamicos(sinais);
+            dados.Processar();
             var saidasEsperadas = DadasAsSaidasEsperadosParaAColecaoDeSinais(sinais);
 
             DeveTerExtraidoOsDadosDasAmostras(dados, 1, 1, saidasEsperadas, sinal.Amostras);
@@ -33,7 +34,8 @@ namespace Testes.Unidade.Algoritmos.Treinamento
             var colecaoDeSinais = DadaUmaColecaoDeSinaisComAmostras(quantidadeDeAmostras, quantidadeDeSinais);
 
             var dados = new DadosFramesSinaisDinamicos(colecaoDeSinais);
-            
+            dados.Processar();
+
             var amostrasEsperadas = ConcatenarAmostrasDosSinais(colecaoDeSinais);
             var saidasEsperadas = DadasAsSaidasEsperadosParaAColecaoDeSinais(colecaoDeSinais);
 

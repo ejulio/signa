@@ -28,6 +28,7 @@ namespace Testes.Unidade.Algoritmos.Treinamento
             var sinais = DadaUmaColecaoDeUmSinal();
 
             var dadosDoAlgoritmo = new DadosSinaisEstaticos(sinais);
+            dadosDoAlgoritmo.Processar();
 
             DeveTerUmDadoDeTreinamento(sinais.First(), dadosDoAlgoritmo);
         }
@@ -41,7 +42,7 @@ namespace Testes.Unidade.Algoritmos.Treinamento
             var sinais = DadaUmaColecaoDeSinais(quantidadeDeAmostrasPorSinal, quantidadeDeSinais);
 
             var dadosDoAlgoritmo = new DadosSinaisEstaticos(sinais);
-
+            dadosDoAlgoritmo.Processar();
             DeveTerOsDadosDaColecaoDeSinais(dadosDoAlgoritmo, sinais, quantidadeDeAmostrasPorSinal);
         }
 

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Dominio.Sinais;
+﻿using Dominio.Sinais;
 using Dominio.Sinais.Frames;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio.Algoritmos.Treinamento
 {
-    public abstract class DadosAlgoritmoReconhecimentoSinais
+    public abstract class DadosAlgoritmoClassificacaoSinais
     {
         public int[] Saidas { get; private set; }
         public int QuantidadeDeClasses { get; private set; }
@@ -14,14 +14,13 @@ namespace Dominio.Algoritmos.Treinamento
         private readonly IEnumerable<Sinal> sinais;
         private LinkedList<int> saidas;
 
-        protected DadosAlgoritmoReconhecimentoSinais(IEnumerable<Sinal> sinais)
+        protected DadosAlgoritmoClassificacaoSinais(IEnumerable<Sinal> sinais)
         {
             this.sinais = sinais;
             saidas = new LinkedList<int>();
-            ExtrairInformacoesDosSinais();
         }
 
-        private void ExtrairInformacoesDosSinais()
+        public void Processar()
         {
             var identificadorDoSinal = 0;
             QuantidadeDeClasses = 0;
