@@ -84,10 +84,10 @@
     <Compile Include="Algoritmos\Dinamico\IAlgoritmoClassificacaoSinaisDinamicos.cs" />
     <Compile Include="Algoritmos\Estatico\IAlgoritmoClassificacaoSinaisEstaticos.cs" />
     <Compile Include="Algoritmos\Estatico\Svm.cs" />
-    <Compile Include="Algoritmos\Factories\AlgoritmoDeReconhecimentoDeSinalFactory.cs" />
-    <Compile Include="Algoritmos\Factories\GeradorDeCaracteristicasFactory.cs" />
-    <Compile Include="Algoritmos\Factories\IAlgoritmoDeReconhecimentoDeSinalFactory.cs" />
-    <Compile Include="Algoritmos\Factories\IGeradorDeCaracteristicasFactory.cs" />
+    <Compile Include="Algoritmos\Factories\AlgoritmoClassificacaoSinalFactory.cs" />
+    <Compile Include="Algoritmos\Factories\CaracteristicasFactory.cs" />
+    <Compile Include="Algoritmos\Factories\IAlgoritmoClassificacaoSinalFactory.cs" />
+    <Compile Include="Algoritmos\Factories\ICaracteristicasFactory.cs" />
     <Compile Include="Algoritmos\IAlgoritmoClassificacaoSinais.cs" />
     <Compile Include="Persistencia\IRepositorio.cs" />
     <Compile Include="Persistencia\IRepositorioFactory.cs" />

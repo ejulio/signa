@@ -11,16 +11,16 @@ namespace Aplicacao
     public class ConfiguradorDeDependencias
     {
         private readonly IDependencyResolver container;
-        private static AlgoritmoDeReconhecimentoDeSinalFactory algoritmoFactory;
+        private static AlgoritmoClassificacaoSinalFactory algoritmoFactory;
         private static IRepositorioFactory repositorioFactory;
-        private static GeradorDeCaracteristicasFactory geradorDeCaracteristicasFactory;
+        private static CaracteristicasFactory caracteristicasFactory;
 
         public ConfiguradorDeDependencias(IDependencyResolver container)
         {
             this.container = container;
             repositorioFactory = new RepositorioFactory(GerenciadorSinais.CaminhoDoArquivoDoRepositorio);
-            geradorDeCaracteristicasFactory = new GeradorDeCaracteristicasFactory();
-            algoritmoFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(geradorDeCaracteristicasFactory);
+            caracteristicasFactory = new CaracteristicasFactory();
+            algoritmoFactory = new AlgoritmoClassificacaoSinalFactory(caracteristicasFactory);
         }
 
         public void Configurar()
@@ -54,7 +54,7 @@ namespace Aplicacao
             container.Register(typeof(GerenciadorSinaisDinamicos),
                 () =>
                     new GerenciadorSinaisDinamicos(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos(),
-                        geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(),
+                        caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(),
                         algoritmoFactory.CriarReconhecedorDeSinaisDinamicos(),
                         algoritmoFactory.CriarReconhecedorDeFramesDeSinaisDinamicos()));
 

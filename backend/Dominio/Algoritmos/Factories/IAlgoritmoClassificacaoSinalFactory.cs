@@ -3,7 +3,7 @@ using Dominio.Algoritmos.Estatico;
 
 namespace Dominio.Algoritmos.Factories
 {
-    public interface IAlgoritmoDeReconhecimentoDeSinalFactory
+    public interface IAlgoritmoClassificacaoSinalFactory
     {
         IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeSinaisEstaticos();
         IAlgoritmoClassificacaoSinaisDinamicos CriarReconhecedorDeSinaisDinamicos();

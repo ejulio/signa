@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Dominio.Persistencia;
+﻿using Dominio.Persistencia;
 using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Frames;
 
 namespace Testes.Integracao.Persistencia
 {
     [TestClass]
-    public class RepositorioDeSinaisTeste
+    public class RepositorioSinaisTeste
     {
         private RepositorioSinais repositorioSinais;
         private const string CaminhoDoArquivoDeAmostras = "Integracao/JsonTestData/repositorio-de-sinais-teste.json";

@@ -21,15 +21,15 @@ namespace Testes.Integracao.Dominio.Algoritmos
         private const string CaminhoDoArquivoDeDadosDeTreinamento = "Integracao/JsonTestData/repositorio-sinais-treinamento-reconhecimento.json";
 
         private IRepositorio<Sinal> repositorio;
-        private AlgoritmoDeReconhecimentoDeSinalFactory algoritmoFactory;
+        private AlgoritmoClassificacaoSinalFactory algoritmoFactory;
         private RepositorioFactory repositorioFactory;
 
         [TestInitialize]
         public void setup()
         {
-            var geradorDeCaracteristicasFactory = new GeradorDeCaracteristicasFactory();
+            var geradorDeCaracteristicasFactory = new CaracteristicasFactory();
             repositorioFactory = new RepositorioFactory(CaminhoDoArquivoDeDadosDeTreinamento);
-            algoritmoFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(geradorDeCaracteristicasFactory);
+            algoritmoFactory = new AlgoritmoClassificacaoSinalFactory(geradorDeCaracteristicasFactory);
             var inicializadorDeAlgoritmo = new InicializadorDeAlgoritmoFacade(algoritmoFactory, repositorioFactory);
 
             inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();

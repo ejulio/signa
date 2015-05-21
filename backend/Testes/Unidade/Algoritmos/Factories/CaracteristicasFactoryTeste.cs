@@ -5,12 +5,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Testes.Unidade.Algoritmos.Factories
 {
     [TestClass]
-    public class GeradorDeCaracteristicasFactoryTeste
+    public class CaracteristicasFactoryTeste
     {
         [TestMethod]
         public void criando_um_gerador_de_caracristicas_de_sinal_dinamico()
         {
-            var factory = new GeradorDeCaracteristicasFactory();
+            var factory = new CaracteristicasFactory();
 
             var gerador1 = factory.CriarGeradorDeCaracteristicasDeSinalDinamico();
             var gerador2 = factory.CriarGeradorDeCaracteristicasDeSinalDinamico();
@@ -21,7 +21,7 @@ namespace Testes.Unidade.Algoritmos.Factories
         [TestMethod]
         public void criando_um_gerador_de_caracristicas_de_sinal_estatico()
         {
-            var factory = new GeradorDeCaracteristicasFactory();
+            var factory = new CaracteristicasFactory();
 
             var gerador1 = factory.CriarGeradorDeCaracteristicasDeSinalEstatico();
             var gerador2 = factory.CriarGeradorDeCaracteristicasDeSinalEstatico();
@@ -32,7 +32,7 @@ namespace Testes.Unidade.Algoritmos.Factories
         [TestMethod]
         public void criando_um_gerador_de_caracristicas_de_sinal_estatico_com_tipo_de_frame()
         {
-            var factory = new GeradorDeCaracteristicasFactory();
+            var factory = new CaracteristicasFactory();
 
             var gerador1 = factory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame();
             var gerador2 = factory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame();

@@ -18,7 +18,7 @@ namespace Testes.Unidade
     [TestClass]
     public class InicializadorDeAlgoritmoFacadeTeste
     {
-        private Mock<IAlgoritmoDeReconhecimentoDeSinalFactory> algoritmoDeReconhecimentoDeSinaisFactory;
+        private Mock<IAlgoritmoClassificacaoSinalFactory> algoritmoDeReconhecimentoDeSinaisFactory;
         private Mock<IRepositorio<Sinal>> repositorio;
         private Mock<IAlgoritmoClassificacaoSinaisEstaticos> algoritmoDeReconhecimentoDeSinaisEstaticos;
         private Mock<IRepositorioFactory> repositorioFactory;
@@ -32,7 +32,7 @@ namespace Testes.Unidade
             repositorioFactory = new Mock<IRepositorioFactory>();
             algoritmoDeReconhecimentoDeSinaisEstaticos = new Mock<IAlgoritmoClassificacaoSinaisEstaticos>();
             algoritmoDeReconhecimentoDeSinaisDinamicos = new Mock<IAlgoritmoClassificacaoSinaisDinamicos>();
-            algoritmoDeReconhecimentoDeSinaisFactory = new Mock<IAlgoritmoDeReconhecimentoDeSinalFactory>();
+            algoritmoDeReconhecimentoDeSinaisFactory = new Mock<IAlgoritmoClassificacaoSinalFactory>();
 
             inicializadorDeAlgoritmoFacade =
                 new InicializadorDeAlgoritmoFacade(algoritmoDeReconhecimentoDeSinaisFactory.Object, repositorioFactory.Object);

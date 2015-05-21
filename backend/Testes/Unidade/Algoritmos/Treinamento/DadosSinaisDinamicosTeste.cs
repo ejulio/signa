@@ -1,18 +1,18 @@
-﻿using Dominio.Sinais;
+﻿using Dominio.Algoritmos.Treinamento;
+using Dominio.Sinais;
+using Dominio.Sinais.Frames;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Algoritmos.Treinamento;
-using Dominio.Sinais.Frames;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Frames;
 using Testes.Comum.Util;
 
-namespace Testes.Unidade.Algoritmos.Dados
+namespace Testes.Unidade.Algoritmos.Treinamento
 {
     [TestClass]
-    public class GeradorDeDadosDeSinaisDinamicosTeste
+    public class DadosSinaisDinamicosTeste
     {
         [TestMethod]
         public void criando_dados_para_um_sinal_com_cinco_frames()

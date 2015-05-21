@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Dominio.Persistencia;
+﻿using Dominio.Persistencia;
 using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Frames;
 
 namespace Testes.Integracao.Persistencia
 {
     [TestClass]
-    public class RepositorioDeSinaisDinamicosTeste
+    public class RepositorioSinaisDinamicosTeste
     {
         private RepositorioSinaisDinamicos repositorioSinaisDinamicos;
         private RepositorioSinais repositorioSinais;

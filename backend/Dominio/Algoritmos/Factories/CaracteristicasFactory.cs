@@ -2,13 +2,13 @@
 
 namespace Dominio.Algoritmos.Factories
 {
-    public class GeradorDeCaracteristicasFactory : IGeradorDeCaracteristicasFactory
+    public class CaracteristicasFactory : ICaracteristicasFactory
     {
         private static ICaracteristicasSinalDinamico caracteristicasSinalDinamico;
         private static ICaracteristicasSinalEstatico caracteristicasSinalEstatico;
         private static ICaracteristicasSinalEstaticoComTipoFrame caracteristicasSinalEstaticoComTipoFrame;
 
-        public GeradorDeCaracteristicasFactory()
+        public CaracteristicasFactory()
         {
             caracteristicasSinalDinamico = new CaracteristicasSinalDinamico();
             caracteristicasSinalEstatico = new CaracteristicasSinalEstatico();

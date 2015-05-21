@@ -9,18 +9,18 @@ namespace Dominio
 {
     public class InicializadorDeAlgoritmoFacade
     {
-        private readonly IAlgoritmoDeReconhecimentoDeSinalFactory algoritmoDeReconhecimentoDeSinalFactory;
+        private readonly IAlgoritmoClassificacaoSinalFactory algoritmoClassificacaoSinalFactory;
         private readonly IRepositorioFactory repositorioFactory;
 
-        public InicializadorDeAlgoritmoFacade(IAlgoritmoDeReconhecimentoDeSinalFactory algoritmoDeReconhecimentoDeSinalFactory, IRepositorioFactory repositorioFactory)
+        public InicializadorDeAlgoritmoFacade(IAlgoritmoClassificacaoSinalFactory algoritmoClassificacaoSinalFactory, IRepositorioFactory repositorioFactory)
         {
-            this.algoritmoDeReconhecimentoDeSinalFactory = algoritmoDeReconhecimentoDeSinalFactory;
+            this.algoritmoClassificacaoSinalFactory = algoritmoClassificacaoSinalFactory;
             this.repositorioFactory = repositorioFactory;
         }
 
         public void TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos()
         {
-            var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisEstaticos();
+            var algoritmo = algoritmoClassificacaoSinalFactory.CriarReconhecedorDeSinaisEstaticos();
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
 
             if (repositorio.Any())
@@ -34,8 +34,8 @@ namespace Dominio
         {
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos();
             
-            var algoritmo = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeSinaisDinamicos();
-            var algoritmoDeLimitesDeSinaisDinamicos = algoritmoDeReconhecimentoDeSinalFactory.CriarReconhecedorDeFramesDeSinaisDinamicos();
+            var algoritmo = algoritmoClassificacaoSinalFactory.CriarReconhecedorDeSinaisDinamicos();
+            var algoritmoDeLimitesDeSinaisDinamicos = algoritmoClassificacaoSinalFactory.CriarReconhecedorDeFramesDeSinaisDinamicos();
 
             if (repositorio.Any())
             {

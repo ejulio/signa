@@ -3,22 +3,22 @@ using Dominio.Algoritmos.Estatico;
 
 namespace Dominio.Algoritmos.Factories
 {
-    public class AlgoritmoDeReconhecimentoDeSinalFactory : IAlgoritmoDeReconhecimentoDeSinalFactory
+    public class AlgoritmoClassificacaoSinalFactory : IAlgoritmoClassificacaoSinalFactory
     {
         private static IAlgoritmoClassificacaoSinaisEstaticos algoritmoClassificacaoSinaisEstaticos;
         private static IAlgoritmoClassificacaoSinaisDinamicos algoritmoClassificacaoSinaisDinamicos;
         private static IAlgoritmoClassificacaoSinaisEstaticos algoritmoClassificacaoFramesSinaisDinamicos;
 
-        public AlgoritmoDeReconhecimentoDeSinalFactory(IGeradorDeCaracteristicasFactory geradorDeCaracteristicasFactory)
+        public AlgoritmoClassificacaoSinalFactory(ICaracteristicasFactory caracteristicasFactory)
         {
             algoritmoClassificacaoSinaisEstaticos 
-                = new Svm(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstatico());
+                = new Svm(caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstatico());
 
             algoritmoClassificacaoFramesSinaisDinamicos 
-                = new Svm(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame());
+                = new Svm(caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame());
 
             algoritmoClassificacaoSinaisDinamicos 
-                = new Hcrf(geradorDeCaracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalDinamico());
+                = new Hcrf(caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalDinamico());
         }
 
         public IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeSinaisEstaticos()

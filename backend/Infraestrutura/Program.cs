@@ -29,7 +29,7 @@ namespace Infraestrutura
         private static void TreinarAlgoritmos()
         {
             var repositorioFactory = new RepositorioFactory(GerenciadorSinais.CaminhoDoArquivoDoRepositorio);
-            var algoritmosFactory = new AlgoritmoDeReconhecimentoDeSinalFactory(new GeradorDeCaracteristicasFactory());
+            var algoritmosFactory = new AlgoritmoClassificacaoSinalFactory(new CaracteristicasFactory());
             var inicializadorDeAlgoritmosFacade = new InicializadorDeAlgoritmoFacade(algoritmosFactory, repositorioFactory);
 
             inicializadorDeAlgoritmosFacade.TreinarAlgoritmosDeReconhecimentoDeSinais();
