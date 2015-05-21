@@ -1,8 +1,8 @@
-﻿using Dominio.Algoritmos.Dados;
-using Dominio.Algoritmos.Factories;
+﻿using Dominio.Algoritmos.Factories;
 using System;
 using System.Linq;
 using System.Diagnostics;
+using Dominio.Algoritmos.Treinamento;
 using Dominio.Persistencia;
 
 namespace Dominio

@@ -1,5 +1,4 @@
 ﻿using Dominio;
-using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Dinamico;
 using Dominio.Algoritmos.Estatico;
 using Dominio.Algoritmos.Factories;
@@ -11,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using Testes.Comum.Builders.Dominio.Sinais;
 using System.Linq;
+using Dominio.Algoritmos.Treinamento;
 using Dominio.Persistencia;
 
 namespace Testes.Unidade

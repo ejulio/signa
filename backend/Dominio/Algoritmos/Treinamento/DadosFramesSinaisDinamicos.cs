@@ -1,10 +1,10 @@
-﻿using Dominio.Algoritmos.Caracteristicas;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Sinais;
 using Dominio.Sinais.Frames;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Dominio.Algoritmos.Dados
+namespace Dominio.Algoritmos.Treinamento
 {
     public class DadosFramesSinaisDinamicos : DadosAlgoritmoReconhecimentoSinais,
         IDadosSinaisEstaticos

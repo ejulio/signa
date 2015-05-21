@@ -1,5 +1,5 @@
 ﻿
-using Dominio.Algoritmos.Dados;
+using Dominio.Algoritmos.Treinamento;
 
 namespace Dominio.Algoritmos.Estatico
 {

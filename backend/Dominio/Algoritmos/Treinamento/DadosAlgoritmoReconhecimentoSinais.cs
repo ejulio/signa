@@ -1,9 +1,9 @@
-﻿using Dominio.Sinais;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Dominio.Sinais;
 using Dominio.Sinais.Frames;
 
-namespace Dominio.Algoritmos.Dados
+namespace Dominio.Algoritmos.Treinamento
 {
     public abstract class DadosAlgoritmoReconhecimentoSinais
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace Dominio.Algoritmos.Dados
+namespace Dominio.Algoritmos.Treinamento
 {
     public interface IDadosSinaisEstaticos
     {

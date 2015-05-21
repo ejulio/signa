@@ -3,11 +3,11 @@ using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.Statistics.Kernels;
 using Dominio.Algoritmos.Caracteristicas;
-using Dominio.Algoritmos.Dados;
 using Dominio.Sinais;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dominio.Algoritmos.Treinamento;
 using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Estatico

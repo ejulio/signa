@@ -1,10 +1,10 @@
 ﻿using Dominio.Algoritmos.Caracteristicas;
-using Dominio.Algoritmos.Dados;
 using Dominio.Algoritmos.Dinamico;
 using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Dominio.Algoritmos.Treinamento;
 using Dominio.Sinais.Frames;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Frames;

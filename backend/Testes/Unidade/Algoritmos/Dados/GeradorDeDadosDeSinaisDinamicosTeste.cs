@@ -1,9 +1,9 @@
-﻿using Dominio.Algoritmos.Dados;
-using Dominio.Sinais;
+﻿using Dominio.Sinais;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using Dominio.Algoritmos.Treinamento;
 using Dominio.Sinais.Frames;
 using Testes.Comum.Builders.Dominio.Sinais;
 using Testes.Comum.Builders.Dominio.Sinais.Frames;

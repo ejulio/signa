@@ -7,10 +7,10 @@ using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
 using Dominio.Algoritmos.Caracteristicas;
-using Dominio.Algoritmos.Dados;
 using Dominio.Sinais;
 using System;
 using System.Collections.Generic;
+using Dominio.Algoritmos.Treinamento;
 using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Dinamico
