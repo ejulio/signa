@@ -100,11 +100,11 @@ namespace Testes.Unidade.Algoritmos.Treinamento
         private void DeveTerExtraidoOsDadosDasAmostras(DadosSinaisDinamicos dados, int quantidadeDeSinais, 
             int quantidadeDeAmostras, int[] saidasEsperadas, IList<IList<Frame>> amostrasEsperadas)
         {
-            dados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
-            dados.Saidas.Should().HaveSameCount(dados.Entradas);
-            dados.Saidas.Should().ContainInOrder(saidasEsperadas);
-            dados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais);
-            DeveTerAsEntradasDasAmostras(dados.Entradas, amostrasEsperadas);
+            dados.CaracteristicasSinais.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
+            dados.IdentificadoresSinais.Should().HaveSameCount(dados.CaracteristicasSinais);
+            dados.IdentificadoresSinais.Should().ContainInOrder(saidasEsperadas);
+            dados.QuantidadeClasses.Should().Be(quantidadeDeSinais);
+            DeveTerAsEntradasDasAmostras(dados.CaracteristicasSinais, amostrasEsperadas);
         }
 
         private void DeveTerAsEntradasDasAmostras(double[][][] entradas, IList<IList<Frame>> amostras)

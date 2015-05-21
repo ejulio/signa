@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Dominio.Algoritmos.Caracteristicas;
+﻿using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Sinais;
 using Dominio.Sinais.Frames;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio.Algoritmos.Treinamento
 {
     public class DadosSinaisEstaticos : DadosAlgoritmoClassificacaoSinais, 
         IDadosSinaisEstaticos
     {
-        public double[][] Entradas { get; private set; }
+        public double[][] CaracteristicasSinais { get; private set; }
         
-        private LinkedList<double[]> entradas;
+        private LinkedList<double[]> caracteristicasSinais;
 
         private CaracteristicasSinalEstatico caracteristicas;
 
-        public override int QuantidadeDeClassesPorSinal
+        public override int QuantidadeClassesPorSinal
         {
             get { return 1; }
         }
@@ -27,20 +27,20 @@ namespace Dominio.Algoritmos.Treinamento
 
         protected override void Inicializar(IEnumerable<Sinal> sinais)
         {
-            entradas = new LinkedList<double[]>();
+            caracteristicasSinais = new LinkedList<double[]>();
             caracteristicas = new CaracteristicasSinalEstatico();
         }
 
-        protected override void GerarEntradasESaidasParaAmostra(IList<Frame> amostra, LinkedList<int> saidas, int identificadorDoSinal)
+        protected override void GerarEntradasESaidasDaAmostra(IList<Frame> amostra, LinkedList<int> identificadoresSinais, int identificadorSinal)
         {
-            var caracteristicas = this.caracteristicas.DaAmostra(amostra);
-            entradas.AddLast(caracteristicas);
-            saidas.AddLast(identificadorDoSinal);
+            var caracteristicasDaAmostra = caracteristicas.DaAmostra(amostra);
+            caracteristicasSinais.AddLast(caracteristicasDaAmostra);
+            identificadoresSinais.AddLast(identificadorSinal);
         }
 
         protected override void Finalizar()
         {
-            Entradas = entradas.ToArray();
+            CaracteristicasSinais = caracteristicasSinais.ToArray();
         }
     }
 }

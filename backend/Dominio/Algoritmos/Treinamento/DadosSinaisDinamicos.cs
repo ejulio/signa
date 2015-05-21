@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Dominio.Algoritmos.Caracteristicas;
+﻿using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Sinais;
 using Dominio.Sinais.Frames;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio.Algoritmos.Treinamento
 {
     public class DadosSinaisDinamicos : DadosAlgoritmoClassificacaoSinais, 
         IDadosSinaisDinamicos
     {
-        public double[][][] Entradas { get; private set; }
+        public double[][][] CaracteristicasSinais { get; private set; }
 
-        private LinkedList<double[][]> entradas;
+        private LinkedList<double[][]> caracteristicasSinais;
         private CaracteristicasSinalDinamico caracteristicas;
 
-        public override int QuantidadeDeClassesPorSinal
+        public override int QuantidadeClassesPorSinal
         {
             get { return 1; }
         }
@@ -26,19 +26,19 @@ namespace Dominio.Algoritmos.Treinamento
 
         protected override void Inicializar(IEnumerable<Sinal> sinais)
         {
-            entradas = new LinkedList<double[][]>();
+            caracteristicasSinais = new LinkedList<double[][]>();
             caracteristicas = new CaracteristicasSinalDinamico();
         }
 
-        protected override void GerarEntradasESaidasParaAmostra(IList<Frame> amostra, LinkedList<int> saidas, int identificadorDoSinal)
+        protected override void GerarEntradasESaidasDaAmostra(IList<Frame> amostra, LinkedList<int> identificadoresSinais, int identificadorSinal)
         {
-            entradas.AddLast(caracteristicas.DaAmostra(amostra));
-            saidas.AddLast(identificadorDoSinal);
+            caracteristicasSinais.AddLast(caracteristicas.DaAmostra(amostra));
+            identificadoresSinais.AddLast(identificadorSinal);
         }
 
         protected override void Finalizar()
         {
-            Entradas = entradas.ToArray();
+            CaracteristicasSinais = caracteristicasSinais.ToArray();
         }
     }
 }

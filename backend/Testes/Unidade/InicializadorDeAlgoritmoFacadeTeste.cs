@@ -184,25 +184,25 @@ namespace Testes.Unidade
 
         private bool VerificarDadosDoAlgoritmoDeSinaisEstaticos(IDadosSinaisEstaticos dados)
         {
-            dados.QuantidadeDeClasses.Should().Be(2);
-            dados.Saidas.Should().HaveCount(4);
-            dados.Entradas.Should().HaveCount(4);
+            dados.QuantidadeClasses.Should().Be(2);
+            dados.IdentificadoresSinais.Should().HaveCount(4);
+            dados.CaracteristicasSinais.Should().HaveCount(4);
             return true;
         }
 
         private bool VerificarDadosDoAlgoritmoDeSinaisDinamicos(IDadosSinaisDinamicos dados)
         {
-            dados.QuantidadeDeClasses.Should().Be(2);
-            dados.Saidas.Should().HaveCount(4);
-            dados.Entradas.Should().HaveCount(4);
+            dados.QuantidadeClasses.Should().Be(2);
+            dados.IdentificadoresSinais.Should().HaveCount(4);
+            dados.CaracteristicasSinais.Should().HaveCount(4);
             return true;
         }
 
         private bool VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(IDadosSinaisEstaticos dados)
         {
-            dados.QuantidadeDeClasses.Should().Be(4);
-            dados.Saidas.Should().HaveCount(12);
-            dados.Entradas.Should().HaveCount(12);
+            dados.QuantidadeClasses.Should().Be(4);
+            dados.IdentificadoresSinais.Should().HaveCount(12);
+            dados.CaracteristicasSinais.Should().HaveCount(12);
             return true;
         }
     }

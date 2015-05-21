@@ -74,14 +74,14 @@ namespace Testes.Unidade.Algoritmos.Treinamento
 
         private void DeveTerOsDadosDaColecaoDeSinais(DadosSinaisEstaticos dadosDoAlgoritmo, ICollection<Sinal> sinais, int quantidadeDeAmostrasPorSinal)
         {
-            dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(sinais.Count);
-            dadosDoAlgoritmo.Entradas.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
-            dadosDoAlgoritmo.Entradas.Should().HaveSameCount(dadosDoAlgoritmo.Saidas);
-            dadosDoAlgoritmo.Saidas.Should().ContainInOrder(SaidasEsperadas(sinais));
+            dadosDoAlgoritmo.QuantidadeClasses.Should().Be(sinais.Count);
+            dadosDoAlgoritmo.CaracteristicasSinais.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
+            dadosDoAlgoritmo.CaracteristicasSinais.Should().HaveSameCount(dadosDoAlgoritmo.IdentificadoresSinais);
+            dadosDoAlgoritmo.IdentificadoresSinais.Should().ContainInOrder(SaidasEsperadas(sinais));
 
             int indiceDaEntrada = 0;
             var entradasEsperadas = EntradasEsperadasParaOsSinais(sinais);
-            foreach (var input in dadosDoAlgoritmo.Entradas)
+            foreach (var input in dadosDoAlgoritmo.CaracteristicasSinais)
             {
                 input.Should().ContainInOrder(entradasEsperadas[indiceDaEntrada]);
                 indiceDaEntrada++;
@@ -91,11 +91,11 @@ namespace Testes.Unidade.Algoritmos.Treinamento
         private void DeveTerUmDadoDeTreinamento(Sinal sinal, DadosSinaisEstaticos dadosDoAlgoritmo)
         {
             var arrayDaAmostra = amostraPadrao[0].MontarArrayEsperadoParaSinaisEstaticos();
-            dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
-            dadosDoAlgoritmo.Entradas.Should().HaveCount(1);
-            dadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
-            dadosDoAlgoritmo.Saidas.Should().HaveCount(1);
-            dadosDoAlgoritmo.Saidas[0].Should().Be(sinal.IdNoAlgoritmo);
+            dadosDoAlgoritmo.QuantidadeClasses.Should().Be(1);
+            dadosDoAlgoritmo.CaracteristicasSinais.Should().HaveCount(1);
+            dadosDoAlgoritmo.CaracteristicasSinais[0].Should().ContainInOrder(arrayDaAmostra);
+            dadosDoAlgoritmo.IdentificadoresSinais.Should().HaveCount(1);
+            dadosDoAlgoritmo.IdentificadoresSinais[0].Should().Be(sinal.IdNoAlgoritmo);
         }
 
         private double[][] EntradasEsperadasParaOsSinais(ICollection<Sinal> sinais)

@@ -35,9 +35,9 @@ namespace Dominio.Algoritmos.Estatico
         public void Treinar(IDadosSinaisEstaticos dados)
         {
             var kernel = new Gaussian(sigma: 1);
-            svm = new MulticlassSupportVectorMachine(QuantidadeIndeterminadaDeCaracteristicas, kernel, dados.QuantidadeDeClasses);
+            svm = new MulticlassSupportVectorMachine(QuantidadeIndeterminadaDeCaracteristicas, kernel, dados.QuantidadeClasses);
             
-            var teacher = new MulticlassSupportVectorLearning(svm, dados.Entradas, dados.Saidas)
+            var teacher = new MulticlassSupportVectorLearning(svm, dados.CaracteristicasSinais, dados.IdentificadoresSinais)
             {
                 Algorithm = (machine, classInputs, classOutputs, j, k) => 
                     new SequentialMinimalOptimization(machine, classInputs, classOutputs)

@@ -1,10 +1,8 @@
 ﻿
 namespace Dominio.Algoritmos.Treinamento
 {
-    public interface IDadosSinaisEstaticos
+    public interface IDadosSinaisEstaticos : IDadosAlgoritmoClassificacaoSinais
     {
-        double[][] Entradas { get; }
-        int[] Saidas { get; }
-        int QuantidadeDeClasses { get; }
+        double[][] CaracteristicasSinais { get; }
     }
 }

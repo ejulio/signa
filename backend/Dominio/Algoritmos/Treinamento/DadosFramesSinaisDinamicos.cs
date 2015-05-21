@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Dominio.Algoritmos.Caracteristicas;
+﻿using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Sinais;
 using Dominio.Sinais.Frames;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio.Algoritmos.Treinamento
 {
-    public class DadosFramesSinaisDinamicos : DadosAlgoritmoClassificacaoSinais,
-        IDadosSinaisEstaticos
+    public class DadosFramesSinaisDinamicos : DadosAlgoritmoClassificacaoSinais, IDadosSinaisEstaticos
     {
-        public double[][] Entradas { get; private set; }
+        public double[][] CaracteristicasSinais { get; private set; }
 
-        private LinkedList<double[]> entradas;
+        private LinkedList<double[]> caracteristicasSinais;
         private CaracteristicasSinalEstaticoComTipoFrame caracteristicasComTipoFrame;
 
         private int quantidadeDeSinais;
 
-        public override int QuantidadeDeClassesPorSinal
+        public override int QuantidadeClassesPorSinal
         {
             get { return 2; }
         }
@@ -29,21 +28,21 @@ namespace Dominio.Algoritmos.Treinamento
         protected override void Inicializar(IEnumerable<Sinal> sinais)
         {
             quantidadeDeSinais = sinais.Count();
-            entradas = new LinkedList<double[]>();
+            caracteristicasSinais = new LinkedList<double[]>();
             var geradorDeCaracteristicas = new CaracteristicasSinalEstatico();
             caracteristicasComTipoFrame = new CaracteristicasSinalEstaticoComTipoFrame(geradorDeCaracteristicas);
         }
 
-        protected override void GerarEntradasESaidasParaAmostra(IList<Frame> amostra, LinkedList<int> saidas, int identificadorDoSinal)
+        protected override void GerarEntradasESaidasDaAmostra(IList<Frame> amostra, LinkedList<int> identificadoresSinais, int identificadorSinal)
         {
             var quantidadeFramesQueRepresentamPrimeiroFrame = amostra.Count / 2;
             caracteristicasComTipoFrame.PrimeiroFrame = amostra.First();
             
-            GerarEntradasSaidasQueRepresentamPrimeiroFrame(amostra, saidas, identificadorDoSinal, quantidadeFramesQueRepresentamPrimeiroFrame);
-            GerarEntradasSaidasQueRepresentamUltimoFrame(amostra, saidas, identificadorDoSinal, quantidadeFramesQueRepresentamPrimeiroFrame);
+            GerarEntradasESaidasPrimeiroFrame(amostra, identificadoresSinais, identificadorSinal, quantidadeFramesQueRepresentamPrimeiroFrame);
+            GerarEntradasESaidasUltimoFrame(amostra, identificadoresSinais, identificadorSinal, quantidadeFramesQueRepresentamPrimeiroFrame);
         }
 
-        private void GerarEntradasSaidasQueRepresentamPrimeiroFrame(IList<Frame> amostra, LinkedList<int> saidas, 
+        private void GerarEntradasESaidasPrimeiroFrame(IList<Frame> amostra, LinkedList<int> saidas, 
             int indice, int quantidadeFramesQueRepresentamPrimeiroFrame)
         {
             var amostraDoFrame = new Frame[1];
@@ -51,12 +50,12 @@ namespace Dominio.Algoritmos.Treinamento
             for (int i = 0; i < quantidadeFramesQueRepresentamPrimeiroFrame; i++)
             {
                 amostraDoFrame[0] = amostra[i];
-                entradas.AddLast(caracteristicasComTipoFrame.DaAmostra(amostraDoFrame));
+                caracteristicasSinais.AddLast(caracteristicasComTipoFrame.DaAmostra(amostraDoFrame));
                 saidas.AddLast(indice);
             }
         }
 
-        private void GerarEntradasSaidasQueRepresentamUltimoFrame(IList<Frame> amostra, LinkedList<int> saidas, 
+        private void GerarEntradasESaidasUltimoFrame(IList<Frame> amostra, LinkedList<int> saidas, 
             int indice, int quantidadeFramesQueRepresentamPrimeiroFrame)
         {
             var amostraDoFrame = new Frame[1];
@@ -64,14 +63,14 @@ namespace Dominio.Algoritmos.Treinamento
             for (int i = quantidadeFramesQueRepresentamPrimeiroFrame; i < amostra.Count; i++)
             {
                 amostraDoFrame[0] = amostra[i];
-                entradas.AddLast(caracteristicasComTipoFrame.DaAmostra(amostraDoFrame));
+                caracteristicasSinais.AddLast(caracteristicasComTipoFrame.DaAmostra(amostraDoFrame));
                 saidas.AddLast(indice + quantidadeDeSinais);
             }
         }
 
         protected override void Finalizar()
         {
-            Entradas = entradas.ToArray();
+            CaracteristicasSinais = caracteristicasSinais.ToArray();
         }
     }
 }

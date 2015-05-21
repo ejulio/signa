@@ -5,45 +5,45 @@ using System.Linq;
 
 namespace Dominio.Algoritmos.Treinamento
 {
-    public abstract class DadosAlgoritmoClassificacaoSinais
+    public abstract class DadosAlgoritmoClassificacaoSinais : IDadosAlgoritmoClassificacaoSinais
     {
-        public int[] Saidas { get; private set; }
-        public int QuantidadeDeClasses { get; private set; }
-        public abstract int QuantidadeDeClassesPorSinal { get; }
+        public int[] IdentificadoresSinais { get; private set; }
+        public int QuantidadeClasses { get; private set; }
+        public abstract int QuantidadeClassesPorSinal { get; }
 
         private readonly IEnumerable<Sinal> sinais;
-        private LinkedList<int> saidas;
+        private LinkedList<int> identificadoresSinais;
 
         protected DadosAlgoritmoClassificacaoSinais(IEnumerable<Sinal> sinais)
         {
             this.sinais = sinais;
-            saidas = new LinkedList<int>();
+            identificadoresSinais = new LinkedList<int>();
         }
 
         public void Processar()
         {
             var identificadorDoSinal = 0;
-            QuantidadeDeClasses = 0;
-            saidas = new LinkedList<int>();
+            QuantidadeClasses = 0;
+            identificadoresSinais = new LinkedList<int>();
 
             Inicializar(sinais);
 
             foreach (var sinal in sinais)
             {
                 foreach (var amostra in sinal.Amostras)
-                    GerarEntradasESaidasParaAmostra(amostra, saidas, identificadorDoSinal);
+                    GerarEntradasESaidasDaAmostra(amostra, identificadoresSinais, identificadorDoSinal);
 
                 sinal.IdNoAlgoritmo = identificadorDoSinal;
                 identificadorDoSinal++;
-                QuantidadeDeClasses += QuantidadeDeClassesPorSinal;
+                QuantidadeClasses += QuantidadeClassesPorSinal;
             }
 
-            Saidas = saidas.ToArray();
+            IdentificadoresSinais = identificadoresSinais.ToArray();
             Finalizar();
         }
 
         protected abstract void Inicializar(IEnumerable<Sinal>  sinais);
-        protected abstract void GerarEntradasESaidasParaAmostra(IList<Frame> amostra, LinkedList<int> saidas, int identificadorDoSinal);
+        protected abstract void GerarEntradasESaidasDaAmostra(IList<Frame> amostra, LinkedList<int> identificadoresSinais, int identificadorSinal);
         protected abstract void Finalizar();
     }
 }
