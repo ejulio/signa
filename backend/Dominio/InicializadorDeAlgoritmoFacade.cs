@@ -25,7 +25,7 @@ namespace Dominio
 
             if (repositorio.Any())
             {
-                var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(repositorio);
+                var dadosDoAlgoritmo = new DadosSinaisEstaticos(repositorio);
                 algoritmo.Treinar(dadosDoAlgoritmo);
             }
         }
@@ -39,10 +39,10 @@ namespace Dominio
 
             if (repositorio.Any())
             {
-                var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisDinamicos(repositorio);
+                var dadosDoAlgoritmo = new DadosSinaisDinamicos(repositorio);
                 algoritmo.Treinar(dadosDoAlgoritmo);
 
-                var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new GeradorDeDadosDosLimitesDeSinaisDinamicos(repositorio);
+                var dadosDoAlgoritmoDeLimitesDeSinaisDinamicos = new DadosFramesSinaisDinamicos(repositorio);
                 algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosDoAlgoritmoDeLimitesDeSinaisDinamicos);
             }
         }

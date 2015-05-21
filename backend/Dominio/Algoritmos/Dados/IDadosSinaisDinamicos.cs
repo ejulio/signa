@@ -1,7 +1,7 @@
 ﻿
 namespace Dominio.Algoritmos.Dados
 {
-    public interface IGeradorDeDadosDeSinaisDinamicos
+    public interface IDadosSinaisDinamicos
     {
         double[][][] Entradas { get; }
         int[] Saidas { get; }

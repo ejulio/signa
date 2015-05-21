@@ -1,13 +1,13 @@
 ﻿using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Sinais;
+using Dominio.Sinais.Frames;
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Dados
 {
-    public class GeradorDeDadosDosLimitesDeSinaisDinamicos : GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais,
-        IGeradorDeDadosDeSinaisEstaticos
+    public class DadosFramesSinaisDinamicos : DadosAlgoritmoReconhecimentoSinais,
+        IDadosSinaisEstaticos
     {
         public double[][] Entradas { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Dominio.Algoritmos.Dados
             get { return 2; }
         }
 
-        public GeradorDeDadosDosLimitesDeSinaisDinamicos(IEnumerable<Sinal> sinais)
+        public DadosFramesSinaisDinamicos(IEnumerable<Sinal> sinais)
             : base(sinais)
         {
         }

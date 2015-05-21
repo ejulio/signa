@@ -6,8 +6,8 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Dados
 {
-    public class GeradorDeDadosDeSinaisDinamicos : GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais, 
-        IGeradorDeDadosDeSinaisDinamicos
+    public class DadosSinaisDinamicos : DadosAlgoritmoReconhecimentoSinais, 
+        IDadosSinaisDinamicos
     {
         public double[][][] Entradas { get; private set; }
 
@@ -19,7 +19,7 @@ namespace Dominio.Algoritmos.Dados
             get { return 1; }
         }
 
-        public GeradorDeDadosDeSinaisDinamicos(IEnumerable<Sinal> sinais)
+        public DadosSinaisDinamicos(IEnumerable<Sinal> sinais)
             :base(sinais)
         {
         }

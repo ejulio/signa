@@ -69,7 +69,7 @@ namespace Testes.Unidade
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisEstaticos>(d => VerificarDadosDoAlgoritmoDeSinaisEstaticos(d))));
+                    a.Treinar(It.Is<IDadosSinaisEstaticos>(d => VerificarDadosDoAlgoritmoDeSinaisEstaticos(d))));
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace Testes.Unidade
 
             acao.ShouldNotThrow();
             algoritmoDeReconhecimentoDeSinaisEstaticos
-                .Verify(a => a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisEstaticos>()), Times.Never);
+                .Verify(a => a.Treinar(It.IsAny<IDadosSinaisEstaticos>()), Times.Never);
         }
 
         [TestMethod]
@@ -98,11 +98,11 @@ namespace Testes.Unidade
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisEstaticos>(d => VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(d))));
+                    a.Treinar(It.Is<IDadosSinaisEstaticos>(d => VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(d))));
 
             algoritmoDeReconhecimentoDeSinaisDinamicos
                 .Verify(a =>
-                    a.Treinar(It.Is<IGeradorDeDadosDeSinaisDinamicos>(d => VerificarDadosDoAlgoritmoDeSinaisDinamicos(d))));
+                    a.Treinar(It.Is<IDadosSinaisDinamicos>(d => VerificarDadosDoAlgoritmoDeSinaisDinamicos(d))));
         }
 
         [TestMethod]
@@ -117,10 +117,10 @@ namespace Testes.Unidade
 
             acao.ShouldNotThrow();
             algoritmoDeReconhecimentoDeSinaisEstaticos
-                .Verify(a => a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisEstaticos>()), Times.Never);
+                .Verify(a => a.Treinar(It.IsAny<IDadosSinaisEstaticos>()), Times.Never);
 
             algoritmoDeReconhecimentoDeSinaisDinamicos
-                .Verify(a => a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisDinamicos>()), Times.Never);
+                .Verify(a => a.Treinar(It.IsAny<IDadosSinaisDinamicos>()), Times.Never);
         }
 
         [TestMethod]
@@ -134,11 +134,11 @@ namespace Testes.Unidade
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisEstaticos>()), Times.Exactly(2));
+                    a.Treinar(It.IsAny<IDadosSinaisEstaticos>()), Times.Exactly(2));
 
             algoritmoDeReconhecimentoDeSinaisDinamicos
                 .Verify(a =>
-                    a.Treinar(It.IsAny<IGeradorDeDadosDeSinaisDinamicos>()), Times.Once);
+                    a.Treinar(It.IsAny<IDadosSinaisDinamicos>()), Times.Once);
         }
 
         private ICollection<Sinal> DadaUmaColecaoDeSinaisEstaticos()
@@ -182,7 +182,7 @@ namespace Testes.Unidade
                 .ToArray();
         }
 
-        private bool VerificarDadosDoAlgoritmoDeSinaisEstaticos(IGeradorDeDadosDeSinaisEstaticos dados)
+        private bool VerificarDadosDoAlgoritmoDeSinaisEstaticos(IDadosSinaisEstaticos dados)
         {
             dados.QuantidadeDeClasses.Should().Be(2);
             dados.Saidas.Should().HaveCount(4);
@@ -190,15 +190,15 @@ namespace Testes.Unidade
             return true;
         }
 
-        private bool VerificarDadosDoAlgoritmoDeSinaisDinamicos(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
+        private bool VerificarDadosDoAlgoritmoDeSinaisDinamicos(IDadosSinaisDinamicos dados)
         {
-            geradorDeDados.QuantidadeDeClasses.Should().Be(2);
-            geradorDeDados.Saidas.Should().HaveCount(4);
-            geradorDeDados.Entradas.Should().HaveCount(4);
+            dados.QuantidadeDeClasses.Should().Be(2);
+            dados.Saidas.Should().HaveCount(4);
+            dados.Entradas.Should().HaveCount(4);
             return true;
         }
 
-        private bool VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(IGeradorDeDadosDeSinaisEstaticos dados)
+        private bool VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(IDadosSinaisEstaticos dados)
         {
             dados.QuantidadeDeClasses.Should().Be(4);
             dados.Saidas.Should().HaveCount(12);

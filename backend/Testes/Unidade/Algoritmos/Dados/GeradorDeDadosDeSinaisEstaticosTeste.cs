@@ -27,7 +27,7 @@ namespace Testes.Unidade.Algoritmos.Dados
         {
             var sinais = DadaUmaColecaoDeUmSinal();
 
-            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(sinais);
+            var dadosDoAlgoritmo = new DadosSinaisEstaticos(sinais);
 
             DeveTerUmDadoDeTreinamento(sinais.First(), dadosDoAlgoritmo);
         }
@@ -40,7 +40,7 @@ namespace Testes.Unidade.Algoritmos.Dados
 
             var sinais = DadaUmaColecaoDeSinais(quantidadeDeAmostrasPorSinal, quantidadeDeSinais);
 
-            var dadosDoAlgoritmo = new GeradorDeDadosDeSinaisEstaticos(sinais);
+            var dadosDoAlgoritmo = new DadosSinaisEstaticos(sinais);
 
             DeveTerOsDadosDaColecaoDeSinais(dadosDoAlgoritmo, sinais, quantidadeDeAmostrasPorSinal);
         }
@@ -71,30 +71,30 @@ namespace Testes.Unidade.Algoritmos.Dados
             return sinais;
         }
 
-        private void DeveTerOsDadosDaColecaoDeSinais(GeradorDeDadosDeSinaisEstaticos geradorDeGeradorDeDadosDoAlgoritmo, ICollection<Sinal> sinais, int quantidadeDeAmostrasPorSinal)
+        private void DeveTerOsDadosDaColecaoDeSinais(DadosSinaisEstaticos dadosDoAlgoritmo, ICollection<Sinal> sinais, int quantidadeDeAmostrasPorSinal)
         {
-            geradorDeGeradorDeDadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(sinais.Count);
-            geradorDeGeradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
-            geradorDeGeradorDeDadosDoAlgoritmo.Entradas.Should().HaveSameCount(geradorDeGeradorDeDadosDoAlgoritmo.Saidas);
-            geradorDeGeradorDeDadosDoAlgoritmo.Saidas.Should().ContainInOrder(SaidasEsperadas(sinais));
+            dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(sinais.Count);
+            dadosDoAlgoritmo.Entradas.Should().HaveCount(quantidadeDeAmostrasPorSinal * sinais.Count);
+            dadosDoAlgoritmo.Entradas.Should().HaveSameCount(dadosDoAlgoritmo.Saidas);
+            dadosDoAlgoritmo.Saidas.Should().ContainInOrder(SaidasEsperadas(sinais));
 
             int indiceDaEntrada = 0;
             var entradasEsperadas = EntradasEsperadasParaOsSinais(sinais);
-            foreach (var input in geradorDeGeradorDeDadosDoAlgoritmo.Entradas)
+            foreach (var input in dadosDoAlgoritmo.Entradas)
             {
                 input.Should().ContainInOrder(entradasEsperadas[indiceDaEntrada]);
                 indiceDaEntrada++;
             }
         }
 
-        private void DeveTerUmDadoDeTreinamento(Sinal sinal, GeradorDeDadosDeSinaisEstaticos geradorDeGeradorDeDadosDoAlgoritmo)
+        private void DeveTerUmDadoDeTreinamento(Sinal sinal, DadosSinaisEstaticos dadosDoAlgoritmo)
         {
             var arrayDaAmostra = amostraPadrao[0].MontarArrayEsperadoParaSinaisEstaticos();
-            geradorDeGeradorDeDadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
-            geradorDeGeradorDeDadosDoAlgoritmo.Entradas.Should().HaveCount(1);
-            geradorDeGeradorDeDadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
-            geradorDeGeradorDeDadosDoAlgoritmo.Saidas.Should().HaveCount(1);
-            geradorDeGeradorDeDadosDoAlgoritmo.Saidas[0].Should().Be(sinal.IdNoAlgoritmo);
+            dadosDoAlgoritmo.QuantidadeDeClasses.Should().Be(1);
+            dadosDoAlgoritmo.Entradas.Should().HaveCount(1);
+            dadosDoAlgoritmo.Entradas[0].Should().ContainInOrder(arrayDaAmostra);
+            dadosDoAlgoritmo.Saidas.Should().HaveCount(1);
+            dadosDoAlgoritmo.Saidas[0].Should().Be(sinal.IdNoAlgoritmo);
         }
 
         private double[][] EntradasEsperadasParaOsSinais(ICollection<Sinal> sinais)

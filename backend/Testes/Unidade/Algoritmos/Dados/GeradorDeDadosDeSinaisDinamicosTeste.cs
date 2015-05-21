@@ -20,7 +20,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             var sinais = DadaUmaColecaoComUmSinalComCincoFrames();
             var sinal = sinais[0];
 
-            var dados = new GeradorDeDadosDeSinaisDinamicos(sinais);
+            var dados = new DadosSinaisDinamicos(sinais);
             var saidasEsperadas = DadasAsSaidasEsperadasParaAColecaoDeSinais(sinais);
 
             DeveTerExtraidoOsDadosDasAmostras(dados, 1, 1, saidasEsperadas, sinal.Amostras);
@@ -48,7 +48,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             const int quantidadeDeSinais = 4;
             var colecaoDeSinais = DadaUmaColecaoDeSinaisComAmostras(quantidadeDeAmostras, quantidadeDeSinais);
 
-            var dados = new GeradorDeDadosDeSinaisDinamicos(colecaoDeSinais);
+            var dados = new DadosSinaisDinamicos(colecaoDeSinais);
             
             var amostrasEsperadas = ConcatenarAmostrasDosSinais(colecaoDeSinais);
             var saidasEsperadas = DadasAsSaidasEsperadasParaAColecaoDeSinais(colecaoDeSinais);
@@ -96,14 +96,14 @@ namespace Testes.Unidade.Algoritmos.Dados
             return amostrasConcatenadas.ToArray();
         }
 
-        private void DeveTerExtraidoOsDadosDasAmostras(GeradorDeDadosDeSinaisDinamicos geradorDeGeradorDeDados, int quantidadeDeSinais, 
+        private void DeveTerExtraidoOsDadosDasAmostras(DadosSinaisDinamicos dados, int quantidadeDeSinais, 
             int quantidadeDeAmostras, int[] saidasEsperadas, IList<IList<Frame>> amostrasEsperadas)
         {
-            geradorDeGeradorDeDados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
-            geradorDeGeradorDeDados.Saidas.Should().HaveSameCount(geradorDeGeradorDeDados.Entradas);
-            geradorDeGeradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
-            geradorDeGeradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais);
-            DeveTerAsEntradasDasAmostras(geradorDeGeradorDeDados.Entradas, amostrasEsperadas);
+            dados.Entradas.Should().HaveCount(quantidadeDeSinais * quantidadeDeAmostras);
+            dados.Saidas.Should().HaveSameCount(dados.Entradas);
+            dados.Saidas.Should().ContainInOrder(saidasEsperadas);
+            dados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais);
+            DeveTerAsEntradasDasAmostras(dados.Entradas, amostrasEsperadas);
         }
 
         private void DeveTerAsEntradasDasAmostras(double[][][] entradas, IList<IList<Frame>> amostras)

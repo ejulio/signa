@@ -5,6 +5,6 @@ namespace Dominio.Algoritmos.Estatico
 {
     public interface IAlgoritmoClassificacaoSinaisEstaticos : IAlgoritmoClassificacaoSinais
     {
-        void Treinar(IGeradorDeDadosDeSinaisEstaticos dados);
+        void Treinar(IDadosSinaisEstaticos dados);
     }
 }

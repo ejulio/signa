@@ -1,7 +1,7 @@
 ﻿
 namespace Dominio.Algoritmos.Dados
 {
-    public interface IGeradorDeDadosDeSinaisEstaticos
+    public interface IDadosSinaisEstaticos
     {
         double[][] Entradas { get; }
         int[] Saidas { get; }

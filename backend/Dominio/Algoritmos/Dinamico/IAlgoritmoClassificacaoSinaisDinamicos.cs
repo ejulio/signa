@@ -5,6 +5,6 @@ namespace Dominio.Algoritmos.Dinamico
 {
     public interface IAlgoritmoClassificacaoSinaisDinamicos : IAlgoritmoClassificacaoSinais
     {
-        void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados);
+        void Treinar(IDadosSinaisDinamicos dados);
     }
 }

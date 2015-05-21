@@ -20,7 +20,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             var sinais = DadaUmaColecaoComUmaAmostraDeCincoFrames();
             var sinal = sinais[0];
 
-            var dados = new GeradorDeDadosDosLimitesDeSinaisDinamicos(sinais);
+            var dados = new DadosFramesSinaisDinamicos(sinais);
             var saidasEsperadas = DadasAsSaidasEsperadosParaAColecaoDeSinais(sinais);
 
             DeveTerExtraidoOsDadosDasAmostras(dados, 1, 1, saidasEsperadas, sinal.Amostras);
@@ -33,7 +33,7 @@ namespace Testes.Unidade.Algoritmos.Dados
             const int quantidadeDeSinais = 4;
             var colecaoDeSinais = DadaUmaColecaoDeSinaisComAmostras(quantidadeDeAmostras, quantidadeDeSinais);
 
-            var dados = new GeradorDeDadosDosLimitesDeSinaisDinamicos(colecaoDeSinais);
+            var dados = new DadosFramesSinaisDinamicos(colecaoDeSinais);
             
             var amostrasEsperadas = ConcatenarAmostrasDosSinais(colecaoDeSinais);
             var saidasEsperadas = DadasAsSaidasEsperadosParaAColecaoDeSinais(colecaoDeSinais);
@@ -100,13 +100,13 @@ namespace Testes.Unidade.Algoritmos.Dados
             return amostrasConcatenadas.ToArray();
         }
 
-        private void DeveTerExtraidoOsDadosDasAmostras(GeradorDeDadosDosLimitesDeSinaisDinamicos geradorDeGeradorDeDados, int quantidadeDeSinais, 
+        private void DeveTerExtraidoOsDadosDasAmostras(DadosFramesSinaisDinamicos dados, int quantidadeDeSinais, 
             int quantidadeDeAmostras, int[] saidasEsperadas, IList<IList<Frame>> amostrasEsperadas)
         {
-            geradorDeGeradorDeDados.Entradas.Should().HaveSameCount(saidasEsperadas);
-            geradorDeGeradorDeDados.Saidas.Should().HaveSameCount(saidasEsperadas);
-            geradorDeGeradorDeDados.Saidas.Should().ContainInOrder(saidasEsperadas);
-            geradorDeGeradorDeDados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais * 2);
+            dados.Entradas.Should().HaveSameCount(saidasEsperadas);
+            dados.Saidas.Should().HaveSameCount(saidasEsperadas);
+            dados.Saidas.Should().ContainInOrder(saidasEsperadas);
+            dados.QuantidadeDeClasses.Should().Be(quantidadeDeSinais * 2);
         }
     }
 }

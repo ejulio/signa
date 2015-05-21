@@ -33,16 +33,16 @@ namespace Dominio.Algoritmos.Dinamico
             return classificador.Compute(caracteristicas.DaAmostra(amostra)); ;
         }
 
-        public void Treinar(IGeradorDeDadosDeSinaisDinamicos geradorDeDados)
+        public void Treinar(IDadosSinaisDinamicos dados)
         {
-            var initial = CriarDistribuicao(geradorDeDados.Entradas);
+            var initial = CriarDistribuicao(dados.Entradas);
 
 
             int numberOfStates = 5; // this value can be found by trial-and-error
 
             var classifier = new HiddenMarkovClassifier<Independent<NormalDistribution>>
             (
-               classes: geradorDeDados.QuantidadeDeClasses,
+               classes: dados.QuantidadeDeClasses,
                topology: new Forward(numberOfStates), // word classifiers should use a forward topology
                initial: initial
             );
@@ -68,7 +68,7 @@ namespace Dominio.Algoritmos.Dinamico
             );
 
             // Finally, we can run the learning algorithm!
-            teacher.Run(geradorDeDados.Entradas, geradorDeDados.Saidas);
+            teacher.Run(dados.Entradas, dados.Saidas);
 
             var function = new MarkovMultivariateFunction(classifier);
             classificador = new HiddenConditionalRandomField<double[]>(function);

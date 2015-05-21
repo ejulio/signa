@@ -5,7 +5,7 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Dados
 {
-    public abstract class GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais
+    public abstract class DadosAlgoritmoReconhecimentoSinais
     {
         public int[] Saidas { get; private set; }
         public int QuantidadeDeClasses { get; private set; }
@@ -14,7 +14,7 @@ namespace Dominio.Algoritmos.Dados
         private readonly IEnumerable<Sinal> sinais;
         private LinkedList<int> saidas;
 
-        protected GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais(IEnumerable<Sinal> sinais)
+        protected DadosAlgoritmoReconhecimentoSinais(IEnumerable<Sinal> sinais)
         {
             this.sinais = sinais;
             saidas = new LinkedList<int>();

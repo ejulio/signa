@@ -55,7 +55,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
                 .ComGeradorDeAmostras(i => new ColecaoDeFramesBuilder().ParaOIndiceComQuantidade(i, 5).Construir())
                 .Construir();
 
-            var dados = new GeradorDeDadosDeSinaisDinamicos(colecaoDeSinais);
+            var dados = new DadosSinaisDinamicos(colecaoDeSinais);
             hcrf.Treinar(dados);
 
             return hcrf;

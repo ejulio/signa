@@ -6,8 +6,8 @@ using Dominio.Sinais.Frames;
 
 namespace Dominio.Algoritmos.Dados
 {
-    public class GeradorDeDadosDeSinaisEstaticos : GeradorDeDadosParaAlgoritmoDeReconhecimentoDeSinais, 
-        IGeradorDeDadosDeSinaisEstaticos
+    public class DadosSinaisEstaticos : DadosAlgoritmoReconhecimentoSinais, 
+        IDadosSinaisEstaticos
     {
         public double[][] Entradas { get; private set; }
         
@@ -20,7 +20,7 @@ namespace Dominio.Algoritmos.Dados
             get { return 1; }
         }
 
-        public GeradorDeDadosDeSinaisEstaticos(IEnumerable<Sinal> sinais)
+        public DadosSinaisEstaticos(IEnumerable<Sinal> sinais)
             : base(sinais)
         {
         }
