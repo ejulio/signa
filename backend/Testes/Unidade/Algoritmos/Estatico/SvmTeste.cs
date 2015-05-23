@@ -46,7 +46,7 @@ namespace Testes.Unidade.Algoritmos.Estatico
             var dadosDeTreinamento = new DadosSinaisEstaticos(sinais);
             dadosDeTreinamento.Processar();
             var svm = new Svm(new CaracteristicasSinalEstatico());
-            svm.Treinar(dadosDeTreinamento);
+            svm.Aprender(dadosDeTreinamento);
 
             return svm;
         }

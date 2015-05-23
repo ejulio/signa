@@ -69,7 +69,7 @@ namespace Testes.Unidade
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.Is<IDadosSinaisEstaticos>(d => VerificarDadosDoAlgoritmoDeSinaisEstaticos(d))));
+                    a.Aprender(It.Is<IDadosSinaisEstaticos>(d => VerificarDadosDoAlgoritmoDeSinaisEstaticos(d))));
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace Testes.Unidade
 
             acao.ShouldNotThrow();
             algoritmoDeReconhecimentoDeSinaisEstaticos
-                .Verify(a => a.Treinar(It.IsAny<IDadosSinaisEstaticos>()), Times.Never);
+                .Verify(a => a.Aprender(It.IsAny<IDadosSinaisEstaticos>()), Times.Never);
         }
 
         [TestMethod]
@@ -98,11 +98,11 @@ namespace Testes.Unidade
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.Is<IDadosSinaisEstaticos>(d => VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(d))));
+                    a.Aprender(It.Is<IDadosSinaisEstaticos>(d => VerificarDadosDosLimitesDoAlgoritmoDeSinaisDinamicos(d))));
 
             algoritmoDeReconhecimentoDeSinaisDinamicos
                 .Verify(a =>
-                    a.Treinar(It.Is<IDadosSinaisDinamicos>(d => VerificarDadosDoAlgoritmoDeSinaisDinamicos(d))));
+                    a.Aprender(It.Is<IDadosSinaisDinamicos>(d => VerificarDadosDoAlgoritmoDeSinaisDinamicos(d))));
         }
 
         [TestMethod]
@@ -117,10 +117,10 @@ namespace Testes.Unidade
 
             acao.ShouldNotThrow();
             algoritmoDeReconhecimentoDeSinaisEstaticos
-                .Verify(a => a.Treinar(It.IsAny<IDadosSinaisEstaticos>()), Times.Never);
+                .Verify(a => a.Aprender(It.IsAny<IDadosSinaisEstaticos>()), Times.Never);
 
             algoritmoDeReconhecimentoDeSinaisDinamicos
-                .Verify(a => a.Treinar(It.IsAny<IDadosSinaisDinamicos>()), Times.Never);
+                .Verify(a => a.Aprender(It.IsAny<IDadosSinaisDinamicos>()), Times.Never);
         }
 
         [TestMethod]
@@ -134,11 +134,11 @@ namespace Testes.Unidade
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
-                    a.Treinar(It.IsAny<IDadosSinaisEstaticos>()), Times.Exactly(2));
+                    a.Aprender(It.IsAny<IDadosSinaisEstaticos>()), Times.Exactly(2));
 
             algoritmoDeReconhecimentoDeSinaisDinamicos
                 .Verify(a =>
-                    a.Treinar(It.IsAny<IDadosSinaisDinamicos>()), Times.Once);
+                    a.Aprender(It.IsAny<IDadosSinaisDinamicos>()), Times.Once);
         }
 
         private ICollection<Sinal> DadaUmaColecaoDeSinaisEstaticos()

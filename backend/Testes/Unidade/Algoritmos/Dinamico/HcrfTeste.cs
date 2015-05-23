@@ -56,7 +56,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
 
             var dados = new DadosSinaisDinamicos(colecaoDeSinais);
             dados.Processar();
-            hcrf.Treinar(dados);
+            hcrf.Aprender(dados);
 
             return hcrf;
         }

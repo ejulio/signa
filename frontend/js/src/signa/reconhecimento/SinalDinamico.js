@@ -59,11 +59,7 @@
 
         reconhecendo: function(amostra) {
             this._estado = this.RECONHECENDO;
-            this._salvarAmostraNoBuffer(amostra);
-        },
-
-        _salvarAmostraNoBuffer: function(amostra) {
-            this._estado.reconhecer(amostra);
+            this._buffer.adicionar(amostra);
         },
 
         naoReconheceuFrame: function() {

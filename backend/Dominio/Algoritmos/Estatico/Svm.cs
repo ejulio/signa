@@ -32,7 +32,7 @@ namespace Dominio.Algoritmos.Estatico
             return svm.Compute(caracteristicas.DaAmostra(frame), MulticlassComputeMethod.Elimination);
         }
 
-        public void Treinar(IDadosSinaisEstaticos dados)
+        public void Aprender(IDadosSinaisEstaticos dados)
         {
             var kernel = new Gaussian(sigma: 1);
             svm = new MulticlassSupportVectorMachine(QuantidadeIndeterminadaDeCaracteristicas, kernel, dados.QuantidadeClasses);

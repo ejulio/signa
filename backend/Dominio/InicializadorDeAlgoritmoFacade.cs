@@ -27,7 +27,7 @@ namespace Dominio
             {
                 var dadosSinaisEstaticos = new DadosSinaisEstaticos(repositorio);
                 dadosSinaisEstaticos.Processar();
-                algoritmo.Treinar(dadosSinaisEstaticos);
+                algoritmo.Aprender(dadosSinaisEstaticos);
             }
         }
 
@@ -42,11 +42,11 @@ namespace Dominio
             {
                 var dadosSinaisDinamicos = new DadosSinaisDinamicos(repositorio);
                 dadosSinaisDinamicos.Processar();
-                algoritmo.Treinar(dadosSinaisDinamicos);
+                algoritmo.Aprender(dadosSinaisDinamicos);
 
                 var dadosFramesSinaisDinamicos = new DadosFramesSinaisDinamicos(repositorio);
                 dadosFramesSinaisDinamicos.Processar();
-                algoritmoDeLimitesDeSinaisDinamicos.Treinar(dadosFramesSinaisDinamicos);
+                algoritmoDeLimitesDeSinaisDinamicos.Aprender(dadosFramesSinaisDinamicos);
             }
         }
 
