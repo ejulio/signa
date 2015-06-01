@@ -2,8 +2,8 @@
     'use strict';
     
     var ID_EVENTO_FRAME = 'frame';
-    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 2;
-    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 4;
+    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 3;
+    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 5;
 
     function FrameBuffer() {
         this._eventEmitter = new EventEmitter();

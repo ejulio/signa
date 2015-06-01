@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using Dominio.Sinais.Frames;
 using Dominio.Sinais.Maos;
 using Dominio.Util;
 using Dominio.Util.Matematica;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio.Algoritmos.Caracteristicas
 {
@@ -20,21 +20,30 @@ namespace Dominio.Algoritmos.Caracteristicas
         {
             return mao.VetorNormalDaPalma.Normalizado()
                 .Concat(mao.Direcao.Normalizado())
-                .Concat(AngulosEntreDedosEPalmaDaMao(mao))
+                .Concat(AngulosEntreDedos(mao))
                 .Concat(DirecaoDosDedos(mao));
         }
 
-        private IEnumerable<double> AngulosEntreDedosEPalmaDaMao(Mao mao)
+        private IEnumerable<double> AngulosEntreDedos(Mao mao)
         {
-            var angulos = new double[mao.Dedos.Length];
+            var angulos = new double[mao.Dedos.Length - 1];
             
             for (int i = 0; i < angulos.Length; i++)
-                angulos[i] = mao.Dedos[i].PosicaoDaPonta
-                    .Subtrair(mao.PosicaoDaPalma)
-                    .ProjetadoNoPlano(mao.VetorNormalDaPalma)
-                    .AnguloAte(mao.PosicaoDaPalma);
+            {
+                var dedoAtual = mao.Dedos[i];
+                var proximoDedo = mao.Dedos[i + 1];
+                var posicaoDedoAtual = PosicaoDoDedoProjetadaNoPlanoDaPalma(dedoAtual, mao);
+                var posicaoProximoDedo = PosicaoDoDedoProjetadaNoPlanoDaPalma(proximoDedo, mao);
+                angulos[i] = posicaoDedoAtual.AnguloAte(posicaoProximoDedo);
+            }
 
             return angulos.Normalizado();
+        }
+
+        private double[] PosicaoDoDedoProjetadaNoPlanoDaPalma(Dedo dedo, Mao mao)
+        {
+            return dedo.PosicaoDaPonta
+                .ProjetadoNoPlano(mao.VetorNormalDaPalma);
         }
 
         private IEnumerable<double> DirecaoDosDedos(Mao mao)
