@@ -16,11 +16,7 @@
         reconhecer: function(frame) {
             var amostra = [frame];
 
-            return this._hub
-                .reconhecer(this._sinalId, amostra)
-                .then(function(reconheceuSinal) {
-                    return reconheceuSinal;
-                });
+            return this._hub.reconhecer(this._sinalId, amostra);
         }
     };
 

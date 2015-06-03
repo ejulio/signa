@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Dominio.Algoritmos;
+﻿using Dominio.Algoritmos;
 using Dominio.Persistencia;
 using Dominio.Sinais;
 using Dominio.Sinais.Frames;
 using Dominio.Util;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Dominio.Gerenciamento
 {

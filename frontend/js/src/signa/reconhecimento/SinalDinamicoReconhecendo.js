@@ -1,6 +1,8 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
+    var QUANTIDADE_MAXIMA = 50;
+
     function SinalDinamicoReconhecendo(algoritmoDeSinalDinamico) {
         this._frames = [];
         this._algoritmoDeSinalDinamico = algoritmoDeSinalDinamico;
@@ -21,10 +23,9 @@
 
         adicionar: function(amostra) {
             this._frames.push(amostra[0]);
-            if (this._frames.length === 50) {
+            if (this._frames.length === QUANTIDADE_MAXIMA) {
                 this._algoritmoDeSinalDinamico.naoReconheceuFrame();
                 this._frames = [];
-                console.log('LIMPANDO FRAMES - BUFFER CHEIO');
             }
         },
 

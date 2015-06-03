@@ -1,14 +1,11 @@
-﻿using Accord.Controls;
-using Accord.MachineLearning.VectorMachines;
+﻿using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.Statistics.Kernels;
 using Dominio.Algoritmos.Caracteristicas;
-using Dominio.Sinais;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Dominio.Algoritmos.Treinamento;
 using Dominio.Sinais.Frames;
+using System;
+using System.Collections.Generic;
 
 namespace Dominio.Algoritmos.Estatico
 {
@@ -29,7 +26,8 @@ namespace Dominio.Algoritmos.Estatico
             {
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
-            return svm.Compute(caracteristicas.DaAmostra(frame), MulticlassComputeMethod.Elimination);
+            var caracteristicasDoSinal = caracteristicas.DaAmostra(frame);
+            return svm.Compute(caracteristicasDoSinal, MulticlassComputeMethod.Elimination);
         }
 
         public void Aprender(IDadosSinaisEstaticos dados)
