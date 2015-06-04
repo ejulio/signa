@@ -1,16 +1,12 @@
 ﻿using Dominio;
 using Dominio.Algoritmos;
-using Dominio.Algoritmos.Estatico;
 using Dominio.Algoritmos.Factories;
+using Dominio.Persistencia;
 using Dominio.Sinais;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Dominio.Persistencia;
 
 namespace Testes.Integracao.Dominio.Algoritmos
 {
@@ -38,7 +34,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             repositorio = new RepositorioSinais(CaminhoDoArquivoDeDadosDeReconhecimento);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_estaticos()
         {
             var repositorioSinaisEstaticos = new RepositorioSinaisEstaticos(repositorio);
@@ -49,7 +45,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisEstaticos, repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos());
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
@@ -60,7 +56,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisDinamicos, repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos());
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_frames_de_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);

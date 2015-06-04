@@ -27,7 +27,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
         {
             const int quantidadeDeSinais = 3;
             const int quantidadeDeAmostrasPorSinal = 4;
-            const int indiceDoSinalResultante = 2;
+            const int indiceDoSinalResultante = 1;
 
             var hcrf = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 

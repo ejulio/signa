@@ -1,10 +1,9 @@
-﻿using Dominio.Sinais;
-using Dominio.Util;
-using System.Linq;
-using System.Collections.Generic;
-using Dominio.Sinais.Frames;
+﻿using Dominio.Sinais.Frames;
 using Dominio.Sinais.Maos;
+using Dominio.Util;
 using Dominio.Util.Matematica;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Testes.Comum.Util
 {
@@ -29,14 +28,13 @@ namespace Testes.Comum.Util
 
         private static IEnumerable<double> AngulosProjetados(Mao mao)
         {
-            var angulos = new double[mao.Dedos.Length];
+            var angulos = new double[mao.Dedos.Length - 1];
 
             for (int i = 0; i < angulos.Length; i++)
             {
                 angulos[i] = mao.Dedos[i].PosicaoDaPonta
-                    .Subtrair(mao.PosicaoDaPalma)
                     .ProjetadoNoPlano(mao.VetorNormalDaPalma)
-                    .AnguloAte(mao.Direcao);
+                    .AnguloAte(mao.Dedos[i + 1].PosicaoDaPonta.ProjetadoNoPlano(mao.VetorNormalDaPalma));
 
             }
 
