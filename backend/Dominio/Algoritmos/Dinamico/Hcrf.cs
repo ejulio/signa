@@ -31,7 +31,7 @@ namespace Dominio.Algoritmos.Dinamico
                 throw new InvalidOperationException();
 
             var caracteristicasDoSinal = caracteristicas.DaAmostra(amostra);
-            return hcrf.Compute(caracteristicasDoSinal); ;
+            return hcrf.Compute(caracteristicasDoSinal);
         }
 
         public void Aprender(IDadosSinaisDinamicos dados)

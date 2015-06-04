@@ -377,8 +377,8 @@
     'use strict';
     
     var ID_EVENTO_FRAME = 'frame';
-    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 2;
-    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 4;
+    var INDICE_DO_FRAME_QUE_DEVE_SER_ARMAZENADO = 3;
+    var QUANTIDADE_DE_FRAMES_DO_BUFFER = 5;
 
     function FrameBuffer() {
         this._eventEmitter = new EventEmitter();
@@ -576,7 +576,7 @@
         },
 
         _gerarAmostra: function() {
-            if (this._framesCarregados.length === 1) {
+            if (this._framesCarregados.length < 5) {
                 return this._gerarAmostraEstatica();
             }
 
@@ -788,7 +788,7 @@
             this._descricaoDoSinal.onNovoSinal(this._informacoesDoSinal);
             this._maosDoUsuario.onNovoSinal(this._informacoesDoSinal);
             this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
-            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.Id);
+            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.IdReconhecimento);
             this._esconderCaixaDeMensagem();
         },
 
@@ -1087,6 +1087,8 @@
 ;(function(window, Signa, undefined) {
     'use strict';
 
+    var QUANTIDADE_MAXIMA = 50;
+
     function SinalDinamicoReconhecendo(algoritmoDeSinalDinamico) {
         this._frames = [];
         this._algoritmoDeSinalDinamico = algoritmoDeSinalDinamico;
@@ -1107,10 +1109,9 @@
 
         adicionar: function(amostra) {
             this._frames.push(amostra[0]);
-            if (this._frames.length === 50) {
+            if (this._frames.length === QUANTIDADE_MAXIMA) {
                 this._algoritmoDeSinalDinamico.naoReconheceuFrame();
                 this._frames = [];
-                console.log('LIMPANDO FRAMES - BUFFER CHEIO');
             }
         },
 
@@ -1200,11 +1201,7 @@
         reconhecer: function(frame) {
             var amostra = [frame];
 
-            return this._hub
-                .reconhecer(this._sinalId, amostra)
-                .then(function(reconheceuSinal) {
-                    return reconheceuSinal;
-                });
+            return this._hub.reconhecer(this._sinalId, amostra);
         }
     };
 

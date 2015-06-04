@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using Dominio.Sinais;
+using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Dominio.Sinais;
-using Newtonsoft.Json;
 
 namespace Dominio.Persistencia
 {
@@ -36,7 +36,7 @@ namespace Dominio.Persistencia
 
         public Sinal BuscarPorIndice(int indice)
         {
-            if (indice == Quantidade)
+            if (indice >= Quantidade)
                 return null;
 
             return sinaisPorIndice[indice];
@@ -77,7 +77,7 @@ namespace Dominio.Persistencia
 
         public void SalvarAlteracoes()
         {
-            using (StreamWriter writer = new StreamWriter(caminhoDoArquivoDeDados))
+            using (var writer = new StreamWriter(caminhoDoArquivoDeDados))
             {
                 var sinaisEmFormatoJson = JsonConvert.SerializeObject(sinaisPorDescricao.Values);
                 writer.Write(sinaisEmFormatoJson);
