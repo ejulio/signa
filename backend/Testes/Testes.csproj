@@ -74,6 +74,7 @@
     <Compile Include="Comum\Builders\Dominio\Sinais\SinalBuilder.cs" />
     <Compile Include="Comum\Builders\Dominio\Sinais\ColecaoDeSinaisBuilder.cs" />
     <Compile Include="Comum\Util\FrameExtensions.cs" />
+    <Compile Include="Comum\Util\Relatorio.cs" />
     <Compile Include="Integracao\Caminhos.cs" />
     <Compile Include="Integracao\Persistencia\RepositorioSinaisTeste.cs" />
     <Compile Include="Integracao\Persistencia\RepositorioFactoryTeste.cs" />

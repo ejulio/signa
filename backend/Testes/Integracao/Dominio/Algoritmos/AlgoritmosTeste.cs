@@ -3,10 +3,11 @@ using Dominio.Algoritmos;
 using Dominio.Algoritmos.Factories;
 using Dominio.Persistencia;
 using Dominio.Sinais;
+using Dominio.Sinais.Frames;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using Testes.Comum.Util;
 
 namespace Testes.Integracao.Dominio.Algoritmos
 {
@@ -19,13 +20,14 @@ namespace Testes.Integracao.Dominio.Algoritmos
         private IRepositorio<Sinal> repositorio;
         private AlgoritmoClassificacaoSinalFactory algoritmoFactory;
         private RepositorioFactory repositorioFactory;
+        private CaracteristicasFactory caracteristicasFactory;
 
         [TestInitialize]
         public void setup()
         {
-            var geradorDeCaracteristicasFactory = new CaracteristicasFactory();
+            caracteristicasFactory = new CaracteristicasFactory();
             repositorioFactory = new RepositorioFactory(CaminhoDoArquivoDeDadosDeTreinamento);
-            algoritmoFactory = new AlgoritmoClassificacaoSinalFactory(geradorDeCaracteristicasFactory);
+            algoritmoFactory = new AlgoritmoClassificacaoSinalFactory(caracteristicasFactory);
             var inicializadorDeAlgoritmo = new InicializadorDeAlgoritmoFacade(algoritmoFactory, repositorioFactory);
 
             inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
@@ -34,7 +36,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             repositorio = new RepositorioSinais(CaminhoDoArquivoDeDadosDeReconhecimento);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void reconhecendo_sinais_estaticos()
         {
             var repositorioSinaisEstaticos = new RepositorioSinaisEstaticos(repositorio);
@@ -45,7 +47,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisEstaticos, repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos());
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void reconhecendo_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
@@ -56,7 +58,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisDinamicos, repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos());
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void reconhecendo_sinais_frames_de_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
@@ -64,67 +66,80 @@ namespace Testes.Integracao.Dominio.Algoritmos
 
             repositorioSinaisDinamicos.Carregar();
 
-            ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisDinamicos, repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos());
+            ExecutarTestesDeReconhecimentoFramesComRelatorio(algoritmo, repositorioSinaisDinamicos, repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos());
         }
 
         private void ExecutarTestesDeReconhecimentoComRelatorio(IAlgoritmoClassificacaoSinais algoritmo, IRepositorio<Sinal> repositorioTestes, IRepositorio<Sinal> repositorioTreinamento)
         {
-            int totalAcertos = 0;
-            int totalErros = 0;
-            StringBuilder acertos = new StringBuilder();
-            StringBuilder erros = new StringBuilder();
+            var relatorio = new Relatorio();
             for (var i = 0; i < repositorioTestes.Quantidade; i++)
             {
                 var sinal = repositorioTestes.BuscarPorIndice(i);
-                var indiceDoSinalParaOAlgoritmo = repositorioTreinamento
-                    .Select((s, index) => new { Descricao = s.Descricao, Indice = index })
+                sinal.IdNoAlgoritmo = repositorioTreinamento
                     .First(o => o.Descricao == sinal.Descricao)
-                    .Indice;
-
-                Console.WriteLine("{0}({1})", sinal.Descricao, repositorioTreinamento
-                    .First(o => o.Descricao == sinal.Descricao).Amostras.Count);
+                    .IdNoAlgoritmo;
 
                 for (var j = 0; j < sinal.Amostras.Count; j++)
                 {
+                    var stopwatch = Stopwatch.StartNew();
                     var resultado = algoritmo.Classificar(sinal.Amostras[j]);
+                    stopwatch.Stop();
+                    if (resultado == sinal.IdNoAlgoritmo)
+                        relatorio.AdicionarAcerto(sinal, stopwatch.ElapsedMilliseconds);
+                    else
+                        relatorio.AdicionarErro(sinal, repositorioTreinamento.BuscarPorIndice(resultado), j, stopwatch.ElapsedMilliseconds);
+                }
+            }
 
-                    if (resultado == indiceDoSinalParaOAlgoritmo)
-                    {
-                        acertos.AppendFormat("{0}({1}), ", sinal.Descricao, indiceDoSinalParaOAlgoritmo);
-                        totalAcertos++;
-                    }
+            relatorio.Imprimir();
+        }
+
+        private void ExecutarTestesDeReconhecimentoFramesComRelatorio(IAlgoritmoClassificacaoSinais algoritmo, IRepositorio<Sinal> repositorioTestes, IRepositorio<Sinal> repositorioTreinamento)
+        {
+            var caracteristicas = caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame();
+            var relatorio = new Relatorio();
+            for (var i = 0; i < repositorioTestes.Quantidade; i++)
+            {
+                var sinal = repositorioTestes.BuscarPorIndice(i);
+                sinal.IdNoAlgoritmo = repositorioTreinamento
+                    .First(o => o.Descricao == sinal.Descricao)
+                    .IdNoAlgoritmo;
+
+                for (var j = 0; j < sinal.Amostras.Count; j++)
+                {
+                    caracteristicas.PrimeiroFrame = null;
+                    caracteristicas.TipoFrame = TipoFrame.Primeiro;
+                    var stopwatch = Stopwatch.StartNew();
+                    var resultado = algoritmo.Classificar(new[] { sinal.Amostras[j].First() });
+                    stopwatch.Stop();
+                    if (resultado == sinal.IdNoAlgoritmo)
+                        relatorio.AdicionarAcerto(sinal, stopwatch.ElapsedMilliseconds, " - PRIMEIRO FRAME");
                     else
                     {
-                        Console.WriteLine("ERRO");
-                        erros.AppendFormat(
-                            "Índice da amostra: {2}{0}Esperado: {3} - {1}{0}Reconhecido: {4} - {6}{0}{5}",
-                            Environment.NewLine,
-                            sinal.Descricao,
-                            j,
-                            indiceDoSinalParaOAlgoritmo,
-                            resultado,
-                            String.Empty.PadRight(20, '-'),
-                            repositorioTreinamento.BuscarPorIndice(resultado).Descricao);
-                        totalErros++;
+                        var indice = resultado >= repositorioTestes.Quantidade
+                            ? resultado - repositorioTestes.Quantidade
+                            : resultado;
+                        relatorio.AdicionarErro(sinal, repositorioTreinamento.BuscarPorIndice(indice), j, stopwatch.ElapsedMilliseconds, " - PRIMEIRO FRAME");
+                    }
+
+                    caracteristicas.PrimeiroFrame = sinal.Amostras[j].First();
+                    caracteristicas.TipoFrame = TipoFrame.Ultimo;
+                    stopwatch = Stopwatch.StartNew();
+                    resultado = algoritmo.Classificar(new[] { sinal.Amostras[j].Last() });
+                    stopwatch.Stop();
+                    if (resultado == sinal.IdNoAlgoritmo + repositorioTestes.Quantidade)
+                        relatorio.AdicionarAcerto(sinal, stopwatch.ElapsedMilliseconds, " - ÚLTIMO FRAME");
+                    else
+                    {
+                        var indice = resultado >= repositorioTestes.Quantidade
+                            ? resultado - repositorioTestes.Quantidade
+                            : resultado;
+                        relatorio.AdicionarErro(sinal, repositorioTreinamento.BuscarPorIndice(indice), j, stopwatch.ElapsedMilliseconds, " - ÚLTIMO FRAME");
                     }
                 }
             }
 
-            Console.WriteLine("Total acertos: {0}", totalAcertos);
-            Console.WriteLine("Total erros: {0}", totalErros);
-            Console.WriteLine("Sinais corretos: {0}{1}", acertos.ToString(), Environment.NewLine);
-            Console.WriteLine("Sinais errados: {0}{1}", Environment.NewLine, erros.ToString());
-
-            if (totalErros > 0)
-            {
-                Assert.Inconclusive(
-                    "{0}Total acertos: {3}{0}Total erros:{4}{0}{1}{0}-----{0}{2}", 
-                    Environment.NewLine,
-                    acertos.ToString(), 
-                    erros.ToString(),
-                    totalAcertos,
-                    totalErros);
-            }
+            relatorio.Imprimir();
         }
     }
 }
