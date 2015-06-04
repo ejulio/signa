@@ -1,8 +1,7 @@
 ﻿using Aplicacao.ViewModel;
+using Dominio.Persistencia;
 using Dominio.Sinais;
 using Microsoft.AspNet.SignalR;
-using System;
-using Dominio.Persistencia;
 
 namespace Aplicacao.Hubs
 {
@@ -17,13 +16,16 @@ namespace Aplicacao.Hubs
 
         public ProximoSinalResponseModel ProximoSinal(int indiceDoSinalAnterior)
         {
-            var random = new Random();
-            int indice = random.Next(repositorio.Quantidade);
+            var indice = indiceDoSinalAnterior + 1;
+            if (indice == repositorio.Quantidade)
+                indice = 0;
+
             var sinal = repositorio.BuscarPorIndice(indice);
             
             var informadoesDoSinal = new ProximoSinalResponseModel
             {
-                Id = sinal.IdNoAlgoritmo,
+                Id = sinal.Id,
+                IdReconhecimento = sinal.IdNoAlgoritmo,
                 Descricao = sinal.Descricao,
                 CaminhoParaArquivoDeExemplo = sinal.CaminhoParaArquivoDeExemplo,
                 Tipo = sinal.Tipo

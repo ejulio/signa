@@ -67,7 +67,7 @@
             this._descricaoDoSinal.onNovoSinal(this._informacoesDoSinal);
             this._maosDoUsuario.onNovoSinal(this._informacoesDoSinal);
             this._reconhecedorDeSinais.setTipoDoSinal(this._informacoesDoSinal.Tipo);
-            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.Id);
+            this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(this._informacoesDoSinal.IdReconhecimento);
             this._esconderCaixaDeMensagem();
         },
 
