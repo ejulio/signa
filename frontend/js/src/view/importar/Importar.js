@@ -71,7 +71,7 @@
         },
 
         _gerarAmostra: function() {
-            if (this._framesCarregados.length === 1) {
+            if (this._framesCarregados.length < 5) {
                 return this._gerarAmostraEstatica();
             }
 
