@@ -90,6 +90,7 @@
     <Compile Include="Algoritmos\Factories\IAlgoritmoClassificacaoSinalFactory.cs" />
     <Compile Include="Algoritmos\Factories\ICaracteristicasFactory.cs" />
     <Compile Include="Algoritmos\IAlgoritmoClassificacaoSinais.cs" />
+    <Compile Include="MedidorTempo.cs" />
     <Compile Include="Persistencia\IRepositorio.cs" />
     <Compile Include="Persistencia\IRepositorioFactory.cs" />
     <Compile Include="Persistencia\RepositorioSinais.cs" />

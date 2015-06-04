@@ -2,7 +2,6 @@
 using Dominio.Algoritmos.Treinamento;
 using Dominio.Persistencia;
 using System;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Dominio
@@ -26,8 +25,11 @@ namespace Dominio
             if (repositorio.Any())
             {
                 var dadosSinaisEstaticos = new DadosSinaisEstaticos(repositorio);
-                dadosSinaisEstaticos.Processar();
-                algoritmo.Aprender(dadosSinaisEstaticos);
+                using (new MedidorTempo("montar dados de treinamento de sinais estáticos."))
+                    dadosSinaisEstaticos.Processar();
+
+                using (new MedidorTempo("treinar algoritmos de sinais estáticos."))
+                    algoritmo.Aprender(dadosSinaisEstaticos);
             }
         }
 
@@ -41,12 +43,18 @@ namespace Dominio
             if (repositorio.Any())
             {
                 var dadosSinaisDinamicos = new DadosSinaisDinamicos(repositorio);
-                dadosSinaisDinamicos.Processar();
-                algoritmo.Aprender(dadosSinaisDinamicos);
+                using (new MedidorTempo("montar dados de treinamento de sinais dinâmicos."))
+                    dadosSinaisDinamicos.Processar();
+
+                using (new MedidorTempo("treinar algoritmo de sinais dinâmicos."))
+                    algoritmo.Aprender(dadosSinaisDinamicos);
 
                 var dadosFramesSinaisDinamicos = new DadosFramesSinaisDinamicos(repositorio);
-                dadosFramesSinaisDinamicos.Processar();
-                algoritmoDeLimitesDeSinaisDinamicos.Aprender(dadosFramesSinaisDinamicos);
+                using (new MedidorTempo("montar dados de treinamento de frames de sinais dinâmicos."))
+                    dadosFramesSinaisDinamicos.Processar();
+
+                using (new MedidorTempo("treinar algoritmos de frames sinais dinâmicos."))
+                    algoritmoDeLimitesDeSinaisDinamicos.Aprender(dadosFramesSinaisDinamicos);
             }
         }
 
@@ -54,22 +62,16 @@ namespace Dominio
         {
             Console.WriteLine("Treinando algoritmos...");
             
-            var stopwatchTempoTotal = Stopwatch.StartNew();
+            using (new MedidorTempo("tempo total algoritmos."))
+            {
+                using (new MedidorTempo("tempo total algoritmos de sinais estáticos."))
+                    TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
 
-            var stopwatchSinaisEstaticos = Stopwatch.StartNew();
-            TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
-            stopwatchSinaisEstaticos.Stop();
-            Console.WriteLine("Tempo para treinar o reconhecimento de sinais estáticos foi {0}ms", stopwatchSinaisEstaticos.ElapsedMilliseconds);
-
-            var stopwatchSinaisDinamicos = Stopwatch.StartNew();
-            TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
-            stopwatchSinaisDinamicos.Stop();
-            Console.WriteLine("Tempo para treinar o reconhecimento de sinais dinâmicos foi {0}ms", stopwatchSinaisDinamicos.ElapsedMilliseconds);
-
-            stopwatchTempoTotal.Stop();
+                using (new MedidorTempo("tempo total algoritmos de sinais dinâmicos."))
+                    TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+            }
             
             Console.WriteLine("Fim do treinamento de algoritmos.");
-            Console.WriteLine("Tempo total para treinar os algoritmos foi {0}ms", stopwatchTempoTotal.ElapsedMilliseconds);
         }
     }
 }
