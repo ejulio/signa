@@ -89,7 +89,7 @@
     <Compile Include="Unidade\Algoritmos\Factories\CaracteristicasFactoryTeste.cs" />
     <Compile Include="Unidade\InicializadorDeAlgoritmoFacadeTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Treinamento\DadosSinaisDinamicosTeste.cs" />
-    <Compile Include="Unidade\Algoritmos\Dinamico\HcrfTeste.cs" />
+    <Compile Include="Unidade\Algoritmos\Dinamico\HmmTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Treinamento\DadosSinaisEstaticosTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Estatico\SvmTeste.cs" />
     <Compile Include="Unidade\Algoritmos\Factories\AlgoritmoClassificacaoSinalFactoryTeste.cs" />

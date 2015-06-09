@@ -36,7 +36,8 @@ namespace Dominio.Gerenciamento
         {
             caracteristicas.PrimeiroFrame = amostraPrimeiroFrame[0];
             caracteristicas.TipoFrame = TipoFrame.Ultimo;
-            return (idSinal + repositorio.Count(s => s.Tipo == TipoSinal.Dinamico)) == algoritmoClassificacaoSinaisEstaticos.Classificar(amostraUltimoFrame);
+            var idSinalUltimoFrame = idSinal + repositorio.Count(s => s.Tipo == TipoSinal.Dinamico);
+            return idSinalUltimoFrame == algoritmoClassificacaoSinaisEstaticos.Classificar(amostraUltimoFrame);
         }
     }
 }

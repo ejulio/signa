@@ -18,7 +18,7 @@ namespace Dominio.Algoritmos.Factories
                 = new Svm(caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame());
 
             algoritmoClassificacaoSinaisDinamicos 
-                = new Hcrf(caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalDinamico());
+                = new Hmm(caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalDinamico());
         }
 
         public IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeSinaisEstaticos()

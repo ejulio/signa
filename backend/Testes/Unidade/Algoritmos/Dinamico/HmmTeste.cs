@@ -11,13 +11,13 @@ using Testes.Comum.Builders.Dominio.Sinais.Frames;
 namespace Testes.Unidade.Algoritmos.Dinamico
 {
     [TestClass]
-    public class HcrfTeste
+    public class HmmTeste
     {
         [TestMethod]
         public void reconhecendo_sem_treinar_o_algoritmo()
         {
             var frames = new Frame[0];
-            Action acao = () => new Hcrf(new CaracteristicasSinalDinamico()).Classificar(frames);
+            Action acao = () => new Hmm(new CaracteristicasSinalDinamico()).Classificar(frames);
 
             acao.ShouldThrow<InvalidOperationException>();
         }
@@ -29,7 +29,7 @@ namespace Testes.Unidade.Algoritmos.Dinamico
             const int quantidadeDeAmostrasPorSinal = 4;
             const int indiceDoSinalResultante = 1;
 
-            var hcrf = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
+            var hmm = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 
             var framesParaReconhecer = new []
             {
@@ -40,14 +40,14 @@ namespace Testes.Unidade.Algoritmos.Dinamico
                 new FrameBuilder().ParaOIndice(indiceDoSinalResultante).Construir()
             };
 
-            int sinalReconhecido = hcrf.Classificar(framesParaReconhecer);
+            int sinalReconhecido = hmm.Classificar(framesParaReconhecer);
 
             sinalReconhecido.Should().Be(indiceDoSinalResultante);
         }
 
-        private Hcrf DadoUmAlgoritmoTreinado(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
+        private Hmm DadoUmAlgoritmoTreinado(int quantidadeDeSinais, int quantidadeDeAmostrasPorSinal)
         {
-            var hcrf = new Hcrf(new CaracteristicasSinalDinamico());
+            var hmm = new Hmm(new CaracteristicasSinalDinamico());
             var colecaoDeSinais = new ColecaoDeSinaisBuilder()
                 .ComQuantidadeDeSinais(quantidadeDeSinais)
                 .ComQuantidadeDeAmostrasPorSinal(quantidadeDeAmostrasPorSinal)
@@ -56,9 +56,9 @@ namespace Testes.Unidade.Algoritmos.Dinamico
 
             var dados = new DadosSinaisDinamicos(colecaoDeSinais);
             dados.Processar();
-            hcrf.Aprender(dados);
+            hmm.Aprender(dados);
 
-            return hcrf;
+            return hmm;
         }
     }
 }

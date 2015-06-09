@@ -81,7 +81,7 @@
     <Compile Include="Algoritmos\Treinamento\IDadosAlgoritmoClassificacaoSinais.cs" />
     <Compile Include="Algoritmos\Treinamento\IDadosSinaisDinamicos.cs" />
     <Compile Include="Algoritmos\Treinamento\IDadosSinaisEstaticos.cs" />
-    <Compile Include="Algoritmos\Dinamico\Hcrf.cs" />
+    <Compile Include="Algoritmos\Dinamico\Hmm.cs" />
     <Compile Include="Algoritmos\Dinamico\IAlgoritmoClassificacaoSinaisDinamicos.cs" />
     <Compile Include="Algoritmos\Estatico\IAlgoritmoClassificacaoSinaisEstaticos.cs" />
     <Compile Include="Algoritmos\Estatico\Svm.cs" />

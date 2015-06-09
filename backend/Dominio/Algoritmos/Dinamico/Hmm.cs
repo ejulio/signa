@@ -1,8 +1,6 @@
 ﻿using Accord.Statistics.Distributions.Fitting;
 using Accord.Statistics.Distributions.Multivariate;
 using Accord.Statistics.Distributions.Univariate;
-using Accord.Statistics.Models.Fields;
-using Accord.Statistics.Models.Fields.Functions;
 using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
@@ -14,58 +12,48 @@ using System.Collections.Generic;
 
 namespace Dominio.Algoritmos.Dinamico
 {
-    public class Hcrf : IAlgoritmoClassificacaoSinaisDinamicos
+    public class Hmm : IAlgoritmoClassificacaoSinaisDinamicos
     {
         private const int QuantidadeEstados = 5;
         private readonly ICaracteristicasSinalDinamico caracteristicas;
-        private HiddenConditionalRandomField<double[]> hcrf;
+        private HiddenMarkovClassifier<Independent<NormalDistribution>> hmm;
 
-        public Hcrf(ICaracteristicasSinalDinamico caracteristicas)
+        public Hmm(ICaracteristicasSinalDinamico caracteristicas)
         {
             this.caracteristicas = caracteristicas;
         }
 
         public int Classificar(IList<Frame> amostra)
         {
-            if (hcrf == null)
+            if (hmm == null)
                 throw new InvalidOperationException();
 
             var caracteristicasDoSinal = caracteristicas.DaAmostra(amostra);
-            return hcrf.Compute(caracteristicasDoSinal);
+            return hmm.Compute(caracteristicasDoSinal);
         }
 
         public void Aprender(IDadosSinaisDinamicos dados)
         {
-            var classificadorHmm = AprenderClassificarHmm(dados);
-
-            var funcaoPotencial = new MarkovMultivariateFunction(classificadorHmm);
-            hcrf = new HiddenConditionalRandomField<double[]>(funcaoPotencial);
-        }
-
-        private HiddenMarkovClassifier<Independent<NormalDistribution>> AprenderClassificarHmm(IDadosSinaisDinamicos dados)
-        {
             var distribuicoes = DistribuicoesNormais(dados.CaracteristicasSinais);
 
-            var classificadorHmm = new HiddenMarkovClassifier<Independent<NormalDistribution>>(
+            hmm = new HiddenMarkovClassifier<Independent<NormalDistribution>>(
                 classes: dados.QuantidadeClasses,
                 topology: new Forward(QuantidadeEstados),
                 initial: distribuicoes
                 );
 
-            var teacher = new HiddenMarkovClassifierLearning<Independent<NormalDistribution>>(classificadorHmm,
-                modelIndex => new BaumWelchLearning<Independent<NormalDistribution>>(classificadorHmm.Models[modelIndex])
+            var teacher = new HiddenMarkovClassifierLearning<Independent<NormalDistribution>>(hmm,
+                modelIndex => new BaumWelchLearning<Independent<NormalDistribution>>(hmm.Models[modelIndex])
                 {
                     Tolerance = 0.001,
                     Iterations = 100,
                     FittingOptions = new IndependentOptions()
                     {
-                        InnerOption = new NormalOptions() {Regularization = 1e-5}
+                        InnerOption = new NormalOptions() { Regularization = 1e-5 }
                     }
-                }
-                );
+                });
 
             teacher.Run(dados.CaracteristicasSinais, dados.IdentificadoresSinais);
-            return classificadorHmm;
         }
 
         private Independent<NormalDistribution> DistribuicoesNormais(double[][][] entradas)
