@@ -43,7 +43,8 @@ namespace Dominio.Algoritmos.Caracteristicas
         private double[] PosicaoDoDedoProjetadaNoPlanoDaPalma(Dedo dedo, Mao mao)
         {
             return dedo.PosicaoDaPonta
-                .ProjetadoNoPlano(mao.VetorNormalDaPalma);
+                .ProjetadoNoPlano(mao.VetorNormalDaPalma)
+                .Subtrair(mao.PosicaoDaPalma.ProjetadoNoPlano(mao.VetorNormalDaPalma));
         }
 
         private IEnumerable<double> DirecaoDosDedos(Mao mao)
