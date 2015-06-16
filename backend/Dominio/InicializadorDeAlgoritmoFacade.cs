@@ -17,9 +17,9 @@ namespace Dominio
             this.repositorioFactory = repositorioFactory;
         }
 
-        public void TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos()
+        public void TreinarAlgoritmoClassificacaoSinaisEstaticos()
         {
-            var algoritmo = algoritmoClassificacaoSinalFactory.CriarReconhecedorDeSinaisEstaticos();
+            var algoritmo = algoritmoClassificacaoSinalFactory.CriarClassificadorSinaisEstaticos();
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos();
 
             if (repositorio.Any())
@@ -33,12 +33,12 @@ namespace Dominio
             }
         }
 
-        public void TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos()
+        public void TreinarAlgoritmoClassificacaoSinaisDinamicos()
         {
             var repositorio = repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos();
             
-            var algoritmo = algoritmoClassificacaoSinalFactory.CriarReconhecedorDeSinaisDinamicos();
-            var algoritmoDeLimitesDeSinaisDinamicos = algoritmoClassificacaoSinalFactory.CriarReconhecedorDeFramesDeSinaisDinamicos();
+            var algoritmo = algoritmoClassificacaoSinalFactory.CriarClassificadorSinaisDinamicos();
+            var algoritmoDeLimitesDeSinaisDinamicos = algoritmoClassificacaoSinalFactory.CriarClassificadorFramesSinaisDinamicos();
 
             if (repositorio.Any())
             {
@@ -58,17 +58,17 @@ namespace Dominio
             }
         }
 
-        public void TreinarAlgoritmosDeReconhecimentoDeSinais()
+        public void TreinarAlgoritmosClassificacaoSinais()
         {
             Console.WriteLine("Treinando algoritmos...");
             
             using (new MedidorTempo("tempo total algoritmos."))
             {
                 using (new MedidorTempo("tempo total algoritmos de sinais estáticos."))
-                    TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
+                    TreinarAlgoritmoClassificacaoSinaisEstaticos();
 
                 using (new MedidorTempo("tempo total algoritmos de sinais dinâmicos."))
-                    TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+                    TreinarAlgoritmoClassificacaoSinaisDinamicos();
             }
             
             Console.WriteLine("Fim do treinamento de algoritmos.");

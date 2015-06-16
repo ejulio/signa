@@ -1,6 +1,9 @@
 ﻿using Accord.Statistics.Distributions.Fitting;
 using Accord.Statistics.Distributions.Multivariate;
 using Accord.Statistics.Distributions.Univariate;
+using Accord.Statistics.Models.Fields;
+using Accord.Statistics.Models.Fields.Functions;
+using Accord.Statistics.Models.Fields.Learning;
 using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Models.Markov.Topology;
@@ -17,6 +20,7 @@ namespace Dominio.Algoritmos.Dinamico
         private const int QuantidadeEstados = 5;
         private readonly ICaracteristicasSinalDinamico caracteristicas;
         private HiddenMarkovClassifier<Independent<NormalDistribution>> hmm;
+        private HiddenConditionalRandomField<double[]> hcrf;
 
         public Hmm(ICaracteristicasSinalDinamico caracteristicas)
         {
@@ -25,11 +29,11 @@ namespace Dominio.Algoritmos.Dinamico
 
         public int Classificar(IList<Frame> amostra)
         {
-            if (hmm == null)
+            if (hcrf == null)
                 throw new InvalidOperationException();
 
             var caracteristicasDoSinal = caracteristicas.DaAmostra(amostra);
-            return hmm.Compute(caracteristicasDoSinal);
+            return hcrf.Compute(caracteristicasDoSinal);
         }
 
         public void Aprender(IDadosSinaisDinamicos dados)
@@ -53,7 +57,19 @@ namespace Dominio.Algoritmos.Dinamico
                     }
                 });
 
-            teacher.Run(dados.CaracteristicasSinais, dados.IdentificadoresSinais);
+            //teacher.Run(dados.CaracteristicasSinais, dados.IdentificadoresSinais);
+
+            var f = new MarkovMultivariateFunction(hmm);
+            hcrf = new HiddenConditionalRandomField<double[]>(f);
+
+            var teacher2 = new HiddenResilientGradientLearning<double[]>(hcrf)
+            {
+                Tolerance = 0.001,
+                Iterations = 100,
+                Regularization = 1e-5
+            };
+
+            teacher2.Run(dados.CaracteristicasSinais, dados.IdentificadoresSinais);
         }
 
         private Independent<NormalDistribution> DistribuicoesNormais(double[][][] entradas)
@@ -62,7 +78,7 @@ namespace Dominio.Algoritmos.Dinamico
 
             for (int i = 0; i < distribuicoes.Length; i++)
             {
-                distribuicoes[i] = new NormalDistribution(0, 1);
+                distribuicoes[i] = new NormalDistribution(-1, 10);
             }
 
             return new Independent<NormalDistribution>(distribuicoes);

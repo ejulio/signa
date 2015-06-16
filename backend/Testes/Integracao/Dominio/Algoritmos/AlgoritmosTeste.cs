@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using Dominio.Algoritmos;
+using Dominio.Algoritmos.Estatico;
 using Dominio.Algoritmos.Factories;
 using Dominio.Persistencia;
 using Dominio.Sinais;
@@ -30,8 +31,8 @@ namespace Testes.Integracao.Dominio.Algoritmos
             algoritmoFactory = new AlgoritmoClassificacaoSinalFactory(caracteristicasFactory);
             var inicializadorDeAlgoritmo = new InicializadorDeAlgoritmoFacade(algoritmoFactory, repositorioFactory);
 
-            inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
-            inicializadorDeAlgoritmo.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+            inicializadorDeAlgoritmo.TreinarAlgoritmoClassificacaoSinaisEstaticos();
+            inicializadorDeAlgoritmo.TreinarAlgoritmoClassificacaoSinaisDinamicos();
 
             repositorio = new RepositorioSinais(CaminhoDoArquivoDeDadosDeReconhecimento);
         }
@@ -40,7 +41,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
         public void reconhecendo_sinais_estaticos()
         {
             var repositorioSinaisEstaticos = new RepositorioSinaisEstaticos(repositorio);
-            var algoritmo = algoritmoFactory.CriarReconhecedorDeSinaisEstaticos();
+            var algoritmo = algoritmoFactory.CriarClassificadorSinaisEstaticos();
 
             repositorioSinaisEstaticos.Carregar();
 
@@ -51,7 +52,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
         public void reconhecendo_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
-            var algoritmo = algoritmoFactory.CriarReconhecedorDeSinaisDinamicos();
+            var algoritmo = algoritmoFactory.CriarClassificadorSinaisDinamicos();
 
             repositorioSinaisDinamicos.Carregar();
 
@@ -62,7 +63,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
         public void reconhecendo_sinais_frames_de_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
-            var algoritmo = algoritmoFactory.CriarReconhecedorDeFramesDeSinaisDinamicos();
+            var algoritmo = algoritmoFactory.CriarClassificadorFramesSinaisDinamicos();
 
             repositorioSinaisDinamicos.Carregar();
 
@@ -120,6 +121,10 @@ namespace Testes.Integracao.Dominio.Algoritmos
                             ? resultado - repositorioTestes.Quantidade
                             : resultado;
                         relatorio.AdicionarErro(sinal, repositorioTreinamento.BuscarPorIndice(indice), j, stopwatch.ElapsedMilliseconds, " - PRIMEIRO FRAME");
+                        var ddag = "";
+                        foreach (var t in ((Svm)algoritmo).path)
+                            ddag += string.Format("[{0}, {1}]", t.Item1, t.Item2);
+                        relatorio.AdicionarObservacao(ddag);
                     }
 
                     caracteristicas.PrimeiroFrame = sinal.Amostras[j].First();
@@ -135,6 +140,10 @@ namespace Testes.Integracao.Dominio.Algoritmos
                             ? resultado - repositorioTestes.Quantidade
                             : resultado;
                         relatorio.AdicionarErro(sinal, repositorioTreinamento.BuscarPorIndice(indice), j, stopwatch.ElapsedMilliseconds, " - ÚLTIMO FRAME");
+                        var ddag = "";
+                        foreach (var t in ((Svm)algoritmo).path)
+                            ddag += string.Format("[{0}, {1}]", t.Item1, t.Item2);
+                        relatorio.AdicionarObservacao(ddag);
                     }
                 }
             }

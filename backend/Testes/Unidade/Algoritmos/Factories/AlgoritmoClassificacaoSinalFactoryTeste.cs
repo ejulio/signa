@@ -12,8 +12,8 @@ namespace Testes.Unidade.Algoritmos.Factories
         {
             var factory = new AlgoritmoClassificacaoSinalFactory(new CaracteristicasFactory());
 
-            var algoritmo1 = factory.CriarReconhecedorDeSinaisEstaticos();
-            var algoritmo2 = factory.CriarReconhecedorDeSinaisEstaticos();
+            var algoritmo1 = factory.CriarClassificadorSinaisEstaticos();
+            var algoritmo2 = factory.CriarClassificadorSinaisEstaticos();
 
             algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma instância, como se fosse um Singleton");
         }
@@ -23,8 +23,8 @@ namespace Testes.Unidade.Algoritmos.Factories
         {
             var factory = new AlgoritmoClassificacaoSinalFactory(new CaracteristicasFactory());
 
-            var algoritmo1 = factory.CriarReconhecedorDeSinaisDinamicos();
-            var algoritmo2 = factory.CriarReconhecedorDeSinaisDinamicos();
+            var algoritmo1 = factory.CriarClassificadorSinaisDinamicos();
+            var algoritmo2 = factory.CriarClassificadorSinaisDinamicos();
 
             algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma instância, como se fosse um Singleton");
         }
@@ -34,8 +34,8 @@ namespace Testes.Unidade.Algoritmos.Factories
         {
             var factory = new AlgoritmoClassificacaoSinalFactory(new CaracteristicasFactory());
 
-            var algoritmo1 = factory.CriarReconhecedorDeFramesDeSinaisDinamicos();
-            var algoritmo2 = factory.CriarReconhecedorDeFramesDeSinaisDinamicos();
+            var algoritmo1 = factory.CriarClassificadorFramesSinaisDinamicos();
+            var algoritmo2 = factory.CriarClassificadorFramesSinaisDinamicos();
 
             algoritmo1.Should().BeSameAs(algoritmo2, "Deveria retornar sempre a mesma instância, como se fosse um Singleton");
         }

@@ -46,15 +46,15 @@ namespace Testes.Unidade
                 .Returns(repositorio.Object);
 
             algoritmoDeReconhecimentoDeSinaisFactory
-                .Setup(f => f.CriarReconhecedorDeSinaisEstaticos())
+                .Setup(f => f.CriarClassificadorSinaisEstaticos())
                 .Returns(algoritmoDeReconhecimentoDeSinaisEstaticos.Object);
 
             algoritmoDeReconhecimentoDeSinaisFactory
-                .Setup(f => f.CriarReconhecedorDeFramesDeSinaisDinamicos())
+                .Setup(f => f.CriarClassificadorFramesSinaisDinamicos())
                 .Returns(algoritmoDeReconhecimentoDeSinaisEstaticos.Object);
 
             algoritmoDeReconhecimentoDeSinaisFactory
-                .Setup(f => f.CriarReconhecedorDeSinaisDinamicos())
+                .Setup(f => f.CriarClassificadorSinaisDinamicos())
                 .Returns(algoritmoDeReconhecimentoDeSinaisDinamicos.Object);
         }
 
@@ -65,7 +65,7 @@ namespace Testes.Unidade
                 .Setup(r => r.GetEnumerator())
                 .Returns(DadaUmaColecaoDeSinaisEstaticos().GetEnumerator);
 
-            inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
+            inicializadorDeAlgoritmoFacade.TreinarAlgoritmoClassificacaoSinaisEstaticos();
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
@@ -80,7 +80,7 @@ namespace Testes.Unidade
                 .Setup(r => r.GetEnumerator())
                 .Returns(listaDeSinaisVazia.GetEnumerator());
 
-            Action acao = () => inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisEstaticos();
+            Action acao = () => inicializadorDeAlgoritmoFacade.TreinarAlgoritmoClassificacaoSinaisEstaticos();
 
             acao.ShouldNotThrow();
             algoritmoDeReconhecimentoDeSinaisEstaticos
@@ -94,7 +94,7 @@ namespace Testes.Unidade
                 .Setup(r => r.GetEnumerator())
                 .Returns(DadaUmaColecaoDeSinaisDinamicos().GetEnumerator);
 
-            inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+            inicializadorDeAlgoritmoFacade.TreinarAlgoritmoClassificacaoSinaisDinamicos();
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>
@@ -113,7 +113,7 @@ namespace Testes.Unidade
                 .Setup(r => r.GetEnumerator())
                 .Returns(listaDeSinaisVazia.GetEnumerator());
 
-            Action acao = () => inicializadorDeAlgoritmoFacade.TreinarAlgoritmoDeReconhecimentoDeSinaisDinamicos();
+            Action acao = () => inicializadorDeAlgoritmoFacade.TreinarAlgoritmoClassificacaoSinaisDinamicos();
 
             acao.ShouldNotThrow();
             algoritmoDeReconhecimentoDeSinaisEstaticos
@@ -130,7 +130,7 @@ namespace Testes.Unidade
                 .Setup(r => r.GetEnumerator())
                 .Returns(DadaUmaColecaoDeSinais().GetEnumerator);
 
-            inicializadorDeAlgoritmoFacade.TreinarAlgoritmosDeReconhecimentoDeSinais();
+            inicializadorDeAlgoritmoFacade.TreinarAlgoritmosClassificacaoSinais();
 
             algoritmoDeReconhecimentoDeSinaisEstaticos
                 .Verify(a =>

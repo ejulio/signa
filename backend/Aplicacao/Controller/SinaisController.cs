@@ -37,7 +37,7 @@ namespace Aplicacao.Controller
         [HttpPost]
         public void TreinarAlgoritmos()
         {
-            inicializadorDeAlgoritmo.TreinarAlgoritmosDeReconhecimentoDeSinais();
+            inicializadorDeAlgoritmo.TreinarAlgoritmosClassificacaoSinais();
         }
     }
     

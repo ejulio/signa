@@ -6,9 +6,9 @@ namespace Dominio.Persistencia
     {
         private readonly string caminhoDoArquivoDeDados;
 
-        private static IRepositorio<Sinal> repositorioDeSinais;
-        private static IRepositorio<Sinal> repositorioDeSinaisEstaticos;
-        private static IRepositorio<Sinal> repositorioDeSinaisDinamicos;
+        private static IRepositorio<Sinal> repositorioSinais;
+        private static IRepositorio<Sinal> repositorioSinaisEstaticos;
+        private static IRepositorio<Sinal> repositorioSinaisDinamicos;
 
         public RepositorioFactory(string caminhoDoArquivoDeDados)
         {
@@ -17,24 +17,24 @@ namespace Dominio.Persistencia
 
         public IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisEstaticos()
         {
-            if (repositorioDeSinaisEstaticos == null)
+            if (repositorioSinaisEstaticos == null)
             {
-                repositorioDeSinaisEstaticos = new RepositorioSinaisEstaticos(InstanciaUnicaDeReposiotioDeSinais());
-                repositorioDeSinaisEstaticos.Carregar();    
+                repositorioSinaisEstaticos = new RepositorioSinaisEstaticos(InstanciaUnicaDeReposiotioDeSinais());
+                repositorioSinaisEstaticos.Carregar();    
             }
             
-            return repositorioDeSinaisEstaticos;
+            return repositorioSinaisEstaticos;
         }
 
         public IRepositorio<Sinal> CriarECarregarRepositorioDeSinaisDinamicos()
         {
-            if (repositorioDeSinaisDinamicos == null)
+            if (repositorioSinaisDinamicos == null)
             {
-                repositorioDeSinaisDinamicos = new RepositorioSinaisDinamicos(InstanciaUnicaDeReposiotioDeSinais());
-                repositorioDeSinaisDinamicos.Carregar();
+                repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(InstanciaUnicaDeReposiotioDeSinais());
+                repositorioSinaisDinamicos.Carregar();
             }
 
-            return repositorioDeSinaisDinamicos;
+            return repositorioSinaisDinamicos;
         }
 
         public IRepositorio<Sinal> CriarECarregarRepositorioDeSinais()
@@ -47,12 +47,12 @@ namespace Dominio.Persistencia
 
         private IRepositorio<Sinal> InstanciaUnicaDeReposiotioDeSinais()
         {
-            if (repositorioDeSinais == null)
+            if (repositorioSinais == null)
             {
-                repositorioDeSinais = new RepositorioSinais(caminhoDoArquivoDeDados);
+                repositorioSinais = new RepositorioSinais(caminhoDoArquivoDeDados);
             }
 
-            return repositorioDeSinais;
+            return repositorioSinais;
         }
     }
 }

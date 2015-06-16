@@ -43,7 +43,7 @@ namespace Aplicacao
             container.Register(typeof(GerenciadorSinaisEstaticos),
                 () =>
                     new GerenciadorSinaisEstaticos(repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos(),
-                        algoritmoFactory.CriarReconhecedorDeSinaisEstaticos()));
+                        algoritmoFactory.CriarClassificadorSinaisEstaticos()));
 
             container.Register(typeof(Hubs.SinaisEstaticos),
                 () => new Hubs.SinaisEstaticos(container.Resolve<GerenciadorSinaisEstaticos>()));
@@ -55,8 +55,8 @@ namespace Aplicacao
                 () =>
                     new GerenciadorSinaisDinamicos(repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos(),
                         caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalEstaticoComTipoFrame(),
-                        algoritmoFactory.CriarReconhecedorDeSinaisDinamicos(),
-                        algoritmoFactory.CriarReconhecedorDeFramesDeSinaisDinamicos()));
+                        algoritmoFactory.CriarClassificadorSinaisDinamicos(),
+                        algoritmoFactory.CriarClassificadorFramesSinaisDinamicos()));
 
             container.Register(typeof(Hubs.SinaisDinamicos),
                 () => new Hubs.SinaisDinamicos(container.Resolve<GerenciadorSinaisDinamicos>()));

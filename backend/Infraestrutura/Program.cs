@@ -32,7 +32,7 @@ namespace Infraestrutura
             var algoritmosFactory = new AlgoritmoClassificacaoSinalFactory(new CaracteristicasFactory());
             var inicializadorDeAlgoritmosFacade = new InicializadorDeAlgoritmoFacade(algoritmosFactory, repositorioFactory);
 
-            inicializadorDeAlgoritmosFacade.TreinarAlgoritmosDeReconhecimentoDeSinais();
+            inicializadorDeAlgoritmosFacade.TreinarAlgoritmosClassificacaoSinais();
         }
     }
 }

@@ -5,8 +5,8 @@ namespace Dominio.Algoritmos.Factories
 {
     public interface IAlgoritmoClassificacaoSinalFactory
     {
-        IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeSinaisEstaticos();
-        IAlgoritmoClassificacaoSinaisDinamicos CriarReconhecedorDeSinaisDinamicos();
-        IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeFramesDeSinaisDinamicos();
+        IAlgoritmoClassificacaoSinaisEstaticos CriarClassificadorSinaisEstaticos();
+        IAlgoritmoClassificacaoSinaisDinamicos CriarClassificadorSinaisDinamicos();
+        IAlgoritmoClassificacaoSinaisEstaticos CriarClassificadorFramesSinaisDinamicos();
     }
 }

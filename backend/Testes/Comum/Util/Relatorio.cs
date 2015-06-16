@@ -42,6 +42,14 @@ namespace Testes.Comum.Util
                 indiceDaAmostra, informacoes));
         }
 
+        public void AdicionarObservacao(string texto)
+        {
+            sinaisErrados
+                .AppendLine("-----")
+                .AppendLine(texto)
+                .AppendLine("-----");
+        }
+
         public void Imprimir()
         {
             Console.WriteLine("Total acertos: {0}", acertos);

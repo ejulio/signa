@@ -21,17 +21,17 @@ namespace Dominio.Algoritmos.Factories
                 = new Hmm(caracteristicasFactory.CriarGeradorDeCaracteristicasDeSinalDinamico());
         }
 
-        public IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeSinaisEstaticos()
+        public IAlgoritmoClassificacaoSinaisEstaticos CriarClassificadorSinaisEstaticos()
         {
             return algoritmoClassificacaoSinaisEstaticos;
         }
 
-        public IAlgoritmoClassificacaoSinaisDinamicos CriarReconhecedorDeSinaisDinamicos()
+        public IAlgoritmoClassificacaoSinaisDinamicos CriarClassificadorSinaisDinamicos()
         {
             return algoritmoClassificacaoSinaisDinamicos;
         }
 
-        public IAlgoritmoClassificacaoSinaisEstaticos CriarReconhecedorDeFramesDeSinaisDinamicos()
+        public IAlgoritmoClassificacaoSinaisEstaticos CriarClassificadorFramesSinaisDinamicos()
         {
             return algoritmoClassificacaoFramesSinaisDinamicos;
         }

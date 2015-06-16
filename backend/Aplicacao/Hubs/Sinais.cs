@@ -21,8 +21,7 @@ namespace Aplicacao.Hubs
                 indice = 0;
 
             var sinal = repositorio.BuscarPorIndice(indice);
-            
-            var informadoesDoSinal = new ProximoSinalResponseModel
+            return new ProximoSinalResponseModel
             {
                 Id = sinal.Id,
                 IdReconhecimento = sinal.IdNoAlgoritmo,
@@ -30,8 +29,6 @@ namespace Aplicacao.Hubs
                 CaminhoParaArquivoDeExemplo = sinal.CaminhoParaArquivoDeExemplo,
                 Tipo = sinal.Tipo
             };
-
-            return informadoesDoSinal;
         }
     }
 }
