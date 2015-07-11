@@ -81,7 +81,7 @@
             this._exemploDoSinal.onReconhecer();
             this._maosDoUsuario.onReconhecer();
             this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(-1);
-            window.setTimeout(this._carregarProximoSinal.bind(this), 1000);
+            window.setTimeout(this._carregarProximoSinal.bind(this), 2500);
         },
 
         _mostrarCaixaDeMensagem: function(texto) {

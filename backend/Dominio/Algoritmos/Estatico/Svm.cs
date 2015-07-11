@@ -1,5 +1,6 @@
 ﻿using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
+using Accord.Math;
 using Accord.Statistics.Kernels;
 using Dominio.Algoritmos.Caracteristicas;
 using Dominio.Algoritmos.Treinamento;
@@ -13,7 +14,7 @@ namespace Dominio.Algoritmos.Estatico
     {
         private const int QuantidadeIndeterminadaDeCaracteristicas = 0;
         private readonly ICaracteristicasSinalEstatico caracteristicas;
-        private MulticlassSupportVectorMachine svm;
+        private MultilabelSupportVectorMachine svm;
 
         public Svm(ICaracteristicasSinalEstatico caracteristicas)
         {
@@ -29,17 +30,18 @@ namespace Dominio.Algoritmos.Estatico
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
             var caracteristicasDoSinal = caracteristicas.DaAmostra(frame);
-            double o;
-            var resultado = svm.Compute(caracteristicasDoSinal, out o, out path);
-            return resultado;
+            var resultados = svm.Compute(caracteristicasDoSinal);
+            int classe;
+            resultados.Max(out classe);
+            return classe;
         }
 
         public void Aprender(IDadosSinaisEstaticos dados)
         {
-            var kernel = new Gaussian(sigma: 1);
-            svm = new MulticlassSupportVectorMachine(QuantidadeIndeterminadaDeCaracteristicas, kernel, dados.QuantidadeClasses);
+            var kernel = new Linear(1);
+            svm = new MultilabelSupportVectorMachine(QuantidadeIndeterminadaDeCaracteristicas, kernel, dados.QuantidadeClasses);
             
-            var teacher = new MulticlassSupportVectorLearning(svm, dados.CaracteristicasSinais, dados.IdentificadoresSinais)
+            var teacher = new MultilabelSupportVectorLearning(svm, dados.CaracteristicasSinais, dados.IdentificadoresSinais)
             {
                 Algorithm = (machine, classInputs, classOutputs, j, k) => 
                     new SequentialMinimalOptimization(machine, classInputs, classOutputs)

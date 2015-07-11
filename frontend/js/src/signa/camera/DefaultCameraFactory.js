@@ -17,7 +17,7 @@
         create: function(signaScene)
         {
             var camera = new THREE.PerspectiveCamera(CAMERA_FIELD_OF_VIEW, this._aspectRatio, CAMERA_NEAR, CAMERA_FAR);
-            camera.position.set(0, 300, 300);
+            camera.position.set(0, 250, 250);
             camera.rotation.set(-0.5, 0, 0);
 
             return camera;

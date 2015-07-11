@@ -29,6 +29,7 @@
         _scene: undefined,
         _camera: undefined,
         _renderer: undefined,
+        _container: undefined,
         _id: 0,
 
         getId: function()
@@ -49,6 +50,11 @@
         getContainer: function()
         {
             return this._container;
+        },
+
+        resetCameraPosition: function() {
+            this._camera.position.set(0, 250, 250);
+            this._camera.rotation.set(-0.5, 0, 0);
         },
 
         _drawUrs: function()

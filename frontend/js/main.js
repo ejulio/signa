@@ -127,7 +127,7 @@
         create: function(signaScene)
         {
             var camera = new THREE.PerspectiveCamera(CAMERA_FIELD_OF_VIEW, this._aspectRatio, CAMERA_NEAR, CAMERA_FAR);
-            camera.position.set(0, 300, 300);
+            camera.position.set(0, 250, 250);
             camera.rotation.set(-0.5, 0, 0);
 
             return camera;
@@ -202,6 +202,7 @@
         _scene: undefined,
         _camera: undefined,
         _renderer: undefined,
+        _container: undefined,
         _id: 0,
 
         getId: function()
@@ -222,6 +223,11 @@
         getContainer: function()
         {
             return this._container;
+        },
+
+        resetCameraPosition: function() {
+            this._camera.position.set(0, 250, 250);
+            this._camera.rotation.set(-0.5, 0, 0);
         },
 
         _drawUrs: function()
@@ -268,10 +274,23 @@
             sceneId: signaScene.getId(),
             parent: this.getThreeScene(),
             materialOptions: {
-                transparent: true
+                transparent: false
             },
             renderFn: this.render.bind(this)
         });
+
+        var cena = signaScene.getThreeScene();
+        var luzAmbiente = new THREE.AmbientLight(0x7b5d2c);
+        cena.add(luzAmbiente);
+
+        var luz = new THREE.SpotLight(0xFFFFFF);
+        luz.position.set(0, 0, 0);
+        luz.target = signaScene._camera;
+        cena.add(luz);
+    
+        var luz2 = new THREE.SpotLight(0xffffff);
+        this.luz = luz2;
+        cena.add(luz2);
     }
 
     CenaComLeapRiggedHand.prototype = {
@@ -284,6 +303,7 @@
 
         render: function()
         {
+            this.luz.position.copy(this._signaScene._camera.position);
             this._signaScene.render();
         },
 
@@ -295,6 +315,10 @@
         getContainer: function()
         {
             return this._signaScene.getContainer();
+        },
+
+        resetCameraPosition: function() {
+            this._signaScene.resetCameraPosition();
         }
     };
 
@@ -667,7 +691,7 @@
     
     function ContainerComExemploDoSinal(cameraFactory, container, leapController, largura, altura) {
         var cameraComControlesFactory = new Signa.camera.OrbitControlsCameraFactory(cameraFactory);
-        Signa.cenas.CenaFactory.criarCenaComLeapRiggedHand(largura, altura, container, cameraComControlesFactory, leapController);
+        this._cena = Signa.cenas.CenaFactory.criarCenaComLeapRiggedHand(largura, altura, container, cameraComControlesFactory, leapController);
 
         this._leapRecordingPlayer = new Signa.LeapRecordingPlayer(leapController);
 
@@ -676,12 +700,16 @@
 
     ContainerComExemploDoSinal.prototype = {
         _leapRecordingPlayer: undefined,
+        _cena: undefined,
 
         onNovoSinal: function(informacoesDoSinal) {
+            this._cena.resetCameraPosition();
             this._leapRecordingPlayer.loadRecording('http://localhost:9000/' + informacoesDoSinal.CaminhoParaArquivoDeExemplo);
         },
 
-        onReconhecer: function() { },
+        onReconhecer: function() { 
+            
+        },
 
         _onPlayPause: function() {
             this._leapRecordingPlayer.toggle();
@@ -802,7 +830,7 @@
             this._exemploDoSinal.onReconhecer();
             this._maosDoUsuario.onReconhecer();
             this._reconhecedorDeSinais.setIdDoSinalParaReconhecer(-1);
-            window.setTimeout(this._carregarProximoSinal.bind(this), 1000);
+            window.setTimeout(this._carregarProximoSinal.bind(this), 2500);
         },
 
         _mostrarCaixaDeMensagem: function(texto) {
