@@ -1,6 +1,5 @@
 ﻿using Dominio;
 using Dominio.Algoritmos;
-using Dominio.Algoritmos.Estatico;
 using Dominio.Algoritmos.Factories;
 using Dominio.Persistencia;
 using Dominio.Sinais;
@@ -37,7 +36,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             repositorio = new RepositorioSinais(CaminhoDoArquivoDeDadosDeReconhecimento);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_estaticos()
         {
             var repositorioSinaisEstaticos = new RepositorioSinaisEstaticos(repositorio);
@@ -48,7 +47,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisEstaticos, repositorioFactory.CriarECarregarRepositorioDeSinaisEstaticos());
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
@@ -59,7 +58,7 @@ namespace Testes.Integracao.Dominio.Algoritmos
             ExecutarTestesDeReconhecimentoComRelatorio(algoritmo, repositorioSinaisDinamicos, repositorioFactory.CriarECarregarRepositorioDeSinaisDinamicos());
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void reconhecendo_sinais_frames_de_sinais_dinamicos()
         {
             var repositorioSinaisDinamicos = new RepositorioSinaisDinamicos(repositorio);
@@ -121,10 +120,10 @@ namespace Testes.Integracao.Dominio.Algoritmos
                             ? resultado - repositorioTestes.Quantidade
                             : resultado;
                         relatorio.AdicionarErro(sinal, repositorioTreinamento.BuscarPorIndice(indice), j, stopwatch.ElapsedMilliseconds, " - PRIMEIRO FRAME");
-                        var ddag = "";
-                        foreach (var t in ((Svm)algoritmo).path)
-                            ddag += string.Format("[{0}, {1}]", t.Item1, t.Item2);
-                        relatorio.AdicionarObservacao(ddag);
+                        //var ddag = "";
+                        //foreach (var t in ((Svm)algoritmo).path)
+                        //    ddag += string.Format("[{0}, {1}]", t.Item1, t.Item2);
+                        //relatorio.AdicionarObservacao(ddag);
                     }
 
                     caracteristicas.PrimeiroFrame = sinal.Amostras[j].First();
@@ -140,10 +139,10 @@ namespace Testes.Integracao.Dominio.Algoritmos
                             ? resultado - repositorioTestes.Quantidade
                             : resultado;
                         relatorio.AdicionarErro(sinal, repositorioTreinamento.BuscarPorIndice(indice), j, stopwatch.ElapsedMilliseconds, " - ÚLTIMO FRAME");
-                        var ddag = "";
-                        foreach (var t in ((Svm)algoritmo).path)
-                            ddag += string.Format("[{0}, {1}]", t.Item1, t.Item2);
-                        relatorio.AdicionarObservacao(ddag);
+                        //var ddag = "";
+                        //foreach (var t in ((Svm)algoritmo).path)
+                        //    ddag += string.Format("[{0}, {1}]", t.Item1, t.Item2);
+                        //relatorio.AdicionarObservacao(ddag);
                     }
                 }
             }

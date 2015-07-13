@@ -25,9 +25,9 @@ namespace Testes.Unidade.Algoritmos.Dinamico
         [TestMethod]
         public void reconhecendo_um_sinal()
         {
-            const int quantidadeDeSinais = 3;
-            const int quantidadeDeAmostrasPorSinal = 4;
-            const int indiceDoSinalResultante = 1;
+            const int quantidadeDeSinais = 10;
+            const int quantidadeDeAmostrasPorSinal = 2;
+            const int indiceDoSinalResultante = 4;
 
             var hmm = DadoUmAlgoritmoTreinado(quantidadeDeSinais, quantidadeDeAmostrasPorSinal);
 

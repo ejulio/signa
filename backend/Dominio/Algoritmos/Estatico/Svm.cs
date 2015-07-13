@@ -20,8 +20,6 @@ namespace Dominio.Algoritmos.Estatico
             this.caracteristicas = caracteristicas;
         }
 
-        public Tuple<int, int>[] path;
-
         public int Classificar(IList<Frame> frame)
         {
             if (svm == null)
@@ -29,9 +27,7 @@ namespace Dominio.Algoritmos.Estatico
                 throw new InvalidOperationException("É necessário treinar o algoritmo antes de reconhecer");
             }
             var caracteristicasDoSinal = caracteristicas.DaAmostra(frame);
-            double o;
-            var resultado = svm.Compute(caracteristicasDoSinal, out o, out path);
-            return resultado;
+            return svm.Compute(caracteristicasDoSinal);
         }
 
         public void Aprender(IDadosSinaisEstaticos dados)
